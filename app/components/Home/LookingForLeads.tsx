@@ -16,10 +16,10 @@ export default function LookingForLeads() {
               Looking for leads?
             </h2>
             <h3 className="text-xl font-semibold text-gray-800 mb-4">
-              Grow your business with MyBuilder
+              Grow your business with Getatradelinkltd
             </h3>
             <p className="text-gray-700 mb-6">
-              MyBuilder is the reliable way to get more of the work you want. Sign up for free to receive a steady stream of local job opportunities that match your skills. Take on big jobs or smaller gap fillers – it’s up to you.
+              Getatradelinkltd is the reliable way to get more of the work you want. Sign up for free to receive a steady stream of local job opportunities that match your skills. Take on big jobs or smaller gap fillers – it’s up to you.
             </p>
             <a
               href="#"
