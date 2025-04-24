@@ -17,7 +17,7 @@ export default function NavigationHeader() {
             <Image
               src={logo}
               alt="logo"
-              className="w-[80%] h-[80px] md:w-[100px] object-contain"
+              className="h-[80px] w-[200px]"
               onClick={() => router.push("/")}
             />
           </div>
