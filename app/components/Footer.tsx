@@ -13,10 +13,10 @@ export default function Footer() {
           <Image
             src={Logo}
             alt="logo"
-            className="h-20 w-40"
+            className="h-10 w-20 md:h-20 md:w-40"
             onClick={() => router.push("/")}
           />
-          <p className="text-sm">Helping you find the right tradesperson, the reliable way.</p>
+          <p className="text-sm w-20 md:w-60">Helping you find the right tradesperson, the reliable way.</p>
         </div>
 
         <div>

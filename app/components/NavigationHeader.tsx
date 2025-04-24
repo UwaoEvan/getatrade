@@ -13,11 +13,11 @@ export default function NavigationHeader() {
     <div className="bg-[#2f76d9] text-white">
       <div className="w-full px-4 lg:w-[880px] lg:mx-auto flex items-center justify-between py-4">
         <div className="flex items-center">
-          <div className="p-1 rounded-full">
+          <div className="">
             <Image
               src={logo}
               alt="logo"
-              className="h-[80px] w-[100px] object-contain"
+              className="w-[80%] h-[80px] md:w-[100px] object-contain"
               onClick={() => router.push("/")}
             />
           </div>
@@ -25,7 +25,7 @@ export default function NavigationHeader() {
 
         <div className="hidden md:flex items-center space-x-6">
           <Link href={"/post-a-job"} className="hover:underline">Post a job</Link>
-          <button className="hover:underline">Log in</button>
+          <button onClick={() => router.push("/login")} className="hover:underline">Log in</button>
           <button onClick={() => router.push("/tradesworks-signup")} className="border border-white px-4 py-1 rounded hover:bg-white hover:text-[#1f0e2b] transition">
             Sign up as a tradesperson
           </button>
@@ -71,7 +71,7 @@ export default function NavigationHeader() {
       {menuOpen && (
         <div className="md:hidden bg-[#2f76d9] px-4 pb-4 space-y-4">
           <button onClick={() => router.push("/post-a-job")} className="block w-full text-left hover:underline">Post a job</button>
-          <button className="block w-full text-left hover:underline">Log in</button>
+          <button onClick={() => router.push("/login")} className="block w-full text-left hover:underline">Log in</button>
           <button onClick={() => router.push("/tradesworks-signup")} className="block w-full border border-white px-4 py-2 rounded hover:bg-white hover:text-[#1f0e2b] transition">
             Sign up as a tradesperson
           </button>
