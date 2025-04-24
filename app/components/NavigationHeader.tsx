@@ -26,7 +26,7 @@ export default function NavigationHeader() {
         <div className="hidden md:flex items-center space-x-6">
           <Link href={"/post-a-job"} className="hover:underline">Post a job</Link>
           <button className="hover:underline">Log in</button>
-          <button className="border border-white px-4 py-1 rounded hover:bg-white hover:text-[#1f0e2b] transition">
+          <button onClick={() => router.push("/tradesworks-signup")} className="border border-white px-4 py-1 rounded hover:bg-white hover:text-[#1f0e2b] transition">
             Sign up as a tradesperson
           </button>
         </div>
