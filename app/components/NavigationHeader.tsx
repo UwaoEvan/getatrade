@@ -70,9 +70,9 @@ export default function NavigationHeader() {
 
       {menuOpen && (
         <div className="md:hidden bg-[#2f76d9] px-4 pb-4 space-y-4">
-          <button className="block w-full text-left hover:underline">Post a job</button>
+          <button onClick={() => router.push("/post-a-job")} className="block w-full text-left hover:underline">Post a job</button>
           <button className="block w-full text-left hover:underline">Log in</button>
-          <button className="block w-full border border-white px-4 py-2 rounded hover:bg-white hover:text-[#1f0e2b] transition">
+          <button onClick={() => router.push("/tradesworks-signup")} className="block w-full border border-white px-4 py-2 rounded hover:bg-white hover:text-[#1f0e2b] transition">
             Sign up as a tradesperson
           </button>
         </div>
