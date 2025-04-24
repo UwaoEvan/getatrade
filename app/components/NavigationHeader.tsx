@@ -2,9 +2,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import logo from "@/public/logo.png";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function NavigationHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <div className="bg-[#2f76d9] text-white">
@@ -15,12 +18,13 @@ export default function NavigationHeader() {
               src={logo}
               alt="logo"
               className="h-[80px] w-[100px] object-contain"
+              onClick={() => router.push("/")}
             />
           </div>
         </div>
 
         <div className="hidden md:flex items-center space-x-6">
-          <button className="hover:underline">Post a job</button>
+          <Link href={"/post-a-job"} className="hover:underline">Post a job</Link>
           <button className="hover:underline">Log in</button>
           <button className="border border-white px-4 py-1 rounded hover:bg-white hover:text-[#1f0e2b] transition">
             Sign up as a tradesperson

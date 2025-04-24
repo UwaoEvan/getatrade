@@ -1,7 +1,11 @@
+"use client"
 import Image from "next/image";
 import Logo from "@/public/logo.png";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Footer() {
+  const router = useRouter();
   return (
     <footer className="bg-gray-100 text-gray-700 mt-12">
       <div className="w-full px-4 py-10 sm:px-6 lg:px-8 flex justify-around">
@@ -10,6 +14,7 @@ export default function Footer() {
             src={Logo}
             alt="logo"
             className="h-20 w-40"
+            onClick={() => router.push("/")}
           />
           <p className="text-sm">Helping you find the right tradesperson, the reliable way.</p>
         </div>
@@ -18,7 +23,7 @@ export default function Footer() {
           <h5 className="text-md font-semibold mb-3">Explore</h5>
           <ul className="space-y-2 text-sm">
             <li><a href="#" className="hover:underline">Popular Trades</a></li>
-            <li><a href="#" className="hover:underline">Post a Job</a></li>
+            <Link href="/post-a-job" className="hover:underline">Post a Job</Link>
             <li><a href="#" className="hover:underline">Tradespeople Join</a></li>
           </ul>
         </div>
