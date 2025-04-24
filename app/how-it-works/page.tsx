@@ -28,7 +28,7 @@ export default function HowItWorks() {
 
           <div>
             <Image src={chatIcon} alt="See who's interested" width={60} height={60} className="mx-auto mb-4" />
-            <h3 className="font-bold text-lg mb-2">See who's interested</h3>
+            <h3 className="font-bold text-lg mb-2">See who&apos;s interested</h3>
             <p>Our matching system identifies and alerts relevant tradespeople who can express interest.</p>
           </div>
 

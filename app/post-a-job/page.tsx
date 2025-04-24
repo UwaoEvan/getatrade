@@ -5,7 +5,7 @@ export default function PostAJob() {
     <div className="w-full px-4 lg:w-[800px] mx-auto py-4">
       <h1 className="text-3xl font-bold mb-4">Post a job</h1>
       <p className="mb-6 text-gray-600">
-        Get responses from Getatradelinkltd's screened and reviewed tradespeople near you
+        Get responses from Getatradelinkltd&apos;s screened and reviewed tradespeople near you
       </p>
 
       <div className="mb-6">

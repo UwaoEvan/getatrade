@@ -14,11 +14,13 @@ export default function TradeWorkSignup() {
     email: '',
   })
 
-  const handleChange = (e: any) => {
+  // @ts-ignore
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e: any) => {
+  // @ts-ignore
+  const handleSubmit = (e) => {
     e.preventDefault()
     console.log(formData)
   }
