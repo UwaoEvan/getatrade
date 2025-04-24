@@ -2,6 +2,7 @@ import Image from "next/image";
 import Step1 from "@/public/step1.png";
 import Step2 from "@/public/step2.png";
 import Step3 from "@/public/step3.png";
+import Link from "next/link";
 
 export default function HowToHire() {
   const steps = [
@@ -37,9 +38,9 @@ export default function HowToHire() {
             </div>
           ))}
         </div>
-        <button className="mt-10 px-6 py-3 border border-[#2f76d9] text-[#2f76d9] font-medium rounded hover:bg-purple-100 transition">
+        <Link href="/how-it-works" className="block w-2/6 mx-auto mt-10 px-6 py-3 border border-[#2f76d9] text-[#2f76d9] font-medium rounded hover:bg-purple-100 transition">
           See how it works
-        </button>
+        </Link>
       </div>
     </section>
   );
