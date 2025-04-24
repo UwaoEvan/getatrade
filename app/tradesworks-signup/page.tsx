@@ -14,12 +14,12 @@ export default function TradeWorkSignup() {
     email: '',
   })
 
-  // @ts-ignore
+  // @ts-expect-error any error
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  // @ts-ignore
+  // @ts-expect-error any error
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(formData)
