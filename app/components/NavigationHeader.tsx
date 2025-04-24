@@ -3,10 +3,11 @@ import logo from "@/public/logo.png";
 
 export default function NavigationHeader() {
   return (
-    <div className="bg-[#2f76d9] text-white flex items-center justify-between px-6 py-4">
-      <div className="flex items-center space-x-2">
+    <div className="bg-[#2f76d9]">
+    <div className="w-[880px] mx-auto text-white flex items-center justify-between py-4">
+      <div className="flex items-center">
         <div className="p-1 rounded-full">
-          <Image src={logo} alt="logo" className="h-[60px] object-contain"/>
+          <Image src={logo} alt="logo" className="h-[80px] w-[100px] object-contain"/>
         </div>
       </div>
       <div className="flex items-center space-x-6">
@@ -16,6 +17,7 @@ export default function NavigationHeader() {
           Sign up as a tradesperson
         </button>
       </div>
+    </div>
     </div>
   );
 }

@@ -1,0 +1,41 @@
+import Image from "next/image";
+import Logo from "@/public/logo.png";
+
+export default function Footer() {
+  return (
+    <footer className="bg-gray-100 text-gray-700 mt-12">
+      <div className="w-full px-4 py-10 sm:px-6 lg:px-8 flex justify-around">
+        <div>
+          <Image
+            src={Logo}
+            alt="logo"
+            className="h-20 w-40"
+          />
+          <p className="text-sm">Helping you find the right tradesperson, the reliable way.</p>
+        </div>
+
+        <div>
+          <h5 className="text-md font-semibold mb-3">Explore</h5>
+          <ul className="space-y-2 text-sm">
+            <li><a href="#" className="hover:underline">Popular Trades</a></li>
+            <li><a href="#" className="hover:underline">Post a Job</a></li>
+            <li><a href="#" className="hover:underline">Tradespeople Join</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 className="text-md font-semibold mb-3">Support</h5>
+          <ul className="space-y-2 text-sm">
+            <li><a href="#" className="hover:underline">Help Centre</a></li>
+            <li><a href="#" className="hover:underline">Contact Us</a></li>
+            <li><a href="#" className="hover:underline">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="text-center py-6 border-t text-sm text-gray-500">
+        &copy; {new Date().getFullYear()} Getatradelink. All rights reserved.
+      </div>
+    </footer>
+  );
+}

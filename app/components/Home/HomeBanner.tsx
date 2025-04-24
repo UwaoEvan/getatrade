@@ -1,0 +1,44 @@
+import Image from "next/image";
+import Painter from "@/public/Screenshot 2025-04-23 at 16.12.05.png";
+
+export default function HomeBanner() {
+  return (
+    <div className="w-[880px] mx-auto flex flex-col md:flex-row items-center justify-center py-12 text-white">
+      <div className="md:w-1/2 space-y-6 text-center md:text-left">
+        <h1 className="text-3xl md:text-5xl font-bold leading-tight">
+          The reliable way <br />
+          <span className="text-cyan-300">to hire</span> a tradesperson
+        </h1>
+
+        <div className="mt-20">
+          <label htmlFor="jobSearch" className="text-xl md:text-3xl font-bold leading-tight">
+            What is your job?
+          </label>
+          <div className="flex max-w-md mx-auto md:mx-0 mt-6">
+            <input
+              id="jobSearch"
+              type="text"
+              placeholder="e.g., Plumber, Electrician..."
+              className="w-full px-4 py-2 text-black rounded-l bg-white outline-none"
+            />
+            <button className="bg-[#0c51a1] px-5 flex items-center justify-center rounded-r">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-10 md:mt-0 md:w-1/2 relative flex justify-center items-center">
+        <Image src={Painter} alt="painter" className="h-fit object-contain"/>
+      </div>
+    </div>
+  )
+}

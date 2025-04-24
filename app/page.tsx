@@ -1,7 +1,19 @@
+import HomeBanner from "./components/Home/HomeBanner";
+import HomeCounter from "./components/Home/HomeCounter";
+import HowToHire from "./components/Home/HowToHire";
+import LookingForLeads from "./components/Home/LookingForLeads";
+import PopularTrades from "./components/Home/PopularTrades";
+import WhyGetATrade from "./components/Home/WhyGetATrade";
+
 export default function Home() {
   return (
-    <div>
-      Hello
+    <div className="bg-[#2f76d9]">
+      <HomeBanner/>
+      <HomeCounter/>
+      <HowToHire/>
+      <WhyGetATrade/>
+      <PopularTrades/>
+      <LookingForLeads/>
     </div>
   );
 }
