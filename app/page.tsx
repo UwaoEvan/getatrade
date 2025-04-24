@@ -7,7 +7,7 @@ import WhyGetATrade from "./components/Home/WhyGetATrade";
 
 export default function Home() {
   return (
-    <div className="bg-[#2f76d9]">
+    <div className="">
       <HomeBanner/>
       <HomeCounter/>
       <HowToHire/>

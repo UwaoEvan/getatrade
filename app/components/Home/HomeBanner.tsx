@@ -3,18 +3,19 @@ import Painter from "@/public/Screenshot 2025-04-23 at 16.12.05.png";
 
 export default function HomeBanner() {
   return (
-    <div className="w-[880px] mx-auto flex flex-col md:flex-row items-center justify-center py-12 text-white">
-      <div className="md:w-1/2 space-y-6 text-center md:text-left">
-        <h1 className="text-3xl md:text-5xl font-bold leading-tight">
+    <div className="bg-[#2f76d9] w-full ">
+    <div className="mx-4 lg:w-[880px] lg:mx-auto flex flex-col md:flex-row md:items-center md:justify-center py-12 text-white">
+      <div className="md:w-1/2 space-y-6 text-left">
+        <h1 className="text-2xl lg:text-5xl md:text-3xl font-bold leading-tight">
           The reliable way <br />
           <span className="text-cyan-300">to hire</span> a tradesperson
         </h1>
 
-        <div className="mt-20">
+        <div className="mt-10 md:mt-20">
           <label htmlFor="jobSearch" className="text-xl md:text-3xl font-bold leading-tight">
             What is your job?
           </label>
-          <div className="flex max-w-md mx-auto md:mx-0 mt-6">
+          <div className="flex max-w-md md:mx-0 mt-6">
             <input
               id="jobSearch"
               type="text"
@@ -36,9 +37,10 @@ export default function HomeBanner() {
         </div>
       </div>
 
-      <div className="mt-10 md:mt-0 md:w-1/2 relative flex justify-center items-center">
+      <div className="mt-10 w-4/5 self-center md:mt-0 md:w-1/2 relative flex justify-center items-center">
         <Image src={Painter} alt="painter" className="h-fit object-contain"/>
       </div>
+    </div>
     </div>
   )
 }

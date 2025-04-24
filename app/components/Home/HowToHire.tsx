@@ -24,8 +24,8 @@ export default function HowToHire() {
 
   return (
     <section className="bg-gray-100 py-16">
-      <div className="text-center w-[880px] mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12">
+      <div className="text-center w-full px-4 lg:w-[880px] lg:mx-auto">
+        <h2 className="text-xl md:text-4xl font-bold text-gray-900 mb-12">
           How to hire the right tradesperson
         </h2>
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">

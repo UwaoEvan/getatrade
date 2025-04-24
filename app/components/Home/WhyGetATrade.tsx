@@ -4,8 +4,8 @@ import Banner from "@/public/banner.png";
 export default function WhyGetATrade() {
   return (
     <section className="bg-white py-16">
-      <div className="w-[880px] mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+      <div className="w-full px-4 lg:w-[880px] lg:mx-auto">
+        <h2 className="text-xl md:text-4xl font-bold text-gray-900 mb-4">
           Why Getatradelink is the reliable way
         </h2>
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">

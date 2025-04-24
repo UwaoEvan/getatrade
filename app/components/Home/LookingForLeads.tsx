@@ -4,7 +4,7 @@ import Link from "@/public/link.jpg";
 export default function LookingForLeads() {
   return (
     <section className="bg-white py-16">
-      <div className="w-[800px] mx-auto">
+      <div className="w-ful px-4 lg:w-[800px] lg:mx-auto">
         <div className="flex flex-col md:flex-row md:justify-center gap-10">
           <Image
             src={Link}
@@ -12,7 +12,7 @@ export default function LookingForLeads() {
             className="w-full md:w-1/2 rounded-lg object-cover"
           />
           <div className="md:w-1/2">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-xl md:text-4xl font-bold text-gray-900 mb-4">
               Looking for leads?
             </h2>
             <h3 className="text-xl font-semibold text-gray-800 mb-4">
