@@ -41,7 +41,7 @@ export const register = async (prevState: State, formData: FormData) => {
     return { error: 'Invalid form data' }
   }
 
-  const { email, username, password } = parsed.data;
+  const { email, username, password, role } = parsed.data;
 
   const existingUser = await db.user.findUnique({ where: { email } })
 
@@ -56,6 +56,7 @@ export const register = async (prevState: State, formData: FormData) => {
       email,
       username,
       password: hashedPassword,
+      role
     },
   })
 
