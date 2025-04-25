@@ -1,66 +1,66 @@
-'use server'
+"use server";
 
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
 import { registerSchema } from "./schemas";
 import bcrypt from "bcrypt";
 import { db } from "@/db";
-import { redirect } from 'next/navigation';
+import { redirect } from "next/navigation";
 
 export async function authenticate(
   prevState: string | undefined,
-  formData: FormData
+  formData: FormData,
 ) {
   try {
     await signIn("credentials", {
       email: formData.get("email"),
       password: formData.get("password"),
-      redirect: false
+      redirect: false,
     });
   } catch (error) {
     if (error instanceof AuthError) {
-      return error.message; 
+      return error.message;
     }
     return "Unknown error occurred";
   }
-  redirect("/dashboard")
+  redirect("/dashboard");
 }
 
 type State = {
-  error?: string
-  success?: boolean
-}
+  error?: string;
+  success?: boolean;
+};
 
 export const register = async (prevState: State, formData: FormData) => {
   const parsed = registerSchema.safeParse({
     email: formData.get("email"),
     username: formData.get("username"),
     role: formData.get("role"),
-    password: formData.get("password")
-  })
+    password: formData.get("password"),
+  });
 
   if (!parsed.success) {
-    return { error: 'Invalid form data' }
+    return { error: "Invalid form data" };
   }
 
   const { email, username, password, role } = parsed.data;
 
-  const existingUser = await db.user.findUnique({ where: { email } })
+  const existingUser = await db.user.findUnique({ where: { email } });
 
   if (existingUser) {
-    return { error: 'Email already in use' }
+    return { error: "Email already in use" };
   }
 
-  const hashedPassword = await bcrypt.hash(password, 10)
+  const hashedPassword = await bcrypt.hash(password, 10);
 
   await db.user.create({
     data: {
       email,
       username,
       password: hashedPassword,
-      role
+      role,
     },
-  })
+  });
 
-  return { success: true }
-}
+  return { success: true };
+};

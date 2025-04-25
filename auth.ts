@@ -1,10 +1,10 @@
-import NextAuth from 'next-auth';
-import { authConfig } from './auth.config';
-import Credentials from 'next-auth/providers/credentials';
-import { z } from 'zod';
-import { db } from './db';
+import NextAuth from "next-auth";
+import { authConfig } from "./auth.config";
+import Credentials from "next-auth/providers/credentials";
+import { z } from "zod";
+import { db } from "./db";
 import bcrypt from "bcrypt";
-import { AuthError } from "next-auth"; 
+import { AuthError } from "next-auth";
 
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
@@ -28,7 +28,9 @@ export const { auth, signIn, signOut } = NextAuth({
 
         const passwordsMatch = await bcrypt.compare(password, user.password);
         if (!passwordsMatch) {
-          throw new AuthError("Incorrect password", { cause: "CredentialsSignin" });
+          throw new AuthError("Incorrect password", {
+            cause: "CredentialsSignin",
+          });
         }
 
         return {
@@ -36,6 +38,6 @@ export const { auth, signIn, signOut } = NextAuth({
           email: user.email,
         };
       },
-    }),  
+    }),
   ],
 });

@@ -8,12 +8,12 @@ import WhyGetATrade from "./components/Home/WhyGetATrade";
 export default function Home() {
   return (
     <div className="">
-      <HomeBanner/>
-      <HomeCounter/>
-      <HowToHire/>
-      <WhyGetATrade/>
-      <PopularTrades/>
-      <LookingForLeads/>
+      <HomeBanner />
+      <HomeCounter />
+      <HowToHire />
+      <WhyGetATrade />
+      <PopularTrades />
+      <LookingForLeads />
     </div>
   );
 }

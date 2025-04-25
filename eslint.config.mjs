@@ -15,8 +15,8 @@ const eslintConfig = [
     ignores: [
       "**/node_modules/**",
       "**/.next/**",
-      "**/prisma/**",         // 👈 ignore all Prisma files (schemas + generated)
-      "**/generated/**",      // (optional) ignore other generated files
+      "**/prisma/**", // 👈 ignore all Prisma files (schemas + generated)
+      "**/generated/**", // (optional) ignore other generated files
     ],
   },
 ];

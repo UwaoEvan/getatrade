@@ -7,19 +7,19 @@ import Link from "next/link";
 export default function HowToHire() {
   const steps = [
     {
-      step: 'STEP 1',
-      title: 'Post your job for free',
-      img: Step1
+      step: "STEP 1",
+      title: "Post your job for free",
+      img: Step1,
     },
     {
-      step: 'STEP 2',
-      title: 'Tradespeople respond',
-      img: Step2
+      step: "STEP 2",
+      title: "Tradespeople respond",
+      img: Step2,
     },
     {
-      step: 'STEP 3',
-      title: 'Review profiles and choose',
-      img: Step3
+      step: "STEP 3",
+      title: "Review profiles and choose",
+      img: Step3,
     },
   ];
 
@@ -32,13 +32,22 @@ export default function HowToHire() {
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
           {steps.map((item, index) => (
             <div key={index} className="flex flex-col items-center">
-              <Image src={item.img} alt={item.title} className="w-40 h-40 object-contain mb-4" />
+              <Image
+                src={item.img}
+                alt={item.title}
+                className="w-40 h-40 object-contain mb-4"
+              />
               <p className="text-[#2f76d9] font-semibold">{item.step}</p>
-              <p className="text-lg font-semibold text-gray-900 mt-1">{item.title}</p>
+              <p className="text-lg font-semibold text-gray-900 mt-1">
+                {item.title}
+              </p>
             </div>
           ))}
         </div>
-        <Link href="/how-it-works" className="block w-2/6 mx-auto mt-10 px-6 py-3 border border-[#2f76d9] text-[#2f76d9] font-medium rounded hover:bg-purple-100 transition">
+        <Link
+          href="/how-it-works"
+          className="block w-2/6 mx-auto mt-10 px-6 py-3 border border-[#2f76d9] text-[#2f76d9] font-medium rounded hover:bg-purple-100 transition"
+        >
           See how it works
         </Link>
       </div>

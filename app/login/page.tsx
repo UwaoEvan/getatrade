@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Link from "next/link";
 import { useActionState } from "react";
 import { authenticate } from "../lib/actions";
@@ -7,7 +7,7 @@ import { Suspense } from "react";
 
 function LoginForm() {
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
+  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
   const [errorMessage, formAction, isPending] = useActionState(
     authenticate,
     undefined,
@@ -17,13 +17,18 @@ function LoginForm() {
     <div className="flex items-center justify-center mt-10 px-4">
       <div className="bg-white shadow border border-gray-200 rounded-lg p-8 max-w-md w-full space-y-6">
         <div>
-          <h1 className="sm:text-xl md:text-2xl font-semibold text-gray-900">Login to GetATradeLinkLtd</h1>
+          <h1 className="sm:text-xl md:text-2xl font-semibold text-gray-900">
+            Login to GetATradeLinkLtd
+          </h1>
           <p className="text-gray-600 mt-1">Enter your email to continue</p>
         </div>
-        
+
         <form className="space-y-5" action={formAction}>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
               Email <span className="text-red-500">*</span>
             </label>
             <input
@@ -37,7 +42,10 @@ function LoginForm() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Password <span className="text-red-500">*</span>
             </label>
             <input
@@ -63,7 +71,7 @@ function LoginForm() {
                 Logging in...
               </span>
             ) : (
-              'Log in'
+              "Log in"
             )}
           </button>
 
@@ -73,7 +81,7 @@ function LoginForm() {
         </form>
 
         <hr className="border-gray-200" />
-        
+
         <div className="text-sm text-gray-800">
           <p className="font-semibold">New to Getatradelinkltd?</p>
           <p className="mt-1">
@@ -83,7 +91,10 @@ function LoginForm() {
             to find a tradesperson
           </p>
           <p>
-            <Link href="/tradesworks-signup" className="text-[#2f76d9] underline">
+            <Link
+              href="/tradesworks-signup"
+              className="text-[#2f76d9] underline"
+            >
               Sign up
             </Link>{" "}
             to join as a tradesperson
@@ -96,11 +107,13 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={
-      <div className="flex items-center justify-center min-h-[80vh]">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-purple-600"></div>
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center min-h-[80vh]">
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-purple-600"></div>
+        </div>
+      }
+    >
       <LoginForm />
     </Suspense>
   );

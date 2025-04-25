@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from "next/image";
 import Logo from "@/public/logo.png";
 import Link from "next/link";
@@ -16,24 +16,48 @@ export default function Footer() {
             className="h-10 w-20 md:h-20 md:w-40"
             onClick={() => router.push("/")}
           />
-          <p className="text-sm w-20 md:w-60">Helping you find the right tradesperson, the reliable way.</p>
+          <p className="text-sm w-20 md:w-60">
+            Helping you find the right tradesperson, the reliable way.
+          </p>
         </div>
 
         <div>
           <h5 className="text-md font-semibold mb-3">Explore</h5>
           <ul className="space-y-2 text-sm">
-            <li><a href="#" className="hover:underline">Popular Trades</a></li>
-            <Link href="/post-a-job" className="hover:underline">Post a Job</Link>
-            <li><a href="#" className="hover:underline">Tradespeople Join</a></li>
+            <li>
+              <a href="#" className="hover:underline">
+                Popular Trades
+              </a>
+            </li>
+            <Link href="/post-a-job" className="hover:underline">
+              Post a Job
+            </Link>
+            <li>
+              <a href="#" className="hover:underline">
+                Tradespeople Join
+              </a>
+            </li>
           </ul>
         </div>
 
         <div>
           <h5 className="text-md font-semibold mb-3">Support</h5>
           <ul className="space-y-2 text-sm">
-            <li><a href="#" className="hover:underline">Help Centre</a></li>
-            <li><a href="#" className="hover:underline">Contact Us</a></li>
-            <li><a href="#" className="hover:underline">Privacy Policy</a></li>
+            <li>
+              <a href="#" className="hover:underline">
+                Help Centre
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:underline">
+                Contact Us
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:underline">
+                Privacy Policy
+              </a>
+            </li>
           </ul>
         </div>
       </div>

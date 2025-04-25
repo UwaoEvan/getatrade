@@ -11,25 +11,33 @@ export default function WhyGetATrade() {
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
             <p className="text-gray-700 mb-8">
-              Hiring a tradesperson when you need one isn’t always easy. Getatradelink is the reliable way, helping you hire the right tradesperson for your job.
+              Hiring a tradesperson when you need one isn’t always easy.
+              Getatradelink is the reliable way, helping you hire the right
+              tradesperson for your job.
             </p>
 
             <div className="space-y-6">
               <div>
                 <h3 className="text-xl font-bold text-black">
-                  <span className="text-blue-500 mr-1">|</span>The tradespeople you want
+                  <span className="text-blue-500 mr-1">|</span>The tradespeople
+                  you want
                 </h3>
                 <p className="text-gray-700 mt-1">
-                  Post your job for free to access tradespeople with the skills you need and get responses from those who want to do it. You choose who you want to chat with.
+                  Post your job for free to access tradespeople with the skills
+                  you need and get responses from those who want to do it. You
+                  choose who you want to chat with.
                 </p>
               </div>
 
               <div>
                 <h3 className="text-xl font-bold text-black">
-                  <span className="text-blue-500 mr-1">|</span>Genuine customer reviews
+                  <span className="text-blue-500 mr-1">|</span>Genuine customer
+                  reviews
                 </h3>
                 <p className="text-gray-700 mt-1">
-                  Thanks to our robust feedback system, you can read genuine reviews from previous customers, allowing you to make an informed choice about who to hire.
+                  Thanks to our robust feedback system, you can read genuine
+                  reviews from previous customers, allowing you to make an
+                  informed choice about who to hire.
                 </p>
               </div>
 
@@ -38,7 +46,9 @@ export default function WhyGetATrade() {
                   <span className="text-blue-500 mr-1">|</span>You’re in control
                 </h3>
                 <p className="text-gray-700 mt-1">
-                  Review profiles, work history and feedback before making a decision about who to chat with. Only tradespeople you have chosen can contact you.
+                  Review profiles, work history and feedback before making a
+                  decision about who to chat with. Only tradespeople you have
+                  chosen can contact you.
                 </p>
               </div>
             </div>
