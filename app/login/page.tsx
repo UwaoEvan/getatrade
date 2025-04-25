@@ -5,7 +5,7 @@ import { authenticate } from "../lib/actions";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
-export default function Login() {
+function LoginForm() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
   const [errorMessage, formAction, isPending] = useActionState(
@@ -20,6 +20,7 @@ export default function Login() {
           <h1 className="sm:text-xl md:text-2xl font-semibold text-gray-900">Login to GetATradeLinkLtd</h1>
           <p className="text-gray-600 mt-1">Enter your email to continue</p>
         </div>
+        
         <form className="space-y-5" action={formAction}>
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -34,6 +35,7 @@ export default function Login() {
               required
             />
           </div>
+
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
               Password <span className="text-red-500">*</span>
@@ -47,39 +49,59 @@ export default function Login() {
               required
             />
           </div>
+
           <input type="hidden" name="redirectTo" value={callbackUrl} />
 
           <button
             aria-disabled={isPending}
             type="submit"
-            className="w-full bg-[#2f76d9] hover:cursor-pointer text-white py-2 rounded-md font-medium transition"
+            className="w-full bg-[#2f76d9] hover:cursor-pointer text-white py-2 rounded-md font-medium transition relative"
           >
-            <Suspense fallback={<p>Loading...</p>}>
-              Log in
-            </Suspense>
+            {isPending ? (
+              <span className="flex items-center justify-center">
+                <span className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white mr-2"></span>
+                Logging in...
+              </span>
+            ) : (
+              'Log in'
+            )}
           </button>
+
           {errorMessage && (
-            <>
-              <p className="text-sm text-red-500">{errorMessage}</p>
-            </>
+            <p className="text-sm text-red-500 text-center">{errorMessage}</p>
           )}
         </form>
 
         <hr className="border-gray-200" />
+        
         <div className="text-sm text-gray-800">
           <p className="font-semibold">New to Getatradelinkltd?</p>
           <p className="mt-1">
-            <Link href="/post-a-job" className="text-[#2f76d9] underline">Post your job
+            <Link href="/post-a-job" className="text-[#2f76d9] underline">
+              Post your job
             </Link>{" "}
             to find a tradesperson
           </p>
           <p>
-            <Link href="/tradesworks-signup" className="text-[#2f76d9] underline">Sign up
+            <Link href="/tradesworks-signup" className="text-[#2f76d9] underline">
+              Sign up
             </Link>{" "}
             to join as a tradesperson
           </p>
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-[80vh]">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-purple-600"></div>
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   );
 }
