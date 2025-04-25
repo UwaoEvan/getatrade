@@ -975,7 +975,7 @@ export namespace Prisma {
     id: number | null;
     username: string | null;
     email: string | null;
-    password: string | null;
+    hashedPassword: string | null;
     role: string | null;
   };
 
@@ -983,7 +983,7 @@ export namespace Prisma {
     id: number | null;
     username: string | null;
     email: string | null;
-    password: string | null;
+    hashedPassword: string | null;
     role: string | null;
   };
 
@@ -991,7 +991,7 @@ export namespace Prisma {
     id: number;
     username: number;
     email: number;
-    password: number;
+    hashedPassword: number;
     role: number;
     _all: number;
   };
@@ -1008,7 +1008,7 @@ export namespace Prisma {
     id?: true;
     username?: true;
     email?: true;
-    password?: true;
+    hashedPassword?: true;
     role?: true;
   };
 
@@ -1016,7 +1016,7 @@ export namespace Prisma {
     id?: true;
     username?: true;
     email?: true;
-    password?: true;
+    hashedPassword?: true;
     role?: true;
   };
 
@@ -1024,7 +1024,7 @@ export namespace Prisma {
     id?: true;
     username?: true;
     email?: true;
-    password?: true;
+    hashedPassword?: true;
     role?: true;
     _all?: true;
   };
@@ -1122,7 +1122,7 @@ export namespace Prisma {
     id: number;
     username: string;
     email: string;
-    password: string;
+    hashedPassword: string;
     role: string | null;
     _count: UserCountAggregateOutputType | null;
     _avg: UserAvgAggregateOutputType | null;
@@ -1150,7 +1150,7 @@ export namespace Prisma {
       id?: boolean;
       username?: boolean;
       email?: boolean;
-      password?: boolean;
+      hashedPassword?: boolean;
       role?: boolean;
     },
     ExtArgs["result"]["user"]
@@ -1163,7 +1163,7 @@ export namespace Prisma {
       id?: boolean;
       username?: boolean;
       email?: boolean;
-      password?: boolean;
+      hashedPassword?: boolean;
       role?: boolean;
     },
     ExtArgs["result"]["user"]
@@ -1176,7 +1176,7 @@ export namespace Prisma {
       id?: boolean;
       username?: boolean;
       email?: boolean;
-      password?: boolean;
+      hashedPassword?: boolean;
       role?: boolean;
     },
     ExtArgs["result"]["user"]
@@ -1186,14 +1186,14 @@ export namespace Prisma {
     id?: boolean;
     username?: boolean;
     email?: boolean;
-    password?: boolean;
+    hashedPassword?: boolean;
     role?: boolean;
   };
 
   export type UserOmit<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = $Extensions.GetOmit<
-    "id" | "username" | "email" | "password" | "role",
+    "id" | "username" | "email" | "hashedPassword" | "role",
     ExtArgs["result"]["user"]
   >;
 
@@ -1207,7 +1207,7 @@ export namespace Prisma {
         id: number;
         username: string;
         email: string;
-        password: string;
+        hashedPassword: string;
         role: string | null;
       },
       ExtArgs["result"]["user"]
@@ -1797,7 +1797,7 @@ export namespace Prisma {
     readonly id: FieldRef<"User", "Int">;
     readonly username: FieldRef<"User", "String">;
     readonly email: FieldRef<"User", "String">;
-    readonly password: FieldRef<"User", "String">;
+    readonly hashedPassword: FieldRef<"User", "String">;
     readonly role: FieldRef<"User", "String">;
   }
 
@@ -2211,7 +2211,7 @@ export namespace Prisma {
     id: "id";
     username: "username";
     email: "email";
-    password: "password";
+    hashedPassword: "hashedPassword";
     role: "role";
   };
 
@@ -2302,7 +2302,7 @@ export namespace Prisma {
     id?: IntFilter<"User"> | number;
     username?: StringFilter<"User"> | string;
     email?: StringFilter<"User"> | string;
-    password?: StringFilter<"User"> | string;
+    hashedPassword?: StringFilter<"User"> | string;
     role?: StringNullableFilter<"User"> | string | null;
   };
 
@@ -2310,7 +2310,7 @@ export namespace Prisma {
     id?: SortOrder;
     username?: SortOrder;
     email?: SortOrder;
-    password?: SortOrder;
+    hashedPassword?: SortOrder;
     role?: SortOrderInput | SortOrder;
   };
 
@@ -2322,7 +2322,7 @@ export namespace Prisma {
       OR?: UserWhereInput[];
       NOT?: UserWhereInput | UserWhereInput[];
       username?: StringFilter<"User"> | string;
-      password?: StringFilter<"User"> | string;
+      hashedPassword?: StringFilter<"User"> | string;
       role?: StringNullableFilter<"User"> | string | null;
     },
     "id" | "email"
@@ -2332,7 +2332,7 @@ export namespace Prisma {
     id?: SortOrder;
     username?: SortOrder;
     email?: SortOrder;
-    password?: SortOrder;
+    hashedPassword?: SortOrder;
     role?: SortOrderInput | SortOrder;
     _count?: UserCountOrderByAggregateInput;
     _avg?: UserAvgOrderByAggregateInput;
@@ -2352,14 +2352,14 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"User"> | number;
     username?: StringWithAggregatesFilter<"User"> | string;
     email?: StringWithAggregatesFilter<"User"> | string;
-    password?: StringWithAggregatesFilter<"User"> | string;
+    hashedPassword?: StringWithAggregatesFilter<"User"> | string;
     role?: StringNullableWithAggregatesFilter<"User"> | string | null;
   };
 
   export type UserCreateInput = {
     username: string;
     email: string;
-    password: string;
+    hashedPassword: string;
     role?: string | null;
   };
 
@@ -2367,14 +2367,14 @@ export namespace Prisma {
     id?: number;
     username: string;
     email: string;
-    password: string;
+    hashedPassword: string;
     role?: string | null;
   };
 
   export type UserUpdateInput = {
     username?: StringFieldUpdateOperationsInput | string;
     email?: StringFieldUpdateOperationsInput | string;
-    password?: StringFieldUpdateOperationsInput | string;
+    hashedPassword?: StringFieldUpdateOperationsInput | string;
     role?: NullableStringFieldUpdateOperationsInput | string | null;
   };
 
@@ -2382,7 +2382,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     username?: StringFieldUpdateOperationsInput | string;
     email?: StringFieldUpdateOperationsInput | string;
-    password?: StringFieldUpdateOperationsInput | string;
+    hashedPassword?: StringFieldUpdateOperationsInput | string;
     role?: NullableStringFieldUpdateOperationsInput | string | null;
   };
 
@@ -2390,14 +2390,14 @@ export namespace Prisma {
     id?: number;
     username: string;
     email: string;
-    password: string;
+    hashedPassword: string;
     role?: string | null;
   };
 
   export type UserUpdateManyMutationInput = {
     username?: StringFieldUpdateOperationsInput | string;
     email?: StringFieldUpdateOperationsInput | string;
-    password?: StringFieldUpdateOperationsInput | string;
+    hashedPassword?: StringFieldUpdateOperationsInput | string;
     role?: NullableStringFieldUpdateOperationsInput | string | null;
   };
 
@@ -2405,7 +2405,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     username?: StringFieldUpdateOperationsInput | string;
     email?: StringFieldUpdateOperationsInput | string;
-    password?: StringFieldUpdateOperationsInput | string;
+    hashedPassword?: StringFieldUpdateOperationsInput | string;
     role?: NullableStringFieldUpdateOperationsInput | string | null;
   };
 
@@ -2459,7 +2459,7 @@ export namespace Prisma {
     id?: SortOrder;
     username?: SortOrder;
     email?: SortOrder;
-    password?: SortOrder;
+    hashedPassword?: SortOrder;
     role?: SortOrder;
   };
 
@@ -2471,7 +2471,7 @@ export namespace Prisma {
     id?: SortOrder;
     username?: SortOrder;
     email?: SortOrder;
-    password?: SortOrder;
+    hashedPassword?: SortOrder;
     role?: SortOrder;
   };
 
@@ -2479,7 +2479,7 @@ export namespace Prisma {
     id?: SortOrder;
     username?: SortOrder;
     email?: SortOrder;
-    password?: SortOrder;
+    hashedPassword?: SortOrder;
     role?: SortOrder;
   };
 

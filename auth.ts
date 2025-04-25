@@ -16,7 +16,7 @@ export const { auth, signIn, signOut } = NextAuth({
           .safeParse(credentials);
 
         if (!parsedCredentials.success) {
-          throw new AuthError("Invalid form data", { cause: "InvalidForm" });
+          throw new AuthError("Invalid form data");
         }
 
         const { email, password } = parsedCredentials.data;
@@ -26,11 +26,12 @@ export const { auth, signIn, signOut } = NextAuth({
           throw new AuthError("User not found");
         }
 
-        const passwordsMatch = await bcrypt.compare(password, user.password);
+        const passwordsMatch = await bcrypt.compare(
+          password,
+          user.hashedPassword,
+        );
         if (!passwordsMatch) {
-          throw new AuthError("Incorrect password", {
-            cause: "CredentialsSignin",
-          });
+          throw new AuthError("Incorrect password");
         }
 
         return {
