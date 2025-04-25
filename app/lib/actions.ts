@@ -5,6 +5,7 @@ import { AuthError } from "next-auth";
 import { registerSchema } from "./schemas";
 import bcrypt from "bcrypt";
 import { db } from "@/db";
+import { redirect } from 'next/navigation';
 
 export async function authenticate(
   prevState: string | undefined,
@@ -14,7 +15,7 @@ export async function authenticate(
     await signIn("credentials", {
       email: formData.get("email"),
       password: formData.get("password"),
-      redirect: false, 
+      redirect: false
     });
   } catch (error) {
     if (error instanceof AuthError) {
@@ -22,6 +23,7 @@ export async function authenticate(
     }
     return "Unknown error occurred";
   }
+  redirect("/dashboard")
 }
 
 type State = {

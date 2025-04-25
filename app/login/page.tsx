@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useActionState } from "react";
 import { authenticate } from "../lib/actions";
 import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
 import { Suspense } from "react";
 
 export default function Login() {
@@ -13,13 +12,6 @@ export default function Login() {
     authenticate,
     undefined,
   );
-
-  const router = useRouter();
-
-  // if (session) {
-  //   return router.push("/dashboard");
-  // }
-
 
   return (
     <div className="flex items-center justify-center mt-10 px-4">
