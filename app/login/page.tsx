@@ -1,6 +1,16 @@
+'use client'
 import Link from "next/link";
+import { useActionState } from "react";
+import { authenticate } from "../lib/actions";
+import { useSearchParams } from "next/navigation";
 
 export default function Login() {
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
+  const [errorMessage, formAction, isPending] = useActionState(
+    authenticate,
+    undefined,
+  );
   return (
     <div className="flex items-center justify-center mt-10 px-4">
       <div className="bg-white shadow border border-gray-200 rounded-lg p-8 max-w-md w-full space-y-6">
@@ -8,7 +18,7 @@ export default function Login() {
           <h1 className="sm:text-xl md:text-2xl font-semibold text-gray-900">Login to GetATradeLinkLtd</h1>
           <p className="text-gray-600 mt-1">Enter your email to continue</p>
         </div>
-        <form className="space-y-5">
+        <form className="space-y-5" action={formAction}>
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
               Email <span className="text-red-500">*</span>
@@ -17,6 +27,7 @@ export default function Login() {
               type="email"
               id="email"
               placeholder="Email"
+              name="email"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-600 focus:border-purple-600"
               required
             />
@@ -28,18 +39,26 @@ export default function Login() {
             <input
               type="password"
               id="password"
+              name="password"
               placeholder="Password"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-600 focus:border-purple-600"
               required
             />
           </div>
+          <input type="hidden" name="redirectTo" value={callbackUrl} />
 
           <button
+            aria-disabled={isPending}
             type="submit"
             className="w-full bg-[#2f76d9] hover:cursor-pointer text-white py-2 rounded-md font-medium transition"
           >
             Log in
           </button>
+          {errorMessage && (
+            <>
+              <p className="text-sm text-red-500">{errorMessage}</p>
+            </>
+          )}
         </form>
 
         <hr className="border-gray-200" />
