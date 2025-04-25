@@ -57,7 +57,7 @@ export const register = async (prevState: State, formData: FormData) => {
     data: {
       email,
       username,
-      password: hashedPassword,
+      hashedPassword,
       role,
     },
   });
