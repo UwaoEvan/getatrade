@@ -21,6 +21,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>;
  *
  */
 export type Job = $Result.DefaultSelection<Prisma.$JobPayload>;
+/**
+ * Model Interest
+ *
+ */
+export type Interest = $Result.DefaultSelection<Prisma.$InterestPayload>;
 
 /**
  * ##  Prisma Client ʲˢ
@@ -207,6 +212,16 @@ export class PrismaClient<
    * ```
    */
   get job(): Prisma.JobDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.interest`: Exposes CRUD operations for the **Interest** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Interests
+   * const interests = await prisma.interest.findMany()
+   * ```
+   */
+  get interest(): Prisma.InterestDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -667,6 +682,7 @@ export namespace Prisma {
   export const ModelName: {
     User: "User";
     Job: "Job";
+    Interest: "Interest";
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -694,7 +710,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions;
     };
     meta: {
-      modelProps: "user" | "job";
+      modelProps: "user" | "job" | "interest";
       txIsolationLevel: Prisma.TransactionIsolationLevel;
     };
     model: {
@@ -846,6 +862,80 @@ export namespace Prisma {
           };
         };
       };
+      Interest: {
+        payload: Prisma.$InterestPayload<ExtArgs>;
+        fields: Prisma.InterestFieldRefs;
+        operations: {
+          findUnique: {
+            args: Prisma.InterestFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$InterestPayload> | null;
+          };
+          findUniqueOrThrow: {
+            args: Prisma.InterestFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$InterestPayload>;
+          };
+          findFirst: {
+            args: Prisma.InterestFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$InterestPayload> | null;
+          };
+          findFirstOrThrow: {
+            args: Prisma.InterestFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$InterestPayload>;
+          };
+          findMany: {
+            args: Prisma.InterestFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$InterestPayload>[];
+          };
+          create: {
+            args: Prisma.InterestCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$InterestPayload>;
+          };
+          createMany: {
+            args: Prisma.InterestCreateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          createManyAndReturn: {
+            args: Prisma.InterestCreateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$InterestPayload>[];
+          };
+          delete: {
+            args: Prisma.InterestDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$InterestPayload>;
+          };
+          update: {
+            args: Prisma.InterestUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$InterestPayload>;
+          };
+          deleteMany: {
+            args: Prisma.InterestDeleteManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          updateMany: {
+            args: Prisma.InterestUpdateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          updateManyAndReturn: {
+            args: Prisma.InterestUpdateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$InterestPayload>[];
+          };
+          upsert: {
+            args: Prisma.InterestUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$InterestPayload>;
+          };
+          aggregate: {
+            args: Prisma.InterestAggregateArgs<ExtArgs>;
+            result: $Utils.Optional<AggregateInterest>;
+          };
+          groupBy: {
+            args: Prisma.InterestGroupByArgs<ExtArgs>;
+            result: $Utils.Optional<InterestGroupByOutputType>[];
+          };
+          count: {
+            args: Prisma.InterestCountArgs<ExtArgs>;
+            result: $Utils.Optional<InterestCountAggregateOutputType> | number;
+          };
+        };
+      };
     };
   } & {
     other: {
@@ -936,6 +1026,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit;
     job?: JobOmit;
+    interest?: InterestOmit;
   };
 
   /* Types for Logging */
@@ -1037,6 +1128,78 @@ export namespace Prisma {
   /**
    * Count Types
    */
+
+  /**
+   * Count Type UserCountOutputType
+   */
+
+  export type UserCountOutputType = {
+    interest: number;
+  };
+
+  export type UserCountOutputTypeSelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    interest?: boolean | UserCountOutputTypeCountInterestArgs;
+  };
+
+  // Custom InputTypes
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+     */
+    select?: UserCountOutputTypeSelect<ExtArgs> | null;
+  };
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountInterestArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: InterestWhereInput;
+  };
+
+  /**
+   * Count Type JobCountOutputType
+   */
+
+  export type JobCountOutputType = {
+    interest: number;
+  };
+
+  export type JobCountOutputTypeSelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    interest?: boolean | JobCountOutputTypeCountInterestArgs;
+  };
+
+  // Custom InputTypes
+  /**
+   * JobCountOutputType without action
+   */
+  export type JobCountOutputTypeDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the JobCountOutputType
+     */
+    select?: JobCountOutputTypeSelect<ExtArgs> | null;
+  };
+
+  /**
+   * JobCountOutputType without action
+   */
+  export type JobCountOutputTypeCountInterestArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: InterestWhereInput;
+  };
 
   /**
    * Models
@@ -1243,6 +1406,8 @@ export namespace Prisma {
       email?: boolean;
       hashedPassword?: boolean;
       role?: boolean;
+      interest?: boolean | User$interestArgs<ExtArgs>;
+      _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>;
     },
     ExtArgs["result"]["user"]
   >;
@@ -1287,12 +1452,26 @@ export namespace Prisma {
     "id" | "username" | "email" | "hashedPassword" | "role",
     ExtArgs["result"]["user"]
   >;
+  export type UserInclude<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    interest?: boolean | User$interestArgs<ExtArgs>;
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>;
+  };
+  export type UserIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {};
+  export type UserIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {};
 
   export type $UserPayload<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     name: "User";
-    objects: {};
+    objects: {
+      interest: Prisma.$InterestPayload<ExtArgs>[];
+    };
     scalars: $Extensions.GetPayloadResult<
       {
         id: number;
@@ -1845,6 +2024,17 @@ export namespace Prisma {
     GlobalOmitOptions = {},
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
+    interest<T extends User$interestArgs<ExtArgs> = {}>(
+      args?: Subset<T, User$interestArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      | $Result.GetResult<
+          Prisma.$InterestPayload<ExtArgs>,
+          T,
+          "findMany",
+          GlobalOmitOptions
+        >
+      | Null
+    >;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1908,6 +2098,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null;
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null;
+    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput;
@@ -1928,6 +2122,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null;
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null;
+    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput;
@@ -1947,6 +2145,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null;
     /**
      * Filter, which User to fetch.
      */
@@ -1998,6 +2200,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null;
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null;
+    /**
      * Filter, which User to fetch.
      */
     where?: UserWhereInput;
@@ -2048,6 +2254,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null;
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null;
+    /**
      * Filter, which Users to fetch.
      */
     where?: UserWhereInput;
@@ -2092,6 +2302,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null;
     /**
      * The data needed to create a User.
      */
@@ -2146,6 +2360,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null;
     /**
      * The data needed to update a User.
      */
@@ -2219,6 +2437,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null;
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null;
+    /**
      * The filter to search for the User to update in case it exists.
      */
     where: UserWhereUniqueInput;
@@ -2247,6 +2469,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null;
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null;
+    /**
      * Filter which User to delete.
      */
     where: UserWhereUniqueInput;
@@ -2269,6 +2495,34 @@ export namespace Prisma {
   };
 
   /**
+   * User.interest
+   */
+  export type User$interestArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Interest
+     */
+    select?: InterestSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Interest
+     */
+    omit?: InterestOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InterestInclude<ExtArgs> | null;
+    where?: InterestWhereInput;
+    orderBy?:
+      | InterestOrderByWithRelationInput
+      | InterestOrderByWithRelationInput[];
+    cursor?: InterestWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: InterestScalarFieldEnum | InterestScalarFieldEnum[];
+  };
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<
@@ -2282,6 +2536,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null;
   };
 
   /**
@@ -2473,6 +2731,8 @@ export namespace Prisma {
       project?: boolean;
       createdAt?: boolean;
       location?: boolean;
+      interest?: boolean | Job$interestArgs<ExtArgs>;
+      _count?: boolean | JobCountOutputTypeDefaultArgs<ExtArgs>;
     },
     ExtArgs["result"]["job"]
   >;
@@ -2533,12 +2793,26 @@ export namespace Prisma {
     | "location",
     ExtArgs["result"]["job"]
   >;
+  export type JobInclude<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    interest?: boolean | Job$interestArgs<ExtArgs>;
+    _count?: boolean | JobCountOutputTypeDefaultArgs<ExtArgs>;
+  };
+  export type JobIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {};
+  export type JobIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {};
 
   export type $JobPayload<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     name: "Job";
-    objects: {};
+    objects: {
+      interest: Prisma.$InterestPayload<ExtArgs>[];
+    };
     scalars: $Extensions.GetPayloadResult<
       {
         id: string;
@@ -3094,6 +3368,17 @@ export namespace Prisma {
     GlobalOmitOptions = {},
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
+    interest<T extends Job$interestArgs<ExtArgs> = {}>(
+      args?: Subset<T, Job$interestArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      | $Result.GetResult<
+          Prisma.$InterestPayload<ExtArgs>,
+          T,
+          "findMany",
+          GlobalOmitOptions
+        >
+      | Null
+    >;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3160,6 +3445,10 @@ export namespace Prisma {
      */
     omit?: JobOmit<ExtArgs> | null;
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobInclude<ExtArgs> | null;
+    /**
      * Filter, which Job to fetch.
      */
     where: JobWhereUniqueInput;
@@ -3180,6 +3469,10 @@ export namespace Prisma {
      */
     omit?: JobOmit<ExtArgs> | null;
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobInclude<ExtArgs> | null;
+    /**
      * Filter, which Job to fetch.
      */
     where: JobWhereUniqueInput;
@@ -3199,6 +3492,10 @@ export namespace Prisma {
      * Omit specific fields from the Job
      */
     omit?: JobOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobInclude<ExtArgs> | null;
     /**
      * Filter, which Job to fetch.
      */
@@ -3250,6 +3547,10 @@ export namespace Prisma {
      */
     omit?: JobOmit<ExtArgs> | null;
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobInclude<ExtArgs> | null;
+    /**
      * Filter, which Job to fetch.
      */
     where?: JobWhereInput;
@@ -3300,6 +3601,10 @@ export namespace Prisma {
      */
     omit?: JobOmit<ExtArgs> | null;
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobInclude<ExtArgs> | null;
+    /**
      * Filter, which Jobs to fetch.
      */
     where?: JobWhereInput;
@@ -3344,6 +3649,10 @@ export namespace Prisma {
      * Omit specific fields from the Job
      */
     omit?: JobOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobInclude<ExtArgs> | null;
     /**
      * The data needed to create a Job.
      */
@@ -3398,6 +3707,10 @@ export namespace Prisma {
      * Omit specific fields from the Job
      */
     omit?: JobOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobInclude<ExtArgs> | null;
     /**
      * The data needed to update a Job.
      */
@@ -3471,6 +3784,10 @@ export namespace Prisma {
      */
     omit?: JobOmit<ExtArgs> | null;
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobInclude<ExtArgs> | null;
+    /**
      * The filter to search for the Job to update in case it exists.
      */
     where: JobWhereUniqueInput;
@@ -3499,6 +3816,10 @@ export namespace Prisma {
      */
     omit?: JobOmit<ExtArgs> | null;
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobInclude<ExtArgs> | null;
+    /**
      * Filter which Job to delete.
      */
     where: JobWhereUniqueInput;
@@ -3521,6 +3842,34 @@ export namespace Prisma {
   };
 
   /**
+   * Job.interest
+   */
+  export type Job$interestArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Interest
+     */
+    select?: InterestSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Interest
+     */
+    omit?: InterestOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InterestInclude<ExtArgs> | null;
+    where?: InterestWhereInput;
+    orderBy?:
+      | InterestOrderByWithRelationInput
+      | InterestOrderByWithRelationInput[];
+    cursor?: InterestWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: InterestScalarFieldEnum | InterestScalarFieldEnum[];
+  };
+
+  /**
    * Job without action
    */
   export type JobDefaultArgs<
@@ -3534,6 +3883,1372 @@ export namespace Prisma {
      * Omit specific fields from the Job
      */
     omit?: JobOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobInclude<ExtArgs> | null;
+  };
+
+  /**
+   * Model Interest
+   */
+
+  export type AggregateInterest = {
+    _count: InterestCountAggregateOutputType | null;
+    _avg: InterestAvgAggregateOutputType | null;
+    _sum: InterestSumAggregateOutputType | null;
+    _min: InterestMinAggregateOutputType | null;
+    _max: InterestMaxAggregateOutputType | null;
+  };
+
+  export type InterestAvgAggregateOutputType = {
+    userId: number | null;
+  };
+
+  export type InterestSumAggregateOutputType = {
+    userId: number | null;
+  };
+
+  export type InterestMinAggregateOutputType = {
+    id: string | null;
+    proposal: string | null;
+    userId: number | null;
+    createdAt: Date | null;
+    jobId: string | null;
+  };
+
+  export type InterestMaxAggregateOutputType = {
+    id: string | null;
+    proposal: string | null;
+    userId: number | null;
+    createdAt: Date | null;
+    jobId: string | null;
+  };
+
+  export type InterestCountAggregateOutputType = {
+    id: number;
+    proposal: number;
+    userId: number;
+    createdAt: number;
+    jobId: number;
+    _all: number;
+  };
+
+  export type InterestAvgAggregateInputType = {
+    userId?: true;
+  };
+
+  export type InterestSumAggregateInputType = {
+    userId?: true;
+  };
+
+  export type InterestMinAggregateInputType = {
+    id?: true;
+    proposal?: true;
+    userId?: true;
+    createdAt?: true;
+    jobId?: true;
+  };
+
+  export type InterestMaxAggregateInputType = {
+    id?: true;
+    proposal?: true;
+    userId?: true;
+    createdAt?: true;
+    jobId?: true;
+  };
+
+  export type InterestCountAggregateInputType = {
+    id?: true;
+    proposal?: true;
+    userId?: true;
+    createdAt?: true;
+    jobId?: true;
+    _all?: true;
+  };
+
+  export type InterestAggregateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Filter which Interest to aggregate.
+     */
+    where?: InterestWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of Interests to fetch.
+     */
+    orderBy?:
+      | InterestOrderByWithRelationInput
+      | InterestOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: InterestWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` Interests from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` Interests.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned Interests
+     **/
+    _count?: true | InterestCountAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to average
+     **/
+    _avg?: InterestAvgAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+     **/
+    _sum?: InterestSumAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+     **/
+    _min?: InterestMinAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+     **/
+    _max?: InterestMaxAggregateInputType;
+  };
+
+  export type GetInterestAggregateType<T extends InterestAggregateArgs> = {
+    [P in keyof T & keyof AggregateInterest]: P extends "_count" | "count"
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInterest[P]>
+      : GetScalarType<T[P], AggregateInterest[P]>;
+  };
+
+  export type InterestGroupByArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: InterestWhereInput;
+    orderBy?:
+      | InterestOrderByWithAggregationInput
+      | InterestOrderByWithAggregationInput[];
+    by: InterestScalarFieldEnum[] | InterestScalarFieldEnum;
+    having?: InterestScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: InterestCountAggregateInputType | true;
+    _avg?: InterestAvgAggregateInputType;
+    _sum?: InterestSumAggregateInputType;
+    _min?: InterestMinAggregateInputType;
+    _max?: InterestMaxAggregateInputType;
+  };
+
+  export type InterestGroupByOutputType = {
+    id: string;
+    proposal: string;
+    userId: number;
+    createdAt: Date;
+    jobId: string;
+    _count: InterestCountAggregateOutputType | null;
+    _avg: InterestAvgAggregateOutputType | null;
+    _sum: InterestSumAggregateOutputType | null;
+    _min: InterestMinAggregateOutputType | null;
+    _max: InterestMaxAggregateOutputType | null;
+  };
+
+  type GetInterestGroupByPayload<T extends InterestGroupByArgs> =
+    Prisma.PrismaPromise<
+      Array<
+        PickEnumerable<InterestGroupByOutputType, T["by"]> & {
+          [P in keyof T & keyof InterestGroupByOutputType]: P extends "_count"
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InterestGroupByOutputType[P]>
+            : GetScalarType<T[P], InterestGroupByOutputType[P]>;
+        }
+      >
+    >;
+
+  export type InterestSelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      proposal?: boolean;
+      userId?: boolean;
+      createdAt?: boolean;
+      jobId?: boolean;
+      user?: boolean | UserDefaultArgs<ExtArgs>;
+      job?: boolean | JobDefaultArgs<ExtArgs>;
+    },
+    ExtArgs["result"]["interest"]
+  >;
+
+  export type InterestSelectCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      proposal?: boolean;
+      userId?: boolean;
+      createdAt?: boolean;
+      jobId?: boolean;
+      user?: boolean | UserDefaultArgs<ExtArgs>;
+      job?: boolean | JobDefaultArgs<ExtArgs>;
+    },
+    ExtArgs["result"]["interest"]
+  >;
+
+  export type InterestSelectUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      proposal?: boolean;
+      userId?: boolean;
+      createdAt?: boolean;
+      jobId?: boolean;
+      user?: boolean | UserDefaultArgs<ExtArgs>;
+      job?: boolean | JobDefaultArgs<ExtArgs>;
+    },
+    ExtArgs["result"]["interest"]
+  >;
+
+  export type InterestSelectScalar = {
+    id?: boolean;
+    proposal?: boolean;
+    userId?: boolean;
+    createdAt?: boolean;
+    jobId?: boolean;
+  };
+
+  export type InterestOmit<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetOmit<
+    "id" | "proposal" | "userId" | "createdAt" | "jobId",
+    ExtArgs["result"]["interest"]
+  >;
+  export type InterestInclude<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    user?: boolean | UserDefaultArgs<ExtArgs>;
+    job?: boolean | JobDefaultArgs<ExtArgs>;
+  };
+  export type InterestIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    user?: boolean | UserDefaultArgs<ExtArgs>;
+    job?: boolean | JobDefaultArgs<ExtArgs>;
+  };
+  export type InterestIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    user?: boolean | UserDefaultArgs<ExtArgs>;
+    job?: boolean | JobDefaultArgs<ExtArgs>;
+  };
+
+  export type $InterestPayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: "Interest";
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>;
+      job: Prisma.$JobPayload<ExtArgs>;
+    };
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: string;
+        proposal: string;
+        userId: number;
+        createdAt: Date;
+        jobId: string;
+      },
+      ExtArgs["result"]["interest"]
+    >;
+    composites: {};
+  };
+
+  type InterestGetPayload<
+    S extends boolean | null | undefined | InterestDefaultArgs,
+  > = $Result.GetResult<Prisma.$InterestPayload, S>;
+
+  type InterestCountArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = Omit<InterestFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+    select?: InterestCountAggregateInputType | true;
+  };
+
+  export interface InterestDelegate<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > {
+    [K: symbol]: {
+      types: Prisma.TypeMap<ExtArgs>["model"]["Interest"];
+      meta: { name: "Interest" };
+    };
+    /**
+     * Find zero or one Interest that matches the filter.
+     * @param {InterestFindUniqueArgs} args - Arguments to find a Interest
+     * @example
+     * // Get one Interest
+     * const interest = await prisma.interest.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InterestFindUniqueArgs>(
+      args: SelectSubset<T, InterestFindUniqueArgs<ExtArgs>>,
+    ): Prisma__InterestClient<
+      $Result.GetResult<
+        Prisma.$InterestPayload<ExtArgs>,
+        T,
+        "findUnique",
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find one Interest that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InterestFindUniqueOrThrowArgs} args - Arguments to find a Interest
+     * @example
+     * // Get one Interest
+     * const interest = await prisma.interest.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InterestFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, InterestFindUniqueOrThrowArgs<ExtArgs>>,
+    ): Prisma__InterestClient<
+      $Result.GetResult<
+        Prisma.$InterestPayload<ExtArgs>,
+        T,
+        "findUniqueOrThrow",
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find the first Interest that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InterestFindFirstArgs} args - Arguments to find a Interest
+     * @example
+     * // Get one Interest
+     * const interest = await prisma.interest.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InterestFindFirstArgs>(
+      args?: SelectSubset<T, InterestFindFirstArgs<ExtArgs>>,
+    ): Prisma__InterestClient<
+      $Result.GetResult<
+        Prisma.$InterestPayload<ExtArgs>,
+        T,
+        "findFirst",
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find the first Interest that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InterestFindFirstOrThrowArgs} args - Arguments to find a Interest
+     * @example
+     * // Get one Interest
+     * const interest = await prisma.interest.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InterestFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, InterestFindFirstOrThrowArgs<ExtArgs>>,
+    ): Prisma__InterestClient<
+      $Result.GetResult<
+        Prisma.$InterestPayload<ExtArgs>,
+        T,
+        "findFirstOrThrow",
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find zero or more Interests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InterestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Interests
+     * const interests = await prisma.interest.findMany()
+     *
+     * // Get first 10 Interests
+     * const interests = await prisma.interest.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const interestWithIdOnly = await prisma.interest.findMany({ select: { id: true } })
+     *
+     */
+    findMany<T extends InterestFindManyArgs>(
+      args?: SelectSubset<T, InterestFindManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$InterestPayload<ExtArgs>,
+        T,
+        "findMany",
+        GlobalOmitOptions
+      >
+    >;
+
+    /**
+     * Create a Interest.
+     * @param {InterestCreateArgs} args - Arguments to create a Interest.
+     * @example
+     * // Create one Interest
+     * const Interest = await prisma.interest.create({
+     *   data: {
+     *     // ... data to create a Interest
+     *   }
+     * })
+     *
+     */
+    create<T extends InterestCreateArgs>(
+      args: SelectSubset<T, InterestCreateArgs<ExtArgs>>,
+    ): Prisma__InterestClient<
+      $Result.GetResult<
+        Prisma.$InterestPayload<ExtArgs>,
+        T,
+        "create",
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Create many Interests.
+     * @param {InterestCreateManyArgs} args - Arguments to create many Interests.
+     * @example
+     * // Create many Interests
+     * const interest = await prisma.interest.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends InterestCreateManyArgs>(
+      args?: SelectSubset<T, InterestCreateManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Create many Interests and returns the data saved in the database.
+     * @param {InterestCreateManyAndReturnArgs} args - Arguments to create many Interests.
+     * @example
+     * // Create many Interests
+     * const interest = await prisma.interest.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many Interests and only return the `id`
+     * const interestWithIdOnly = await prisma.interest.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends InterestCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, InterestCreateManyAndReturnArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$InterestPayload<ExtArgs>,
+        T,
+        "createManyAndReturn",
+        GlobalOmitOptions
+      >
+    >;
+
+    /**
+     * Delete a Interest.
+     * @param {InterestDeleteArgs} args - Arguments to delete one Interest.
+     * @example
+     * // Delete one Interest
+     * const Interest = await prisma.interest.delete({
+     *   where: {
+     *     // ... filter to delete one Interest
+     *   }
+     * })
+     *
+     */
+    delete<T extends InterestDeleteArgs>(
+      args: SelectSubset<T, InterestDeleteArgs<ExtArgs>>,
+    ): Prisma__InterestClient<
+      $Result.GetResult<
+        Prisma.$InterestPayload<ExtArgs>,
+        T,
+        "delete",
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Update one Interest.
+     * @param {InterestUpdateArgs} args - Arguments to update one Interest.
+     * @example
+     * // Update one Interest
+     * const interest = await prisma.interest.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends InterestUpdateArgs>(
+      args: SelectSubset<T, InterestUpdateArgs<ExtArgs>>,
+    ): Prisma__InterestClient<
+      $Result.GetResult<
+        Prisma.$InterestPayload<ExtArgs>,
+        T,
+        "update",
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Delete zero or more Interests.
+     * @param {InterestDeleteManyArgs} args - Arguments to filter Interests to delete.
+     * @example
+     * // Delete a few Interests
+     * const { count } = await prisma.interest.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends InterestDeleteManyArgs>(
+      args?: SelectSubset<T, InterestDeleteManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Update zero or more Interests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InterestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Interests
+     * const interest = await prisma.interest.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends InterestUpdateManyArgs>(
+      args: SelectSubset<T, InterestUpdateManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Update zero or more Interests and returns the data updated in the database.
+     * @param {InterestUpdateManyAndReturnArgs} args - Arguments to update many Interests.
+     * @example
+     * // Update many Interests
+     * const interest = await prisma.interest.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more Interests and only return the `id`
+     * const interestWithIdOnly = await prisma.interest.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends InterestUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, InterestUpdateManyAndReturnArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$InterestPayload<ExtArgs>,
+        T,
+        "updateManyAndReturn",
+        GlobalOmitOptions
+      >
+    >;
+
+    /**
+     * Create or update one Interest.
+     * @param {InterestUpsertArgs} args - Arguments to update or create a Interest.
+     * @example
+     * // Update or create a Interest
+     * const interest = await prisma.interest.upsert({
+     *   create: {
+     *     // ... data to create a Interest
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Interest we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InterestUpsertArgs>(
+      args: SelectSubset<T, InterestUpsertArgs<ExtArgs>>,
+    ): Prisma__InterestClient<
+      $Result.GetResult<
+        Prisma.$InterestPayload<ExtArgs>,
+        T,
+        "upsert",
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Count the number of Interests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InterestCountArgs} args - Arguments to filter Interests to count.
+     * @example
+     * // Count the number of Interests
+     * const count = await prisma.interest.count({
+     *   where: {
+     *     // ... the filter for the Interests we want to count
+     *   }
+     * })
+     **/
+    count<T extends InterestCountArgs>(
+      args?: Subset<T, InterestCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<"select", any>
+        ? T["select"] extends true
+          ? number
+          : GetScalarType<T["select"], InterestCountAggregateOutputType>
+        : number
+    >;
+
+    /**
+     * Allows you to perform aggregations operations on a Interest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InterestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+     **/
+    aggregate<T extends InterestAggregateArgs>(
+      args: Subset<T, InterestAggregateArgs>,
+    ): Prisma.PrismaPromise<GetInterestAggregateType<T>>;
+
+    /**
+     * Group by Interest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InterestGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+     **/
+    groupBy<
+      T extends InterestGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<"skip", Keys<T>>,
+        Extends<"take", Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InterestGroupByArgs["orderBy"] }
+        : { orderBy?: InterestGroupByArgs["orderBy"] },
+      OrderFields extends ExcludeUnderscoreKeys<
+        Keys<MaybeTupleToUnion<T["orderBy"]>>
+      >,
+      ByFields extends MaybeTupleToUnion<T["by"]>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T["having"]>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T["by"] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
+                ? never
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [
+                      Error,
+                      "Field ",
+                      P,
+                      ` in "having" needs to be provided in "by"`,
+                    ];
+            }[HavingFields]
+          : "take" extends Keys<T>
+            ? "orderBy" extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : "skip" extends Keys<T>
+              ? "orderBy" extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields],
+    >(
+      args: SubsetIntersection<T, InterestGroupByArgs, OrderByArg> &
+        InputErrors,
+    ): {} extends InputErrors
+      ? GetInterestGroupByPayload<T>
+      : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the Interest model
+     */
+    readonly fields: InterestFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Interest.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InterestClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise";
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, UserDefaultArgs<ExtArgs>>,
+    ): Prisma__UserClient<
+      | $Result.GetResult<
+          Prisma.$UserPayload<ExtArgs>,
+          T,
+          "findUniqueOrThrow",
+          GlobalOmitOptions
+        >
+      | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+    job<T extends JobDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, JobDefaultArgs<ExtArgs>>,
+    ): Prisma__JobClient<
+      | $Result.GetResult<
+          Prisma.$JobPayload<ExtArgs>,
+          T,
+          "findUniqueOrThrow",
+          GlobalOmitOptions
+        >
+      | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?:
+        | ((value: T) => TResult1 | PromiseLike<TResult1>)
+        | undefined
+        | null,
+      onrejected?:
+        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
+        | undefined
+        | null,
+    ): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(
+      onrejected?:
+        | ((reason: any) => TResult | PromiseLike<TResult>)
+        | undefined
+        | null,
+    ): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+  /**
+   * Fields of the Interest model
+   */
+  interface InterestFieldRefs {
+    readonly id: FieldRef<"Interest", "String">;
+    readonly proposal: FieldRef<"Interest", "String">;
+    readonly userId: FieldRef<"Interest", "Int">;
+    readonly createdAt: FieldRef<"Interest", "DateTime">;
+    readonly jobId: FieldRef<"Interest", "String">;
+  }
+
+  // Custom InputTypes
+  /**
+   * Interest findUnique
+   */
+  export type InterestFindUniqueArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Interest
+     */
+    select?: InterestSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Interest
+     */
+    omit?: InterestOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InterestInclude<ExtArgs> | null;
+    /**
+     * Filter, which Interest to fetch.
+     */
+    where: InterestWhereUniqueInput;
+  };
+
+  /**
+   * Interest findUniqueOrThrow
+   */
+  export type InterestFindUniqueOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Interest
+     */
+    select?: InterestSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Interest
+     */
+    omit?: InterestOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InterestInclude<ExtArgs> | null;
+    /**
+     * Filter, which Interest to fetch.
+     */
+    where: InterestWhereUniqueInput;
+  };
+
+  /**
+   * Interest findFirst
+   */
+  export type InterestFindFirstArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Interest
+     */
+    select?: InterestSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Interest
+     */
+    omit?: InterestOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InterestInclude<ExtArgs> | null;
+    /**
+     * Filter, which Interest to fetch.
+     */
+    where?: InterestWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of Interests to fetch.
+     */
+    orderBy?:
+      | InterestOrderByWithRelationInput
+      | InterestOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for Interests.
+     */
+    cursor?: InterestWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` Interests from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` Interests.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of Interests.
+     */
+    distinct?: InterestScalarFieldEnum | InterestScalarFieldEnum[];
+  };
+
+  /**
+   * Interest findFirstOrThrow
+   */
+  export type InterestFindFirstOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Interest
+     */
+    select?: InterestSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Interest
+     */
+    omit?: InterestOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InterestInclude<ExtArgs> | null;
+    /**
+     * Filter, which Interest to fetch.
+     */
+    where?: InterestWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of Interests to fetch.
+     */
+    orderBy?:
+      | InterestOrderByWithRelationInput
+      | InterestOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for Interests.
+     */
+    cursor?: InterestWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` Interests from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` Interests.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of Interests.
+     */
+    distinct?: InterestScalarFieldEnum | InterestScalarFieldEnum[];
+  };
+
+  /**
+   * Interest findMany
+   */
+  export type InterestFindManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Interest
+     */
+    select?: InterestSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Interest
+     */
+    omit?: InterestOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InterestInclude<ExtArgs> | null;
+    /**
+     * Filter, which Interests to fetch.
+     */
+    where?: InterestWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of Interests to fetch.
+     */
+    orderBy?:
+      | InterestOrderByWithRelationInput
+      | InterestOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing Interests.
+     */
+    cursor?: InterestWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` Interests from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` Interests.
+     */
+    skip?: number;
+    distinct?: InterestScalarFieldEnum | InterestScalarFieldEnum[];
+  };
+
+  /**
+   * Interest create
+   */
+  export type InterestCreateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Interest
+     */
+    select?: InterestSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Interest
+     */
+    omit?: InterestOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InterestInclude<ExtArgs> | null;
+    /**
+     * The data needed to create a Interest.
+     */
+    data: XOR<InterestCreateInput, InterestUncheckedCreateInput>;
+  };
+
+  /**
+   * Interest createMany
+   */
+  export type InterestCreateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * The data used to create many Interests.
+     */
+    data: InterestCreateManyInput | InterestCreateManyInput[];
+    skipDuplicates?: boolean;
+  };
+
+  /**
+   * Interest createManyAndReturn
+   */
+  export type InterestCreateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Interest
+     */
+    select?: InterestSelectCreateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Interest
+     */
+    omit?: InterestOmit<ExtArgs> | null;
+    /**
+     * The data used to create many Interests.
+     */
+    data: InterestCreateManyInput | InterestCreateManyInput[];
+    skipDuplicates?: boolean;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InterestIncludeCreateManyAndReturn<ExtArgs> | null;
+  };
+
+  /**
+   * Interest update
+   */
+  export type InterestUpdateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Interest
+     */
+    select?: InterestSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Interest
+     */
+    omit?: InterestOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InterestInclude<ExtArgs> | null;
+    /**
+     * The data needed to update a Interest.
+     */
+    data: XOR<InterestUpdateInput, InterestUncheckedUpdateInput>;
+    /**
+     * Choose, which Interest to update.
+     */
+    where: InterestWhereUniqueInput;
+  };
+
+  /**
+   * Interest updateMany
+   */
+  export type InterestUpdateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * The data used to update Interests.
+     */
+    data: XOR<
+      InterestUpdateManyMutationInput,
+      InterestUncheckedUpdateManyInput
+    >;
+    /**
+     * Filter which Interests to update
+     */
+    where?: InterestWhereInput;
+    /**
+     * Limit how many Interests to update.
+     */
+    limit?: number;
+  };
+
+  /**
+   * Interest updateManyAndReturn
+   */
+  export type InterestUpdateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Interest
+     */
+    select?: InterestSelectUpdateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Interest
+     */
+    omit?: InterestOmit<ExtArgs> | null;
+    /**
+     * The data used to update Interests.
+     */
+    data: XOR<
+      InterestUpdateManyMutationInput,
+      InterestUncheckedUpdateManyInput
+    >;
+    /**
+     * Filter which Interests to update
+     */
+    where?: InterestWhereInput;
+    /**
+     * Limit how many Interests to update.
+     */
+    limit?: number;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InterestIncludeUpdateManyAndReturn<ExtArgs> | null;
+  };
+
+  /**
+   * Interest upsert
+   */
+  export type InterestUpsertArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Interest
+     */
+    select?: InterestSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Interest
+     */
+    omit?: InterestOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InterestInclude<ExtArgs> | null;
+    /**
+     * The filter to search for the Interest to update in case it exists.
+     */
+    where: InterestWhereUniqueInput;
+    /**
+     * In case the Interest found by the `where` argument doesn't exist, create a new Interest with this data.
+     */
+    create: XOR<InterestCreateInput, InterestUncheckedCreateInput>;
+    /**
+     * In case the Interest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InterestUpdateInput, InterestUncheckedUpdateInput>;
+  };
+
+  /**
+   * Interest delete
+   */
+  export type InterestDeleteArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Interest
+     */
+    select?: InterestSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Interest
+     */
+    omit?: InterestOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InterestInclude<ExtArgs> | null;
+    /**
+     * Filter which Interest to delete.
+     */
+    where: InterestWhereUniqueInput;
+  };
+
+  /**
+   * Interest deleteMany
+   */
+  export type InterestDeleteManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Filter which Interests to delete
+     */
+    where?: InterestWhereInput;
+    /**
+     * Limit how many Interests to delete.
+     */
+    limit?: number;
+  };
+
+  /**
+   * Interest without action
+   */
+  export type InterestDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the Interest
+     */
+    select?: InterestSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Interest
+     */
+    omit?: InterestOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InterestInclude<ExtArgs> | null;
   };
 
   /**
@@ -3574,6 +5289,17 @@ export namespace Prisma {
 
   export type JobScalarFieldEnum =
     (typeof JobScalarFieldEnum)[keyof typeof JobScalarFieldEnum];
+
+  export const InterestScalarFieldEnum: {
+    id: "id";
+    proposal: "proposal";
+    userId: "userId";
+    createdAt: "createdAt";
+    jobId: "jobId";
+  };
+
+  export type InterestScalarFieldEnum =
+    (typeof InterestScalarFieldEnum)[keyof typeof InterestScalarFieldEnum];
 
   export const SortOrder: {
     asc: "asc";
@@ -3677,6 +5403,7 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string;
     hashedPassword?: StringFilter<"User"> | string;
     role?: StringNullableFilter<"User"> | string | null;
+    interest?: InterestListRelationFilter;
   };
 
   export type UserOrderByWithRelationInput = {
@@ -3685,6 +5412,7 @@ export namespace Prisma {
     email?: SortOrder;
     hashedPassword?: SortOrder;
     role?: SortOrderInput | SortOrder;
+    interest?: InterestOrderByRelationAggregateInput;
   };
 
   export type UserWhereUniqueInput = Prisma.AtLeast<
@@ -3697,6 +5425,7 @@ export namespace Prisma {
       username?: StringFilter<"User"> | string;
       hashedPassword?: StringFilter<"User"> | string;
       role?: StringNullableFilter<"User"> | string | null;
+      interest?: InterestListRelationFilter;
     },
     "id" | "email"
   >;
@@ -3741,6 +5470,7 @@ export namespace Prisma {
     project?: StringFilter<"Job"> | string;
     createdAt?: DateTimeFilter<"Job"> | Date | string;
     location?: StringFilter<"Job"> | string;
+    interest?: InterestListRelationFilter;
   };
 
   export type JobOrderByWithRelationInput = {
@@ -3752,6 +5482,7 @@ export namespace Prisma {
     project?: SortOrder;
     createdAt?: SortOrder;
     location?: SortOrder;
+    interest?: InterestOrderByRelationAggregateInput;
   };
 
   export type JobWhereUniqueInput = Prisma.AtLeast<
@@ -3767,6 +5498,7 @@ export namespace Prisma {
       project?: StringFilter<"Job"> | string;
       createdAt?: DateTimeFilter<"Job"> | Date | string;
       location?: StringFilter<"Job"> | string;
+      interest?: InterestListRelationFilter;
     },
     "id"
   >;
@@ -3803,11 +5535,79 @@ export namespace Prisma {
     location?: StringWithAggregatesFilter<"Job"> | string;
   };
 
+  export type InterestWhereInput = {
+    AND?: InterestWhereInput | InterestWhereInput[];
+    OR?: InterestWhereInput[];
+    NOT?: InterestWhereInput | InterestWhereInput[];
+    id?: StringFilter<"Interest"> | string;
+    proposal?: StringFilter<"Interest"> | string;
+    userId?: IntFilter<"Interest"> | number;
+    createdAt?: DateTimeFilter<"Interest"> | Date | string;
+    jobId?: StringFilter<"Interest"> | string;
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>;
+    job?: XOR<JobScalarRelationFilter, JobWhereInput>;
+  };
+
+  export type InterestOrderByWithRelationInput = {
+    id?: SortOrder;
+    proposal?: SortOrder;
+    userId?: SortOrder;
+    createdAt?: SortOrder;
+    jobId?: SortOrder;
+    user?: UserOrderByWithRelationInput;
+    job?: JobOrderByWithRelationInput;
+  };
+
+  export type InterestWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: string;
+      AND?: InterestWhereInput | InterestWhereInput[];
+      OR?: InterestWhereInput[];
+      NOT?: InterestWhereInput | InterestWhereInput[];
+      proposal?: StringFilter<"Interest"> | string;
+      userId?: IntFilter<"Interest"> | number;
+      createdAt?: DateTimeFilter<"Interest"> | Date | string;
+      jobId?: StringFilter<"Interest"> | string;
+      user?: XOR<UserScalarRelationFilter, UserWhereInput>;
+      job?: XOR<JobScalarRelationFilter, JobWhereInput>;
+    },
+    "id"
+  >;
+
+  export type InterestOrderByWithAggregationInput = {
+    id?: SortOrder;
+    proposal?: SortOrder;
+    userId?: SortOrder;
+    createdAt?: SortOrder;
+    jobId?: SortOrder;
+    _count?: InterestCountOrderByAggregateInput;
+    _avg?: InterestAvgOrderByAggregateInput;
+    _max?: InterestMaxOrderByAggregateInput;
+    _min?: InterestMinOrderByAggregateInput;
+    _sum?: InterestSumOrderByAggregateInput;
+  };
+
+  export type InterestScalarWhereWithAggregatesInput = {
+    AND?:
+      | InterestScalarWhereWithAggregatesInput
+      | InterestScalarWhereWithAggregatesInput[];
+    OR?: InterestScalarWhereWithAggregatesInput[];
+    NOT?:
+      | InterestScalarWhereWithAggregatesInput
+      | InterestScalarWhereWithAggregatesInput[];
+    id?: StringWithAggregatesFilter<"Interest"> | string;
+    proposal?: StringWithAggregatesFilter<"Interest"> | string;
+    userId?: IntWithAggregatesFilter<"Interest"> | number;
+    createdAt?: DateTimeWithAggregatesFilter<"Interest"> | Date | string;
+    jobId?: StringWithAggregatesFilter<"Interest"> | string;
+  };
+
   export type UserCreateInput = {
     username: string;
     email: string;
     hashedPassword: string;
     role?: string | null;
+    interest?: InterestCreateNestedManyWithoutUserInput;
   };
 
   export type UserUncheckedCreateInput = {
@@ -3816,6 +5616,7 @@ export namespace Prisma {
     email: string;
     hashedPassword: string;
     role?: string | null;
+    interest?: InterestUncheckedCreateNestedManyWithoutUserInput;
   };
 
   export type UserUpdateInput = {
@@ -3823,6 +5624,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string;
     hashedPassword?: StringFieldUpdateOperationsInput | string;
     role?: NullableStringFieldUpdateOperationsInput | string | null;
+    interest?: InterestUpdateManyWithoutUserNestedInput;
   };
 
   export type UserUncheckedUpdateInput = {
@@ -3831,6 +5633,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string;
     hashedPassword?: StringFieldUpdateOperationsInput | string;
     role?: NullableStringFieldUpdateOperationsInput | string | null;
+    interest?: InterestUncheckedUpdateManyWithoutUserNestedInput;
   };
 
   export type UserCreateManyInput = {
@@ -3865,6 +5668,7 @@ export namespace Prisma {
     project: string;
     createdAt?: Date | string;
     location: string;
+    interest?: InterestCreateNestedManyWithoutJobInput;
   };
 
   export type JobUncheckedCreateInput = {
@@ -3876,6 +5680,7 @@ export namespace Prisma {
     project: string;
     createdAt?: Date | string;
     location: string;
+    interest?: InterestUncheckedCreateNestedManyWithoutJobInput;
   };
 
   export type JobUpdateInput = {
@@ -3887,6 +5692,7 @@ export namespace Prisma {
     project?: StringFieldUpdateOperationsInput | string;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     location?: StringFieldUpdateOperationsInput | string;
+    interest?: InterestUpdateManyWithoutJobNestedInput;
   };
 
   export type JobUncheckedUpdateInput = {
@@ -3898,6 +5704,7 @@ export namespace Prisma {
     project?: StringFieldUpdateOperationsInput | string;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     location?: StringFieldUpdateOperationsInput | string;
+    interest?: InterestUncheckedUpdateManyWithoutJobNestedInput;
   };
 
   export type JobCreateManyInput = {
@@ -3931,6 +5738,60 @@ export namespace Prisma {
     project?: StringFieldUpdateOperationsInput | string;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     location?: StringFieldUpdateOperationsInput | string;
+  };
+
+  export type InterestCreateInput = {
+    id?: string;
+    proposal: string;
+    createdAt?: Date | string;
+    user: UserCreateNestedOneWithoutInterestInput;
+    job: JobCreateNestedOneWithoutInterestInput;
+  };
+
+  export type InterestUncheckedCreateInput = {
+    id?: string;
+    proposal: string;
+    userId: number;
+    createdAt?: Date | string;
+    jobId: string;
+  };
+
+  export type InterestUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string;
+    proposal?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    user?: UserUpdateOneRequiredWithoutInterestNestedInput;
+    job?: JobUpdateOneRequiredWithoutInterestNestedInput;
+  };
+
+  export type InterestUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string;
+    proposal?: StringFieldUpdateOperationsInput | string;
+    userId?: IntFieldUpdateOperationsInput | number;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    jobId?: StringFieldUpdateOperationsInput | string;
+  };
+
+  export type InterestCreateManyInput = {
+    id?: string;
+    proposal: string;
+    userId: number;
+    createdAt?: Date | string;
+    jobId: string;
+  };
+
+  export type InterestUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string;
+    proposal?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type InterestUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string;
+    proposal?: StringFieldUpdateOperationsInput | string;
+    userId?: IntFieldUpdateOperationsInput | number;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    jobId?: StringFieldUpdateOperationsInput | string;
   };
 
   export type IntFilter<$PrismaModel = never> = {
@@ -3974,9 +5835,19 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null;
   };
 
+  export type InterestListRelationFilter = {
+    every?: InterestWhereInput;
+    some?: InterestWhereInput;
+    none?: InterestWhereInput;
+  };
+
   export type SortOrderInput = {
     sort: SortOrder;
     nulls?: NullsOrder;
+  };
+
+  export type InterestOrderByRelationAggregateInput = {
+    _count?: SortOrder;
   };
 
   export type UserCountOrderByAggregateInput = {
@@ -4124,12 +5995,112 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>;
   };
 
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput;
+    isNot?: UserWhereInput;
+  };
+
+  export type JobScalarRelationFilter = {
+    is?: JobWhereInput;
+    isNot?: JobWhereInput;
+  };
+
+  export type InterestCountOrderByAggregateInput = {
+    id?: SortOrder;
+    proposal?: SortOrder;
+    userId?: SortOrder;
+    createdAt?: SortOrder;
+    jobId?: SortOrder;
+  };
+
+  export type InterestAvgOrderByAggregateInput = {
+    userId?: SortOrder;
+  };
+
+  export type InterestMaxOrderByAggregateInput = {
+    id?: SortOrder;
+    proposal?: SortOrder;
+    userId?: SortOrder;
+    createdAt?: SortOrder;
+    jobId?: SortOrder;
+  };
+
+  export type InterestMinOrderByAggregateInput = {
+    id?: SortOrder;
+    proposal?: SortOrder;
+    userId?: SortOrder;
+    createdAt?: SortOrder;
+    jobId?: SortOrder;
+  };
+
+  export type InterestSumOrderByAggregateInput = {
+    userId?: SortOrder;
+  };
+
+  export type InterestCreateNestedManyWithoutUserInput = {
+    create?:
+      | XOR<
+          InterestCreateWithoutUserInput,
+          InterestUncheckedCreateWithoutUserInput
+        >
+      | InterestCreateWithoutUserInput[]
+      | InterestUncheckedCreateWithoutUserInput[];
+    connectOrCreate?:
+      | InterestCreateOrConnectWithoutUserInput
+      | InterestCreateOrConnectWithoutUserInput[];
+    createMany?: InterestCreateManyUserInputEnvelope;
+    connect?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+  };
+
+  export type InterestUncheckedCreateNestedManyWithoutUserInput = {
+    create?:
+      | XOR<
+          InterestCreateWithoutUserInput,
+          InterestUncheckedCreateWithoutUserInput
+        >
+      | InterestCreateWithoutUserInput[]
+      | InterestUncheckedCreateWithoutUserInput[];
+    connectOrCreate?:
+      | InterestCreateOrConnectWithoutUserInput
+      | InterestCreateOrConnectWithoutUserInput[];
+    createMany?: InterestCreateManyUserInputEnvelope;
+    connect?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+  };
+
   export type StringFieldUpdateOperationsInput = {
     set?: string;
   };
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null;
+  };
+
+  export type InterestUpdateManyWithoutUserNestedInput = {
+    create?:
+      | XOR<
+          InterestCreateWithoutUserInput,
+          InterestUncheckedCreateWithoutUserInput
+        >
+      | InterestCreateWithoutUserInput[]
+      | InterestUncheckedCreateWithoutUserInput[];
+    connectOrCreate?:
+      | InterestCreateOrConnectWithoutUserInput
+      | InterestCreateOrConnectWithoutUserInput[];
+    upsert?:
+      | InterestUpsertWithWhereUniqueWithoutUserInput
+      | InterestUpsertWithWhereUniqueWithoutUserInput[];
+    createMany?: InterestCreateManyUserInputEnvelope;
+    set?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+    disconnect?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+    delete?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+    connect?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+    update?:
+      | InterestUpdateWithWhereUniqueWithoutUserInput
+      | InterestUpdateWithWhereUniqueWithoutUserInput[];
+    updateMany?:
+      | InterestUpdateManyWithWhereWithoutUserInput
+      | InterestUpdateManyWithWhereWithoutUserInput[];
+    deleteMany?: InterestScalarWhereInput | InterestScalarWhereInput[];
   };
 
   export type IntFieldUpdateOperationsInput = {
@@ -4140,8 +6111,174 @@ export namespace Prisma {
     divide?: number;
   };
 
+  export type InterestUncheckedUpdateManyWithoutUserNestedInput = {
+    create?:
+      | XOR<
+          InterestCreateWithoutUserInput,
+          InterestUncheckedCreateWithoutUserInput
+        >
+      | InterestCreateWithoutUserInput[]
+      | InterestUncheckedCreateWithoutUserInput[];
+    connectOrCreate?:
+      | InterestCreateOrConnectWithoutUserInput
+      | InterestCreateOrConnectWithoutUserInput[];
+    upsert?:
+      | InterestUpsertWithWhereUniqueWithoutUserInput
+      | InterestUpsertWithWhereUniqueWithoutUserInput[];
+    createMany?: InterestCreateManyUserInputEnvelope;
+    set?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+    disconnect?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+    delete?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+    connect?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+    update?:
+      | InterestUpdateWithWhereUniqueWithoutUserInput
+      | InterestUpdateWithWhereUniqueWithoutUserInput[];
+    updateMany?:
+      | InterestUpdateManyWithWhereWithoutUserInput
+      | InterestUpdateManyWithWhereWithoutUserInput[];
+    deleteMany?: InterestScalarWhereInput | InterestScalarWhereInput[];
+  };
+
+  export type InterestCreateNestedManyWithoutJobInput = {
+    create?:
+      | XOR<
+          InterestCreateWithoutJobInput,
+          InterestUncheckedCreateWithoutJobInput
+        >
+      | InterestCreateWithoutJobInput[]
+      | InterestUncheckedCreateWithoutJobInput[];
+    connectOrCreate?:
+      | InterestCreateOrConnectWithoutJobInput
+      | InterestCreateOrConnectWithoutJobInput[];
+    createMany?: InterestCreateManyJobInputEnvelope;
+    connect?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+  };
+
+  export type InterestUncheckedCreateNestedManyWithoutJobInput = {
+    create?:
+      | XOR<
+          InterestCreateWithoutJobInput,
+          InterestUncheckedCreateWithoutJobInput
+        >
+      | InterestCreateWithoutJobInput[]
+      | InterestUncheckedCreateWithoutJobInput[];
+    connectOrCreate?:
+      | InterestCreateOrConnectWithoutJobInput
+      | InterestCreateOrConnectWithoutJobInput[];
+    createMany?: InterestCreateManyJobInputEnvelope;
+    connect?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+  };
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string;
+  };
+
+  export type InterestUpdateManyWithoutJobNestedInput = {
+    create?:
+      | XOR<
+          InterestCreateWithoutJobInput,
+          InterestUncheckedCreateWithoutJobInput
+        >
+      | InterestCreateWithoutJobInput[]
+      | InterestUncheckedCreateWithoutJobInput[];
+    connectOrCreate?:
+      | InterestCreateOrConnectWithoutJobInput
+      | InterestCreateOrConnectWithoutJobInput[];
+    upsert?:
+      | InterestUpsertWithWhereUniqueWithoutJobInput
+      | InterestUpsertWithWhereUniqueWithoutJobInput[];
+    createMany?: InterestCreateManyJobInputEnvelope;
+    set?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+    disconnect?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+    delete?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+    connect?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+    update?:
+      | InterestUpdateWithWhereUniqueWithoutJobInput
+      | InterestUpdateWithWhereUniqueWithoutJobInput[];
+    updateMany?:
+      | InterestUpdateManyWithWhereWithoutJobInput
+      | InterestUpdateManyWithWhereWithoutJobInput[];
+    deleteMany?: InterestScalarWhereInput | InterestScalarWhereInput[];
+  };
+
+  export type InterestUncheckedUpdateManyWithoutJobNestedInput = {
+    create?:
+      | XOR<
+          InterestCreateWithoutJobInput,
+          InterestUncheckedCreateWithoutJobInput
+        >
+      | InterestCreateWithoutJobInput[]
+      | InterestUncheckedCreateWithoutJobInput[];
+    connectOrCreate?:
+      | InterestCreateOrConnectWithoutJobInput
+      | InterestCreateOrConnectWithoutJobInput[];
+    upsert?:
+      | InterestUpsertWithWhereUniqueWithoutJobInput
+      | InterestUpsertWithWhereUniqueWithoutJobInput[];
+    createMany?: InterestCreateManyJobInputEnvelope;
+    set?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+    disconnect?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+    delete?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+    connect?: InterestWhereUniqueInput | InterestWhereUniqueInput[];
+    update?:
+      | InterestUpdateWithWhereUniqueWithoutJobInput
+      | InterestUpdateWithWhereUniqueWithoutJobInput[];
+    updateMany?:
+      | InterestUpdateManyWithWhereWithoutJobInput
+      | InterestUpdateManyWithWhereWithoutJobInput[];
+    deleteMany?: InterestScalarWhereInput | InterestScalarWhereInput[];
+  };
+
+  export type UserCreateNestedOneWithoutInterestInput = {
+    create?: XOR<
+      UserCreateWithoutInterestInput,
+      UserUncheckedCreateWithoutInterestInput
+    >;
+    connectOrCreate?: UserCreateOrConnectWithoutInterestInput;
+    connect?: UserWhereUniqueInput;
+  };
+
+  export type JobCreateNestedOneWithoutInterestInput = {
+    create?: XOR<
+      JobCreateWithoutInterestInput,
+      JobUncheckedCreateWithoutInterestInput
+    >;
+    connectOrCreate?: JobCreateOrConnectWithoutInterestInput;
+    connect?: JobWhereUniqueInput;
+  };
+
+  export type UserUpdateOneRequiredWithoutInterestNestedInput = {
+    create?: XOR<
+      UserCreateWithoutInterestInput,
+      UserUncheckedCreateWithoutInterestInput
+    >;
+    connectOrCreate?: UserCreateOrConnectWithoutInterestInput;
+    upsert?: UserUpsertWithoutInterestInput;
+    connect?: UserWhereUniqueInput;
+    update?: XOR<
+      XOR<
+        UserUpdateToOneWithWhereWithoutInterestInput,
+        UserUpdateWithoutInterestInput
+      >,
+      UserUncheckedUpdateWithoutInterestInput
+    >;
+  };
+
+  export type JobUpdateOneRequiredWithoutInterestNestedInput = {
+    create?: XOR<
+      JobCreateWithoutInterestInput,
+      JobUncheckedCreateWithoutInterestInput
+    >;
+    connectOrCreate?: JobCreateOrConnectWithoutInterestInput;
+    upsert?: JobUpsertWithoutInterestInput;
+    connect?: JobWhereUniqueInput;
+    update?: XOR<
+      XOR<
+        JobUpdateToOneWithWhereWithoutInterestInput,
+        JobUpdateWithoutInterestInput
+      >,
+      JobUncheckedUpdateWithoutInterestInput
+    >;
   };
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -4281,6 +6418,313 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>;
     _min?: NestedDateTimeFilter<$PrismaModel>;
     _max?: NestedDateTimeFilter<$PrismaModel>;
+  };
+
+  export type InterestCreateWithoutUserInput = {
+    id?: string;
+    proposal: string;
+    createdAt?: Date | string;
+    job: JobCreateNestedOneWithoutInterestInput;
+  };
+
+  export type InterestUncheckedCreateWithoutUserInput = {
+    id?: string;
+    proposal: string;
+    createdAt?: Date | string;
+    jobId: string;
+  };
+
+  export type InterestCreateOrConnectWithoutUserInput = {
+    where: InterestWhereUniqueInput;
+    create: XOR<
+      InterestCreateWithoutUserInput,
+      InterestUncheckedCreateWithoutUserInput
+    >;
+  };
+
+  export type InterestCreateManyUserInputEnvelope = {
+    data: InterestCreateManyUserInput | InterestCreateManyUserInput[];
+    skipDuplicates?: boolean;
+  };
+
+  export type InterestUpsertWithWhereUniqueWithoutUserInput = {
+    where: InterestWhereUniqueInput;
+    update: XOR<
+      InterestUpdateWithoutUserInput,
+      InterestUncheckedUpdateWithoutUserInput
+    >;
+    create: XOR<
+      InterestCreateWithoutUserInput,
+      InterestUncheckedCreateWithoutUserInput
+    >;
+  };
+
+  export type InterestUpdateWithWhereUniqueWithoutUserInput = {
+    where: InterestWhereUniqueInput;
+    data: XOR<
+      InterestUpdateWithoutUserInput,
+      InterestUncheckedUpdateWithoutUserInput
+    >;
+  };
+
+  export type InterestUpdateManyWithWhereWithoutUserInput = {
+    where: InterestScalarWhereInput;
+    data: XOR<
+      InterestUpdateManyMutationInput,
+      InterestUncheckedUpdateManyWithoutUserInput
+    >;
+  };
+
+  export type InterestScalarWhereInput = {
+    AND?: InterestScalarWhereInput | InterestScalarWhereInput[];
+    OR?: InterestScalarWhereInput[];
+    NOT?: InterestScalarWhereInput | InterestScalarWhereInput[];
+    id?: StringFilter<"Interest"> | string;
+    proposal?: StringFilter<"Interest"> | string;
+    userId?: IntFilter<"Interest"> | number;
+    createdAt?: DateTimeFilter<"Interest"> | Date | string;
+    jobId?: StringFilter<"Interest"> | string;
+  };
+
+  export type InterestCreateWithoutJobInput = {
+    id?: string;
+    proposal: string;
+    createdAt?: Date | string;
+    user: UserCreateNestedOneWithoutInterestInput;
+  };
+
+  export type InterestUncheckedCreateWithoutJobInput = {
+    id?: string;
+    proposal: string;
+    userId: number;
+    createdAt?: Date | string;
+  };
+
+  export type InterestCreateOrConnectWithoutJobInput = {
+    where: InterestWhereUniqueInput;
+    create: XOR<
+      InterestCreateWithoutJobInput,
+      InterestUncheckedCreateWithoutJobInput
+    >;
+  };
+
+  export type InterestCreateManyJobInputEnvelope = {
+    data: InterestCreateManyJobInput | InterestCreateManyJobInput[];
+    skipDuplicates?: boolean;
+  };
+
+  export type InterestUpsertWithWhereUniqueWithoutJobInput = {
+    where: InterestWhereUniqueInput;
+    update: XOR<
+      InterestUpdateWithoutJobInput,
+      InterestUncheckedUpdateWithoutJobInput
+    >;
+    create: XOR<
+      InterestCreateWithoutJobInput,
+      InterestUncheckedCreateWithoutJobInput
+    >;
+  };
+
+  export type InterestUpdateWithWhereUniqueWithoutJobInput = {
+    where: InterestWhereUniqueInput;
+    data: XOR<
+      InterestUpdateWithoutJobInput,
+      InterestUncheckedUpdateWithoutJobInput
+    >;
+  };
+
+  export type InterestUpdateManyWithWhereWithoutJobInput = {
+    where: InterestScalarWhereInput;
+    data: XOR<
+      InterestUpdateManyMutationInput,
+      InterestUncheckedUpdateManyWithoutJobInput
+    >;
+  };
+
+  export type UserCreateWithoutInterestInput = {
+    username: string;
+    email: string;
+    hashedPassword: string;
+    role?: string | null;
+  };
+
+  export type UserUncheckedCreateWithoutInterestInput = {
+    id?: number;
+    username: string;
+    email: string;
+    hashedPassword: string;
+    role?: string | null;
+  };
+
+  export type UserCreateOrConnectWithoutInterestInput = {
+    where: UserWhereUniqueInput;
+    create: XOR<
+      UserCreateWithoutInterestInput,
+      UserUncheckedCreateWithoutInterestInput
+    >;
+  };
+
+  export type JobCreateWithoutInterestInput = {
+    id?: string;
+    title: string;
+    description: string;
+    contactEmail: string;
+    category: string;
+    project: string;
+    createdAt?: Date | string;
+    location: string;
+  };
+
+  export type JobUncheckedCreateWithoutInterestInput = {
+    id?: string;
+    title: string;
+    description: string;
+    contactEmail: string;
+    category: string;
+    project: string;
+    createdAt?: Date | string;
+    location: string;
+  };
+
+  export type JobCreateOrConnectWithoutInterestInput = {
+    where: JobWhereUniqueInput;
+    create: XOR<
+      JobCreateWithoutInterestInput,
+      JobUncheckedCreateWithoutInterestInput
+    >;
+  };
+
+  export type UserUpsertWithoutInterestInput = {
+    update: XOR<
+      UserUpdateWithoutInterestInput,
+      UserUncheckedUpdateWithoutInterestInput
+    >;
+    create: XOR<
+      UserCreateWithoutInterestInput,
+      UserUncheckedCreateWithoutInterestInput
+    >;
+    where?: UserWhereInput;
+  };
+
+  export type UserUpdateToOneWithWhereWithoutInterestInput = {
+    where?: UserWhereInput;
+    data: XOR<
+      UserUpdateWithoutInterestInput,
+      UserUncheckedUpdateWithoutInterestInput
+    >;
+  };
+
+  export type UserUpdateWithoutInterestInput = {
+    username?: StringFieldUpdateOperationsInput | string;
+    email?: StringFieldUpdateOperationsInput | string;
+    hashedPassword?: StringFieldUpdateOperationsInput | string;
+    role?: NullableStringFieldUpdateOperationsInput | string | null;
+  };
+
+  export type UserUncheckedUpdateWithoutInterestInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    username?: StringFieldUpdateOperationsInput | string;
+    email?: StringFieldUpdateOperationsInput | string;
+    hashedPassword?: StringFieldUpdateOperationsInput | string;
+    role?: NullableStringFieldUpdateOperationsInput | string | null;
+  };
+
+  export type JobUpsertWithoutInterestInput = {
+    update: XOR<
+      JobUpdateWithoutInterestInput,
+      JobUncheckedUpdateWithoutInterestInput
+    >;
+    create: XOR<
+      JobCreateWithoutInterestInput,
+      JobUncheckedCreateWithoutInterestInput
+    >;
+    where?: JobWhereInput;
+  };
+
+  export type JobUpdateToOneWithWhereWithoutInterestInput = {
+    where?: JobWhereInput;
+    data: XOR<
+      JobUpdateWithoutInterestInput,
+      JobUncheckedUpdateWithoutInterestInput
+    >;
+  };
+
+  export type JobUpdateWithoutInterestInput = {
+    id?: StringFieldUpdateOperationsInput | string;
+    title?: StringFieldUpdateOperationsInput | string;
+    description?: StringFieldUpdateOperationsInput | string;
+    contactEmail?: StringFieldUpdateOperationsInput | string;
+    category?: StringFieldUpdateOperationsInput | string;
+    project?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    location?: StringFieldUpdateOperationsInput | string;
+  };
+
+  export type JobUncheckedUpdateWithoutInterestInput = {
+    id?: StringFieldUpdateOperationsInput | string;
+    title?: StringFieldUpdateOperationsInput | string;
+    description?: StringFieldUpdateOperationsInput | string;
+    contactEmail?: StringFieldUpdateOperationsInput | string;
+    category?: StringFieldUpdateOperationsInput | string;
+    project?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    location?: StringFieldUpdateOperationsInput | string;
+  };
+
+  export type InterestCreateManyUserInput = {
+    id?: string;
+    proposal: string;
+    createdAt?: Date | string;
+    jobId: string;
+  };
+
+  export type InterestUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string;
+    proposal?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    job?: JobUpdateOneRequiredWithoutInterestNestedInput;
+  };
+
+  export type InterestUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string;
+    proposal?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    jobId?: StringFieldUpdateOperationsInput | string;
+  };
+
+  export type InterestUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string;
+    proposal?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    jobId?: StringFieldUpdateOperationsInput | string;
+  };
+
+  export type InterestCreateManyJobInput = {
+    id?: string;
+    proposal: string;
+    userId: number;
+    createdAt?: Date | string;
+  };
+
+  export type InterestUpdateWithoutJobInput = {
+    id?: StringFieldUpdateOperationsInput | string;
+    proposal?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    user?: UserUpdateOneRequiredWithoutInterestNestedInput;
+  };
+
+  export type InterestUncheckedUpdateWithoutJobInput = {
+    id?: StringFieldUpdateOperationsInput | string;
+    proposal?: StringFieldUpdateOperationsInput | string;
+    userId?: IntFieldUpdateOperationsInput | number;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type InterestUncheckedUpdateManyWithoutJobInput = {
+    id?: StringFieldUpdateOperationsInput | string;
+    proposal?: StringFieldUpdateOperationsInput | string;
+    userId?: IntFieldUpdateOperationsInput | number;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   /**

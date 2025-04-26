@@ -20,3 +20,9 @@ export const postJobSchema = z.object({
   project: z.string(),
   location: z.string(),
 });
+
+export const showInterestSchema = z.object({
+  proposal: z.string(),
+  jobId: z.string(),
+  email: z.string(),
+});

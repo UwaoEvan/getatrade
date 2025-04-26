@@ -2,7 +2,7 @@
 
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
-import { postJobSchema, registerSchema } from "./schemas";
+import { postJobSchema, registerSchema, showInterestSchema } from "./schemas";
 import bcrypt from "bcrypt";
 import { db } from "@/db";
 import { redirect } from "next/navigation";
@@ -28,7 +28,7 @@ export async function authenticate(
     }
     return "Unknown error occurred";
   }
-  redirect("/dashboard");
+  redirect("/newleads");
 }
 
 export const register = async (prevState: State, formData: FormData) => {
@@ -100,4 +100,57 @@ export const postJob = async (prevState: State, formData: FormData) => {
 export const getJobPostings = async () => {
   const jobs = await db.job.findMany();
   return jobs;
+};
+
+export const getJobPosting = async (id: string) => {
+  const job = await db.job.findFirst({
+    where: {
+      id,
+    },
+  });
+  return job;
+};
+
+export const showInterest = async (formData: FormData) => {
+  try {
+    const parsed = showInterestSchema.safeParse({
+      proposal: formData.get("proposal"),
+      jobId: formData.get("jobId"),
+      email: formData.get("email"),
+    });
+
+    if (!parsed.success) {
+      redirect(
+        `/lead-details/${formData.get("jobId")}?error=${encodeURIComponent("Invalid form data")}`,
+      );
+    }
+
+    const { proposal, jobId, email } = parsed.data;
+
+    const user = await db.user.findFirst({
+      where: { email: email as string },
+    });
+
+    if (!user) {
+      redirect(
+        `/lead-details/${jobId}?error=${encodeURIComponent("User not found")}`,
+      );
+    }
+
+    await db.interest.create({
+      data: {
+        proposal: proposal as string,
+        userId: user.id,
+        jobId: jobId as string,
+        createdAt: new Date(),
+      },
+    });
+
+    redirect(`/interested`);
+  } catch (error) {
+    const jobId = formData.get("jobId") || "";
+    redirect(
+      `/lead-details/${jobId}?error=${encodeURIComponent(JSON.stringify(error))}`,
+    );
+  }
 };

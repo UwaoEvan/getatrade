@@ -29,7 +29,7 @@ export default function NavigationHeader({
         <div className="hidden md:flex items-center space-x-6 text-sm">
           {isLoggedIn ? (
             <>
-              {/* <Link
+              <Link
                 href="/new-leads"
                 className="hover:underline text-purple-300"
               >
@@ -38,9 +38,6 @@ export default function NavigationHeader({
               <Link href="/interested" className="hover:underline">
                 Interested
               </Link>
-              <Link href="/contacts" className="hover:underline">
-                Contacts
-              </Link> */}
               <div className="relative">
                 <button className="border border-white px-4 py-1 rounded hover:bg-white hover:text-[#1f0e2b] transition">
                   My account
@@ -109,15 +106,12 @@ export default function NavigationHeader({
         <div className="md:hidden bg-[#2f76d9] px-4 pb-4 space-y-4 text-sm">
           {isLoggedIn ? (
             <>
-              {/* <Link href="/new-leads" className="block w-full hover:underline">
+              <Link href="/new-leads" className="block w-full hover:underline">
                 New leads
               </Link>
               <Link href="/interested" className="block w-full hover:underline">
                 Interested
               </Link>
-              <Link href="/contacts" className="block w-full hover:underline">
-                Contacts
-              </Link> */}
               <button className="w-full text-left border border-white px-4 py-2 rounded hover:bg-white hover:text-[#1f0e2b] transition">
                 My account
               </button>
