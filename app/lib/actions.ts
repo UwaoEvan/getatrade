@@ -96,3 +96,8 @@ export const postJob = async (prevState: State, formData: FormData) => {
 
   return { success: true };
 };
+
+export const getJobPostings = async () => {
+  const jobs = await db.job.findMany();
+  return jobs;
+};
