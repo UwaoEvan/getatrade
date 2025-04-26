@@ -121,6 +121,17 @@ exports.Prisma.UserScalarFieldEnum = {
   role: "role",
 };
 
+exports.Prisma.JobScalarFieldEnum = {
+  id: "id",
+  title: "title",
+  description: "description",
+  contactEmail: "contactEmail",
+  category: "category",
+  project: "project",
+  createdAt: "createdAt",
+  location: "location",
+};
+
 exports.Prisma.SortOrder = {
   asc: "asc",
   desc: "desc",
@@ -138,6 +149,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: "User",
+  Job: "Job",
 };
 
 /**

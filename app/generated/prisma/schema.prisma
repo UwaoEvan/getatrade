@@ -23,3 +23,16 @@ model User {
 
   @@map("user")
 }
+
+model Job {
+  id           String   @id @default(uuid())
+  title        String
+  description  String
+  contactEmail String
+  category     String
+  project      String
+  createdAt    DateTime @default(now())
+  location     String
+
+  @@map("job")
+}

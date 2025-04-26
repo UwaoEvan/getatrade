@@ -11,3 +11,12 @@ export const registerSchema = z.object({
   role: z.string(),
   password: z.string().min(6),
 });
+
+export const postJobSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  contactEmail: z.string().email(),
+  category: z.string(),
+  project: z.string(),
+  location: z.string(),
+});
