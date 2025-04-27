@@ -111,7 +111,30 @@ export const getJobPosting = async (id: string) => {
   return job;
 };
 
-export const showInterest = async (formData: FormData) => {
+export const getUser = async (email: string) => {
+  const user = await db.user.findFirst({
+    where: { email: email as string },
+  });
+  return user;
+};
+
+export const getInterestedLeads = async (email: string) => {
+  const user = await getUser(email);
+
+  const showInterests = await db.interest.findMany({
+    where: {
+      userId: user?.id,
+    },
+  });
+
+  if (!showInterests) {
+    return [];
+  }
+
+  return showInterests;
+};
+
+export const showInterest = async (prevState: State, formData: FormData) => {
   try {
     const parsed = showInterestSchema.safeParse({
       proposal: formData.get("proposal"),
@@ -120,21 +143,15 @@ export const showInterest = async (formData: FormData) => {
     });
 
     if (!parsed.success) {
-      redirect(
-        `/lead-details/${formData.get("jobId")}?error=${encodeURIComponent("Invalid form data")}`,
-      );
+      return { error: "Invalid formdata" };
     }
 
     const { proposal, jobId, email } = parsed.data;
 
-    const user = await db.user.findFirst({
-      where: { email: email as string },
-    });
+    const user = await getUser(email);
 
     if (!user) {
-      redirect(
-        `/lead-details/${jobId}?error=${encodeURIComponent("User not found")}`,
-      );
+      return { error: "user not found." };
     }
 
     await db.interest.create({
@@ -146,11 +163,8 @@ export const showInterest = async (formData: FormData) => {
       },
     });
 
-    redirect(`/interested`);
+    return { success: true };
   } catch (error) {
-    const jobId = formData.get("jobId") || "";
-    redirect(
-      `/lead-details/${jobId}?error=${encodeURIComponent(JSON.stringify(error))}`,
-    );
+    return { error: JSON.stringify(error) };
   }
 };

@@ -1,18 +1,17 @@
-import { getJobPosting, showInterest } from "@/app/lib/actions";
+import { getJobPosting } from "@/app/lib/actions";
 import { formatDistanceToNow } from "date-fns";
 import { auth } from "@/auth";
 import { Suspense } from "react";
+import ShowInterestForm from "./components/ShowInterest";
 
 type Params = {
   params: {
     id: string;
   };
-  searchParams: { success?: string; error?: string };
 };
 
-export default async function LeadDetails({ params, searchParams }: Params) {
+export default async function LeadDetails({ params }: Params) {
   const { id: jobId } = await params;
-  const { success, error } = await searchParams;
   const job = await getJobPosting(jobId as string);
   const session = await auth();
 
@@ -45,42 +44,7 @@ export default async function LeadDetails({ params, searchParams }: Params) {
           </div>
         </div>
         <hr className="border-gray-300" />
-        <div>
-          <h2 className="text-2xl font-semibold text-gray-800 mt-4">
-            Show Interest
-          </h2>
-          <form className="space-y-4" action={showInterest}>
-            <textarea
-              name="proposal"
-              placeholder="Write a message describing your interest..."
-              className="w-full border border-[#2f76d9] rounded px-3 py-2 h-28"
-              required
-            />
-            <input type="hidden" name="jobId" value={jobId} />
-            <input
-              type="hidden"
-              name="email"
-              value={session?.user?.email || ""}
-            />
-            <button
-              type="submit"
-              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
-            >
-              Send Interest
-            </button>
-            {/* Show success or error messages based on searchParams */}
-            {success === "true" && (
-              <p className="text-green-600 mt-2">
-                ✅ Thank you! Your interest has been submitted.
-              </p>
-            )}
-            {error && (
-              <p className="text-red-600 mt-2">
-                ❌ {decodeURIComponent(error)}
-              </p>
-            )}
-          </form>
-        </div>
+        <ShowInterestForm jobId={jobId} email={session?.user?.email || ""} />
       </div>
     </Suspense>
   );
