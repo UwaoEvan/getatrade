@@ -1,4 +1,4 @@
-import { signOut } from "@/auth";
+import { signOut } from "../lib/auth";
 import { getJobPostings } from "../lib/actions";
 import { Suspense } from "react";
 import Lead from "./components/Lead";

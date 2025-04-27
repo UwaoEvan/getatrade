@@ -1,6 +1,6 @@
 import { getJobPosting } from "@/app/lib/actions";
 import { formatDistanceToNow } from "date-fns";
-import { auth } from "@/auth";
+import { auth } from "@/app/lib/auth";
 import { Suspense } from "react";
 import ShowInterestForm from "./components/ShowInterest";
 

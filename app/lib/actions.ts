@@ -1,10 +1,10 @@
 "use server";
 
-import { signIn } from "@/auth";
+import { signIn } from "./auth";
 import { AuthError } from "next-auth";
 import { postJobSchema, registerSchema, showInterestSchema } from "./schemas";
 import bcrypt from "bcrypt";
-import { db } from "@/db";
+import { db } from "./db";
 import { redirect } from "next/navigation";
 
 type State = {

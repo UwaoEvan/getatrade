@@ -1,7 +1,6 @@
-import { signOut } from "@/auth";
 import { getInterestedLeads } from "../lib/actions";
 import { Suspense } from "react";
-import { auth } from "@/auth";
+import { auth, signOut } from "../lib/auth";
 import Interest from "./components/Interest";
 
 export default async function Interested() {
