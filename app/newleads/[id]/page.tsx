@@ -5,9 +5,9 @@ import { Suspense } from "react";
 import ShowInterestForm from "./components/ShowInterest";
 
 type Params = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 export default async function LeadDetails({ params }: Params) {

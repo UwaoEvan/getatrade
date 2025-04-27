@@ -134,6 +134,15 @@ export const getInterestedLeads = async (email: string) => {
   return showInterests;
 };
 
+export const getInterestedLead = async (jobId: string) => {
+  const lead = await db.interest.findFirst({
+    where: {
+      jobId,
+    },
+  });
+  return lead;
+};
+
 export const showInterest = async (prevState: State, formData: FormData) => {
   try {
     const parsed = showInterestSchema.safeParse({
@@ -152,6 +161,12 @@ export const showInterest = async (prevState: State, formData: FormData) => {
 
     if (!user) {
       return { error: "user not found." };
+    }
+
+    const interest = await getInterestedLead(jobId);
+
+    if (interest) {
+      return { error: "You have already applied for this job." };
     }
 
     await db.interest.create({
