@@ -1,7 +1,10 @@
+"use client";
 import Image from "next/image";
 import Painter from "@/public/Screenshot 2025-04-23 at 16.12.05.png";
+import { useRouter } from "next/navigation";
 
 export default function HomeBanner() {
+  const router = useRouter();
   return (
     <div className="bg-[#2f76d9] w-full ">
       <div className="mx-4 lg:w-[880px] lg:mx-auto flex flex-col md:flex-row md:items-center md:justify-center py-12 text-white">
@@ -25,7 +28,10 @@ export default function HomeBanner() {
                 placeholder="e.g., Plumber, Electrician..."
                 className="w-full px-4 py-2 text-black rounded-l bg-white outline-none"
               />
-              <button className="bg-[#0c51a1] px-5 flex items-center justify-center rounded-r">
+              <button
+                onClick={() => router.push("/post-a-job")}
+                className="bg-[#0c51a1] px-5 flex items-center justify-center rounded-r"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5 text-white"

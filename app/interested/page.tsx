@@ -31,7 +31,11 @@ export default async function Interested() {
           </div>
 
           <div className="space-y-4">
-            {showInterests?.map((job) => <Interest key={job.id} job={job} />)}
+            {showInterests.length > 0 ? (
+              showInterests?.map((job) => <Interest key={job.id} job={job} />)
+            ) : (
+              <p>You haven't shown interest to any job yet.</p>
+            )}
           </div>
         </div>
       </div>

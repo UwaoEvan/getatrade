@@ -31,9 +31,11 @@ export default async function Dashboard() {
           </div>
 
           <div className="space-y-4">
-            {jobs.map((job) => (
-              <Lead key={job.id} job={job} />
-            ))}
+            {jobs.length > 0 ? (
+              jobs.map((job) => <Lead key={job.id} job={job} />)
+            ) : (
+              <p>No new leads</p>
+            )}
           </div>
         </div>
       </div>
