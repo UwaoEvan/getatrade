@@ -1,7 +1,9 @@
+'use client'
 import Image from "next/image";
 import Roofing from "@/public/root.png";
 import Bathroom from "@/public/bathroom.png";
 import Plumbing from "@/public/sink.jpg";
+import { useRouter } from "next/navigation";
 
 export default function PopularTrades() {
   const trades = [
@@ -31,6 +33,7 @@ export default function PopularTrades() {
     },
   ];
 
+  const router = useRouter();
   return (
     <section className="bg-gray-100 py-16">
       <div className="w-full px-4 lg:w-[880px] lg:mx-auto">
@@ -64,7 +67,7 @@ export default function PopularTrades() {
                   <p className="text-sm font-medium text-gray-900">
                     {trade.stats}
                   </p>
-                  <button className="mt-2 w-full bg-[#2f76d9] text-white py-2 rounded hover:bg-[#2f76d9] transition">
+                  <button onClick={() => router.push("/services")} className="mt-2 w-full bg-[#2f76d9] text-white py-2 rounded hover:bg-[#2f76d9] transition hover:cursor-pointer">
                     View all
                   </button>
                 </div>
