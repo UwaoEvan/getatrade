@@ -1,5 +1,6 @@
 import Image from "next/image";
-import Link from "@/public/link.jpg";
+import working from "@/public/link.jpg";
+import Link from "next/link";
 
 export default function LookingForLeads() {
   return (
@@ -7,7 +8,7 @@ export default function LookingForLeads() {
       <div className="w-ful px-4 lg:w-[800px] lg:mx-auto">
         <div className="flex flex-col md:flex-row md:justify-center gap-10">
           <Image
-            src={Link}
+            src={working}
             alt="Tradesperson working"
             className="w-full md:w-1/2 rounded-lg object-cover"
           />
@@ -24,8 +25,8 @@ export default function LookingForLeads() {
               opportunities that match your skills. Take on big jobs or smaller
               gap fillers – it’s up to you.
             </p>
-            <a
-              href="#"
+            <Link
+              href="/tradesworks-signup"
               className="inline-flex items-center text-black font-medium underline hover:no-underline transition"
             >
               <svg
@@ -43,7 +44,7 @@ export default function LookingForLeads() {
                 />
               </svg>
               Tradespeople join for free
-            </a>
+            </Link>
           </div>
         </div>
       </div>
