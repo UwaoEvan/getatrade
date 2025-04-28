@@ -34,7 +34,7 @@ export default async function Interested() {
             {showInterests.length > 0 ? (
               showInterests?.map((job) => <Interest key={job.id} job={job} />)
             ) : (
-              <p>You haven't shown interest to any job yet.</p>
+              <p>You haven&apos;t shown interest to any job yet.</p>
             )}
           </div>
         </div>

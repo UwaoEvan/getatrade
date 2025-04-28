@@ -3,6 +3,11 @@ import React from "react";
 import { useActionState } from "react";
 import { postJob } from "../lib/actions";
 import { Suspense } from "react";
+import { SERVICES } from "../lib/services";
+import Image from "next/image";
+import thumbsUp from "@/public/thumbsUp.svg";
+import userGroup from "@/public/userGroup.svg";
+import postIcon from "@/public/post-icon.svg";
 
 const initialState = { error: undefined, success: false };
 export default function PostAJob() {
@@ -26,12 +31,17 @@ export default function PostAJob() {
             <label className="block font-semibold mb-1">
               What would you like to have done?
             </label>
-            <input
-              type="text"
+            <select
               name="title"
-              placeholder="Architectural Services"
               className="w-full border border-gray-300 rounded px-3 py-2"
-            />
+            >
+              <option value="">Select a service</option>
+              {SERVICES.map((service) => (
+                <option key={service.id} value={service.label}>
+                  {service.label}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="mb-6">
@@ -110,7 +120,43 @@ export default function PostAJob() {
             </p>
           )}
         </form>
+        <InfoCards />
       </div>
     </Suspense>
+  );
+}
+
+function InfoCards() {
+  const cards = [
+    {
+      icon: postIcon,
+      title: "Post your job for free – no strings attached",
+    },
+    {
+      icon: userGroup,
+      title: "More than 240,079 qualified tradespeople",
+    },
+    {
+      icon: thumbsUp,
+      title: "More than 2,559,546 independent reviews",
+    },
+  ];
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
+      {cards.map((card, index) => (
+        <div
+          key={index}
+          className="flex flex-col p-6 border-gray-200 rounded-md shadow-sm hover:shadow-md transition"
+        >
+          <Image
+            src={card.icon}
+            alt="icon"
+            className="bg-gray-100 w-16 h-16 rounded-full mb-4"
+          />
+          <p className="text-gray-800 font-bold">{card.title}</p>
+        </div>
+      ))}
+    </div>
   );
 }

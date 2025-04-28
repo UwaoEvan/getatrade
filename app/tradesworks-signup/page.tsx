@@ -6,6 +6,7 @@ import FindWork from "./components/FindWork";
 import { register } from "../lib/actions";
 import { useActionState } from "react";
 import { Suspense } from "react";
+import { SERVICES } from "../lib/services";
 
 const initialState = { error: undefined, success: false };
 
@@ -21,12 +22,17 @@ function SignupForm() {
         action={formAction}
         className="bg-gray-300 text-black p-6 rounded-md space-y-4"
       >
-        <input
-          type="text"
+        <select
           name="role"
-          placeholder="Your main trade"
-          className="w-full bg-white border border-gray-300 p-2 rounded"
-        />
+          className="w-full bg-white border border-gray-300 rounded px-3 py-2 outline-0"
+        >
+          <option value="">Your main trade</option>
+          {SERVICES.map((service) => (
+            <option key={service.id} value={service.label}>
+              {service.label}
+            </option>
+          ))}
+        </select>
         <input
           type="text"
           name="username"

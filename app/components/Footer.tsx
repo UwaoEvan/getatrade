@@ -44,9 +44,9 @@ export default function Footer() {
           <h5 className="text-md font-semibold mb-3">Support</h5>
           <ul className="space-y-2 text-sm">
             <li>
-              <a href="#" className="hover:underline">
-                Help Centre
-              </a>
+              <Link href="/services" className="hover:underline">
+                Services
+              </Link>
             </li>
             <li>
               <a href="#" className="hover:underline">
