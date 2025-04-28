@@ -52,7 +52,7 @@ function SignupForm() {
           className="w-full bg-white border border-gray-300 p-2 rounded"
         />
         <p className="text-xs text-gray-500">
-          By clicking Sign up for free, you agree to MyBuilder Terms and
+          By clicking Sign up for free, you agree to Getatradelinkltd Terms and
           Conditions. For information on how we process your data, see our
           Privacy policy.
         </p>

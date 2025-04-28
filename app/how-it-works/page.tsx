@@ -8,7 +8,7 @@ import poundIcon from "@/public/pound-icon.svg";
 
 export default function HowItWorks() {
   return (
-    <div className="bg-[#f5f7fa] py-16 px-4 text-center">
+    <div className="bg-white py-16 px-4 text-center">
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-12">
           <div className="text-left">
