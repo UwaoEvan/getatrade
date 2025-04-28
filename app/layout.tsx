@@ -24,6 +24,8 @@ export const metadata: Metadata = {
   description: "One stop shop",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function RootLayout({
   children,
 }: Readonly<{
