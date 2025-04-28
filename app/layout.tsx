@@ -24,15 +24,15 @@ export const metadata: Metadata = {
   description: "One stop shop",
 };
 
-export const dynamic = "force-dynamic";
-
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const cookieStore = await cookies();
-  const token = cookieStore.get("authjs.session-token");
+  const token =
+    cookieStore.get("__Secure-authjs.session-token") ||
+    cookieStore.get("authjs.session-token");
   const isLoggedIn = !!token;
   return (
     <html lang="en">
