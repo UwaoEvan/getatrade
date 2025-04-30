@@ -345,6 +345,153 @@ export const PRICING = {
         </ul>
       `,
       },
+      {
+        label: "Chimney Specialist Cost",
+        route: "/Bricklaying-and-Repointing/chimney-specialist-cost",
+        title: "Your Comprehensive Guide to Chimney Job Prices",
+        content: `
+        <p style="margin-bottom: 20px">Identifying and understanding the costs of various services offered by chimney specialists can significantly help in planning and executing maintenance or repair works on your chimney efficiently. When seeking services from roofing and chimney specialists near me, it's best to have an idea of the average costs involved. Here’s a breakdown of typical services provided by chimney specialists and the average cost range you might expect:</p>
+        <ul style="margin: 20px 0">
+          <li style="margin-bottom: 6px"><strong>Chimney Inspection:</strong> Essential for maintaining chimney health and safety, inspections can range from £50 to £200, depending on the level of detail required.</li>
+          <li style="margin-bottom: 6px"><strong>Chimney Sweep:</strong> To prevent soot and creosote buildup, sweeping is recommended annually, costing between £50 to £120.</li>
+          <li style="margin-bottom: 6px"><strong>Chimney Repair:</strong> Repair work covers a broad range of issues from fixing leaks, cracks, to replacing bricks. Depending on the extent, you could be looking at £150 to £800.</li>
+          <li style="margin-bottom: 6px"><strong>Chimney Cap Installation:</strong> Installing a cap can prevent unwanted debris, animals, and water from entering your chimney, typically costing between £100 to £250.</li>
+          <li style="margin-bottom: 6px"><strong>Chimney Liner Installation:</strong> This crucial job can vary wildly in price due to the materials (stainless steel, aluminium, or clay) and the complexity of installation, generally ranging from £800 to £2,000.</li>
+          <li style="margin-bottom: 6px"><strong>Chimney Repointing Cost:</strong> Depending on the size of a chimney, costs range from £500 to £1,000.</li>
+        </ul>
+        <p>This rough guide helps you anticipate the chimney specialist costs for maintaining or repairing your chimney. However, it's always recommended to obtain multiple quotes from local chimney specialists to ensure you’re getting the best service at the right price.</p>
+      `,
+      },
+      {
+        label: "Exposed Brick Walls Cost",
+        route: "/Bricklaying-and-Repointing/exposed-brick-walls-cost",
+        title: "How Much Does Exposing a Brick Wall Cost?",
+        content: `
+        <p style="margin-bottom: 20px">Exposing a brick wall can transform your space, adding a rustic, industrial charm that's both unique and stylish. This process involves removing plaster or drywall to reveal the underlying brick, giving your interior an authentic and textured look. On average, the cost of exposing a brick wall in the UK ranges from £500 to £1,500, depending on the size and complexity of the project. This versatile addition can enhance any room and even increase your property's value.</p>
+        <p>To provide a clearer idea of potential costs, consider the following examples of varying project sizes:</p>
+        <ul style="margin: 20px 0">
+          <li style="margin-bottom: 6px"><strong>Small wall (up to 10 sqm):</strong> £500 - £750</li>
+          <li style="margin-bottom: 6px"><strong>Medium wall (10-20 sqm):</strong> £750 - £1,200</li>
+          <li style="margin-bottom: 6px"><strong>Large wall (20-30 sqm):</strong> £1,200 - £1,500</li>
+        </ul>
+        <p>By understanding these rough estimates, you can better plan and budget your project. Remember, actual costs can vary based on specific conditions and requirements.</p>
+      `,
+      },
+      {
+        label: "Installing Air Bricks Cost",
+        route: "/Bricklaying-and-Repointing/installing-air-bricks-cost",
+        title: "How much does Installing Air Bricks cost?",
+        content: `
+        <p style="margin-bottom: 20px">Installing air bricks is essential for maintaining proper ventilation and preventing building dampness and condensation. It is a relatively small but vital investment that can significantly improve the air quality inside your property. The average cost of installing air bricks in the UK can range from <strong>£200 to £500 per project</strong>, depending on various factors. Let’s take a look at these costs and what influences them.</p>
+        <p><strong>Key Factors Influencing the Cost:</strong>></p>
+        <ul style="margin: 20px 0">
+          <li style="margin-bottom: 6px"><strong>Number of Air Bricks Required:</strong> More bricks increase material and labour costs.</li>
+          <li style="margin-bottom: 6px"><strong>Complexity of Installation:</strong> Difficult installations might require additional time and expertise.</li>
+          <li style="margin-bottom: 6px"><strong>Location of Property:</strong> Costs can vary based on geographic location due to varying labour charges.</li>
+          <li style="margin-bottom: 6px"><strong>Pre-Installation Inspections:</strong> Sometimes necessary to assess the site, incurring extra costs.</li>
+          <li style="margin-bottom: 6px"><strong>Post-Installation Services:</strong> Cleaning or repairs can add to the overall expense.</li>
+        </ul>
+        <p>When planning your budget, consider obtaining quotes from multiple tradespeople to get the best price for the work required.</p>
+      `,
+      },
+      {
+        label: "Lintel Replacement Cost",
+        route: "/Bricklaying-and-Repointing/lintel-replacement-cost",
+        title: "How Much Does Lintel Replacement Cost?",
+        content: `
+        <p style="margin-bottom: 20px">The cost of installation depends heavily on the extent of work needed, the type of lintel being replaced and the condition of the surrounding structure. Here are the typical tasks performed during lintel replacement and their associated costs:</p>
+        <ul style="margin: 20px 0">
+          <li style="margin-bottom: 6px"><strong>Assessment of lintel damage:</strong> £50 - £100</li>
+          <li style="margin-bottom: 6px"><strong>Removal of the old lintel:</strong> £100 - £300</li>
+          <li style="margin-bottom: 6px"><strong>Installation of the new lintel:</strong> £150 - £400</li>
+          <li style="margin-bottom: 6px"><strong>Masonry work (e.g., bricklaying):</strong> £100 - £300</li>
+          <li style="margin-bottom: 6px"><strong>Final inspection and adjustments:</strong> £50 - £100</li>
+          <li style="margin-bottom: 6px"><strong>Tradesperson hourly rate: </strong> £20 - £40</li>
+        </ul>
+        <p>These figures can vary based on the location and additional requirements such as scaffolding or structural engineer consultations.</p>
+      `,
+      },
+      {
+        label: "Repointing Cost",
+        route: "/Bricklaying-and-Repointing/repointing-cost",
+        title: "How Much Does Repointing Cost?",
+        content: `
+        <p style="margin-bottom: 20px">Several factors can impact the repointing cost, which generally includes the size of the area, the complexity of the job and the materials used. Additionally, labour charges and regional differences play a significant role. Understanding these factors helps in budgeting for the project effectively.</p>
+        <p style="margin-bottom: 20px">The average cost of repointing ranges widely. For brickwork, you might expect to pay between £20 and £60 per square metre, while specific structures or areas could incur higher charges depending on accessibility and other requirements.</p>
+        <p>Before embarking on a repointing project, it's crucial to acquire multiple quotes to get a detailed estimate of costs from a vetted tradesperson. Post a job on MyBuilder to connect with recommended bricklayers near you and ensure you're getting the best deal for your project!</p>
+      `,
+      },
+    ],
+  },
+  "Carpentry and Joinery": {
+    categories: [
+      {
+        label: "Bay Window Seat Cost",
+        route: "/Bricklaying-and-Repointing/bay-window-seat-cost",
+        title: "How Much Does a Bay Window Seat Cost?",
+        content: `
+        <p style="margin-bottom: 20px">A bay window seat adds charm, comfort, and extra storage or seating to your home. But it's important to understand the cost implications before embarking on this project. Generally, the cost of building a bay window seat in the UK ranges between £500 and £2,500. This depends on various factors such as the scope of the project, materials used, and design complexity.</p>
+        <ul style="margin: 20px 0">
+          <li style="margin-bottom: 6px"><strong>Standard design with simple materials:</strong> £500 - £1,000</li>
+          <li style="margin-bottom: 6px"><strong>Includes built-in storage compartments:</strong> £800 - £1,500</li>
+          <li style="margin-bottom: 6px"><strong>Upholstered for additional comfort:</strong> £700 - £1,800</li>
+          <li style="margin-bottom: 6px"><strong>Custom design to fit curved bay windows:</strong> £1,000 - £2,500</li>
+          <li style="margin-bottom: 6px"><strong>Specially designed to meet unique specifications:</strong> £1,200 - £2,500</li>
+        </ul>
+        <p>Understanding these costs will help you plan your budget more effectively and choose the right type of bay window seat that fits your needs without breaking the bank.</p>
+      `,
+      },
+      {
+        label: "Bookshelf Installation Cost",
+        route: "/Carpentry-and-Joinery/bookshelf-installation-cost",
+        title: "How Much Does It Cost and What to Expect",
+        content: `
+        <p style="margin-bottom: 20px">Built-in bookshelves are a popular choice in the UK, blending style and practicality to upgrade your space. People love them for their customisation options and efficient use of space. On average, installing built-in bookshelves costs between <strong>£1,500 and £5,500</strong>. This guide will help you understand what drives these costs.</p>
+        <p>Here’s a quick breakdown to help you budget:</p>
+        <ul style="margin: 20px 0">
+          <li style="margin-bottom: 6px"><strong>Labour Costs:</strong> Influence heavily depending on the complexity and duration of the project.</li>
+          <li style="margin-bottom: 6px"><strong>Material Costs:</strong> A significant variable which includes the type of wood and finishes.</li>
+          <li style="margin-bottom: 6px"><strong>Custom Features:</strong> Can substantially raise the total cost depending on personalisation.</li>
+          <li style="margin-bottom: 6px"><strong>Transport and Miscellaneous:</strong> Smaller factors but add to the overall budget.</li>
+        </ul>
+        <p>With this breakdown, you'll be able to plan your budget better and keep your installation on track.</p>
+      `,
+      },
+      {
+        label: "Cabinet Repair Services Cost",
+        route: "/Carpentry-and-Joinery/cabinet-repair-services-cost",
+        title: "How Much Does It Cost To Repair A Cabinet?",
+        content: `
+        <p style="margin-bottom: 20px">Cabinet repair services offer a valuable solution for homeowners looking to restore their kitchen cabinets without the expense of full replacement. These services can address issues such as structural damage, aesthetic blemishes, and functionality problems. In the UK, the average cost for cabinet repair services ranges from <strong>£100 to £800</strong>. The specific cost depends on the damage extent, materials involved, and complexity of the task. For repairs involving custom finishes, costs may reach the higher end or even exceed this range.</p>
+        <p"><strong>5 Major Cost Factors Influencing Cabinet Repair Services:</strong></p>
+        <ul style="margin: 20px 0">
+          <li style="margin-bottom: 6px"><strong>Extent of Damage:</strong> More extensive damage requires more time and resources, increasing costs.</li>
+          <li style="margin-bottom: 6px"><strong>Materials Used:</strong> The quality and type of materials directly impact the overall expense.</li>
+          <li style="margin-bottom: 6px"><strong>Labour Time:</strong> Professional rates range from £25 to £50 per hour; longer jobs mean higher labour costs.</li>
+          <li style="margin-bottom: 6px"><strong>Customisation:</strong> Special finishes or unique material requests can add 20-30% to the total cost.</li>
+          <li style="margin-bottom: 6px"><strong>Travel Expenses:</strong> Service providers may charge £20 to £50 if they are travelling long distances.</li>
+        </ul>
+        <p>Getting a professional quote is essential for accurate cost estimation. This ensures that all variables are considered, providing a clearer picture of potential expenses tailored to your specific needs and location.</p>
+      `,
+      },
+      {
+        label: "Carpet Tile Installation Cost",
+        route: "/Carpentry-and-Joinery/carpet-tile-installation-cost",
+        title: "Your comprehensive guide to materials and costs",
+        content: `
+        <p style="margin-bottom: 20px">Installing carpet tiles can be an efficient and cost-effective alternative to traditional carpet rolls. On average, the cost of carpet tile installation ranges from <strong>£20 to £40 per square metre</strong>. However, various factors can influence this cost, including the quality of the tiles, room size, and the complexity of the installation process.</p>
+        <p"><strong>Key factors which will affect carpet tile installation cost:</strong></p>
+        <ul style="margin: 20px 0">
+          <li style="margin-bottom: 6px"><strong>Tile quality:</strong> Higher quality tiles often come with a higher price tag but offer better durability and aesthetic appeal.</li>
+          <li style="margin-bottom: 6px"><strong>Room size:</strong> Larger rooms or areas typically lower the installation cost per square metre due to economies of scale.</li>
+          <li style="margin-bottom: 6px"><strong>Old flooring removal:</strong> If old flooring needs to be removed, this will incur additional costs.</li>
+          <li style="margin-bottom: 6px"><strong>Subfloor preparation:</strong> Some subfloors may require levelling or additional preparation.</li>
+          <li style="margin-bottom: 6px"><strong>Labour costs:</strong> Depending on the region and installer, labour costs can vary significantly.</li>
+          <li style="margin-bottom: 6px"><strong>Adhesives and extras:</strong> Costs can also increase with the use of high-quality adhesives or additional underlays.</li>
+        </ul>
+        <p><strong>Note:</strong> It is highly recommended to get a quote from a specialist to get an accurate estimate for your specific project.</p>
+      `,
+      },
     ],
   },
 };
