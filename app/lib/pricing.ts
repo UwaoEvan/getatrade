@@ -427,7 +427,7 @@ export const PRICING = {
     categories: [
       {
         label: "Bay Window Seat Cost",
-        route: "/Bricklaying-and-Repointing/bay-window-seat-cost",
+        route: "/Carpentry and Joinery/bay-window-seat-cost",
         title: "How Much Does a Bay Window Seat Cost?",
         content: `
         <p style="margin-bottom: 20px">A bay window seat adds charm, comfort, and extra storage or seating to your home. But it's important to understand the cost implications before embarking on this project. Generally, the cost of building a bay window seat in the UK ranges between £500 and £2,500. This depends on various factors such as the scope of the project, materials used, and design complexity.</p>
