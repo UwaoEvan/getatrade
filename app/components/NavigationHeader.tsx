@@ -121,12 +121,9 @@ export default function NavigationHeader({
               <Link href="/post-a-job" className="block w-full hover:underline">
                 Post a job
               </Link>
-              <button
-                onClick={() => router.push("/login")}
-                className="block w-full hover:underline"
-              >
+              <Link href="/login" className="block w-full hover:underline">
                 Log in
-              </button>
+              </Link>
               <button
                 onClick={() => router.push("/tradesworks-signup")}
                 className="block w-full border border-white px-4 py-2 rounded hover:bg-white hover:text-[#1f0e2b] transition"

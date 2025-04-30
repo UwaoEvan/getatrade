@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Image from "next/image";
 import Roofing from "@/public/root.png";
 import Bathroom from "@/public/bathroom.png";
@@ -67,7 +67,10 @@ export default function PopularTrades() {
                   <p className="text-sm font-medium text-gray-900">
                     {trade.stats}
                   </p>
-                  <button onClick={() => router.push("/services")} className="mt-2 w-full bg-[#2f76d9] text-white py-2 rounded hover:bg-[#2f76d9] transition hover:cursor-pointer">
+                  <button
+                    onClick={() => router.push("/services")}
+                    className="mt-2 w-full bg-[#2f76d9] text-white py-2 rounded hover:bg-[#2f76d9] transition hover:cursor-pointer"
+                  >
                     View all
                   </button>
                 </div>
