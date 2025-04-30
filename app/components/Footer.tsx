@@ -49,9 +49,9 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <a href="#" className="hover:underline">
+              <Link href="/pricing-guides" className="hover:underline">
                 Contact Us
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#" className="hover:underline">
