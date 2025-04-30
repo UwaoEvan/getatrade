@@ -50,7 +50,7 @@ export default function Footer() {
             </li>
             <li>
               <Link href="/pricing-guides" className="hover:underline">
-                Contact Us
+                Pricing guides
               </Link>
             </li>
             <li>
