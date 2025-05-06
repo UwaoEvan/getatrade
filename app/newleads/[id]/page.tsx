@@ -1,8 +1,6 @@
 import { getJobPosting } from "@/app/lib/actions";
 import { formatDistanceToNow } from "date-fns";
-import { auth } from "@/app/lib/auth";
 import { Suspense } from "react";
-import ShowInterestForm from "./components/ShowInterest";
 import ShortlistFee from "./components/ShortlistFee";
 
 type Params = {
@@ -14,8 +12,6 @@ type Params = {
 export default async function LeadDetails({ params }: Params) {
   const { id: jobId } = await params;
   const job = await getJobPosting(jobId as string);
-  const session = await auth();
-
   return (
     <Suspense
       fallback={
@@ -58,7 +54,7 @@ export default async function LeadDetails({ params }: Params) {
                 </div>
               </div>
               <div className="py-2 px-4 text-sm bg-gray-200">
-                Your chances are good! This customer hasn't shortlisted anyone
+                Your chances are good! This customer hasn&apos;t shortlisted anyone
                 yet.
               </div>
             </div>
