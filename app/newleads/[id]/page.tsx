@@ -41,7 +41,8 @@ export default async function LeadDetails({ params }: Params) {
               <div className="flex justify-center items-center py-4">
                 <div className="p-2">
                   <p className="text-sm font-bold text-center">
-                    <span className="text-xl">4</span> Interested
+                    <span className="text-xl">{job?.interested}</span>{" "}
+                    Interested
                   </p>
                   <p className="text-sm">
                     Tradespeople who expressed interest.
@@ -49,7 +50,8 @@ export default async function LeadDetails({ params }: Params) {
                 </div>
                 <div className="p-2">
                   <p className="text-sm font-bold text-center">
-                    <span className="text-xl">0</span> Shortlisted
+                    <span className="text-xl">{job?.shortlisted}</span>{" "}
+                    Shortlisted
                   </p>
                   <p className="text-sm">
                     Tradespeople who received contact details.

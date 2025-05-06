@@ -12,7 +12,7 @@ const initialState = { error: undefined, success: false };
 export default function ShortlistFee({ email, jobId }: Props) {
   const [state, formAction] = useActionState(showInterest, initialState);
   return (
-    <div className="bg-white shadow-md p-2 mt-6 md:mx-4 h-fit w-full md:w-lg">
+    <div className="bg-white shadow-md p-4 mt-6 md:mx-4 h-fit w-full md:w-lg">
       <p className="font-bold">Shortlist fee</p>
       <p className="text-[#2f76d9] font-bold">￡9.00 + VAT</p>
       <div className="p-2 bg-gray-200 my-4">

@@ -167,8 +167,14 @@ export const showInterest = async (prevState: State, formData: FormData) => {
 
     const user = await getUser(email);
 
+    const job = await getJobPosting(jobId);
+
     if (!user) {
       return { error: "user not found." };
+    }
+
+    if (!job) {
+      return { error: "Job not found." };
     }
 
     const interest = await getInterestedLead(jobId);
@@ -182,6 +188,14 @@ export const showInterest = async (prevState: State, formData: FormData) => {
         userId: user.id,
         jobId: jobId as string,
         createdAt: new Date(),
+      },
+    });
+
+    await db.job.update({
+      where: { id: jobId },
+      data: {
+        interested: (job.interested ?? 0) + 1,
+        shortlisted: job.shortlisted,
       },
     });
 

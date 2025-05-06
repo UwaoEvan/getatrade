@@ -39,9 +39,12 @@ export default function NavigationHeader({
                 Interested
               </Link>
               <div className="relative">
-                <button className="border border-white px-4 py-1 rounded hover:bg-white hover:text-[#1f0e2b] transition">
+                <Link
+                  href="/my-account"
+                  className="border border-white px-4 py-1 rounded hover:bg-white hover:text-[#1f0e2b] transition"
+                >
                   My account
-                </button>
+                </Link>
               </div>
             </>
           ) : (
@@ -112,9 +115,12 @@ export default function NavigationHeader({
               <Link href="/interested" className="block w-full hover:underline">
                 Interested
               </Link>
-              <button className="w-full text-left border border-white px-4 py-2 rounded hover:bg-white hover:text-[#1f0e2b] transition">
+              <Link
+                href="/my-account"
+                className="w-full text-left border border-white px-4 py-2 rounded hover:bg-white hover:text-[#1f0e2b] transition"
+              >
                 My account
-              </button>
+              </Link>
             </>
           ) : (
             <>

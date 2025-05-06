@@ -35,6 +35,8 @@ model Job {
   createdAt   DateTime   @default(now())
   location    String
   userId      Int
+  interested  Int?       @default(0)
+  shortlisted Int?       @default(0)
   user        User       @relation(fields: [userId], references: [id])
   interest    Interest[]
 
