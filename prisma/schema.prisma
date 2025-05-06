@@ -20,6 +20,7 @@ model User {
   email          String     @unique
   hashedPassword String
   role           String?
+  job            Job[]
   interest       Interest[]
 
   @@map("user")
@@ -29,11 +30,12 @@ model Job {
   id           String     @id @default(uuid())
   title        String
   description  String
-  contactEmail String
   category     String
   project      String
   createdAt    DateTime   @default(now())
   location     String
+  userId       Int
+  user         User       @relation(fields: [userId], references: [id])
   interest     Interest[]
 
   @@map("job")

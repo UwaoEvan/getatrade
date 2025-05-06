@@ -8,7 +8,7 @@ import { useActionState } from "react";
 import { Suspense } from "react";
 import { SERVICES } from "../lib/services";
 
-const initialState = { error: undefined, success: false };
+const initialState = { error: undefined, success: false, userId: 0 };
 
 function SignupForm() {
   const [state, formAction] = useActionState(register, initialState);

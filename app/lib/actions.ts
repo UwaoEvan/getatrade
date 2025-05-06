@@ -53,7 +53,7 @@ export const register = async (prevState: State, formData: FormData) => {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  await db.user.create({
+  const user = await db.user.create({
     data: {
       email,
       username,
@@ -62,39 +62,48 @@ export const register = async (prevState: State, formData: FormData) => {
     },
   });
 
-  return { success: true };
+  await signIn("credentials", {
+    email: formData.get("email"),
+    password: formData.get("password"),
+    redirect: false,
+  });
+
+  return { success: true, userId: user.id };
 };
 
 export const postJob = async (prevState: State, formData: FormData) => {
-  const parsed = postJobSchema.safeParse({
-    title: formData.get("title"),
-    description: formData.get("description"),
-    location: formData.get("location"),
-    category: formData.get("category"),
-    contactEmail: formData.get("contactEmail"),
-    project: formData.get("project"),
-  });
+  const user = await register(prevState, formData);
+  if (user.success) {
+    const parsed = postJobSchema.safeParse({
+      title: formData.get("title"),
+      description: formData.get("description"),
+      location: formData.get("location"),
+      category: formData.get("category"),
+      project: formData.get("project"),
+    });
 
-  if (!parsed.success) {
-    return { error: "Invalid form data" };
+    if (!parsed.success) {
+      const firstError = parsed.error.errors[0]?.message || "Invalid form data";
+      return { error: firstError };
+    }
+
+    const { category, title, description, location, project } = parsed.data;
+
+    await db.job.create({
+      data: {
+        title,
+        description,
+        category,
+        createdAt: new Date(),
+        location,
+        project,
+        userId: user.userId,
+      },
+    });
+
+    return { success: true };
   }
-
-  const { category, contactEmail, title, description, location, project } =
-    parsed.data;
-
-  await db.job.create({
-    data: {
-      title,
-      description,
-      category,
-      contactEmail,
-      createdAt: new Date(),
-      location,
-      project,
-    },
-  });
-
-  return { success: true };
+  return { error: "Something went wrong" };
 };
 
 export const getJobPostings = async () => {

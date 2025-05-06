@@ -13,12 +13,11 @@ export const registerSchema = z.object({
 });
 
 export const postJobSchema = z.object({
-  title: z.string(),
-  description: z.string(),
-  contactEmail: z.string().email(),
-  category: z.string(),
-  project: z.string(),
-  location: z.string(),
+  title: z.string({ required_error: "Job title is required" }),
+  description: z.string({ required_error: "Description is required" }),
+  category: z.string({ required_error: "Category is required" }),
+  project: z.string({ required_error: "Project type is required" }),
+  location: z.string({ required_error: "Location is required" }),
 });
 
 export const showInterestSchema = z.object({

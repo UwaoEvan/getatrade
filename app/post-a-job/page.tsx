@@ -1,17 +1,20 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useActionState } from "react";
 import { postJob } from "../lib/actions";
 import { Suspense } from "react";
-import { SERVICES } from "../lib/services";
 import Image from "next/image";
 import thumbsUp from "@/public/thumbsUp.svg";
 import userGroup from "@/public/userGroup.svg";
 import postIcon from "@/public/post-icon.svg";
+import PostJob from "./components/PostJob";
+import CustomerSignup from "./components/CustomerSignUp";
 
 const initialState = { error: undefined, success: false };
 export default function PostAJob() {
+  const [form, setForm] = useState<"PostJob" | "SignUp">("PostJob");
   const [state, formAction, isPending] = useActionState(postJob, initialState);
+
   return (
     <Suspense
       fallback={
@@ -27,89 +30,32 @@ export default function PostAJob() {
           tradespeople near you
         </p>
         <form action={formAction}>
-          <div className="mb-6">
-            <label className="block font-semibold mb-1">
-              What would you like to have done?
-            </label>
-            <select
-              name="title"
-              className="w-full border border-gray-300 rounded px-3 py-2"
-            >
-              <option value="">Select a service</option>
-              {SERVICES.map((service) => (
-                <option key={service.id} value={service.label}>
-                  {service.label}
-                </option>
-              ))}
-            </select>
+          <div className={form === "PostJob" ? "block" : "hidden"}>
+            <PostJob />
           </div>
-
-          <div className="mb-6">
-            <label className="block font-semibold mb-1">
-              What type of service do you need?
-            </label>
-            <input
-              type="text"
-              name="category"
-              placeholder="e.g., Basic outline plans, Full regulation plans..."
-              className="w-full border border-gray-300 rounded px-3 py-2"
-            />
+          <div className={form === "SignUp" ? "block" : "hidden"}>
+            <CustomerSignup />
           </div>
-
-          <div className="mb-6">
-            <label className="block font-semibold mb-1">
-              What type of project are you planning?
-            </label>
-            <input
-              type="text"
-              name="project"
-              placeholder="e.g., Extension, Renovation, New build..."
-              className="w-full border border-gray-300 rounded px-3 py-2"
-            />
-          </div>
-
-          <div className="mb-6">
-            <label className="block font-semibold mb-1">
-              Describe what you need the plans for
-            </label>
-            <textarea
-              name="description"
-              placeholder="E.g. I need plans for something a little bit different..."
-              className="w-full border border-[#2f76d9] rounded px-3 py-2 h-28"
-            ></textarea>
-          </div>
-          <div className="mb-6">
-            <label className="block font-semibold mb-1">
-              What is your location?
-            </label>
-            <input
-              type="text"
-              name="location"
-              placeholder="e.g., Maidstone"
-              className="w-full border border-gray-300 rounded px-3 py-2"
-            />
-          </div>
-          <div className="mb-6">
-            <label className="block font-semibold mb-1">
-              What is your contact email?
-            </label>
-            <input
-              type="email"
-              name="contactEmail"
-              placeholder="e.g., user@info.com"
-              className="w-full border border-gray-300 rounded px-3 py-2"
-            />
-          </div>
-
           <div className="flex justify-between">
-            <button className="bg-[#2f76d9] text-white px-4 py-2 rounded">
+            <button
+              type={form === "PostJob" ? "button" : "submit"}
+              onClick={(e) => {
+                if (form === "PostJob") {
+                  setForm("SignUp");
+                  e.preventDefault();
+                }
+              }}
+              className="bg-[#2f76d9] text-white px-4 py-2 rounded"
+            >
               {isPending ? (
                 <span className="flex items-center justify-center">
                   <span className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white mr-2"></span>
                   Posting...
                 </span>
+              ) : form === "PostJob" ? (
+                "Next"
               ) : (
-                "Post job"
+                "Finalize"
               )}
             </button>
           </div>

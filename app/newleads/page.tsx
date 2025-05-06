@@ -14,7 +14,7 @@ export default async function Dashboard() {
         </div>
       }
     >
-      <div className="min-h-screen mx-auto bg-gray-100 p-6">
+      <div className="min-h-screen mx-auto bg-gray-100 py-6">
         <div className="w-full px-4 md:w-[880px] mx-auto">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold">New Leads</h1>
