@@ -21,7 +21,6 @@ export const postJobSchema = z.object({
 });
 
 export const showInterestSchema = z.object({
-  proposal: z.string(),
   jobId: z.string(),
   email: z.string(),
 });

@@ -2,6 +2,7 @@ import { getJobPosting } from "@/app/lib/actions";
 import { formatDistanceToNow } from "date-fns";
 import { Suspense } from "react";
 import ShortlistFee from "./components/ShortlistFee";
+import { auth } from "@/app/lib/auth";
 
 type Params = {
   params: Promise<{
@@ -12,6 +13,8 @@ type Params = {
 export default async function LeadDetails({ params }: Params) {
   const { id: jobId } = await params;
   const job = await getJobPosting(jobId as string);
+  const session = await auth();
+
   return (
     <Suspense
       fallback={
@@ -35,8 +38,8 @@ export default async function LeadDetails({ params }: Params) {
             <hr className="border-gray-300" />
             <p className="font-bold text-xl py-4">Activity on this lead</p>
             <div className="border-1 border-gray-200">
-              <div className="flex justify-around items-center py-4">
-                <div>
+              <div className="flex justify-center items-center py-4">
+                <div className="p-2">
                   <p className="text-sm font-bold text-center">
                     <span className="text-xl">4</span> Interested
                   </p>
@@ -44,7 +47,7 @@ export default async function LeadDetails({ params }: Params) {
                     Tradespeople who expressed interest.
                   </p>
                 </div>
-                <div>
+                <div className="p-2">
                   <p className="text-sm font-bold text-center">
                     <span className="text-xl">0</span> Shortlisted
                   </p>
@@ -54,8 +57,8 @@ export default async function LeadDetails({ params }: Params) {
                 </div>
               </div>
               <div className="py-2 px-4 text-sm bg-gray-200">
-                Your chances are good! This customer hasn&apos;t shortlisted anyone
-                yet.
+                Your chances are good! This customer hasn&apos;t shortlisted
+                anyone yet.
               </div>
             </div>
             <div className="mt-4 space-y-1">
@@ -71,8 +74,7 @@ export default async function LeadDetails({ params }: Params) {
               </p>
             </div>
           </div>
-          <ShortlistFee />
-          {/* <ShowInterestForm jobId={jobId} email={session?.user?.email || ""} /> */}
+          <ShortlistFee jobId={job?.id} email={session?.user?.email || ""} />
         </div>
       </div>
     </Suspense>

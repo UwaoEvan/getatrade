@@ -155,7 +155,6 @@ export const getInterestedLead = async (jobId: string) => {
 export const showInterest = async (prevState: State, formData: FormData) => {
   try {
     const parsed = showInterestSchema.safeParse({
-      proposal: formData.get("proposal"),
       jobId: formData.get("jobId"),
       email: formData.get("email"),
     });
@@ -164,7 +163,7 @@ export const showInterest = async (prevState: State, formData: FormData) => {
       return { error: "Invalid formdata" };
     }
 
-    const { proposal, jobId, email } = parsed.data;
+    const { jobId, email } = parsed.data;
 
     const user = await getUser(email);
 
@@ -180,7 +179,6 @@ export const showInterest = async (prevState: State, formData: FormData) => {
 
     await db.interest.create({
       data: {
-        proposal: proposal as string,
         userId: user.id,
         jobId: jobId as string,
         createdAt: new Date(),

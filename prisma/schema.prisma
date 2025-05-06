@@ -27,23 +27,22 @@ model User {
 }
 
 model Job {
-  id           String     @id @default(uuid())
-  title        String
-  description  String
-  category     String
-  project      String
-  createdAt    DateTime   @default(now())
-  location     String
-  userId       Int
-  user         User       @relation(fields: [userId], references: [id])
-  interest     Interest[]
+  id          String     @id @default(uuid())
+  title       String
+  description String
+  category    String
+  project     String
+  createdAt   DateTime   @default(now())
+  location    String
+  userId      Int
+  user        User       @relation(fields: [userId], references: [id])
+  interest    Interest[]
 
   @@map("job")
 }
 
 model Interest {
   id        String   @id @default(uuid())
-  proposal  String
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())

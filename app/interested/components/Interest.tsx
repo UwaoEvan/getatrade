@@ -4,7 +4,6 @@ import { getJobPosting } from "@/app/lib/actions";
 type Job = {
   job: {
     jobId: string;
-    proposal: string;
     createdAt: Date;
   };
 };
@@ -22,9 +21,9 @@ export default async function Interest({ job }: Job) {
           })}
         </span>
       </div>
-      <p className="text-gray-500 text-sm">
+      {/* <p className="text-gray-500 text-sm">
         Proposal sent: <span>{job.proposal}</span>
-      </p>
+      </p> */}
     </div>
   );
 }
