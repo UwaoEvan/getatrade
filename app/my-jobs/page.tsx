@@ -1,11 +1,11 @@
-import { signOut } from "../lib/auth";
-import { getJobPostings } from "../lib/actions";
+import { signOut, auth } from "../lib/auth";
+import { getCustomerJobs } from "../lib/actions";
 import { Suspense } from "react";
 import Job from "./components/Job";
 
 export default async function Dashboard() {
-  const jobs = await getJobPostings();
-
+  const session = await auth();
+  const jobs = await getCustomerJobs(session?.user?.email as string);
   return (
     <Suspense
       fallback={

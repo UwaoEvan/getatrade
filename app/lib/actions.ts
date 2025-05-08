@@ -204,3 +204,13 @@ export const showInterest = async (prevState: State, formData: FormData) => {
     return { error: JSON.stringify(error) };
   }
 };
+
+export const getCustomerJobs = async (email: string) => {
+  const user = await getUser(email);
+  const jobs = await db.job.findMany({
+    where: {
+      userId: user?.id,
+    },
+  });
+  return jobs;
+};

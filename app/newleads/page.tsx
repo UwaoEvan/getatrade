@@ -1,9 +1,17 @@
-import { signOut } from "../lib/auth";
-import { getJobPostings } from "../lib/actions";
+import { signOut, auth } from "../lib/auth";
+import { getJobPostings, getUser } from "../lib/actions";
 import { Suspense } from "react";
 import Lead from "./components/Lead";
+import { redirect } from "next/navigation";
 
 export default async function Dashboard() {
+  const session = await auth();
+  const user = await getUser(session?.user?.email as string);
+
+  if (user?.role === "customer") {
+    redirect("/my-jobs");
+  }
+
   const jobs = await getJobPostings();
 
   return (

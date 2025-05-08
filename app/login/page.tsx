@@ -7,7 +7,7 @@ import { Suspense } from "react";
 
 function LoginForm() {
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
+  const callbackUrl = searchParams.get("callbackUrl") || "/new-leads";
   const [errorMessage, formAction, isPending] = useActionState(
     authenticate,
     undefined,

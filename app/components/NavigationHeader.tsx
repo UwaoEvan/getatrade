@@ -17,7 +17,7 @@ export default function NavigationHeader({
 }: NavigationHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
-  console.log(role);
+
   return (
     <div className="bg-[#2f76d9] text-white">
       <div className="w-full px-4 lg:w-[880px] lg:mx-auto flex items-center justify-between py-4">
@@ -32,7 +32,7 @@ export default function NavigationHeader({
           {isLoggedIn ? (
             role === "customer" ? (
               <>
-                <Link href="/new-leads" className="hover:underline">
+                <Link href="/my-jobs" className="hover:underline">
                   My Jobs
                 </Link>
                 <div className="relative">
