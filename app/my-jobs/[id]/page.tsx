@@ -2,7 +2,7 @@ import { getInterestOnJob, getJobPosting } from "@/app/lib/actions";
 import { formatDistanceToNow } from "date-fns";
 import { Suspense } from "react";
 import InterestedPerson from "./components/InterestedPerson";
-import Shortlisted from "./components/Shortlisted";
+// import Shortlisted from "./components/Shortlisted";
 
 type Params = {
   params: Promise<{
