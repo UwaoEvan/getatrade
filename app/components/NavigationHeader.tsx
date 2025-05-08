@@ -8,14 +8,16 @@ import logo from "@/public/logo.png";
 
 interface NavigationHeaderProps {
   isLoggedIn: boolean;
+  role?: string;
 }
 
 export default function NavigationHeader({
   isLoggedIn,
+  role,
 }: NavigationHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
-
+  console.log(role);
   return (
     <div className="bg-[#2f76d9] text-white">
       <div className="w-full px-4 lg:w-[880px] lg:mx-auto flex items-center justify-between py-4">
@@ -28,25 +30,41 @@ export default function NavigationHeader({
 
         <div className="hidden md:flex items-center space-x-6 text-sm">
           {isLoggedIn ? (
-            <>
-              <Link
-                href="/new-leads"
-                className="hover:underline text-purple-300"
-              >
-                New leads
-              </Link>
-              <Link href="/interested" className="hover:underline">
-                Interested
-              </Link>
-              <div className="relative">
-                <Link
-                  href="/my-account"
-                  className="border border-white px-4 py-1 rounded hover:bg-white hover:text-[#1f0e2b] transition"
-                >
-                  My account
+            role === "customer" ? (
+              <>
+                <Link href="/new-leads" className="hover:underline">
+                  My Jobs
                 </Link>
-              </div>
-            </>
+                <div className="relative">
+                  <Link
+                    href="/my-account"
+                    className="border border-white px-4 py-1 rounded hover:bg-white hover:text-[#1f0e2b] transition"
+                  >
+                    My account
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/new-leads"
+                  className="hover:underline text-purple-300"
+                >
+                  New leads
+                </Link>
+                <Link href="/interested" className="hover:underline">
+                  Interested
+                </Link>
+                <div className="relative">
+                  <Link
+                    href="/my-account"
+                    className="border border-white px-4 py-1 rounded hover:bg-white hover:text-[#1f0e2b] transition"
+                  >
+                    My account
+                  </Link>
+                </div>
+              </>
+            )
           ) : (
             <>
               <Link href="/post-a-job" className="hover:underline">

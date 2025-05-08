@@ -1,8 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useActionState } from "react";
 import { postJob } from "../lib/actions";
 import { Suspense } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import thumbsUp from "@/public/thumbsUp.svg";
 import userGroup from "@/public/userGroup.svg";
@@ -14,6 +15,14 @@ const initialState = { error: undefined, success: false };
 export default function PostAJob() {
   const [form, setForm] = useState<"PostJob" | "SignUp">("PostJob");
   const [state, formAction, isPending] = useActionState(postJob, initialState);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state?.success) {
+      router.push("/my-jobs");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state]);
 
   return (
     <Suspense
@@ -60,11 +69,11 @@ export default function PostAJob() {
             </button>
           </div>
           {state?.error && <p className="text-red-500">{state.error}</p>}
-          {state?.success && (
+          {/* {state?.success && (
             <p className="text-green-600">
               Job posting created successfully! 🎉
             </p>
-          )}
+          )} */}
         </form>
         <InfoCards />
       </div>

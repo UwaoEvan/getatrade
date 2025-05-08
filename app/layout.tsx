@@ -4,16 +4,8 @@ import "./globals.css";
 import NavigationHeader from "./components/NavigationHeader";
 import Footer from "./components/Footer";
 import { cookies } from "next/headers";
-
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
+import { auth } from "./lib/auth";
+import { getUser } from "./lib/actions";
 
 const montSerrat = Montserrat({
   subsets: ["latin"],
@@ -34,10 +26,15 @@ export default async function RootLayout({
     cookieStore.get("__Secure-authjs.session-token") ||
     cookieStore.get("authjs.session-token");
   const isLoggedIn = !!token;
+  const session = await auth();
+  const user = isLoggedIn
+    ? await getUser(session?.user?.email as string)
+    : null;
+
   return (
     <html lang="en">
       <body className={`${montSerrat.className} antialiased`}>
-        <NavigationHeader isLoggedIn={isLoggedIn} />
+        <NavigationHeader isLoggedIn={isLoggedIn} role={user?.role || ""} />
         {children}
         <Footer />
       </body>

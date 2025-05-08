@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import Roofing from "@/public/root.png";
-import Bathroom from "@/public/bathroom.png";
+import Roofing from "@/public/root.webp";
+import Bathroom from "@/public/bathroom.webp";
 import Plumbing from "@/public/sink.jpg";
 import { useRouter } from "next/navigation";
 

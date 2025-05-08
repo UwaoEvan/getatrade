@@ -4,14 +4,23 @@ import Person from "@/public/signup-image.webp";
 import ReliableWork from "./components/ReliableWork";
 import FindWork from "./components/FindWork";
 import { register } from "../lib/actions";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { Suspense } from "react";
 import { SERVICES } from "../lib/services";
+import { useRouter } from "next/navigation";
 
 const initialState = { error: undefined, success: false, userId: 0 };
 
 function SignupForm() {
   const [state, formAction] = useActionState(register, initialState);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state?.success) {
+      router.push("/new-leads");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state]);
 
   return (
     <div className="p-8 flex flex-col justify-center text-black">
@@ -63,9 +72,6 @@ function SignupForm() {
           Sign up for free
         </button>
         {state?.error && <p className="text-red-500">{state.error}</p>}
-        {state?.success && (
-          <p className="text-green-600">Account created! 🎉</p>
-        )}
       </form>
     </div>
   );

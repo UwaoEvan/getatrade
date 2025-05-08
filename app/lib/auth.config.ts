@@ -7,7 +7,12 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
-      const protectedPaths = ["/newleads", "/interested", "/my-account"];
+      const protectedPaths = [
+        "/newleads",
+        "/interested",
+        "/my-account",
+        "/my-jobs",
+      ];
       const isOnProtectedPath = protectedPaths.some((path) =>
         nextUrl.pathname.startsWith(path),
       );
