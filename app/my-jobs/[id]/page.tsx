@@ -1,4 +1,4 @@
-import { getJobPosting } from "@/app/lib/actions";
+import { getInterestOnJob, getJobPosting } from "@/app/lib/actions";
 import { formatDistanceToNow } from "date-fns";
 import { Suspense } from "react";
 import InterestedPerson from "./components/InterestedPerson";
@@ -13,7 +13,7 @@ type Params = {
 export default async function LeadDetails({ params }: Params) {
   const { id: jobId } = await params;
   const job = await getJobPosting(jobId as string);
-  // const interests = await getInterestOnJob(job?.id as string);
+  const interests = await getInterestOnJob(job?.id as string);
   return (
     <Suspense
       fallback={
@@ -70,16 +70,16 @@ export default async function LeadDetails({ params }: Params) {
         <div>
           <p className="font-bold text-xl py-4">Interested</p>
           <div className="flex flex-wrap justify-between gap-4">
-            <InterestedPerson />
-            <InterestedPerson />
-            <InterestedPerson />
+            {interests.map(interest => (
+              <InterestedPerson key={interest.id}/>
+            ))}
           </div>
         </div>
         <div>
-          <p className="font-bold text-xl py-4">Shortlisted</p>
+          {/* <p className="font-bold text-xl py-4">Shortlisted</p>
           <div className="flex flex-wrap justify-between gap-4">
             <Shortlisted />
-          </div>
+          </div> */}
         </div>
       </div>
     </Suspense>
