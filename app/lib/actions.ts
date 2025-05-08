@@ -5,7 +5,6 @@ import { AuthError } from "next-auth";
 import { postJobSchema, registerSchema, showInterestSchema } from "./schemas";
 import bcrypt from "bcrypt";
 import { db } from "./db";
-import { redirect } from "next/navigation";
 
 type State = {
   error?: string;
@@ -28,7 +27,6 @@ export async function authenticate(
     }
     return "Unknown error occurred";
   }
-  redirect("/newleads");
 }
 
 export const register = async (prevState: State, formData: FormData) => {
@@ -134,6 +132,9 @@ export const getInterestedLeads = async (email: string) => {
     where: {
       userId: user?.id,
     },
+    include: {
+      user: true,
+    },
   });
 
   if (!showInterests) {
@@ -147,6 +148,9 @@ export const getInterestedLead = async (jobId: string) => {
   const lead = await db.interest.findFirst({
     where: {
       jobId,
+    },
+    include: {
+      user: true,
     },
   });
   return lead;
@@ -213,4 +217,16 @@ export const getCustomerJobs = async (email: string) => {
     },
   });
   return jobs;
+};
+
+export const getInterestOnJob = async (jobId: string) => {
+  const interest = await db.interest.findMany({
+    where: {
+      jobId,
+    },
+    include: {
+      user: true,
+    },
+  });
+  return interest;
 };
