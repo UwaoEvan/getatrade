@@ -23,10 +23,9 @@ export default function InterestedPerson() {
           <p className="text-sm text-gray-500">
             ⭐ 5/5 <span className="ml-1 text-gray-400">(2 reviews)</span>
           </p>
-        <p className="text-sm text-gray-600 mb-4">📍 Maidstone</p>
+          <p className="text-sm text-gray-600 mb-4">📍 Maidstone</p>
         </div>
       </div>
-
 
       <button className="w-full py-2 px-4 bg-[#2f76d9] text-white font-medium rounded-lg hover:bg-[#2f76d9] hover:cursor-pointer transition">
         Shortlist

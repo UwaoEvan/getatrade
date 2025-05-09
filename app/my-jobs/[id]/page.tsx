@@ -70,8 +70,8 @@ export default async function LeadDetails({ params }: Params) {
         <div>
           <p className="font-bold text-xl py-4">Interested</p>
           <div className="flex flex-wrap justify-between gap-4">
-            {interests.map(interest => (
-              <InterestedPerson key={interest.id}/>
+            {interests.map((interest) => (
+              <InterestedPerson key={interest.id} />
             ))}
           </div>
         </div>

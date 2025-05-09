@@ -26,7 +26,7 @@ export default function ShortlistFee({ email, jobId }: Props) {
         <input type="hidden" name="email" value={email} />
         <button
           type="submit"
-          className="bg-blue-600 w-full text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+          className="bg-blue-600 w-full text-white px-6 py-2 rounded-lg hover:cursor-pointer hover:bg-blue-400 transition"
         >
           Show Interest
         </button>

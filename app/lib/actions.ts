@@ -5,6 +5,8 @@ import { AuthError } from "next-auth";
 import { postJobSchema, registerSchema, showInterestSchema } from "./schemas";
 import bcrypt from "bcrypt";
 import { db } from "./db";
+import { sendEmail } from "./emailTemplate";
+import { redirect } from "next/navigation";
 
 type State = {
   error?: string;
@@ -27,6 +29,7 @@ export async function authenticate(
     }
     return "Unknown error occurred";
   }
+  redirect("/newleads");
 }
 
 export const register = async (prevState: State, formData: FormData) => {
@@ -173,6 +176,10 @@ export const showInterest = async (prevState: State, formData: FormData) => {
 
     const job = await getJobPosting(jobId);
 
+    const jobCreator = await db.user.findFirst({
+      where: { id: job?.userId },
+    });
+
     if (!user) {
       return { error: "user not found." };
     }
@@ -202,6 +209,13 @@ export const showInterest = async (prevState: State, formData: FormData) => {
         shortlisted: job.shortlisted,
       },
     });
+    console.log("jobEmail", jobCreator?.email);
+    await sendEmail(
+      jobCreator?.email as string,
+      "Tradesperson Interested in the job",
+      job.title,
+      jobCreator?.username as string,
+    );
 
     return { success: true };
   } catch (error) {

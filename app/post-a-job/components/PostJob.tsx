@@ -26,6 +26,7 @@ export default function PostJob() {
         </label>
         <input
           type="text"
+          required
           name="category"
           placeholder="e.g., Basic outline plans, Full regulation plans..."
           className="w-full border border-gray-300 rounded px-3 py-2"
@@ -39,6 +40,7 @@ export default function PostJob() {
         <input
           type="text"
           name="project"
+          required
           placeholder="e.g., Extension, Renovation, New build..."
           className="w-full border border-gray-300 rounded px-3 py-2"
         />
@@ -50,6 +52,7 @@ export default function PostJob() {
         </label>
         <textarea
           name="description"
+          required
           placeholder="E.g. I need plans for something a little bit different..."
           className="w-full border border-[#2f76d9] rounded px-3 py-2 h-28"
         ></textarea>
@@ -60,6 +63,7 @@ export default function PostJob() {
         </label>
         <input
           type="text"
+          required
           name="location"
           placeholder="e.g., Maidstone"
           className="w-full border border-gray-300 rounded px-3 py-2"
