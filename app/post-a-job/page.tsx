@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useActionState } from "react";
 import { postJob } from "../lib/actions";
 import { Suspense } from "react";
@@ -16,6 +16,7 @@ export default function PostAJob() {
   const [form, setForm] = useState<"PostJob" | "SignUp">("PostJob");
   const [state, formAction, isPending] = useActionState(postJob, initialState);
   const router = useRouter();
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     if (state?.success) {
@@ -23,6 +24,20 @@ export default function PostAJob() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
+
+  const validatePostJobForm = () => {
+    const formData = new FormData(formRef.current!);
+    const requiredFields = [
+      "title",
+      "category",
+      "project",
+      "description",
+      "location",
+    ];
+    return requiredFields.every((field) =>
+      formData.get(field)?.toString().trim(),
+    );
+  };
 
   return (
     <Suspense
@@ -38,7 +53,7 @@ export default function PostAJob() {
           Get responses from Getatradelinkltd&apos;s screened and reviewed
           tradespeople near you
         </p>
-        <form action={formAction}>
+        <form ref={formRef} action={formAction}>
           <div className={form === "PostJob" ? "block" : "hidden"}>
             <PostJob />
           </div>
@@ -50,8 +65,12 @@ export default function PostAJob() {
               type={form === "PostJob" ? "button" : "submit"}
               onClick={(e) => {
                 if (form === "PostJob") {
-                  setForm("SignUp");
                   e.preventDefault();
+                  if (!validatePostJobForm()) {
+                    alert("Please fill in all required fields.");
+                    return;
+                  }
+                  setForm("SignUp");
                 }
               }}
               className="bg-[#2f76d9] text-white px-4 py-2 rounded"
