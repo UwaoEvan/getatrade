@@ -50,7 +50,7 @@ const generateHtmlContent = (jobTitle: string, userName: string) => {
                     <table cellpadding="0" cellspacing="0" style="margin: 20px 0;">
                       <tr>
                         <td align="center">
-                          <a href="#" style="background-color: #007BFF; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
+                          <a href="http://getatradelinkltd.vercel.app/my-jobs" style="background-color: #007BFF; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
                             View Interested Candidate
                           </a>
                         </td>
