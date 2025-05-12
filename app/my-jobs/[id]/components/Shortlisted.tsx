@@ -26,7 +26,7 @@ export default async function Shortlisted({ userId }: Shortlist) {
           </svg>
         </div>
         <div>
-          <p className="font-semibold text-gray-900">{user?.username}</p>
+          <p className="font-semibold text-gray-900">{`${user?.username?.slice(0, 10)}...`}</p>
           <p className="text-sm text-gray-500">
             ⭐ 5/5 <span className="ml-1 text-gray-400">(2 reviews)</span>
           </p>
