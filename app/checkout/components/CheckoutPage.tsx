@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useStripe,
   useElements,
   PaymentElement,
 } from "@stripe/react-stripe-js";
 
-export default function CheckoutPage({ amount }: { amount: number }) {
+export default function CheckoutPage({ amount = 10 }: { amount: number }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [clientSecret, setClientSecret] = useState("");
@@ -37,7 +37,7 @@ export default function CheckoutPage({ amount }: { amount: number }) {
       elements,
       clientSecret,
       confirmParams: {
-        return_url: "", //payment sucess
+        return_url: `${window.location.origin}/payment-success`,
       },
     });
 
@@ -50,6 +50,26 @@ export default function CheckoutPage({ amount }: { amount: number }) {
     setLoading(false);
   };
 
+  useEffect(() => {
+    const createPaymentIntent = async () => {
+      try {
+        const res = await fetch("/api/create-payment-intent", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ amount }),
+        });
+
+        const data = await res.json();
+        setClientSecret(data.clientSecret);
+      } catch (error) {
+        setErrorMessage("Failed to load payment intent.");
+        console.log(error)
+      }
+    };
+
+    createPaymentIntent();
+  }, [amount]);
+
   if (!clientSecret || !stripe || !elements) {
     return (
       <div className="flex items-center justify-center min-h-[20vh]">
@@ -58,7 +78,7 @@ export default function CheckoutPage({ amount }: { amount: number }) {
     );
   }
 
-  if (!paymentSuccess) {
+  if (paymentSuccess) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[40vh] animate-fade-in">
         <div className="bg-green-100 text-green-700 p-6 rounded-lg shadow-md text-center transform transition duration-500 scale-100">
@@ -72,7 +92,6 @@ export default function CheckoutPage({ amount }: { amount: number }) {
   return (
     <form onSubmit={handleSubmit}>
       {clientSecret && <PaymentElement />}
-
       {errorMessage && <div>{errorMessage}</div>}
       <button
         aria-disabled={!stripe || !loading}

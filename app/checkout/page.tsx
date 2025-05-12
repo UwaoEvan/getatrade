@@ -5,12 +5,10 @@ import { loadStripe } from "@stripe/stripe-js";
 import convertToSubcurrency from "../lib/convertToSubscurrency";
 import CheckoutPage from "./components/CheckoutPage";
 
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY || "",
-);
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_KEY as string);
 
 export default function Checkout() {
-  const amount = 49.99;
+  const amount = 49;
   return (
     <div className="min-h-screen mx-auto bg-gray-100 py-6">
       <div className="w-full px-4 md:w-[880px] mx-auto">
@@ -23,7 +21,7 @@ export default function Checkout() {
           options={{
             mode: "payment",
             amount: convertToSubcurrency(amount),
-            currency: "pounds",
+            currency: "gbp",
           }}
         >
           <CheckoutPage amount={amount} />
