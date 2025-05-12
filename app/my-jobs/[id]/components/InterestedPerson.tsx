@@ -1,4 +1,16 @@
-export default function InterestedPerson() {
+import { getUser } from "@/app/lib/actions";
+import ShortlistForm from "./ShortlistForm";
+
+type Interested = {
+  interest: {
+    jobId: string;
+    userId: number;
+  };
+};
+
+export default async function InterestedPerson({ interest }: Interested) {
+  const user = await getUser("", interest.userId);
+
   return (
     <div className="w-full max-w-sm p-4 bg-white rounded-xl shadow-md border border-gray-200">
       <div className="flex items-center gap-3 mb-2">
@@ -19,17 +31,14 @@ export default function InterestedPerson() {
           </svg>
         </div>
         <div>
-          <p className="font-semibold text-gray-900">All Occident LTD</p>
+          <p className="font-semibold text-gray-900">{user?.username}</p>
           <p className="text-sm text-gray-500">
             ⭐ 5/5 <span className="ml-1 text-gray-400">(2 reviews)</span>
           </p>
           <p className="text-sm text-gray-600 mb-4">📍 Maidstone</p>
         </div>
       </div>
-
-      <button className="w-full py-2 px-4 bg-[#2f76d9] text-white font-medium rounded-lg hover:bg-[#2f76d9] hover:cursor-pointer transition">
-        Shortlist
-      </button>
+      <ShortlistForm jobId={interest.jobId} userId={user?.id} />
     </div>
   );
 }

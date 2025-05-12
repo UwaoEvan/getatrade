@@ -24,3 +24,8 @@ export const showInterestSchema = z.object({
   jobId: z.string(),
   email: z.string(),
 });
+
+export const shortlist = z.object({
+  jobId: z.string(),
+  userId: z.string(),
+});

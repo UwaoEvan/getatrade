@@ -1,7 +1,12 @@
-import { getInterestOnJob, getJobPosting } from "@/app/lib/actions";
+import {
+  getInterestOnJob,
+  getJobPosting,
+  getShortlists,
+} from "@/app/lib/actions";
 import { formatDistanceToNow } from "date-fns";
 import { Suspense } from "react";
 import InterestedPerson from "./components/InterestedPerson";
+import Shortlisted from "./components/Shortlisted";
 // import Shortlisted from "./components/Shortlisted";
 
 type Params = {
@@ -14,6 +19,8 @@ export default async function LeadDetails({ params }: Params) {
   const { id: jobId } = await params;
   const job = await getJobPosting(jobId as string);
   const interests = await getInterestOnJob(job?.id as string);
+  const shortlists = await getShortlists(jobId);
+
   return (
     <Suspense
       fallback={
@@ -71,15 +78,17 @@ export default async function LeadDetails({ params }: Params) {
           <p className="font-bold text-xl py-4">Interested</p>
           <div className="flex flex-wrap justify-between gap-4">
             {interests.map((interest) => (
-              <InterestedPerson key={interest.id} />
+              <InterestedPerson key={interest.id} interest={interest} />
             ))}
           </div>
         </div>
         <div>
-          {/* <p className="font-bold text-xl py-4">Shortlisted</p>
+          <p className="font-bold text-xl py-4">Shortlisted</p>
           <div className="flex flex-wrap justify-between gap-4">
-            <Shortlisted />
-          </div> */}
+            {shortlists.map((shortlist) => (
+              <Shortlisted key={shortlist.id} userId={shortlist.userId} />
+            ))}
+          </div>
         </div>
       </div>
     </Suspense>

@@ -2,7 +2,12 @@
 
 import { signIn } from "./auth";
 import { AuthError } from "next-auth";
-import { postJobSchema, registerSchema, showInterestSchema } from "./schemas";
+import {
+  postJobSchema,
+  registerSchema,
+  shortlist,
+  showInterestSchema,
+} from "./schemas";
 import bcrypt from "bcrypt";
 import { db } from "./db";
 import { sendEmail } from "./emailTemplate";
@@ -121,11 +126,18 @@ export const getJobPosting = async (id: string) => {
   return job;
 };
 
-export const getUser = async (email: string) => {
-  const user = await db.user.findFirst({
-    where: { email: email as string },
-  });
-  return user;
+export const getUser = async (email?: string, id?: number) => {
+  if (email) {
+    const user = await db.user.findFirst({
+      where: { email: email as string },
+    });
+    return user;
+  } else {
+    const user = await db.user.findFirst({
+      where: { id },
+    });
+    return user;
+  }
 };
 
 export const getInterestedLeads = async (email: string) => {
@@ -147,10 +159,11 @@ export const getInterestedLeads = async (email: string) => {
   return showInterests;
 };
 
-export const getInterestedLead = async (jobId: string) => {
+export const getInterestedLead = async (jobId: string, userId: number) => {
   const lead = await db.interest.findFirst({
     where: {
       jobId,
+      userId,
     },
     include: {
       user: true,
@@ -188,7 +201,7 @@ export const showInterest = async (prevState: State, formData: FormData) => {
       return { error: "Job not found." };
     }
 
-    const interest = await getInterestedLead(jobId);
+    const interest = await getInterestedLead(jobId, user.id);
 
     if (interest) {
       return { error: "You have already applied for this job." };
@@ -209,12 +222,12 @@ export const showInterest = async (prevState: State, formData: FormData) => {
         shortlisted: job.shortlisted,
       },
     });
-    console.log("jobEmail", jobCreator?.email);
     await sendEmail(
       jobCreator?.email as string,
       "Tradesperson Interested in the job",
       job.title,
       jobCreator?.username as string,
+      "tradesperson",
     );
 
     return { success: true };
@@ -243,4 +256,92 @@ export const getInterestOnJob = async (jobId: string) => {
     },
   });
   return interest;
+};
+
+export const getShortlists = async (jobId: string) => {
+  const shortlist = await db.interest.findMany({
+    where: {
+      jobId,
+    },
+    include: {
+      user: true,
+    },
+  });
+  return shortlist;
+};
+
+export const getShortlistedOnJob = async (jobId: string, userId: number) => {
+  const interest = await db.shortlist.findFirst({
+    where: {
+      jobId,
+      userId,
+    },
+  });
+  return interest;
+};
+
+export const shortlistTradesperson = async (
+  prevState: State,
+  formData: FormData,
+) => {
+  try {
+    const parsed = shortlist.safeParse({
+      jobId: formData.get("jobId"),
+      userId: formData.get("userId"),
+    });
+
+    if (!parsed.success) {
+      return { error: "Invalid formdata" };
+    }
+
+    const { jobId, userId } = parsed.data;
+
+    const job = await getJobPosting(jobId);
+
+    const tradesPerson = await db.user.findFirst({
+      where: { id: parseInt(userId) },
+    });
+
+    if (!tradesPerson) {
+      return { error: "user not found." };
+    }
+
+    if (!job) {
+      return { error: "Job not found." };
+    }
+
+    const interest = await getShortlistedOnJob(jobId, parseInt(userId));
+
+    if (interest) {
+      return { error: "You have already shortlisted for this person." };
+    }
+
+    await db.shortlist.create({
+      data: {
+        userId: parseInt(userId),
+        jobId: jobId as string,
+        createdAt: new Date(),
+      },
+    });
+
+    await db.job.update({
+      where: { id: jobId },
+      data: {
+        interested: (job.interested ?? 0) - 1,
+        shortlisted: (job.shortlisted ?? 0) + 1,
+      },
+    });
+
+    await sendEmail(
+      tradesPerson?.email as string,
+      "You have been shortlisted.",
+      job.title,
+      tradesPerson?.username as string,
+      "customer",
+    );
+
+    return { success: true };
+  } catch (error) {
+    return { error: JSON.stringify(error) };
+  }
 };
