@@ -11,9 +11,11 @@ import { savePayments } from "@/app/lib/actions";
 export default function CheckoutPage({
   amount = 10,
   description,
+  jobId
 }: {
   amount: number;
   description: string;
+  jobId: string
 }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -39,7 +41,7 @@ export default function CheckoutPage({
       return;
     }
 
-    await savePayments(amount, description);
+    await savePayments(amount, description, jobId);
     
     const { error } = await stripe.confirmPayment({
       elements,
