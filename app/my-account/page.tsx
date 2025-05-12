@@ -15,7 +15,7 @@ export default function MyAccount() {
               className="w-full border border-gray-300 rounded px-3 py-2"
               id="email"
               type="email"
-              placeholder="legalandledger@outlook.com"
+              placeholder="example@outlook.com"
               readOnly
             />
           </div>
@@ -30,7 +30,7 @@ export default function MyAccount() {
               className="w-full border border-gray-300 rounded px-3 py-2"
               id="firstName"
               type="text"
-              placeholder="Coreen"
+              placeholder="First Name"
             />
           </div>
           <div>
@@ -44,7 +44,7 @@ export default function MyAccount() {
               className="w-full border border-gray-300 rounded px-3 py-2"
               id="lastName"
               type="text"
-              placeholder=""
+              placeholder="Last Name"
             />
           </div>
           <div>
