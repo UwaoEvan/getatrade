@@ -11,11 +11,11 @@ import { savePayments } from "@/app/lib/actions";
 export default function CheckoutPage({
   amount = 10,
   description,
-  jobId
+  jobId,
 }: {
   amount: number;
   description: string;
-  jobId: string
+  jobId: string;
 }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -42,7 +42,7 @@ export default function CheckoutPage({
     }
 
     await savePayments(amount, description, jobId);
-    
+
     const { error } = await stripe.confirmPayment({
       elements,
       clientSecret,
@@ -53,8 +53,8 @@ export default function CheckoutPage({
 
     if (error) {
       setErrorMessage(error.message as string);
-    } 
-    
+    }
+
     setLoading(false);
   };
 

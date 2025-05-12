@@ -16,7 +16,9 @@ export default function HowItWorks() {
               How Getatradelinkltd works
             </h2>
             <p className="text-[#1f0e2b] text-md">
-              <strong>Posting a job on getatradelinkltd is simple and free.</strong>{" "}
+              <strong>
+                Posting a job on getatradelinkltd is simple and free.
+              </strong>{" "}
               Just tell us what you need, and our clever match-making process
               will help you choose the right person for your job with
               confidence.

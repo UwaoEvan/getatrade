@@ -77,6 +77,45 @@ export const register = async (prevState: State, formData: FormData) => {
   return { success: true, userId: user.id };
 };
 
+export const postNewJob = async (prevState: State, formData: FormData) => {
+  const session = await auth();
+
+  const parsed = postJobSchema.safeParse({
+    title: formData.get("title"),
+    description: formData.get("description"),
+    location: formData.get("location"),
+    category: formData.get("category"),
+    project: formData.get("project"),
+  });
+
+  if (!parsed.success) {
+    const firstError = parsed.error.errors[0]?.message || "Invalid form data";
+    return { error: firstError };
+  }
+
+  const user = await getUser(session?.user?.email || "");
+
+  if (!user) {
+    return { error: "User not found." };
+  }
+
+  const { category, title, description, location, project } = parsed.data;
+
+  await db.job.create({
+    data: {
+      title,
+      description,
+      category,
+      createdAt: new Date(),
+      location,
+      project,
+      userId: user.id,
+    },
+  });
+
+  return { success: true };
+};
+
 export const postJob = async (prevState: State, formData: FormData) => {
   const user = await register(prevState, formData);
   if (user.success) {
@@ -347,9 +386,9 @@ export const shortlistTradesperson = async (
     await db.interest.deleteMany({
       where: {
         jobId,
-        userId: parseInt(userId)
+        userId: parseInt(userId),
       },
-    })
+    });
 
     await sendEmail(
       tradesPerson?.email as string,
@@ -365,7 +404,11 @@ export const shortlistTradesperson = async (
   }
 };
 
-export const savePayments = async (amount: number, description: string, jobId: string) => {
+export const savePayments = async (
+  amount: number,
+  description: string,
+  jobId: string,
+) => {
   const session = await auth();
   const email = session?.user?.email;
 
@@ -380,7 +423,7 @@ export const savePayments = async (amount: number, description: string, jobId: s
       amount,
       description,
       userId: user?.id,
-      jobId
+      jobId,
     },
   });
 
@@ -400,8 +443,8 @@ export const getPayment = async (jobId: string) => {
   const payment = await db.payments.findFirst({
     where: {
       userId: user.id,
-      jobId
-    }
-  })
+      jobId,
+    },
+  });
   return payment;
-}
+};
