@@ -13,10 +13,10 @@ export default function HowItWorks() {
         <div className="flex justify-between items-center mb-12">
           <div className="text-left">
             <h2 className="text-3xl font-bold text-[#1f0e2b] mb-4">
-              How MyBuilder works
+              How Getatradelinkltd works
             </h2>
             <p className="text-[#1f0e2b] text-md">
-              <strong>Posting a job on MyBuilder is simple and free.</strong>{" "}
+              <strong>Posting a job on getatradelinkltd is simple and free.</strong>{" "}
               Just tell us what you need, and our clever match-making process
               will help you choose the right person for your job with
               confidence.
