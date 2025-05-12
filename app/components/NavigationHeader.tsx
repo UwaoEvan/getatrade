@@ -55,14 +55,9 @@ export default function NavigationHeader({
                 <Link href="/interested" className="hover:underline">
                   Interested
                 </Link>
-                <div className="relative">
-                  <Link
-                    href="/my-account"
-                    className="border border-white px-4 py-1 rounded hover:bg-white hover:text-[#1f0e2b] transition"
-                  >
-                    My account
-                  </Link>
-                </div>
+                <Link href="/my-account" className="hover:underline">
+                  My account
+                </Link>
               </>
             )
           ) : (
@@ -126,20 +121,44 @@ export default function NavigationHeader({
       {menuOpen && (
         <div className="md:hidden bg-[#2f76d9] px-4 pb-4 space-y-4 text-sm">
           {isLoggedIn ? (
-            <>
-              <Link href="/new-leads" className="block w-full hover:underline">
-                New leads
-              </Link>
-              <Link href="/interested" className="block w-full hover:underline">
-                Interested
-              </Link>
-              <Link
-                href="/my-account"
-                className="w-full text-left border border-white px-4 py-2 rounded hover:bg-white hover:text-[#1f0e2b] transition"
-              >
-                My account
-              </Link>
-            </>
+            role === "customer" ? (
+              <>
+                <Link href="/my-jobs" className="hover:underline">
+                  My Jobs
+                </Link>
+                <div className="relative">
+                  <Link
+                    href="/my-account"
+                    className="border border-white px-4 py-1 rounded hover:bg-white hover:text-[#1f0e2b] transition"
+                  >
+                    My account
+                  </Link>
+                </div>
+                {/* <Logout /> */}
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/new-leads"
+                  className="block w-full hover:underline"
+                >
+                  New leads
+                </Link>
+                <Link
+                  href="/interested"
+                  className="block w-full hover:underline"
+                >
+                  Interested
+                </Link>
+                <Link
+                  href="/my-account"
+                  className="block w-full hover:underline"
+                >
+                  My account
+                </Link>
+                {/* <Logout /> */}
+              </>
+            )
           ) : (
             <>
               <Link href="/post-a-job" className="block w-full hover:underline">

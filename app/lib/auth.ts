@@ -43,3 +43,7 @@ export const { auth, signIn, signOut } = NextAuth({
     }),
   ],
 });
+
+export async function logoutAction() {
+  await signOut({ redirectTo: "/" });
+}

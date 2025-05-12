@@ -8,7 +8,13 @@ import {
 } from "@stripe/react-stripe-js";
 import { savePayments } from "@/app/lib/actions";
 
-export default function CheckoutPage({ amount = 10, description }: { amount: number, description: string }) {
+export default function CheckoutPage({
+  amount = 10,
+  description,
+}: {
+  amount: number;
+  description: string;
+}) {
   const [errorMessage, setErrorMessage] = useState<string>("");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [clientSecret, setClientSecret] = useState("");
@@ -33,6 +39,8 @@ export default function CheckoutPage({ amount = 10, description }: { amount: num
       return;
     }
 
+    await savePayments(amount, description);
+    
     const { error } = await stripe.confirmPayment({
       elements,
       clientSecret,
@@ -43,10 +51,8 @@ export default function CheckoutPage({ amount = 10, description }: { amount: num
 
     if (error) {
       setErrorMessage(error.message as string);
-    } else {
-      // customer is shown the sucess animation.
-      await savePayments(amount, description);
-    }
+    } 
+    
     setLoading(false);
   };
 
@@ -63,7 +69,7 @@ export default function CheckoutPage({ amount = 10, description }: { amount: num
         setClientSecret(data.clientSecret);
       } catch (error) {
         setErrorMessage("Failed to load payment intent.");
-        console.log(error)
+        console.log(error);
       }
     };
 

@@ -7,6 +7,7 @@ import { formatDistanceToNow } from "date-fns";
 import { Suspense } from "react";
 import InterestedPerson from "./components/InterestedPerson";
 import Shortlisted from "./components/Shortlisted";
+import { signOut } from "@/app/lib/auth";
 // import Shortlisted from "./components/Shortlisted";
 
 type Params = {
@@ -31,6 +32,19 @@ export default async function LeadDetails({ params }: Params) {
     >
       <div className="max-w-4xl mx-auto mt-10 p-6 space-y-8">
         <div className="space-y-3">
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-2xl font-bold"></h1>
+            <form
+              action={async () => {
+                "use server";
+                await signOut({ redirectTo: "/" });
+              }}
+            >
+              <button className="flex h-[48px] items-center justify-center gap-2 rounded-md bg-gray-50 px-4 text-sm font-medium hover:bg-sky-100 hover:text-blue-600">
+                <div>Sign Out</div>
+              </button>
+            </form>
+          </div>
           <h1 className="text-3xl font-bold text-gray-800">{job?.title}</h1>
           <p className="text-sm text-gray-500">
             {job?.location} •{" "}

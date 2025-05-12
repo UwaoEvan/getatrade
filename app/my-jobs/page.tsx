@@ -1,11 +1,18 @@
 import { signOut, auth } from "../lib/auth";
-import { getCustomerJobs } from "../lib/actions";
+import { getCustomerJobs, getUser } from "../lib/actions";
 import { Suspense } from "react";
 import Job from "./components/Job";
+import { redirect } from "next/navigation";
 
 export default async function Dashboard() {
   const session = await auth();
   const jobs = await getCustomerJobs(session?.user?.email as string);
+
+    const user = await getUser(session?.user?.email as string);
+  
+    if (user?.role !== "customer") {
+      redirect("/new-leads");
+    }
   return (
     <Suspense
       fallback={

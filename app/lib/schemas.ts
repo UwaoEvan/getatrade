@@ -33,5 +33,5 @@ export const shortlist = z.object({
 export const paymentSchema = z.object({
   amount: z.number(),
   description: z.string(),
-  userId: z.number()
-})
+  userId: z.number(),
+});

@@ -42,6 +42,7 @@ model Job {
   user        User        @relation(fields: [userId], references: [id])
   interest    Interest[]
   shortlist   Shortlist[]
+  payments    Payments[]
 
   @@map("job")
 }
@@ -61,6 +62,7 @@ model Shortlist {
   id        String   @id @default(uuid())
   jobId     String
   userId    Int
+  paid      Boolean? @default(false)
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id])
   job       Job      @relation(fields: [jobId], references: [id])
@@ -73,6 +75,8 @@ model Payments {
   amount      Float  @default(0.00)
   description String
   userId      Int
+  jobId       String
+  job         Job    @relation(fields: [jobId], references: [id])
   user        User   @relation(fields: [userId], references: [id])
 
   @@map("payments")

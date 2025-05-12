@@ -197,6 +197,10 @@ export const showInterest = async (prevState: State, formData: FormData) => {
       return { error: "user not found." };
     }
 
+    if (user.role === "customer") {
+      return { error: "Customer aren't allowed to show interest." };
+    }
+
     if (!job) {
       return { error: "Job not found." };
     }
@@ -219,7 +223,6 @@ export const showInterest = async (prevState: State, formData: FormData) => {
       where: { id: jobId },
       data: {
         interested: (job.interested ?? 0) + 1,
-        shortlisted: job.shortlisted,
       },
     });
     await sendEmail(
@@ -259,7 +262,7 @@ export const getInterestOnJob = async (jobId: string) => {
 };
 
 export const getShortlists = async (jobId: string) => {
-  const shortlist = await db.interest.findMany({
+  const shortlist = await db.shortlist.findMany({
     where: {
       jobId,
     },
@@ -275,6 +278,15 @@ export const getShortlistedOnJob = async (jobId: string, userId: number) => {
     where: {
       jobId,
       userId,
+    },
+  });
+  return interest;
+};
+
+export const getShortListedInfo = async (jobId: string) => {
+  const interest = await db.shortlist.findFirst({
+    where: {
+      jobId,
     },
   });
   return interest;
@@ -332,6 +344,13 @@ export const shortlistTradesperson = async (
       },
     });
 
+    await db.interest.deleteMany({
+      where: {
+        jobId,
+        userId: parseInt(userId)
+      },
+    })
+
     await sendEmail(
       tradesPerson?.email as string,
       "You have been shortlisted.",
@@ -346,13 +365,13 @@ export const shortlistTradesperson = async (
   }
 };
 
-export const savePayments = async (amount: number, description: string) => {
+export const savePayments = async (amount: number, description: string, jobId: string) => {
   const session = await auth();
   const email = session?.user?.email;
 
   const user = await getUser(email || "");
 
-  if(!user) {
+  if (!user) {
     return { error: "user not found." };
   }
 
@@ -360,9 +379,29 @@ export const savePayments = async (amount: number, description: string) => {
     data: {
       amount,
       description,
-      userId: user?.id
+      userId: user?.id,
+      jobId
+    },
+  });
+
+  return { success: true };
+};
+
+export const getPayment = async (jobId: string) => {
+  const session = await auth();
+  const email = session?.user?.email;
+
+  const user = await getUser(email || "");
+
+  if (!user) {
+    return { error: "user not found." };
+  }
+
+  const payment = await db.payments.findFirst({
+    where: {
+      userId: user.id,
+      jobId
     }
   })
-  
-  return { success: true }
+  return payment;
 }
