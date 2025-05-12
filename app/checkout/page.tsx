@@ -8,7 +8,7 @@ import CheckoutPage from "./components/CheckoutPage";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_KEY as string);
 
 export default function Checkout() {
-  const amount = 9;
+  const amount = 9; 
   return (
     <div className="min-h-screen mx-auto bg-gray-100 py-6">
       <div className="w-full px-4 md:w-[880px] mx-auto">
@@ -24,7 +24,7 @@ export default function Checkout() {
             currency: "gbp",
           }}
         >
-          <CheckoutPage amount={amount} />
+          <CheckoutPage amount={amount} description={"Payment for job: Job title"} />
         </Elements>
       </div>
     </div>

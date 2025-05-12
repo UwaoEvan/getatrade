@@ -29,3 +29,9 @@ export const shortlist = z.object({
   jobId: z.string(),
   userId: z.string(),
 });
+
+export const paymentSchema = z.object({
+  amount: z.number(),
+  description: z.string(),
+  userId: z.number()
+})

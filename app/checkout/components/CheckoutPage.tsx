@@ -6,13 +6,13 @@ import {
   useElements,
   PaymentElement,
 } from "@stripe/react-stripe-js";
+import { savePayments } from "@/app/lib/actions";
 
-export default function CheckoutPage({ amount = 10 }: { amount: number }) {
+export default function CheckoutPage({ amount = 10, description }: { amount: number, description: string }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [clientSecret, setClientSecret] = useState("");
   const [loading, setLoading] = useState(false);
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   const stripe = useStripe();
   const elements = useElements();
@@ -45,7 +45,7 @@ export default function CheckoutPage({ amount = 10 }: { amount: number }) {
       setErrorMessage(error.message as string);
     } else {
       // customer is shown the sucess animation.
-      setPaymentSuccess(true);
+      await savePayments(amount, description);
     }
     setLoading(false);
   };
@@ -74,17 +74,6 @@ export default function CheckoutPage({ amount = 10 }: { amount: number }) {
     return (
       <div className="flex items-center justify-center min-h-[20vh]">
         <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#2f76d9]"></div>
-      </div>
-    );
-  }
-
-  if (paymentSuccess) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[40vh] animate-fade-in">
-        <div className="bg-green-100 text-green-700 p-6 rounded-lg shadow-md text-center transform transition duration-500 scale-100">
-          <h2 className="text-2xl font-bold mb-2">Payment Successful!</h2>
-          <p className="text-sm">Thank you for your purchase.</p>
-        </div>
       </div>
     );
   }

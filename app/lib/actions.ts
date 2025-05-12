@@ -1,6 +1,6 @@
 "use server";
 
-import { signIn } from "./auth";
+import { auth, signIn } from "./auth";
 import { AuthError } from "next-auth";
 import {
   postJobSchema,
@@ -345,3 +345,24 @@ export const shortlistTradesperson = async (
     return { error: JSON.stringify(error) };
   }
 };
+
+export const savePayments = async (amount: number, description: string) => {
+  const session = await auth();
+  const email = session?.user?.email;
+
+  const user = await getUser(email || "");
+
+  if(!user) {
+    return { error: "user not found." };
+  }
+
+  await db.payments.create({
+    data: {
+      amount,
+      description,
+      userId: user?.id
+    }
+  })
+  
+  return { success: true }
+}

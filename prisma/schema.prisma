@@ -23,6 +23,7 @@ model User {
   job            Job[]
   interest       Interest[]
   shortlist      Shortlist[]
+  payments       Payments[]
 
   @@map("user")
 }
@@ -65,4 +66,14 @@ model Shortlist {
   job       Job      @relation(fields: [jobId], references: [id])
 
   @@map("shortlist")
+}
+
+model Payments {
+  id          String @id @default(uuid())
+  amount      Float  @default(0.00)
+  description String
+  userId      Int
+  user        User   @relation(fields: [userId], references: [id])
+
+  @@map("payments")
 }
