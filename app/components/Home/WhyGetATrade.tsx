@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Banner from "@/public/banner.png";
+import Link from "next/link";
 
 export default function WhyGetATrade() {
   return (
@@ -67,9 +68,9 @@ export default function WhyGetATrade() {
           <h3 className="text-xl font-semibold text-gray-900 mb-4">
             Ready to hire a tradesperson?
           </h3>
-          <button className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition">
+          <Link href="/post-a-job" className="bg-blue-600  text-white px-6 py-3 rounded hover:bg-blue-700 transition">
             Post your job
-          </button>
+          </Link>
         </div>
       </div>
     </section>
