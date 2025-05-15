@@ -1,7 +1,8 @@
 "use client";
 
-import { showInterest } from "@/app/lib/actions";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { showInterest } from "../../actions";
 
 type Props = {
   jobId?: string;
@@ -11,8 +12,16 @@ type Props = {
 const initialState = { error: undefined, success: false };
 export default function ShortlistFee({ email, jobId }: Props) {
   const [state, formAction] = useActionState(showInterest, initialState);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state.success) {
+      router.push(`/newleads/${jobId}`);
+    }
+  }, [state]);
+
   return (
-    <div className="bg-white shadow-md p-4 mt-6 md:mx-4 h-fit w-full md:w-lg">
+    <div className="w-full border-1 border-gray-200 p-4 rounded-lg">
       <p className="font-bold">Shortlist fee</p>
       <p className="text-[#2f76d9] font-bold">￡9.00 + VAT</p>
       <div className="p-2 bg-gray-200 my-4">
@@ -26,9 +35,9 @@ export default function ShortlistFee({ email, jobId }: Props) {
         <input type="hidden" name="email" value={email} />
         <button
           type="submit"
-          className="bg-blue-600 w-full text-white px-6 py-2 rounded-lg hover:cursor-pointer hover:bg-blue-400 transition"
+          className="bg-[#2f76d9] w-full text-white px-6 py-2 rounded-md hover:cursor-pointer transition"
         >
-          Show Interest
+          Express interest
         </button>
         {state?.error && <p className="text-red-500">{state.error}</p>}
         {state?.success && (

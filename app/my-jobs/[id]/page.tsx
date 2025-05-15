@@ -1,14 +1,10 @@
-import {
-  getInterestOnJob,
-  getJobPosting,
-  getShortlists,
-} from "@/app/lib/actions";
+import { getJobPosting } from "@/app/lib/actions";
 import { formatDistanceToNow } from "date-fns";
 import { Suspense } from "react";
 import InterestedPerson from "./components/InterestedPerson";
 import Shortlisted from "./components/Shortlisted";
 import { signOut } from "@/app/lib/auth";
-// import Shortlisted from "./components/Shortlisted";
+import { getInterestOnJob, getShortlists } from "../actions";
 
 type Params = {
   params: Promise<{

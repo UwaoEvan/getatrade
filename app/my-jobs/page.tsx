@@ -1,9 +1,10 @@
 import { signOut, auth } from "../lib/auth";
-import { getCustomerJobs, getUser } from "../lib/actions";
+import { getUser } from "../lib/actions";
 import { Suspense } from "react";
 import Job from "./components/Job";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { getCustomerJobs } from "./actions";
 
 export default async function Dashboard() {
   const session = await auth();

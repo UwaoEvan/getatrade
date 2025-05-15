@@ -3,86 +3,69 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import logo from "@/public/logo.png";
+import NavItem from "./NavItem";
 
 interface NavigationHeaderProps {
   isLoggedIn: boolean;
   role?: string;
+  onLogout?: () => void;
 }
+
+const navLinks = {
+  guest: [
+    { href: "/post-a-job", label: "Post a job" },
+    { href: "/login", label: "Log in", isButton: false },
+    { href: "/tradesworks-signup", label: "Sign up as a tradesperson" },
+  ],
+  customer: [
+    { href: "/my-jobs", label: "My Jobs" },
+    { href: "/my-account", label: "My account" },
+    { href: "/", label: "Logout", isButton: true },
+  ],
+  tradesperson: [
+    { href: "/new-leads", label: "New leads" },
+    { href: "/activity", label: "Activity" },
+    { href: "/my-account", label: "My account" },
+    { href: "/", label: "Logout", isButton: true },
+  ],
+};
 
 export default function NavigationHeader({
   isLoggedIn,
   role,
 }: NavigationHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const router = useRouter();
+
+  const getNavItems = () => {
+    if (!isLoggedIn) return navLinks.guest;
+    if (role === "customer") return navLinks.customer;
+    return navLinks.tradesperson;
+  };
+
+  const navItems = getNavItems();
 
   return (
-    <div className="bg-[#2f76d9] text-white">
+    <header className="bg-[#2f76d9] text-white">
       <div className="w-full px-4 lg:w-[880px] lg:mx-auto flex items-center justify-between py-4">
-        <div
-          className="flex items-center cursor-pointer"
-          onClick={() => router.push("/")}
-        >
-          <Image src={logo} alt="logo" className="h-[80px] w-[200px]" />
-        </div>
+        <Link href="/" className="flex items-center">
+          <Image src={logo} alt="logo" className="h-16 w-auto max-w-[200px]" />
+        </Link>
 
-        <div className="hidden md:flex items-center space-x-6 text-sm">
-          {isLoggedIn ? (
-            role === "customer" ? (
-              <>
-                <Link href="/my-jobs" className="hover:underline">
-                  My Jobs
-                </Link>
-                <div className="relative">
-                  <Link
-                    href="/my-account"
-                    className="border border-white px-4 py-1 rounded hover:bg-white hover:text-[#1f0e2b] transition"
-                  >
-                    My account
-                  </Link>
-                </div>
-              </>
-            ) : (
-              <>
-                <Link
-                  href="/new-leads"
-                  className="hover:underline text-purple-300"
-                >
-                  New leads
-                </Link>
-                <Link href="/interested" className="hover:underline">
-                  Interested
-                </Link>
-                <Link href="/my-account" className="hover:underline">
-                  My account
-                </Link>
-              </>
-            )
-          ) : (
-            <>
-              <Link href="/post-a-job" className="hover:underline">
-                Post a job
-              </Link>
-              <button
-                onClick={() => router.push("/login")}
-                className="hover:underline"
-              >
-                Log in
-              </button>
-              <button
-                onClick={() => router.push("/tradesworks-signup")}
-                className="border border-white px-4 py-1 rounded hover:bg-white hover:text-[#1f0e2b] transition"
-              >
-                Sign up as a tradesperson
-              </button>
-            </>
-          )}
-        </div>
+        <nav className="hidden md:flex items-center space-x-6 text-sm">
+          {navItems.map((item) => (
+            <NavItem key={item.href} {...item} />
+          ))}
+        </nav>
 
         <div className="md:hidden">
-          <button onClick={() => setMenuOpen(!menuOpen)}>
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            aria-label="Toggle menu"
+            role="button"
+          >
             {menuOpen ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -119,64 +102,31 @@ export default function NavigationHeader({
       </div>
 
       {menuOpen && (
-        <div className="md:hidden bg-[#2f76d9] px-4 pb-4 space-y-4 text-sm">
-          {isLoggedIn ? (
-            role === "customer" ? (
-              <>
-                <Link href="/my-jobs" className="hover:underline">
-                  My Jobs
-                </Link>
-                <div className="relative">
-                  <Link
-                    href="/my-account"
-                    className="border border-white px-4 py-1 rounded hover:bg-white hover:text-[#1f0e2b] transition"
-                  >
-                    My account
-                  </Link>
-                </div>
-                {/* <Logout /> */}
-              </>
-            ) : (
-              <>
-                <Link
-                  href="/new-leads"
-                  className="block w-full hover:underline"
-                >
-                  New leads
-                </Link>
-                <Link
-                  href="/interested"
-                  className="block w-full hover:underline"
-                >
-                  Interested
-                </Link>
-                <Link
-                  href="/my-account"
-                  className="block w-full hover:underline"
-                >
-                  My account
-                </Link>
-                {/* <Logout /> */}
-              </>
-            )
-          ) : (
-            <>
-              <Link href="/post-a-job" className="block w-full hover:underline">
-                Post a job
-              </Link>
-              <Link href="/login" className="block w-full hover:underline">
-                Log in
-              </Link>
+        <nav
+          id="mobile-menu"
+          className="md:hidden bg-[#2f76d9] px-4 pb-4 space-y-4 text-sm"
+        >
+          {navItems.map((item) =>
+            item.isButton ? (
               <button
-                onClick={() => router.push("/tradesworks-signup")}
-                className="block w-full border border-white px-4 py-2 rounded hover:bg-white hover:text-[#1f0e2b] transition"
+                key={item.href}
+                onClick={() => {}}
+                className="w-full border border-white px-4 py-2 rounded hover:bg-white hover:text-[#1f0e2b] transition"
               >
-                Sign up as a tradesperson
+                {item.label}
               </button>
-            </>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="block w-full hover:underline"
+              >
+                {item.label}
+              </Link>
+            ),
           )}
-        </div>
+        </nav>
       )}
-    </div>
+    </header>
   );
 }

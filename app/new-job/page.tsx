@@ -1,8 +1,8 @@
 "use client";
 import { SERVICES } from "@/app/lib/services";
 import { useActionState, useEffect } from "react";
-import { postNewJob } from "../lib/actions";
 import { useRouter } from "next/navigation";
+import { postNewJob } from "./actions";
 
 const initialState = { error: undefined, success: false };
 export default function PostJob() {

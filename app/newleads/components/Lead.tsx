@@ -1,6 +1,10 @@
 "use client";
 import { formatDistanceToNow } from "date-fns";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import location from "@/public/location.png";
+import duration from "@/public/deadline.png";
+import task from "@/public/build.png";
 
 type Job = {
   job: {
@@ -22,7 +26,19 @@ export default function Lead({ job }: Job) {
     >
       <h2 className="text-[#2f76d9] font-semibold mb-1">{job.title}</h2>
       <div className="text-gray-500 text-sm flex flex-wrap gap-2">
-        <span>{job.category}</span>•<span>{job.location}</span>•
+        <Image src={task} alt="task" className="h-5 w-4 object-contain" />
+        <span>{job.category}</span>
+        <Image
+          src={location}
+          alt="location"
+          className="h-5 w-4 object-contain"
+        />
+        <span>{job.location}</span>
+        <Image
+          src={duration}
+          alt="duration"
+          className="h-4 w-4 object-contain"
+        />
         <span>
           {formatDistanceToNow(new Date(job.createdAt), {
             addSuffix: true,

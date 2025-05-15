@@ -1,6 +1,6 @@
 "use client";
-import { shortlistTradesperson } from "@/app/lib/actions";
 import { useActionState } from "react";
+import { shortlistTradesperson } from "../../actions";
 
 type Shortlist = {
   jobId: string;

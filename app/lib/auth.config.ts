@@ -15,6 +15,10 @@ export const authConfig = {
         "/checkout",
         "/payment-success",
         "/new-job",
+        "/activity",
+        "/shortlisted",
+        "/hired",
+        "/closed",
       ];
       const isOnProtectedPath = protectedPaths.some((path) =>
         nextUrl.pathname.startsWith(path),

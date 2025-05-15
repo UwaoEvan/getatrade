@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { useActionState } from "react";
-import { postJob } from "../lib/actions";
 import { Suspense } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -10,6 +9,7 @@ import userGroup from "@/public/userGroup.svg";
 import postIcon from "@/public/post-icon.svg";
 import PostJob from "./components/PostJob";
 import CustomerSignup from "./components/CustomerSignUp";
+import { postJob } from "./actions";
 
 const initialState = { error: undefined, success: false };
 export default function PostAJob() {

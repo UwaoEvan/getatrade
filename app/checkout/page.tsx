@@ -2,7 +2,6 @@
 
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import convertToSubcurrency from "../lib/convertToSubscurrency";
 import CheckoutPage from "./components/CheckoutPage";
 import { useSearchParams } from "next/navigation";
 
@@ -24,7 +23,7 @@ export default function Checkout() {
           stripe={stripePromise}
           options={{
             mode: "payment",
-            amount: convertToSubcurrency(amount),
+            amount: amount,
             currency: "gbp",
           }}
         >

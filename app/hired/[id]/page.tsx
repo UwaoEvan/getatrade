@@ -1,7 +1,8 @@
 import { getJobPosting } from "@/app/lib/actions";
 import { formatDistanceToNow } from "date-fns";
 import { Suspense } from "react";
-import Shortlist from "./components/Shortlist";
+import Hired from "./Hired";
+// import { getShortListedInfo } from "@/app/shortlisted/[id]/actions";
 
 type Params = {
   params: Promise<{
@@ -9,9 +10,10 @@ type Params = {
   }>;
 };
 
-export default async function InterestedDetails({ params }: Params) {
+export default async function HiredDetails({ params }: Params) {
   const { id: jobId } = await params;
   const job = await getJobPosting(jobId as string);
+  // const shortlisted = await getShortListedInfo(jobId);
 
   return (
     <Suspense
@@ -60,7 +62,7 @@ export default async function InterestedDetails({ params }: Params) {
               </div>
             </div>
           </div>
-          <Shortlist />
+          <Hired />
         </div>
 
         <div className="p-4 rounded-lg mb-6">
