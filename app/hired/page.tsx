@@ -1,3 +1,3 @@
 export default function Page() {
-  return <p>Hired</p>
+  return <p>Hired</p>;
 }

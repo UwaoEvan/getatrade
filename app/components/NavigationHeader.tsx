@@ -21,13 +21,11 @@ const navLinks = {
   customer: [
     { href: "/my-jobs", label: "My Jobs" },
     { href: "/my-account", label: "My account" },
-    { href: "/", label: "Logout", isButton: true },
   ],
   tradesperson: [
     { href: "/new-leads", label: "New leads" },
     { href: "/activity", label: "Activity" },
     { href: "/my-account", label: "My account" },
-    { href: "/", label: "Logout", isButton: true },
   ],
 };
 
@@ -106,25 +104,15 @@ export default function NavigationHeader({
           id="mobile-menu"
           className="md:hidden bg-[#2f76d9] px-4 pb-4 space-y-4 text-sm"
         >
-          {navItems.map((item) =>
-            item.isButton ? (
-              <button
-                key={item.href}
-                onClick={() => {}}
-                className="w-full border border-white px-4 py-2 rounded hover:bg-white hover:text-[#1f0e2b] transition"
-              >
-                {item.label}
-              </button>
-            ) : (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="block w-full hover:underline"
-              >
-                {item.label}
-              </Link>
-            ),
-          )}
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="block w-full hover:underline"
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
       )}
     </header>
