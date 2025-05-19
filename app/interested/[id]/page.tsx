@@ -31,7 +31,16 @@ export default async function InterestedDetails({ params }: Params) {
               addSuffix: true,
             })}
           </span>
-          <span>📍 {job?.location}</span>
+          <div className="flex items-center text-sm text-gray-700 mt-1">
+            <svg
+              className="w-4 h-4 mr-1 text-[#fe3333]"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path d="M10 2a6 6 0 016 6c0 4.418-6 10-6 10S4 12.418 4 8a6 6 0 016-6zm0 8a2 2 0 100-4 2 2 0 000 4z" />
+            </svg>
+            <span>{job?.location}</span>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
