@@ -44,7 +44,6 @@ export default function Reviews() {
                 (Updated on {review.updated})
               </div>
             </div>
-           
           </div>
         ))}
       </div>

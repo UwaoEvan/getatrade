@@ -12,9 +12,15 @@ export default function Payments() {
       <table className="min-w-full block md:table">
         <thead className="hidden md:table-header-group bg-gray-50 sticky top-0">
           <tr className="md:table-row">
-            <th className="p-3 text-left font-semibold text-gray-700 border-b">Date</th>
-            <th className="p-3 text-left font-semibold text-gray-700 border-b">Status</th>
-            <th className="p-3 text-left font-semibold text-gray-700 border-b">Total</th>
+            <th className="p-3 text-left font-semibold text-gray-700 border-b">
+              Date
+            </th>
+            <th className="p-3 text-left font-semibold text-gray-700 border-b">
+              Status
+            </th>
+            <th className="p-3 text-left font-semibold text-gray-700 border-b">
+              Total
+            </th>
           </tr>
         </thead>
 
@@ -25,15 +31,21 @@ export default function Payments() {
               className="block md:table-row hover:bg-gray-50 text-sm"
             >
               <td className="p-3 block md:table-cell border-b border-gray-50">
-                <span className="md:hidden font-semibold text-gray-600">Date: </span>
+                <span className="md:hidden font-semibold text-gray-600">
+                  Date:{" "}
+                </span>
                 {payment.date}
               </td>
               <td className="p-3 block md:table-cell border-b border-gray-50">
-                <span className="md:hidden font-semibold text-gray-600">Status: </span>
+                <span className="md:hidden font-semibold text-gray-600">
+                  Status:{" "}
+                </span>
                 {payment.status}
               </td>
               <td className="p-3 block md:table-cell border-b border-gray-50 font-bold">
-                <span className="md:hidden font-semibold text-gray-600">Total: </span>
+                <span className="md:hidden font-semibold text-gray-600">
+                  Total:{" "}
+                </span>
                 {payment.total}
               </td>
             </tr>

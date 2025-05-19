@@ -70,16 +70,19 @@ export default function MyAccount() {
       <hr className="mb-4 border-t-1 border-gray-200" />
 
       <CompanyProfile />
-      <div>
-        <h1 className="text-xl font-bold mb-4">Contact Information</h1>
-
-        <div className="mb-2">
-          <h2 className="text-md font-semibold">Name</h2>
-          <p className="text-sm text-gray-700">Evan Uwao</p>
-        </div>
-        <div className="mb-2">
-          <h2 className="text-md font-semibold">Address</h2>
-          <p className="text-sm text-gray-700">Evan Uwao</p>
+      <div className="space-y-6 border border-gray-100">
+        <div>
+          <h2 className="text-md font-semibold text-gray-800 mb-2">
+            Contact Information
+          </h2>
+          <div className="text-gray-700 space-y-1 text-sm">
+            <p>
+              <span className="font-medium">Email:</span> jane.doe@example.com
+            </p>
+            <p>
+              <span className="font-medium">Phone:</span> +44 1234 567890
+            </p>
+          </div>
         </div>
       </div>
     </div>
