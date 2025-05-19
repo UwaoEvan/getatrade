@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 export default function Footer() {
   const router = useRouter();
   return (
-    <footer className="bg-gray-100 text-gray-700 mt-12">
+    <footer className="bg-gray-200 text-gray-700 pt-12">
       <div className="w-full px-4 py-10 sm:px-6 lg:px-8 flex justify-around">
         <div>
           <Image
