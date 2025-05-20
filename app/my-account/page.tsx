@@ -1,9 +1,18 @@
 import CompanyProfile from "./components/CompanyProfile";
 import Image from "next/image";
 import User from "@/public/userGroup.svg";
-import { signOut } from "../lib/auth";
+import { signOut, auth } from "../lib/auth";
+import { getUser } from "../lib/actions";
+import { redirect } from "next/navigation";
 
-export default function MyAccount() {
+export default async function MyAccount() {
+  const session = await auth();
+  const user = await getUser(session?.user?.email as string);
+
+  if (!user?.about) {
+    redirect("/update-profile");
+  }
+
   return (
     <div className="max-w-3xl mx-auto">
       <form
@@ -39,9 +48,7 @@ export default function MyAccount() {
         />
 
         <div>
-          <h1 className="text-xl font-bold">
-            McKenzie Plastering & Decorating Service
-          </h1>
+          <h1 className="text-xl font-bold">{user?.username}</h1>
 
           <div className="flex items-center text-sm text-gray-700 mt-1">
             <svg
@@ -63,28 +70,13 @@ export default function MyAccount() {
             >
               <path d="M10 2a6 6 0 016 6c0 4.418-6 10-6 10S4 12.418 4 8a6 6 0 016-6zm0 8a2 2 0 100-4 2 2 0 000 4z" />
             </svg>
-            <span>Maidstone</span>
+            <span>{user?.location}</span>
           </div>
         </div>
       </div>
       <hr className="mb-4 border-t-1 border-gray-200" />
 
-      <CompanyProfile />
-      <div className="space-y-6 border border-gray-100">
-        <div>
-          <h2 className="text-md font-semibold text-gray-800 mb-2">
-            Contact Information
-          </h2>
-          <div className="text-gray-700 space-y-1 text-sm">
-            <p>
-              <span className="font-medium">Email:</span> jane.doe@example.com
-            </p>
-            <p>
-              <span className="font-medium">Phone:</span> +44 1234 567890
-            </p>
-          </div>
-        </div>
-      </div>
+      <CompanyProfile email={user?.email} about={user?.about || ""} />
     </div>
   );
 }

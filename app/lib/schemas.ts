@@ -35,3 +35,9 @@ export const paymentSchema = z.object({
   description: z.string(),
   userId: z.number(),
 });
+
+export const updateProfileSchema = z.object({
+  username: z.string(),
+  about: z.string(),
+  location: z.string(),
+});

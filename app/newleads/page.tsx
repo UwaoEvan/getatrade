@@ -8,7 +8,9 @@ export default async function Dashboard() {
   const session = await auth();
   const user = await getUser(session?.user?.email as string);
 
-  if (user?.role === "customer") {
+  if (!user?.about) {
+    redirect("/update-profile");
+  } else if (user?.role === "customer") {
     redirect("/my-jobs");
   }
 
