@@ -1,13 +1,13 @@
 const reviews = [
-  {
-    user: "MyBuilder user from Welling",
-    rating: 5,
-    date: "4 Sep 2023",
-    title: "Walls to be papered and painted.",
-    content:
-      "Asked Sharna in to do some wallpapering and painting for me. The wallpapering was good, the painting was great. Sharna has some great cutting in skills, even on my wonky walls. Was very impressed. It was a pleasure to have Sharna work here.",
-    updated: "11 May 2024",
-  },
+  // {
+  //   user: "MyBuilder user from Welling",
+  //   rating: 5,
+  //   date: "4 Sep 2023",
+  //   title: "Walls to be papered and painted.",
+  //   content:
+  //     "Asked Sharna in to do some wallpapering and painting for me. The wallpapering was good, the painting was great. Sharna has some great cutting in skills, even on my wonky walls. Was very impressed. It was a pleasure to have Sharna work here.",
+  //   updated: "11 May 2024",
+  // },
 ];
 
 export default function Reviews() {
@@ -18,18 +18,18 @@ export default function Reviews() {
           <div>
             <h2 className="text-lg font-bold">Overall rating</h2>
             <div className="flex items-center space-x-2">
-              <span className="text-2xl font-bold">4.2</span>
-              <span className="text-[#fd914d]">★★★★★</span>
-              <span className="text-gray-500 text-sm">(5 reviews)</span>
+              <span className="text-2xl font-bold">0</span>
+              <span className="text-gray-200">★★★★★</span>
+              {/* <span className="text-[#fd914d]">★★★★★</span> */}
+              <span className="text-gray-500 text-sm">(0 reviews)</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Reviews List */}
       <div>
         <h3 className="font-bold text-lg mb-4">Reviews ({reviews.length})</h3>
-        {reviews.map((review, idx) => (
+        {/* {reviews.map((review, idx) => (
           <div key={idx} className="mb-8">
             <div className="bg-white rounded-lg shadow p-4">
               <div className="flex items-center mb-2">
@@ -45,7 +45,16 @@ export default function Reviews() {
               </div>
             </div>
           </div>
-        ))}
+        ))} */}
+        <div className="text-center py-12">
+          <div className="text-4xl mb-4">📝</div>
+          <h3 className="text-lg font-semibold text-gray-700">
+            No reviews yet
+          </h3>
+          <p className="text-sm text-gray-500 mt-1">
+            Once people start sharing their thoughts, you’ll see them here.
+          </p>
+        </div>
       </div>
     </section>
   );
