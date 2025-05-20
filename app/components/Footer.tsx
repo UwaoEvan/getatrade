@@ -29,9 +29,11 @@ export default function Footer() {
                 Popular Trades
               </a>
             </li>
-            <Link href="/post-a-job" className="hover:underline">
-              Post a Job
-            </Link>
+            <li>
+              <Link href="/post-a-job" className="hover:underline">
+                Post a Job
+              </Link>
+            </li>
             <li>
               <a href="#" className="hover:underline">
                 Tradespeople Join
