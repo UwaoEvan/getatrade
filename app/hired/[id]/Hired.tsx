@@ -6,7 +6,7 @@ type Props = {
   phoneNumber?: string;
 };
 
-export default function HiredInfo({ email, name, phoneNumber }: Props) {
+export default function HiredInfo({ email, name }: Props) {
   return (
     <div className="w-full border-1 border-gray-200 p-4 rounded-lg">
       <h2 className="font-semibold mb-2">Contact details shared</h2>
