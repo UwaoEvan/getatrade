@@ -73,14 +73,15 @@ model Shortlist {
 }
 
 model Payments {
-  id          String  @id @default(uuid())
-  amount      Float   @default(0.00)
+  id          String    @id @default(uuid())
+  amount      Float     @default(0.00)
   description String
   userId      Int
   jobId       String
-  status      String? @default("NOT PAID")
-  job         Job     @relation(fields: [jobId], references: [id])
-  user        User    @relation(fields: [userId], references: [id])
+  createdAt   DateTime? @default(now())
+  status      String?   @default("NOT PAID")
+  job         Job       @relation(fields: [jobId], references: [id])
+  user        User      @relation(fields: [userId], references: [id])
 
   @@map("payments")
 }

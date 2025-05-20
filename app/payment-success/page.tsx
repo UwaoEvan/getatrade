@@ -3,8 +3,8 @@ import { updatePayments } from "../checkout/action";
 
 type Params = {
   searchParams: Promise<{
-    id: string
-  }>
+    id: string;
+  }>;
 };
 
 export default async function PaymentSuccessPage({ searchParams }: Params) {
