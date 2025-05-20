@@ -131,15 +131,12 @@ export const getPayment = async (jobId: string) => {
 
   const user = await getUser(email || "");
 
-  if (!user) {
-    return { error: "user not found." };
-  }
-
   const payment = await db.payments.findFirst({
     where: {
-      userId: user.id,
+      userId: user?.id,
       jobId,
     },
   });
+
   return payment;
 };
