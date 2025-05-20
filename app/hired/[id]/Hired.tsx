@@ -1,6 +1,12 @@
 "use client";
 
-export default function ShortlistFee() {
+type Props = {
+  email?: string;
+  name?: string;
+  phoneNumber?: string;
+};
+
+export default function HiredInfo({ email, name, phoneNumber }: Props) {
   return (
     <div className="w-full border-1 border-gray-200 p-4 rounded-lg">
       <h2 className="font-semibold mb-2">Contact details shared</h2>
@@ -23,7 +29,7 @@ export default function ShortlistFee() {
               d="M5.121 17.804A11.955 11.955 0 0112 15c2.2 0 4.25.64 5.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"
             />
           </svg>
-          <span>Brendan O Shea</span>
+          <span>{name}</span>
         </div>
 
         <div className="flex items-center gap-2">
@@ -42,7 +48,7 @@ export default function ShortlistFee() {
             />
           </svg>
           <a href="tel:+447711589839" className="underline hover:text-blue-600">
-            +447711589839
+            {email}
           </a>
         </div>
       </div>

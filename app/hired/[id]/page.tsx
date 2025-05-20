@@ -1,7 +1,7 @@
 import { getJobPosting } from "@/app/lib/actions";
 import { formatDistanceToNow } from "date-fns";
 import { Suspense } from "react";
-import Hired from "./Hired";
+import HiredInfo from "./Hired";
 // import { getShortListedInfo } from "@/app/shortlisted/[id]/actions";
 
 type Params = {
@@ -62,7 +62,7 @@ export default async function HiredDetails({ params }: Params) {
               </div>
             </div>
           </div>
-          <Hired />
+          <HiredInfo />
         </div>
 
         <div className="p-4 rounded-lg mb-6">

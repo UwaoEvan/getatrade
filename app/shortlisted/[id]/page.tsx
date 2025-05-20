@@ -1,8 +1,9 @@
-import { getJobPosting } from "@/app/lib/actions";
+import { getJobPosting, getPayment, getUser } from "@/app/lib/actions";
 import { formatDistanceToNow } from "date-fns";
 import { Suspense } from "react";
 import ShortlistFee from "./components/ShortlistFee";
 import { getShortListedInfo } from "./actions";
+import HiredInfo from "@/app/hired/[id]/Hired";
 
 type Params = {
   params: Promise<{
@@ -14,6 +15,8 @@ export default async function ShortlistedDetails({ params }: Params) {
   const { id: jobId } = await params;
   const job = await getJobPosting(jobId as string);
   const shortlisted = await getShortListedInfo(jobId);
+  const user = await getUser("", job?.userId);
+  const payment = await getPayment(job?.id as string);
 
   return (
     <Suspense
@@ -62,7 +65,11 @@ export default async function ShortlistedDetails({ params }: Params) {
               </div>
             </div>
           </div>
-          <ShortlistFee jobId={jobId} shortlisted={shortlisted?.id} />
+          {payment?.status === "Paid" ? (
+            <HiredInfo email={user?.email} name={user?.username} />
+          ) : (
+            <ShortlistFee jobId={jobId} shortlisted={shortlisted?.id} />
+          )}
         </div>
 
         <div className="p-4 rounded-lg mb-6">
