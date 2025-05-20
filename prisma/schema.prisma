@@ -37,6 +37,8 @@ model Job {
   category    String
   project     String
   createdAt   DateTime    @default(now())
+  closedAt    DateTime?
+  active      Boolean?    @default(true)
   location    String
   userId      Int
   interested  Int?        @default(0)

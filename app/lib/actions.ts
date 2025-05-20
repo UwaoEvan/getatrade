@@ -72,7 +72,11 @@ export const register = async (prevState: State, formData: FormData) => {
 };
 
 export const getJobPostings = async () => {
-  const jobs = await db.job.findMany();
+  const jobs = await db.job.findMany({
+    where: {
+      closedAt: null,
+    },
+  });
   return jobs;
 };
 

@@ -3,7 +3,7 @@
 import { getJobPosting, getUser, State } from "../lib/actions";
 import { db } from "../lib/db";
 import { sendEmail } from "../lib/emailTemplate";
-import { shortlist } from "../lib/schemas";
+import { closeJobSchema, shortlist } from "../lib/schemas";
 
 export const getCustomerJobs = async (email: string) => {
   const user = await getUser(email);
@@ -117,4 +117,27 @@ export const getShortlistedOnJob = async (jobId: string, userId: number) => {
     },
   });
   return interest;
+};
+
+export const closeJob = async (prevState: State, formData: FormData) => {
+  const parsed = closeJobSchema.safeParse({
+    jobId: formData.get("jobId"),
+  });
+
+  if (!parsed.success) {
+    return { error: "Invalid job id" };
+  }
+
+  const { jobId } = parsed.data;
+
+  await db.job.update({
+    where: {
+      id: jobId,
+    },
+    data: {
+      closedAt: new Date(),
+      active: false,
+    },
+  });
+  return { success: true };
 };

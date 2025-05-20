@@ -1,4 +1,4 @@
-import { signOut, auth } from "../lib/auth";
+import { auth } from "../lib/auth";
 import { getUser } from "../lib/actions";
 import { Suspense } from "react";
 import Job from "./components/Job";
@@ -30,20 +30,10 @@ export default async function Dashboard() {
             <div className="flex items-center">
               <Link
                 href="/new-job"
-                className="border text-sm border-[#2f76d9] px-4 py-1 mr-4 rounded hover:bg-white hover:text-[#1f0e2b] transition text-[#2f76d9]"
+                className="border text-sm border-[#2f76d9] px-4 py-1 rounded hover:bg-white hover:text-[#1f0e2b] transition text-[#2f76d9]"
               >
                 Post a new job
               </Link>
-              <form
-                action={async () => {
-                  "use server";
-                  await signOut({ redirectTo: "/" });
-                }}
-              >
-                <button className="flex h-[40px] items-center justify-center gap-2 rounded-md bg-gray-50 px-4 text-sm font-medium hover:bg-sky-100 hover:text-blue-600">
-                  Sign Out
-                </button>
-              </form>
             </div>
           </div>
           <div className="space-y-4">

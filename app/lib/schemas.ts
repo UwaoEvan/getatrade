@@ -41,3 +41,7 @@ export const updateProfileSchema = z.object({
   about: z.string(),
   location: z.string(),
 });
+
+export const closeJobSchema = z.object({
+  jobId: z.string(),
+});
