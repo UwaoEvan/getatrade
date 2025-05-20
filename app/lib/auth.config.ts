@@ -19,6 +19,7 @@ export const authConfig = {
         "/shortlisted",
         "/hired",
         "/closed",
+        "/update-profile",
       ];
       const isOnProtectedPath = protectedPaths.some((path) =>
         nextUrl.pathname.startsWith(path),
