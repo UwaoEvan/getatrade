@@ -78,7 +78,7 @@ model Payments {
   description String
   userId      Int
   jobId       String
-  status      String? @default("Not paid")
+  status      String? @default("NOT PAID")
   job         Job     @relation(fields: [jobId], references: [id])
   user        User    @relation(fields: [userId], references: [id])
 

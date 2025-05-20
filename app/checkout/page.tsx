@@ -18,7 +18,7 @@ export default function Checkout() {
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">Complete the payment.</h1>
         </div>
-        <p>Since you have been shortlisted, a payment of 100 is needed</p>
+        <p>Since you have been shortlisted, a payment of {amount} is needed</p>
         <Elements
           stripe={stripePromise}
           options={{

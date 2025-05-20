@@ -6,9 +6,7 @@ type Props = {
   shortlisted?: string;
 };
 
-export default function ShortlistFee({
-  jobId,
-}: Props) {
+export default function ShortlistFee({ jobId }: Props) {
   return (
     <div className="w-full border-1 border-gray-200 p-4 rounded-lg">
       <h2 className="font-semibold mb-2">Message sent</h2>

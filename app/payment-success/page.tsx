@@ -1,12 +1,22 @@
-"use client";
-
 import Link from "next/link";
+import { updatePayments } from "../checkout/action";
 
-export default function PaymentSuccessPage() {
+type Params = {
+  searchParams: {
+    id?: string;
+  };
+};
+
+export default async function PaymentSuccessPage({ searchParams }: Params) {
+  const { id } = searchParams;
+
+  if (id) {
+    await updatePayments(id, "PAID");
+  }
+
   return (
-    <div className="flex items-center justify-center px-4">
+    <div className="flex items-center justify-center px-4 h-screen">
       <div className="bg-white  p-8 max-w-md text-center">
-        {/* ✅ Inline SVG Checkmark */}
         <svg
           className="mx-auto mb-4 w-16 h-16 text-green-500"
           fill="none"

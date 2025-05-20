@@ -35,6 +35,7 @@ export default function UpdateProfile() {
           type="text"
           id="username"
           name="username"
+          required
           className="mt-1 block w-full rounded-sm border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-3"
           placeholder="Enter your username"
         />
@@ -50,6 +51,7 @@ export default function UpdateProfile() {
         <textarea
           id="about"
           name="about"
+          required
           rows={4}
           className="mt-1 block w-full rounded-sm border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-3"
           placeholder="Tell us a bit about yourself..."
@@ -67,6 +69,7 @@ export default function UpdateProfile() {
           type="text"
           id="location"
           name="location"
+          required
           className="mt-1 block w-full rounded-sm border-gray-300 shadow-sm focus:ring-[#2f76d9] focus:border-[#2f76d9] sm:text-sm p-3"
           placeholder="Enter your location"
         />

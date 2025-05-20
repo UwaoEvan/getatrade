@@ -6,7 +6,7 @@ import {
   useElements,
   PaymentElement,
 } from "@stripe/react-stripe-js";
-import { savePayments } from "@/app/lib/actions";
+import { savePayments, updatePayments } from "../action";
 
 export default function CheckoutPage({
   amount = 10,
@@ -41,17 +41,18 @@ export default function CheckoutPage({
       return;
     }
 
-    await savePayments(amount, description, jobId);
+    const pay = await savePayments(amount, description, jobId);
 
     const { error } = await stripe.confirmPayment({
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `${window.location.origin}/payment-success`,
+        return_url: `${window.location.origin}/payment-success?id=${pay?.id}`,
       },
     });
 
     if (error) {
+      await updatePayments(pay?.id as string, "FAILED");
       setErrorMessage(error.message as string);
     }
 

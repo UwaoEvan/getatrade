@@ -99,32 +99,6 @@ export const getUser = async (email?: string, id?: number) => {
   }
 };
 
-export const savePayments = async (
-  amount: number,
-  description: string,
-  jobId: string,
-) => {
-  const session = await auth();
-  const email = session?.user?.email;
-
-  const user = await getUser(email || "");
-
-  if (!user) {
-    return { error: "user not found." };
-  }
-
-  await db.payments.create({
-    data: {
-      amount,
-      description,
-      userId: user?.id,
-      jobId,
-    },
-  });
-
-  return { success: true };
-};
-
 export const getPayment = async (jobId: string) => {
   const session = await auth();
   const email = session?.user?.email;
