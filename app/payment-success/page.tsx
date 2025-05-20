@@ -2,13 +2,13 @@ import Link from "next/link";
 import { updatePayments } from "../checkout/action";
 
 type Params = {
-  searchParams: {
-    id?: string;
-  };
+  searchParams: Promise<{
+    id: string
+  }>
 };
 
 export default async function PaymentSuccessPage({ searchParams }: Params) {
-  const { id } = searchParams;
+  const { id } = await searchParams;
 
   if (id) {
     await updatePayments(id, "PAID");
