@@ -6,12 +6,12 @@ export default function Terms() {
       </h1>
 
       <p className="mb-6">
-        Welcome to <span className="font-semibold">The Getatrade</span>. These
+        Welcome to <span className="font-semibold">The Getatradelink</span>. These
         terms and conditions outline the rules and regulations for the use of
-        The Getatrade’s website and services. By accessing this website and
+        The Getatradelink’s website and services. By accessing this website and
         using our services, you accept these terms and conditions in full.{" "}
         <span className="font-medium text-red-600">
-          Do not continue to use The Getatrade if you do not agree
+          Do not continue to use The Getatradelink if you do not agree
         </span>{" "}
         with all of the terms and conditions stated on this page.
       </p>
@@ -23,7 +23,7 @@ export default function Terms() {
             “Client,” “You,” and “Your” refers to you, the person accessing this
             website and accepting the Company’s terms and conditions. “The
             Company,” “Ourselves,” “We,” “Our,” and “Us” refers to our Company,
-            The Getatrade. “Party,” “Parties,” or “Us” refers to both the Client
+            The Getatradelink. “Party,” “Parties,” or “Us” refers to both the Client
             and ourselves, or either the Client or ourselves.
           </p>
         </section>
@@ -41,7 +41,7 @@ export default function Terms() {
         <section>
           <h2 className="text-2xl font-semibold mb-2">3. Services</h2>
           <p>
-            The Getatrade provides a platform to connect clients with
+            The Getatradelink provides a platform to connect clients with
             tradespeople. We do not provide the actual trade services ourselves
             and are not responsible for the performance of the tradespeople. We
             facilitate the initial contact and communication between clients and
@@ -78,7 +78,7 @@ export default function Terms() {
           <p>
             Clients may leave reviews and feedback about their experience with
             tradespeople. By posting a review, you agree to provide honest and
-            accurate feedback. The Getatrade reserves the right to remove any
+            accurate feedback. The Getatradelink reserves the right to remove any
             reviews that we deem inappropriate or misleading.
           </p>
         </section>
@@ -88,8 +88,8 @@ export default function Terms() {
             7. Intellectual Property
           </h2>
           <p>
-            Unless otherwise stated, The Getatrade and/or its licensors own the
-            intellectual property rights for all material on The Getatrade. All
+            Unless otherwise stated, The Getatradelink and/or its licensors own the
+            intellectual property rights for all material on The Getatradelink. All
             intellectual property rights are reserved. You may view and/or print
             pages from thetradecore.com for your own personal use subject to
             restrictions set in these terms and conditions.
@@ -101,10 +101,10 @@ export default function Terms() {
             8. Limitation of Liability
           </h2>
           <p>
-            In no event shall The Getatrade, nor any of its officers, directors,
+            In no event shall The Getatradelink, nor any of its officers, directors,
             and employees, be liable to you for anything arising out of or in
             any way connected with your use of this website, whether such
-            liability is under contract, tort, or otherwise. The Getatrade shall
+            liability is under contract, tort, or otherwise. The Getatradelink shall
             not be liable for any indirect, consequential, or special liability
             arising out of or in any way related to your use of this website.
           </p>
@@ -113,7 +113,7 @@ export default function Terms() {
         <section>
           <h2 className="text-2xl font-semibold mb-2">9. Indemnification</h2>
           <p>
-            You hereby indemnify to the fullest extent The Getatrade from and
+            You hereby indemnify to the fullest extent The Getatradelink from and
             against any and all liabilities, costs, demands, causes of action,
             damages, and expenses arising in any way related to your breach of
             any of the provisions of these terms and conditions.
@@ -135,7 +135,7 @@ export default function Terms() {
             11. Changes to These Terms
           </h2>
           <p>
-            The Getatrade reserves the right to revise these terms and
+            The Getatradelink reserves the right to revise these terms and
             conditions at any time as it sees fit. By using this website, you
             are expected to review these terms and conditions on a regular
             basis.
