@@ -1,11 +1,11 @@
 import { auth } from "@/app/lib/auth";
 import { Suspense } from "react";
-import Hired from "../hired/Hired";
-import { getInterestedLeads } from "../actions";
+import { getClosedLeads } from "../actions";
+import Closed from "./Closed";
 
-export default async function Closed() {
+export default async function Page() {
   const session = await auth();
-  const showInterests = await getInterestedLeads(session?.user?.email || "");
+  const closed = await getClosedLeads(session?.user?.email as string);
   return (
     <Suspense
       fallback={
@@ -17,8 +17,8 @@ export default async function Closed() {
       <div className="min-h-screen mx-auto bg-gray-100 py-6 md:p-6">
         <div className="">
           <div className="space-y-4">
-            {showInterests.length > 0 ? (
-              showInterests?.map((job) => <Hired key={job.id} job={job} />)
+            {closed.length > 0 ? (
+              closed?.map((job) => <Closed key={job.id} job={job} />)
             ) : (
               <div className="flex flex-col items-center justify-center py-20 text-center text-gray-600">
                 <div className="text-5xl mb-4">📭</div>

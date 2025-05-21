@@ -47,6 +47,7 @@ model Job {
   interest    Interest[]
   shortlist   Shortlist[]
   payments    Payments[]
+  closed      Closed[]
 
   @@map("job")
 }
@@ -72,6 +73,15 @@ model Shortlist {
   job       Job      @relation(fields: [jobId], references: [id])
 
   @@map("shortlist")
+}
+
+model Closed {
+  id       String   @id @default(uuid())
+  jobId    String
+  closedAt DateTime @default(now())
+  job      Job      @relation(fields: [jobId], references: [id])
+
+  @@map("closed")
 }
 
 model Payments {

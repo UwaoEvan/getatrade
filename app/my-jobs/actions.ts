@@ -139,5 +139,12 @@ export const closeJob = async (prevState: State, formData: FormData) => {
       active: false,
     },
   });
+
+  await db.closed.create({
+    data: {
+      jobId,
+    },
+  });
+
   return { success: true };
 };
