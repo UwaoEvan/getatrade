@@ -1,4 +1,5 @@
 import { getUser } from "@/app/lib/actions";
+import Link from "next/link";
 
 type Shortlist = {
   userId: number;
@@ -26,16 +27,22 @@ export default async function Shortlisted({ userId }: Shortlist) {
           </svg>
         </div>
         <div>
-          <p className="font-semibold text-gray-900">{`${user?.username?.slice(0, 10)}...`}</p>
+          <p
+            title={user?.username}
+            className="font-semibold text-gray-900"
+          >{`${user?.username?.slice(0, 30)}...`}</p>
           <p className="text-sm text-gray-500">
-            ⭐ 5/5 <span className="ml-1 text-gray-400">(2 reviews)</span>
+            ⭐ 0/0 <span className="ml-1 text-gray-400">(0 reviews)</span>
           </p>
-          <p className="text-sm text-gray-600 mb-4">📍 Maidstone</p>
+          <p className="text-sm text-gray-600 mb-4">📍 {user?.location}</p>
         </div>
       </div>
-      {/* <button className="w-full py-2 px-4 bg-[#2f76d9] text-white font-medium rounded-lg hover:bg-[#2f76d9] hover:cursor-pointer transition">
-        Hire
-      </button> */}
+      <Link
+        href={`/my-account/${user?.id}`}
+        className="w-full text-center  block py-2 px-4 bg-[#2f76d9] text-white font-medium rounded-lg hover:bg-[#2f76d9] hover:cursor-pointer transition"
+      >
+        View profile
+      </Link>
     </div>
   );
 }

@@ -1,17 +1,17 @@
-import CompanyProfile from "./components/CompanyProfile";
 import Image from "next/image";
 import User from "@/public/userGroup.svg";
-import { auth } from "../lib/auth";
-import { getUser } from "../lib/actions";
-import { redirect } from "next/navigation";
+import { getUser } from "@/app/lib/actions";
+import GeneralProfile from "../components/CompanyProfile";
 
-export default async function MyAccount() {
-  const session = await auth();
-  const user = await getUser(session?.user?.email as string);
+type Params = {
+  params: Promise<{
+    id: string;
+  }>;
+};
 
-  if (!user?.about) {
-    redirect("/update-profile");
-  }
+export default async function Page({ params }: Params) {
+  const { id } = await params;
+  const user = await getUser("", parseInt(id));
 
   return (
     <div className="max-w-3xl mx-auto">
@@ -56,7 +56,7 @@ export default async function MyAccount() {
       </div>
       <hr className="mb-4 border-t-1 border-gray-200" />
 
-      <CompanyProfile email={user?.email} about={user?.about || ""} />
+      <GeneralProfile email={user?.email} about={user?.about || ""} />
     </div>
   );
 }

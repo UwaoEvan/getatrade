@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
 import { FC } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { signOut } from "@/app/lib/auth";
 
 const mainItems = [
   {
@@ -52,8 +53,15 @@ const mainItems = [
 
 const SidebarMenu: FC = () => {
   const pathname = usePathname();
+  const router = useRouter();
+
+  async function handleSignOut() {
+    await signOut();
+    router.push("/");
+  }
+
   return (
-    <aside className="w-full max-w-xs p-4 text-sm text-gray-800">
+    <aside className="w-full md:w-xs p-4 text-sm text-gray-800">
       <div className="space-y-1">
         {mainItems.map(({ label, icon, route }) => {
           const active = route === pathname;
@@ -70,6 +78,26 @@ const SidebarMenu: FC = () => {
             </Link>
           );
         })}
+        <form action={handleSignOut}>
+          <button className="flex w-full py-2 items-center gap-2 rounded-md bg-gray-50 mr-2 px-4 text-sm font-medium hover:cursor-pointer hover:bg-gray-100">
+            <div className="flex items-center">
+              <svg
+                className="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17 16l4-4m0 0l-4-4m4 4H9m4 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1"
+                />
+              </svg>
+              Sign Out
+            </div>
+          </button>
+        </form>
       </div>
 
       <hr className="my-4 border-gray-200" />

@@ -49,7 +49,7 @@ export default async function LeadDetails({ params }: Params) {
               Note: <span className="font-normal">{job?.description}</span>
             </p>
           </div>
-          <CloseJob active={job?.active || true} jobId={job?.id} />
+          <CloseJob active={job?.active as boolean} jobId={job?.id} />
         </div>
         <div className="w-full">
           <hr className="border-gray-300" />

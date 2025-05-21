@@ -20,13 +20,13 @@ export default function Sidebar() {
       icon: "💬",
       path: "/activity/shortlisted",
     },
-    {
-      id: 3,
-      name: "Hired",
-      caption: "Request a review when you finish the job",
-      icon: "🤝",
-      path: "/activity/hired",
-    },
+    // {
+    //   id: 3,
+    //   name: "Hired",
+    //   caption: "Request a review when you finish the job",
+    //   icon: "🤝",
+    //   path: "/activity/hired",
+    // },
     {
       id: 4,
       name: "Closed",
