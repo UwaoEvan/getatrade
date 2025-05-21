@@ -3,6 +3,8 @@ import Image from "next/image";
 import Logo from "@/public/logo.png";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import facebook from "@/public/facebook.png";
+import linkedin from "@/public/linkedin.png";
 
 export default function Footer() {
   const router = useRouter();
@@ -13,17 +15,46 @@ export default function Footer() {
           <Image
             src={Logo}
             alt="logo"
-            className="h-10 w-20 md:h-20 md:w-40"
+            className="h-10 w-20 md:h-20 md:w-40 cursor-pointer"
             onClick={() => router.push("/")}
           />
-          <p className="text-sm w-20 md:w-60">
+          <p className="text-sm w-20 md:w-60 mt-2">
             Helping you find the right tradesperson, the reliable way.
           </p>
+          <div className="flex space-x-2 mt-4">
+            <a
+              href="https://www.linkedin.com/company/getatradelinkltd/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src={linkedin}
+                alt="linkedin"
+                className="h-6 w-6 object-contain"
+              />
+            </a>
+            <a
+              href="https://www.facebook.com/profile.php?id=61574881120840"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src={facebook}
+                alt="facebook"
+                className="h-6 w-6 object-contain"
+              />
+            </a>
+          </div>
         </div>
 
         <div>
           <h5 className="text-md font-semibold mb-3">Explore</h5>
           <ul className="space-y-2 text-sm">
+            <li>
+              <Link href="/services" className="hover:underline">
+                Services
+              </Link>
+            </li>
             <li>
               <a href="#" className="hover:underline">
                 Popular Trades
@@ -46,9 +77,12 @@ export default function Footer() {
           <h5 className="text-md font-semibold mb-3">Support</h5>
           <ul className="space-y-2 text-sm">
             <li>
-              <Link href="/services" className="hover:underline">
-                Services
-              </Link>
+              <a
+                href="mailto:info@getatradelinkltd.com"
+                className="hover:underline"
+              >
+                Customer Support
+              </a>
             </li>
             <li>
               <Link href="/pricing-guides" className="hover:underline">
