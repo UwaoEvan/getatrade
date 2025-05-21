@@ -48,7 +48,12 @@ export default async function MyAccount() {
         />
 
         <div>
-          <h1 className="text-xl font-bold">{user?.username}</h1>
+          <h1
+            title={user?.username}
+            className="text-lg font-bold truncate max-w-3xl overflow-hidden whitespace-nowrap"
+          >
+            {user?.username}
+          </h1>
 
           <div className="flex items-center text-sm text-gray-700 mt-1">
             <svg

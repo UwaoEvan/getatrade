@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { getPayments } from "./action";
+import { format } from "date-fns";
 
 export default async function Payments() {
   const payments = await getPayments();
@@ -31,15 +32,15 @@ export default async function Payments() {
             {payments?.map((payment, idx) => (
               <tr
                 key={idx}
-                className="block md:table-row hover:bg-gray-50 text-sm"
+                className="block md:table-row hover:bg-gray-100 hover:cursor-pointer text-sm"
               >
                 <td className="p-3 block md:table-cell border-b border-gray-50">
                   <span className="md:hidden font-semibold text-gray-600">
                     Date:{" "}
                   </span>
-                  {"payment.createdAt"}
+                  {format(payment?.createdAt || new Date(), "dd-MM-yyyy")}
                 </td>
-                <td className="p-3 block md:table-cell border-b border-gray-50">
+                <td className="p-3 block md:table-cell border-b border-gray-50 font-bold">
                   <span className="md:hidden font-semibold text-gray-600">
                     Status:{" "}
                   </span>
