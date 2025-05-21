@@ -93,7 +93,7 @@ export default function CheckoutPage({
       {errorMessage && <div>{errorMessage}</div>}
       <button
         aria-disabled={!stripe || !loading}
-        className="w-full bg-[#2f76d9] hover:cursor-pointer text-white py-2 rounded-md font-medium transition relative"
+        className="w-full mt-2 bg-[#2f76d9] hover:cursor-pointer text-white py-2 rounded-md font-medium transition relative"
       >
         {loading ? (
           <span className="flex items-center justify-center">

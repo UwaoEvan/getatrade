@@ -15,7 +15,7 @@ export default async function PaymentSuccessPage({ searchParams }: Params) {
   }
 
   return (
-    <div className="flex items-center justify-center px-4 h-screen">
+    <div className="flex items-center justify-center px-4 py-6 h-fit">
       <div className="bg-white  p-8 max-w-md text-center">
         <svg
           className="mx-auto mb-4 w-16 h-16 text-green-500"

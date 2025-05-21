@@ -14,11 +14,8 @@ export default function ShortlistFee({ jobId }: Props) {
         Congratulations 🎉! You have been shortlisted..
       </p>
       <p className="text-sm text-gray-700 mb-4">
-        You&apos;ll be charged <strong>£45.00 + VAT</strong> if the customer
+        You&apos;ll be charged <strong>£32.00 + VAT</strong> if the customer
         shortlists you.
-        <a href="#" className="text-[#2f76d9] underline">
-          Learn more
-        </a>
       </p>
       <Link
         href={`/checkout?jobId=${jobId}`}

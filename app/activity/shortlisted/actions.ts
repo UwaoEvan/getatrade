@@ -6,7 +6,7 @@ import { db } from "@/app/lib/db";
 export const getShortlistedLeads = async (email: string) => {
   const user = await getUser(email);
 
-  const shortlists = await db.interest.findMany({
+  const shortlists = await db.shortlist.findMany({
     where: {
       userId: user?.id,
     },

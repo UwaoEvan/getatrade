@@ -44,7 +44,8 @@ export default async function LeadDetails({ params }: Params) {
               <div className="flex justify-between text-center border-1 border-gray-200 px-4 py-6">
                 <div>
                   <div className="text-2xl font-bold text-[#2f76d9]">
-                    9 <span className="text-sm text-gray-600">Interested</span>
+                    {job?.interested}{" "}
+                    <span className="text-sm text-gray-600">Interested</span>
                   </div>
                   <div className="text-xs text-gray-400">
                     Tradespeople who expressed interest
@@ -52,7 +53,8 @@ export default async function LeadDetails({ params }: Params) {
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-[#2f76d9]">
-                    1 <span className="text-sm text-gray-600">Shortlisted</span>
+                    {job?.shortlisted}{" "}
+                    <span className="text-sm text-gray-600">Shortlisted</span>
                   </div>
                   <div className="text-xs text-gray-400">
                     Tradespeople who received contact details

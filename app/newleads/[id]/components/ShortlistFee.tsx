@@ -11,7 +11,10 @@ type Props = {
 
 const initialState = { error: undefined, success: false };
 export default function ShortlistFee({ email, jobId }: Props) {
-  const [state, formAction] = useActionState(showInterest, initialState);
+  const [state, formAction, isPending] = useActionState(
+    showInterest,
+    initialState,
+  );
   const router = useRouter();
 
   useEffect(() => {
@@ -23,7 +26,7 @@ export default function ShortlistFee({ email, jobId }: Props) {
   return (
     <div className="w-full border-1 border-gray-200 p-4 rounded-lg">
       <p className="font-bold">Shortlist fee</p>
-      <p className="text-[#2f76d9] font-bold">￡9.00 + VAT</p>
+      <p className="text-[#2f76d9] font-bold">￡32.00 + VAT</p>
       <div className="p-2 bg-gray-200 my-4">
         <p className="font-bold">￡ Expressing interest is free</p>
         <p className="text-sm font-medium">
@@ -37,7 +40,14 @@ export default function ShortlistFee({ email, jobId }: Props) {
           type="submit"
           className="bg-[#2f76d9] w-full text-white px-6 py-2 rounded-md hover:cursor-pointer transition"
         >
-          Express interest
+          {isPending ? (
+            <span className="flex items-center justify-center">
+              <span className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white mr-2"></span>
+              Submitting...
+            </span>
+          ) : (
+            "Express Interest"
+          )}
         </button>
         {state?.error && <p className="text-red-500">{state.error}</p>}
         {state?.success && (

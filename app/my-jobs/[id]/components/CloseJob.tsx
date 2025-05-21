@@ -18,7 +18,7 @@ export default function CloseJob({ jobId, active }: Props) {
       {active ? (
         <>
           <p className="text-sm text-green-700 bg-green-100 p-2 rounded mb-3">
-            This job has been active.
+            This job is still active.
           </p>
           <p className="text-sm text-gray-700 mb-4">
             Do you wish to close this job

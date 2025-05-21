@@ -6,7 +6,7 @@ export default function Shortlist() {
         We&apos;ll let you know when the customer responds.
       </p>
       <p className="text-sm text-gray-700 mb-4">
-        You&apos;ll be charged <strong>£45.00 + VAT</strong> if the customer
+        You&apos;ll be charged <strong>£32.00 + VAT</strong> if the customer
         shortlists you.
       </p>
     </div>

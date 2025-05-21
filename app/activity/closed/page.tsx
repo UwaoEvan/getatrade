@@ -20,7 +20,16 @@ export default async function Closed() {
             {showInterests.length > 0 ? (
               showInterests?.map((job) => <Hired key={job.id} job={job} />)
             ) : (
-              <p>You have no closed leads yet.</p>
+              <div className="flex flex-col items-center justify-center py-20 text-center text-gray-600">
+                <div className="text-5xl mb-4">📭</div>
+                <h2 className="text-xl font-semibold mb-2">
+                  No closed jobs yet
+                </h2>
+                <p className="text-sm max-w-md">
+                  When you get to apply for a job then it&aposs closed, it’ll
+                  show up here. Keep exploring and applying!
+                </p>
+              </div>
             )}
           </div>
         </div>
