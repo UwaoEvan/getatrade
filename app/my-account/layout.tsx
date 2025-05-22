@@ -16,7 +16,7 @@ export default async function MyAccountLayout({
           <h1 className="text-2xl font-bold">My Account</h1>
         </div>
         <div className="flex flex-col md:flex-row min-h-screen">
-          <Sidebar role={user?.role as string}/>
+          <Sidebar role={user?.role as string} />
           <main className="flex-1">
             <div className="p-4">{children}</div>
           </main>

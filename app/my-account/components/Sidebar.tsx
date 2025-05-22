@@ -52,7 +52,7 @@ const mainItems = [
 
 type Props = {
   role?: string;
-}
+};
 
 const SidebarMenu = ({ role }: Props) => {
   const pathname = usePathname();
@@ -74,8 +74,11 @@ const SidebarMenu = ({ role }: Props) => {
               href={route}
               key={label}
               className={`flex items-center px-3 py-2 rounded-sm cursor-pointer ${
-                active ? "bg-blue-200 font-medium" : hide ? "hidden" : "hover:bg-gray-100"
-                
+                active
+                  ? "bg-blue-200 font-medium"
+                  : hide
+                    ? "hidden"
+                    : "hover:bg-gray-100"
               }`}
             >
               <div className="w-5 h-5 mr-3 text-gray-700">{icon}</div>

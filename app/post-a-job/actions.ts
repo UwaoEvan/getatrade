@@ -21,6 +21,16 @@ export const postJob = async (prevState: State, formData: FormData) => {
     }
 
     const { category, title, description, location, project } = parsed.data;
+    const phoneNumber = formData.get("phone");
+
+    if (phoneNumber) {
+      await db.user.update({
+        where: { id: user.userId },
+        data: {
+          phoneNumber: phoneNumber as string,
+        },
+      });
+    }
 
     await db.job.create({
       data: {
