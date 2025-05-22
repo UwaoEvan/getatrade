@@ -45,7 +45,7 @@ function SignupForm() {
         <input
           type="text"
           name="username"
-          placeholder="Your username"
+          placeholder="Your company name"
           className="w-full border bg-white border-gray-300 p-2 rounded"
         />
         <input

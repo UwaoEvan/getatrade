@@ -10,16 +10,17 @@ export const updateProfile = async (prevState: State, formData: FormData) => {
   const email = session?.user?.email;
 
   const parsed = updateProfileSchema.safeParse({
-    username: formData.get("username"),
     about: formData.get("about"),
     location: formData.get("location"),
+    lastName: formData.get("lastname"),
+    firstName: formData.get("firstname"),
   });
 
   if (!parsed.success) {
     return { error: "Invalid form data" };
   }
 
-  const { username, about, location } = parsed.data;
+  const { about, location, lastName, firstName } = parsed.data;
 
   if (email) {
     await db.user.update({
@@ -27,9 +28,10 @@ export const updateProfile = async (prevState: State, formData: FormData) => {
         email,
       },
       data: {
-        username,
         about,
         location,
+        firstName,
+        lastName,
       },
     });
 

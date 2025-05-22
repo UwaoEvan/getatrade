@@ -37,9 +37,10 @@ export const paymentSchema = z.object({
 });
 
 export const updateProfileSchema = z.object({
-  username: z.string(),
   about: z.string(),
   location: z.string(),
+  firstName: z.string(),
+  lastName: z.string(),
 });
 
 export const closeJobSchema = z.object({
