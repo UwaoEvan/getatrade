@@ -22,3 +22,10 @@ You can use either **Yarn** or **npm**:
 ```bash
 yarn install
 yarn dev
+
+Sample env
+AUTH_SECRET
+DATABASE_URL
+BREVO_API_KEY=for email
+NEXT_PUBLIC_KEY= for stripe
+SECRET_KEY=for stripe
