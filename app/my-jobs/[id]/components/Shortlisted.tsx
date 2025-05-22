@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import { useState } from "react";
 
 type Shortlist = {
   userId: number;
@@ -6,11 +8,8 @@ type Shortlist = {
   name: string;
 };
 
-export default async function Shortlisted({
-  userId,
-  location,
-  name,
-}: Shortlist) {
+export default function Shortlisted({ userId, location, name }: Shortlist) {
+  const [showReviewForm, setShowReviewForm] = useState<boolean>(false);
   return (
     <div className="w-full max-w-sm p-4 bg-white rounded-xl shadow-md border border-gray-200">
       <div className="flex items-center gap-3 mb-2">
@@ -50,29 +49,46 @@ export default async function Shortlisted({
 
       <div className="mt-2">
         <button
-          // onClick={() => setShowReviewForm(true)} // Toggle a local state
+          onClick={() => setShowReviewForm(!showReviewForm)} // Toggle a local state
           className="text-blue-600 underline text-sm"
         >
           Add a Review
         </button>
 
-        {/* {showReviewForm && ( */}
-        <form>
-          <textarea
-            className="w-full p-2 border rounded my-2"
-            rows={3}
-            placeholder="Write your review..."
-            // value={reviewText}
-            // onChange={(e) => setReviewText(e.target.value)}
-          />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-1 rounded"
-          >
-            Submit Review
-          </button>
-        </form>
-        {/* )} */}
+        {showReviewForm && (
+          <form>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Rating
+            </label>
+            <select
+              name="rating"
+              required
+              className="w-full mb-2 border border-gray-300 p-2 rounded"
+            >
+              <option value="">Select rating</option>
+              {[5, 4, 3, 2, 1].map((val) => (
+                <option key={val} value={val}>
+                  {val} Star{val > 1 && "s"}
+                </option>
+              ))}
+            </select>
+
+            <textarea
+              className="w-full p-2 border rounded my-2"
+              rows={3}
+              placeholder="Write your review..."
+              name="review"
+              required
+            />
+
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600"
+            >
+              Submit Review
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );

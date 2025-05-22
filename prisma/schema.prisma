@@ -51,6 +51,7 @@ model Job {
   shortlist   Shortlist[]
   payments    Payments[]
   closed      Closed[]
+  reviews     Reviews[]
 
   @@map("job")
 }
@@ -99,4 +100,15 @@ model Payments {
   user        User      @relation(fields: [userId], references: [id])
 
   @@map("payments")
+}
+
+model Reviews {
+  id             String   @id @default(uuid())
+  rating         Int
+  createdAt      DateTime @default(now())
+  review         String
+  customerId     Int
+  tradesPersonId Int
+  jobId          String
+  job            Job      @relation(fields: [jobId], references: [id])
 }
