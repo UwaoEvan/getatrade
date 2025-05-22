@@ -86,7 +86,12 @@ export default async function LeadDetails({ params }: Params) {
           <p className="font-bold text-xl py-4">Shortlisted</p>
           <div className="flex flex-wrap justify-between gap-4">
             {shortlists.map((shortlist) => (
-              <Shortlisted key={shortlist.id} userId={shortlist.userId} />
+              <Shortlisted
+                key={shortlist.shortlistId}
+                userId={shortlist.userId}
+                location={shortlist.location}
+                name={shortlist.username}
+              />
             ))}
           </div>
         </div>

@@ -98,15 +98,20 @@ export const shortlistTradesperson = async (
 };
 
 export const getShortlists = async (jobId: string) => {
-  const shortlist = await db.shortlist.findMany({
-    where: {
-      jobId,
-    },
-    include: {
-      user: true,
-    },
-  });
-  return shortlist;
+  type Shortlist = {
+    shortlistId: string;
+    username: string;
+    location: string;
+    userId: number;
+  };
+
+  const shortlists = await db.$queryRaw<Shortlist[]>`
+    SELECT "shortlist"."id" AS "shortlistId", "user"."username", "user"."location", "user"."id" AS "userId"
+    FROM "shortlist"
+    INNER JOIN "user"
+    ON "user"."id" = "shortlist"."userId"
+  `;
+  return shortlists;
 };
 
 export const getShortlistedOnJob = async (jobId: string, userId: number) => {
