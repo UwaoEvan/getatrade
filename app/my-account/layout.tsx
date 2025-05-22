@@ -15,7 +15,7 @@ export default async function MyAccountLayout({
         <div className="p-4 flex justify-between items-center py-6">
           <h1 className="text-2xl font-bold">My Account</h1>
         </div>
-        <div className="flex flex-col md:flex-row min-h-screen">
+        <div className="flex flex-col md:flex-row min-h-[60vh]">
           <Sidebar role={user?.role as string} />
           <main className="flex-1">
             <div className="p-4">{children}</div>

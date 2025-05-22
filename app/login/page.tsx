@@ -14,7 +14,7 @@ function LoginForm() {
   );
 
   return (
-    <div className="flex items-center justify-center mt-10 px-4">
+    <div className="flex items-center justify-center py-10 px-4">
       <div className="bg-white shadow border border-gray-200 rounded-lg p-8 max-w-md w-full space-y-6">
         <div>
           <h1 className="sm:text-xl md:text-2xl font-semibold text-gray-900">

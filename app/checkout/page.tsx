@@ -13,7 +13,7 @@ export default function Checkout() {
   const amount = 32;
 
   return (
-    <div className="min-h-screen mx-auto bg-gray-100 py-6">
+    <div className="min-h-[60vh] mx-auto bg-gray-100 py-6">
       <div className="w-full px-4 md:w-[880px] mx-auto">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">Complete the payment.</h1>

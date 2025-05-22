@@ -14,7 +14,7 @@ export default async function Interested() {
         </div>
       }
     >
-      <div className="min-h-screen mx-auto bg-gray-100 py-6 md:p-6">
+      <div className="min-h-[60vh] mx-auto bg-gray-100 py-6 md:p-6">
         <div className="">
           <div className="space-y-4">
             {showInterests.length > 0 ? (
