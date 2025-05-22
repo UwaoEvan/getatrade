@@ -19,6 +19,7 @@ A web application built with **Next.js**, using **PostgreSQL** as the database a
 You can use either **Yarn** or **npm**:
 
 ### Using Yarn
+
 ```bash
 yarn install
 yarn dev
@@ -29,3 +30,4 @@ DATABASE_URL
 BREVO_API_KEY=for email
 NEXT_PUBLIC_KEY= for stripe
 SECRET_KEY=for stripe
+```

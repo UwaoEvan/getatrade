@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Painter from "@/public/Screenshot 2025-04-23 at 16.12.05.png";
 import { useRouter } from "next/navigation";
+import { SERVICES } from "@/app/lib/services";
 
 export default function HomeBanner() {
   const router = useRouter();
@@ -22,12 +23,18 @@ export default function HomeBanner() {
               What is your job?
             </label>
             <div className="flex max-w-md md:mx-0 mt-6">
-              <input
-                id="jobSearch"
-                type="text"
-                placeholder="e.g., Plumber, Electrician..."
-                className="w-full px-4 py-2 text-black rounded-l bg-white outline-none"
-              />
+              <select
+                name="title"
+                className="w-full border border-gray-300 rounded px-3 py-2 appearance-none bg-transparent, text-gray-400 outline-0"
+                style={{ backgroundImage: "none", backgroundColor: "white" }}
+              >
+                <option value="">For example: painting</option>
+                {SERVICES.map((service) => (
+                  <option key={service.id} value={service.label}>
+                    {service.label}
+                  </option>
+                ))}
+              </select>
               <button
                 onClick={() => router.push("/post-a-job")}
                 className="bg-[#0c51a1] px-5 flex items-center justify-center rounded-r"

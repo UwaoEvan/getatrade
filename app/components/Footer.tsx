@@ -10,7 +10,7 @@ export default function Footer() {
   const router = useRouter();
   return (
     <footer className="bg-gray-200 text-gray-700 pt-12">
-      <div className="w-full px-4 py-10 sm:px-6 lg:px-8 flex justify-around">
+      <div className="w-full md:w-[800px] mx-auto px-4 py-10 sm:px-6 lg:px-8 flex justify-around">
         <div>
           <Image
             src={Logo}
@@ -49,57 +49,41 @@ export default function Footer() {
 
         <div>
           <h5 className="text-md font-semibold mb-3">Explore</h5>
-          <ul className="space-y-2 text-sm">
-            <li>
-              <Link href="/services" className="hover:underline">
-                Services
-              </Link>
-            </li>
-            <li>
-              <a href="#" className="hover:underline">
-                Popular Trades
-              </a>
-            </li>
-            <li>
-              <Link href="/post-a-job" className="hover:underline">
-                Post a Job
-              </Link>
-            </li>
-            <li>
-              <a href="#" className="hover:underline">
-                Tradespeople Join
-              </a>
-            </li>
-          </ul>
+          <div className="flex flex-col">
+            <Link href="/services" className="underline text-sm mb-2">
+              Services
+            </Link>
+            <Link href="#" className="underline text-sm mb-2">
+              Popular Trades
+            </Link>
+            <Link href="/post-a-job" className="underline text-sm mb-2">
+              Post a Job
+            </Link>
+            <Link href="#" className=" text-sm underline">
+              Tradespeople Join
+            </Link>
+          </div>
         </div>
 
         <div>
           <h5 className="text-md font-semibold mb-3">Support</h5>
-          <ul className="space-y-2 text-sm">
-            <li>
-              <a
-                href="mailto:info@getatradelinkltd.com"
-                className="hover:underline"
-              >
-                Customer Support
-              </a>
-            </li>
-            <li>
-              <Link href="/pricing-guides" className="hover:underline">
-                Pricing guides
-              </Link>
-            </li>
-            <li>
-              <Link href="/privacy-policy" className="hover:underline">
-                Privacy Policy
-              </Link>
-            </li>
-            <li>
-              <Link href="/terms-conditions" className="hover:underline">
-                Terms and conditions
-              </Link>
-            </li>
-          </ul>
+          <div className="flex flex-col">
+            <a
+              href="mailto:info@getatradelinkltd.com"
+              className="underline text-sm mb-2"
+            >
+              Customer Support
+            </a>
+            <Link href="/pricing-guides" className="underline text-sm mb-2">
+              Pricing guides
+            </Link>
+            <Link href="/privacy-policy" className="underline text-sm mb-2">
+              Privacy Policy
+            </Link>
+            <Link href="/terms-conditions" className="underline text-sm mb-2">
+              Terms and conditions
+            </Link>
+          </div>
         </div>
       </div>
 
