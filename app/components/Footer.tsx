@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import facebook from "@/public/facebook.png";
 import linkedin from "@/public/linkedin.png";
+import instagram from "@/public/instagram.png";
 
 export default function Footer() {
   const router = useRouter();
@@ -42,6 +43,17 @@ export default function Footer() {
               <Image
                 src={facebook}
                 alt="facebook"
+                className="h-6 w-6 object-contain"
+              />
+            </a>
+            <a
+              href="https://www.instagram.com/getatradelink/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src={instagram}
+                alt="instagram"
                 className="h-6 w-6 object-contain"
               />
             </a>
