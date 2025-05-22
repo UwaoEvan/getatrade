@@ -6,7 +6,7 @@ export default function CustomerSignup() {
       <h2 className="text-2xl font-bold mb-4">Sign up to continue</h2>
 
       <div className="mb-4">
-        <label className="block font-semibold mb-1">Username</label>
+        <label className="block font-semibold mb-1">Full Name</label>
         <input
           type="text"
           name="username"
@@ -29,7 +29,7 @@ export default function CustomerSignup() {
         <label className="block font-semibold mb-1">Phone Number</label>
         <input
           type="tel"
-          name="phone"
+          name="phonenumber"
           className="w-full border border-gray-300 rounded px-3 py-2"
           placeholder="(123) 456-7890"
         />

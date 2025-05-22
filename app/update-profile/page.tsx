@@ -94,17 +94,9 @@ export default function UpdateProfile() {
       </div>
 
       <div className="mb-4 flex items-start">
-        <input type="checkbox" name="terms" className="mr-2 mt-1" required />
+        <input type="checkbox" name="terms" className="mr-2 mt-1" />
         <label className="text-sm">
-          I agree to the{" "}
-          <Link
-            href="/terms"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 underline"
-          >
-            Terms and Conditions
-          </Link>
+          would you like to receive marketing emails?
         </label>
       </div>
 

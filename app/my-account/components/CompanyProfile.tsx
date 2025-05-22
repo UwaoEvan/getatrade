@@ -8,10 +8,10 @@ export default function GeneralProfile({ about, phoneNumber, email }: Props) {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-xl font-bold mb-4">Brief description</h1>
+        <h1 className="text-xl font-bold mb-4">Company description</h1>
 
         <div className="mb-2 flex items-center justify-between">
-          <h2 className="text-md font-semibold">About you</h2>
+          <h2 className="text-md font-semibold">About the company</h2>
         </div>
 
         <p className="text-sm text-gray-700">{about}</p>

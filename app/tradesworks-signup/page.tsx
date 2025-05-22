@@ -55,6 +55,12 @@ function SignupForm() {
           className="w-full bg-white border border-gray-300 p-2 rounded"
         />
         <input
+          type="tel"
+          name="phonenumber"
+          placeholder="Your phonenumber"
+          className="w-full bg-white border border-gray-300 p-2 rounded"
+        />
+        <input
           type="password"
           name="password"
           placeholder="Your password"

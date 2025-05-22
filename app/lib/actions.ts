@@ -37,13 +37,14 @@ export const register = async (prevState: State, formData: FormData) => {
     username: formData.get("username"),
     role: formData.get("role"),
     password: formData.get("password"),
+    phoneNumber: formData.get("phonenumber"),
   });
 
   if (!parsed.success) {
     return { error: "Invalid form data" };
   }
 
-  const { email, username, password, role } = parsed.data;
+  const { phoneNumber, email, username, password, role } = parsed.data;
 
   const existingUser = await db.user.findUnique({ where: { email } });
 
@@ -59,6 +60,7 @@ export const register = async (prevState: State, formData: FormData) => {
       username,
       hashedPassword,
       role,
+      phoneNumber,
     },
   });
 
