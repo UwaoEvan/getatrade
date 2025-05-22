@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { FC } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "@/app/lib/auth";
 
@@ -51,7 +50,11 @@ const mainItems = [
   },
 ];
 
-const SidebarMenu: FC = () => {
+type Props = {
+  role?: string;
+}
+
+const SidebarMenu = ({ role }: Props) => {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -65,12 +68,14 @@ const SidebarMenu: FC = () => {
       <div className="space-y-1">
         {mainItems.map(({ label, icon, route }) => {
           const active = route === pathname;
+          const hide = label === "Payments" && role === "customer";
           return (
             <Link
               href={route}
               key={label}
               className={`flex items-center px-3 py-2 rounded-sm cursor-pointer ${
-                active ? "bg-blue-200 font-medium" : "hover:bg-gray-100"
+                active ? "bg-blue-200 font-medium" : hide ? "hidden" : "hover:bg-gray-100"
+                
               }`}
             >
               <div className="w-5 h-5 mr-3 text-gray-700">{icon}</div>

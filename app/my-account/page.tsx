@@ -9,7 +9,7 @@ export default async function MyAccount() {
   const session = await auth();
   const user = await getUser(session?.user?.email as string);
 
-  if (!user?.about) {
+  if (user?.role !== "customer" && !user?.about) {
     redirect("/update-profile");
   }
 
