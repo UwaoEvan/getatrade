@@ -56,7 +56,12 @@ export default async function MyAccount() {
       </div>
       <hr className="mb-4 border-t-1 border-gray-200" />
 
-      <CompanyProfile email={user?.email} about={user?.about || ""} />
+      <CompanyProfile 
+        email={user?.email} 
+        phoneNumber={user?.phoneNumber as string}
+        role={user?.role as string} 
+        about={user?.about as string} 
+      />
     </div>
   );
 }
