@@ -5,21 +5,26 @@ type Props = {
   role?: string;
 };
 
-export default function GeneralProfile({ about, phoneNumber, email, role }: Props) {
-  const customer = role === "customer";
+export default function GeneralProfile({
+  about,
+  phoneNumber,
+  email,
+  role,
+}: Props) {
+  const tradesperson = role !== "customer";
   return (
     <div>
-      {customer &&
+      {tradesperson && (
         <div className="mb-6">
-        <h1 className="text-xl font-bold mb-4">Company description</h1>
+          <h1 className="text-xl font-bold mb-4">Company description</h1>
 
-        <div className="mb-2 flex items-center justify-between">
-          <h2 className="text-md font-semibold">About the company</h2>
+          <div className="mb-2 flex items-center justify-between">
+            <h2 className="text-md font-semibold">About the company</h2>
+          </div>
+
+          <p className="text-sm text-gray-700">{about}</p>
         </div>
-
-        <p className="text-sm text-gray-700">{about}</p>
-      </div>
-      }
+      )}
       <div className="space-y-6 border border-gray-100">
         <div>
           <h2 className="text-md font-semibold text-gray-800 mb-2">
