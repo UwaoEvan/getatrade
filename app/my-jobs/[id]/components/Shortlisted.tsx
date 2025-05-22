@@ -1,15 +1,26 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useActionState } from "react";
+import { submitReview } from "../../actions";
 
 type Shortlist = {
   userId: number;
   location?: string;
   name: string;
+  jobId?: string;
 };
-
-export default function Shortlisted({ userId, location, name }: Shortlist) {
+const initState = { success: false, error: undefined };
+export default function Shortlisted({
+  userId,
+  location,
+  name,
+  jobId,
+}: Shortlist) {
   const [showReviewForm, setShowReviewForm] = useState<boolean>(false);
+  const [state, formAction, isPending] = useActionState(
+    submitReview,
+    initState,
+  );
   return (
     <div className="w-full max-w-sm p-4 bg-white rounded-xl shadow-md border border-gray-200">
       <div className="flex items-center gap-3 mb-2">
@@ -49,17 +60,16 @@ export default function Shortlisted({ userId, location, name }: Shortlist) {
 
       <div className="mt-2">
         <button
-          onClick={() => setShowReviewForm(!showReviewForm)} // Toggle a local state
-          className="text-blue-600 underline text-sm"
+          onClick={() => setShowReviewForm(!showReviewForm)}
+          className="text-blue-600 underline text-sm mb-2 hover:cursor-pointer"
         >
-          Add a Review
+          {showReviewForm ? "Close" : "Add a Review"}
         </button>
 
         {showReviewForm && (
-          <form>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Rating
-            </label>
+          <form action={formAction}>
+            <input type="hidden" value={jobId} name="jobId" />
+            <input type="hidden" value={userId} name="userId" />
             <select
               name="rating"
               required
@@ -85,8 +95,21 @@ export default function Shortlisted({ userId, location, name }: Shortlist) {
               type="submit"
               className="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600"
             >
-              Submit Review
+              {isPending ? (
+                <span className="flex items-center justify-center">
+                  <span className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white mr-2"></span>
+                  Submitting...
+                </span>
+              ) : (
+                "Submit Review"
+              )}
             </button>
+            {state?.success && (
+              <p className="text-green-600 mt-2">
+                Job posting created successfully! 🎉
+              </p>
+            )}
+            {state?.error && <p className="text-red-500 mt-2">{state.error}</p>}
           </form>
         )}
       </div>

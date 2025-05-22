@@ -91,6 +91,7 @@ export default async function LeadDetails({ params }: Params) {
                 userId={shortlist.userId}
                 location={shortlist.location}
                 name={shortlist.username}
+                jobId={jobId}
               />
             ))}
           </div>

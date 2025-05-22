@@ -111,4 +111,6 @@ model Reviews {
   tradesPersonId Int
   jobId          String
   job            Job      @relation(fields: [jobId], references: [id])
+
+  @@map("reviews")
 }

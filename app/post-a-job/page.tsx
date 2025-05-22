@@ -88,11 +88,6 @@ export default function PostAJob() {
             </button>
           </div>
           {state?.error && <p className="text-red-500">{state.error}</p>}
-          {/* {state?.success && (
-            <p className="text-green-600">
-              Job posting created successfully! 🎉
-            </p>
-          )} */}
         </form>
         <InfoCards />
       </div>

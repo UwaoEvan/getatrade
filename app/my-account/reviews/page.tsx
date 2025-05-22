@@ -1,16 +1,8 @@
-const reviews = [
-  // {
-  //   user: "MyBuilder user from Welling",
-  //   rating: 5,
-  //   date: "4 Sep 2023",
-  //   title: "Walls to be papered and painted.",
-  //   content:
-  //     "Asked Sharna in to do some wallpapering and painting for me. The wallpapering was good, the painting was great. Sharna has some great cutting in skills, even on my wonky walls. Was very impressed. It was a pleasure to have Sharna work here.",
-  //   updated: "11 May 2024",
-  // },
-];
+import { getReviews } from "./action";
+import { format } from "date-fns";
 
-export default function Reviews() {
+export default async function Reviews() {
+  const reviews = await getReviews();
   return (
     <section className="max-w-2xl mx-auto p-4">
       <div className="bg-white rounded-lg shadow p-6 mb-6">
@@ -28,24 +20,24 @@ export default function Reviews() {
       </div>
 
       <div>
-        <h3 className="font-bold text-lg mb-4">Reviews ({reviews.length})</h3>
-        {/* {reviews.map((review, idx) => (
+        <h3 className="font-bold text-lg mb-4">Reviews ({reviews?.length})</h3>
+        {reviews?.map((review, idx) => (
           <div key={idx} className="mb-8">
             <div className="bg-white rounded-lg shadow p-4">
               <div className="flex items-center mb-2">
                 <span className="text-[#fd914d] mr-2">★★★★★</span>
                 <span className="text-gray-500 text-xs">
-                  Review left on {review.date}
+                  Review left on {format(review.createdAt, "dd-MM-yyyy")}
                 </span>
               </div>
               <div className="font-bold">{review.title}</div>
-              <div className="mt-1 text-gray-700 text-sm">{review.content}</div>
+              <div className="mt-1 text-gray-700 text-sm">{review.review}</div>
               <div className="text-xs text-gray-400 mt-1">
-                (Updated on {review.updated})
+                {/* (Updated on {format(review.createdAt, "dd-MM-yyyy")}) */}
               </div>
             </div>
           </div>
-        ))} */}
+        ))}
         <div className="text-center py-12">
           <div className="text-4xl mb-4">📝</div>
           <h3 className="text-lg font-semibold text-gray-700">

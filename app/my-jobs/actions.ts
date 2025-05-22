@@ -1,9 +1,10 @@
 "use server";
 
 import { getJobPosting, getUser, State } from "../lib/actions";
+import { auth } from "../lib/auth";
 import { db } from "../lib/db";
 import { sendEmail } from "../lib/emailTemplate";
-import { closeJobSchema, shortlist } from "../lib/schemas";
+import { closeJobSchema, reviewsSchema, shortlist } from "../lib/schemas";
 
 export const getCustomerJobs = async (email: string) => {
   const user = await getUser(email);
@@ -97,7 +98,7 @@ export const shortlistTradesperson = async (
   }
 };
 
-export const getShortlists = async (jobId: string) => {
+export const getShortlists = async () => {
   type Shortlist = {
     shortlistId: string;
     username: string;
@@ -151,5 +152,37 @@ export const closeJob = async (prevState: State, formData: FormData) => {
     },
   });
 
+  return { success: true };
+};
+
+export const submitReview = async (prevState: State, formData: FormData) => {
+  const session = await auth();
+  const user = await getUser(session?.user?.email as string);
+
+  const parsed = reviewsSchema.safeParse({
+    tradespersonId: formData.get("userId"),
+    rating: formData.get("rating"),
+    review: formData.get("review"),
+    jobId: formData.get("jobId"),
+  });
+
+  if (!parsed.success) {
+    return { error: "Invalid data" };
+  }
+
+  if (!user) {
+    return { error: "User not found" };
+  }
+
+  const { tradespersonId, rating, review, jobId } = parsed.data;
+  await db.reviews.create({
+    data: {
+      customerId: user.id,
+      tradesPersonId: parseInt(tradespersonId),
+      rating: parseFloat(rating),
+      review,
+      jobId,
+    },
+  });
   return { success: true };
 };

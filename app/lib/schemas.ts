@@ -47,3 +47,10 @@ export const updateProfileSchema = z.object({
 export const closeJobSchema = z.object({
   jobId: z.string(),
 });
+
+export const reviewsSchema = z.object({
+  tradespersonId: z.string(),
+  review: z.string(),
+  rating: z.string(),
+  jobId: z.string(),
+});
