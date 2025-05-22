@@ -98,7 +98,7 @@ export const shortlistTradesperson = async (
   }
 };
 
-export const getShortlists = async () => {
+export const getShortlists = async (jobId: string) => {
   type Shortlist = {
     shortlistId: string;
     username: string;
@@ -111,6 +111,7 @@ export const getShortlists = async () => {
     FROM "shortlist"
     INNER JOIN "user"
     ON "user"."id" = "shortlist"."userId"
+    WHERE "job"."id" = ${jobId}
   `;
   return shortlists;
 };

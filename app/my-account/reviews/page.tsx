@@ -30,10 +30,13 @@ export default async function Reviews() {
                   Review left on {format(review.createdAt, "dd-MM-yyyy")}
                 </span>
               </div>
+
               <div className="font-bold">{review.title}</div>
+
               <div className="mt-1 text-gray-700 text-sm">{review.review}</div>
+
               <div className="text-xs text-gray-400 mt-1">
-                {/* (Updated on {format(review.createdAt, "dd-MM-yyyy")}) */}
+                — by {review.username}
               </div>
             </div>
           </div>
