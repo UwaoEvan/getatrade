@@ -2,7 +2,6 @@
 import { useActionState, useEffect } from "react";
 import { updateProfile } from "./action";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 const initState = { success: false, error: undefined };
 export default function UpdateProfile() {
