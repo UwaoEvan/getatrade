@@ -28,3 +28,21 @@ export const getReviews = async () => {
     return reviews;
   }
 };
+
+export const getAverageRating = async () => {
+  const session = await auth();
+  const user = await getUser(session?.user?.email as string);
+
+  if (user) {
+    const avgRating = await db.reviews.aggregate({
+      _avg: {
+        rating: true,
+      },
+      where: {
+        customerId: user.id,
+      },
+    });
+    console.log("av", avgRating);
+    return avgRating;
+  }
+};

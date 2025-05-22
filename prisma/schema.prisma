@@ -25,6 +25,7 @@ model User {
   role           String?
   location       String?
   about          String?
+  averageRating  Float?      @default(0.0)
   job            Job[]
   interest       Interest[]
   shortlist      Shortlist[]
