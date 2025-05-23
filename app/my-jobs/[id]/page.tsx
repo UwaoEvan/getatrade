@@ -95,7 +95,11 @@ export default async function LeadDetails({ params }: Params) {
             ))}
           </div>
         </div> */}
-        <LeadTabs jobId={jobId} interests={interests} shortlists={shortlists} />
+        <LeadTabs 
+          jobId={jobId} 
+          interests={interests} 
+          shortlists={shortlists} 
+        />
       </div>
     </Suspense>
   );

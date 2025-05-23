@@ -6,15 +6,25 @@ import Shortlisted from "./Shortlisted";
 
 type Props = {
   jobId: string;
-  interests: any[];
+  interests: Interest[];
   shortlists: any[];
 };
+
+type Interest = {
+  id: string;
+  jobId: string;
+  userId: number;
+  user: {
+    username: string;
+    location?: string | null;
+  }
+}
 
 export default function LeadTabs({ jobId, interests, shortlists }: Props) {
   const [activeTab, setActiveTab] = useState<"interested" | "shortlisted">(
     "interested",
   );
-
+  console.log(interests)
   return (
     <div>
       <div className="flex space-x-4 border-b mb-4">

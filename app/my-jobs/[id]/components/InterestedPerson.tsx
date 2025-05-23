@@ -1,15 +1,18 @@
-import { getUser } from "@/app/lib/actions";
 import ShortlistForm from "./ShortlistForm";
 
 type Interested = {
   interest: {
-    jobId: string;
-    userId: number;
-  };
-};
+    id: string;
+  jobId: string;
+  userId: number;
+  user?: {
+    username: string;
+    location?: string | null;
+  }
+  }
+}
 
-export default async function InterestedPerson({ interest }: Interested) {
-  const user = await getUser("", interest.userId);
+export default function InterestedPerson({ interest }: Interested) {
 
   return (
     <div className="w-full max-w-sm p-4 bg-white rounded-xl shadow-md border border-gray-200">
@@ -31,14 +34,14 @@ export default async function InterestedPerson({ interest }: Interested) {
           </svg>
         </div>
         <div>
-          <p className="font-semibold text-gray-900">{`${user?.username?.slice(0, 10)}...`}</p>
+          <p className="font-semibold text-gray-900">{`${interest?.user?.username?.slice(0, 10)}...`}</p>
           <p className="text-sm text-gray-500">
             ⭐ 5/5 <span className="ml-1 text-gray-400">(2 reviews)</span>
           </p>
-          <p className="text-sm text-gray-600 mb-4">📍 Maidstone</p>
+          <p className="text-sm text-gray-600 mb-4">📍 {interest?.user?.location}</p>
         </div>
       </div>
-      <ShortlistForm jobId={interest.jobId} userId={user?.id} />
+      <ShortlistForm jobId={interest.jobId} userId={interest.userId} />
     </div>
   );
 }

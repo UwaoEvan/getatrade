@@ -21,7 +21,11 @@ export const getInterestOnJob = async (jobId: string) => {
     where: {
       jobId,
     },
+    include: {
+      user: true
+    }
   });
+  
   return interest;
 };
 

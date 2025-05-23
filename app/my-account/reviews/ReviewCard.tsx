@@ -73,7 +73,14 @@ export default function ReviewCard({ review }: Props) {
             />
             <div className="flex gap-2">
               <button className="px-4 py-1.5 bg-blue-600 text-white text-sm rounded-md">
-                Submit Reply
+                {isPending ? (
+            <span className="flex items-center justify-center">
+              <span className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white mr-2"></span>
+              Submitting...
+            </span>
+          ) : (
+            "Submit Reply"
+          )}
               </button>
               <button
                 onClick={() => setShowReplyBox(false)}
