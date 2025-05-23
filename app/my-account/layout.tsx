@@ -1,6 +1,8 @@
 import { getUser } from "../lib/actions";
 import { auth } from "../lib/auth";
+import CustomerMenu from "./components/CustomerMenu";
 import Sidebar from "./components/Sidebar";
+import TradespersonMenu from "./components/TradespersonMenu";
 
 export default async function MyAccountLayout({
   children,
@@ -16,7 +18,17 @@ export default async function MyAccountLayout({
           <h1 className="text-2xl font-bold">My Account</h1>
         </div>
         <div className="flex flex-col md:flex-row min-h-[60vh]">
-          <Sidebar role={user?.role as string} />
+          {user?.role === "customer" ? (
+            <CustomerMenu
+              name={user.username}
+              location={user?.location as string}
+            />
+          ) : (
+            <TradespersonMenu
+              name={user?.username}
+              location={user?.location as string}
+            />
+          )}
           <main className="flex-1">
             <div className="p-4">{children}</div>
           </main>

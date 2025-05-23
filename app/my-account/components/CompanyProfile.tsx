@@ -19,13 +19,13 @@ export default function GeneralProfile({
           <h1 className="text-xl font-bold mb-4">Company description</h1>
 
           <div className="mb-2 flex items-center justify-between">
-            <h2 className="text-md font-semibold">About the company</h2>
+            <h2 className="text-md font-semibold">About your company</h2>
           </div>
 
           <p className="text-sm text-gray-700">{about}</p>
         </div>
       )}
-      <div className="space-y-6 border border-gray-100">
+      {/* <div className="space-y-6 border border-gray-100">
         <div>
           <h2 className="text-md font-semibold text-gray-800 mb-2">
             Contact Information
@@ -41,7 +41,7 @@ export default function GeneralProfile({
             )}
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
