@@ -1,6 +1,4 @@
 import CompanyProfile from "./components/CompanyProfile";
-import Image from "next/image";
-import User from "@/public/userGroup.svg";
 import { auth } from "../lib/auth";
 import { getUser } from "../lib/actions";
 import { redirect } from "next/navigation";

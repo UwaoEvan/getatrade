@@ -5,12 +5,7 @@ type Props = {
   role?: string;
 };
 
-export default function GeneralProfile({
-  about,
-  phoneNumber,
-  email,
-  role,
-}: Props) {
+export default function GeneralProfile({ about, role }: Props) {
   const tradesperson = role !== "customer";
   return (
     <div>

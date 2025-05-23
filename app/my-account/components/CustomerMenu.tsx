@@ -30,7 +30,7 @@ const sections: Section[] = [
     items: [
       {
         label: "Contact details",
-        route: "/my-account/contact",
+        route: "/my-account/contact-details",
         icon: file,
       },
       {
@@ -42,9 +42,7 @@ const sections: Section[] = [
   },
   {
     title: "Support",
-    items: [
-      { label: "Support centre", route: "/my-account/support", icon: info },
-    ],
+    items: [{ label: "Support centre", route: "#", icon: info }],
   },
 ];
 
@@ -84,7 +82,26 @@ export default function CustomerMenu({ name, location }: Props) {
             <div className="space-y-1">
               {section.items.map(({ label, route, icon }) => {
                 const active = pathname === route;
-                return (
+                const support = label === "Support centre";
+                return support ? (
+                  <a
+                    href="mailto:info@getatradelinkltd.com"
+                    className={`flex items-center gap-2 px-3 py-2 rounded-md ${
+                      active
+                        ? "bg-blue-200 text-black font-medium"
+                        : "hover:bg-gray-100"
+                    }`}
+                  >
+                    <span className="text-lg">
+                      <Image
+                        src={icon}
+                        alt="icon"
+                        className="w-4 h-4 object-contain"
+                      />
+                    </span>
+                    {label}
+                  </a>
+                ) : (
                   <Link
                     href={route}
                     key={label}

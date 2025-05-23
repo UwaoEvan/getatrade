@@ -1,7 +1,6 @@
 import { getUser } from "../lib/actions";
 import { auth } from "../lib/auth";
 import CustomerMenu from "./components/CustomerMenu";
-import Sidebar from "./components/Sidebar";
 import TradespersonMenu from "./components/TradespersonMenu";
 
 export default async function MyAccountLayout({
