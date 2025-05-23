@@ -10,7 +10,7 @@ export default function ReliableWork() {
         <p className="text-lg text-gray-600">
           There’s lots of demand for good tradespeople but finding exactly the
           work you want when you want it isn’t always easy. <br />
-          MyBuilder is the reliable solution, ensuring you get leads that are
+          Getatradelink is the reliable solution, ensuring you get leads that are
           right for you.
         </p>
       </section>
