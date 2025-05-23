@@ -1,3 +1,7 @@
+import Image from "next/image";
+import info from "@/public/menuicons/info.png";
+import GuaranteeSelector from "./GuaranteeSelector";
+
 type Props = {
   about?: string;
   phoneNumber?: string;
@@ -5,38 +9,33 @@ type Props = {
   role?: string;
 };
 
-export default function GeneralProfile({ about, role }: Props) {
-  const tradesperson = role !== "customer";
+export default function GeneralProfile({ about }: Props) {
   return (
     <div>
-      {tradesperson && (
-        <div className="mb-6">
-          <h1 className="text-xl font-bold mb-4">Company description</h1>
+      <div className="mb-6">
+        <h1 className="text-xl font-bold mb-4">Company description</h1>
 
-          <div className="mb-2 flex items-center justify-between">
-            <h2 className="text-md font-semibold">About your company</h2>
-          </div>
+        <div className="mb-2 flex items-center justify-between">
+          <h2 className="text-md font-semibold">About your company</h2>
+        </div>
 
-          <p className="text-sm text-gray-700">{about}</p>
-        </div>
-      )}
-      {/* <div className="space-y-6 border border-gray-100">
-        <div>
-          <h2 className="text-md font-semibold text-gray-800 mb-2">
-            Contact Information
-          </h2>
-          <div className="text-gray-700 space-y-1 text-sm">
-            <p>
-              <span className="font-medium">Email:</span> {email}
-            </p>
-            {phoneNumber && (
-              <p>
-                <span className="font-medium">Phone:</span> {phoneNumber}
-              </p>
-            )}
-          </div>
-        </div>
-      </div> */}
+        <p className="text-md text-gray-700">{about}</p>
+      </div>
+
+      <div className="mb-2 flex items-center justify-between">
+        <h2 className="text-md font-semibold">Guarantee</h2>
+      </div>
+      <p className="text-md text-gray-700">
+        Increase your chances of getting hired by offering a guarantee.
+      </p>
+      <div className="flex items-center my-4">
+        <Image src={info} alt="info" className="w-4 h-4 object-contain mr-2" />
+        <p className="text-sm text-gray-700">
+          Homeowners are aware guarantees vary and should discuss the terms in
+          advance.
+        </p>
+      </div>
+      <GuaranteeSelector />
     </div>
   );
 }
