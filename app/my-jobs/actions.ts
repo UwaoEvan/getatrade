@@ -111,7 +111,7 @@ export const getShortlists = async (jobId: string) => {
     FROM "shortlist"
     INNER JOIN "user"
     ON "user"."id" = "shortlist"."userId"
-    WHERE "job"."id" = ${jobId}
+    WHERE "shortlist"."jobId" = ${jobId}
   `;
   return shortlists;
 };
