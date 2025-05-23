@@ -1,10 +1,9 @@
 import { getJobPosting } from "@/app/lib/actions";
 import { formatDistanceToNow } from "date-fns";
 import { Suspense } from "react";
-import InterestedPerson from "./components/InterestedPerson";
-import Shortlisted from "./components/Shortlisted";
 import { getInterestOnJob, getShortlists } from "../actions";
 import CloseJob from "./components/CloseJob";
+import LeadTabs from "./components/LeadTabs";
 
 type Params = {
   params: Promise<{
@@ -74,7 +73,7 @@ export default async function LeadDetails({ params }: Params) {
             </div>
           </div>
         </div>
-        <div>
+        {/* <div>
           <p className="font-bold text-xl py-4">Interested</p>
           <div className="flex flex-wrap justify-between gap-4">
             {interests.map((interest) => (
@@ -95,7 +94,8 @@ export default async function LeadDetails({ params }: Params) {
               />
             ))}
           </div>
-        </div>
+        </div> */}
+        <LeadTabs jobId={jobId} interests={interests} shortlists={shortlists} />
       </div>
     </Suspense>
   );
