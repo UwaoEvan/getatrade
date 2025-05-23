@@ -54,3 +54,8 @@ export const reviewsSchema = z.object({
   rating: z.string(),
   jobId: z.string(),
 });
+
+export const replyReviewSchema = z.object({
+  reply: z.string(),
+  reviewId: z.string(),
+});

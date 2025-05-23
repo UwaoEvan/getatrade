@@ -104,14 +104,16 @@ model Payments {
 }
 
 model Reviews {
-  id             String   @id @default(uuid())
+  id             String    @id @default(uuid())
   rating         Int
-  createdAt      DateTime @default(now())
+  createdAt      DateTime  @default(now())
   review         String
   customerId     Int
   tradesPersonId Int
+  reply          String?
+  replyCreatedAt DateTime? 
   jobId          String
-  job            Job      @relation(fields: [jobId], references: [id])
+  job            Job       @relation(fields: [jobId], references: [id])
 
   @@map("reviews")
 }

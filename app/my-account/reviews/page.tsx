@@ -1,10 +1,9 @@
 import { getAverageRating, getReviews } from "./action";
-import { format } from "date-fns";
+import ReviewCard from "./ReviewCard";
 
 export default async function Reviews() {
   const reviews = await getReviews();
   const avg = await getAverageRating();
-  // console.log({avg})
   return (
     <section className="max-w-2xl mx-auto p-4">
       <div className="bg-white rounded-lg shadow p-6 mb-6">
@@ -42,24 +41,7 @@ export default async function Reviews() {
       <div>
         <h3 className="font-bold text-lg mb-4">Reviews ({reviews?.length})</h3>
         {reviews?.map((review, idx) => (
-          <div key={idx} className="mb-8">
-            <div className="bg-white rounded-lg shadow p-4">
-              <div className="flex items-center mb-2">
-                <span className="text-[#fd914d] mr-2">★★★★★</span>
-                <span className="text-gray-500 text-xs">
-                  Review left on {format(review.createdAt, "dd-MM-yyyy")}
-                </span>
-              </div>
-
-              <div className="font-bold">{review.title}</div>
-
-              <div className="mt-1 text-gray-700 text-sm">{review.review}</div>
-
-              <div className="text-xs text-gray-400 mt-1">
-                — by {review.username}
-              </div>
-            </div>
-          </div>
+          <ReviewCard key={idx} review={review} />
         ))}
         {reviews?.length === 0 && (
           <div className="text-center py-12">
