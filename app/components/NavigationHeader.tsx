@@ -20,7 +20,7 @@ const navLinks = {
   ],
   customer: [
     { href: "/my-jobs", label: "My Jobs" },
-    { href: "/my-account", label: "My account" },
+    { href: "/my-account/contact-details", label: "My account" },
   ],
   tradesperson: [
     { href: "/new-leads", label: "New leads" },

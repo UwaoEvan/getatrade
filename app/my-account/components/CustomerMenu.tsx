@@ -85,6 +85,7 @@ export default function CustomerMenu({ name, location }: Props) {
                 const support = label === "Support centre";
                 return support ? (
                   <a
+                    key={label}
                     href="mailto:info@getatradelinkltd.com"
                     className={`flex items-center gap-2 px-3 py-2 rounded-md ${
                       active
