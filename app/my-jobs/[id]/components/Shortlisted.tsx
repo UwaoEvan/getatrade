@@ -25,7 +25,7 @@ export default function Shortlisted({
   return (
     <div className="w-full max-w-sm px-4 py-2 rounded-xl border border-gray-200">
       <Link
-        href={`/my-account/${userId}`}
+        href={`/my-jobs/${jobId}/overview`}
         className="flex items-center gap-3 mb-2"
       >
         <Avatar className="w-10 h-10">
