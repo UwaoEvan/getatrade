@@ -5,13 +5,14 @@ import Chat from "./Chat";
 type SearchParams = {
   searchParams: {
     jobId?: string;
+    userId?: string;
   };
 };
 
 export default async function Messages({ searchParams }: SearchParams) {
-  const { jobId } = await searchParams;
+  const { jobId, userId } = await searchParams;
   const job = await getJobPosting(jobId as string);
-  const user = await getUser("", job?.userId);
+  const user = await getUser("", parseInt(userId as string));
   return (
     <div className="flex flex-col lg:flex-row min-h-[60vh] mx-auto bg-gray-100 p-6 font-sans text-sm">
       <div className="md:w-[880px] mx-auto flex">
@@ -27,7 +28,7 @@ export default async function Messages({ searchParams }: SearchParams) {
           <div className="bg-white rounded-xl border border-gray-200 p-4 space-y-3">
             <h3 className="font-semibold">Contact details</h3>
             <div className="bg-green-50 text-green-800 p-2 rounded-md text-sm">
-              ✅ You've been hired for this job
+              ✅ You&apos;ve been hired for this job
             </div>
             <div className="text-sm">
               📞{" "}
@@ -57,7 +58,7 @@ export default async function Messages({ searchParams }: SearchParams) {
                 })}
               </p>
               <p>
-                💷 You've been charged <strong>£32</strong> + VAT
+                💷 You&apos;ve been charged <strong>£32</strong> + VAT
               </p>
               <p>📍 {job?.location}</p>
             </div>

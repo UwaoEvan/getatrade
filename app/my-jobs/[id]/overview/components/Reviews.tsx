@@ -2,6 +2,7 @@ import { TabsContent } from "@/components/ui/tabs";
 
 type Props = {
   value: string;
+  userId?: number;
 };
 
 export default function Review({ value }: Props) {

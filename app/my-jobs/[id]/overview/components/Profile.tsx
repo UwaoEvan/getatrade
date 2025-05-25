@@ -1,20 +1,19 @@
+"use client"
 import { TabsContent } from "@/components/ui/tabs";
 import { CheckCircle, Clock, Info, Shield } from "lucide-react";
 
 type Props = {
   value: string;
+    about?: string;
 };
 
-export default function Profile({ value }: Props) {
+export default function Profile({ value, about }: Props) {
   return (
     <TabsContent value={value} className="mt-6 space-y-6">
-      {/* Member Since */}
       <div className="flex items-center gap-2 text-sm text-gray-600">
         <Clock className="w-4 h-4" />
         <span>Member since 2025</span>
       </div>
-
-      {/* Good to Know Section */}
       <div>
         <h4 className="text-lg font-semibold text-gray-900 mb-4">
           Good to know
@@ -35,33 +34,27 @@ export default function Profile({ value }: Props) {
         </div>
       </div>
 
-      {/* Trades Section */}
       <div>
         <h4 className="text-lg font-semibold text-gray-900 mb-3">Trades</h4>
         <p className="text-sm text-gray-700">Painter & Decorator</p>
       </div>
 
-      {/* About Section */}
       <div>
         <h4 className="text-lg font-semibold text-gray-900 mb-3">
           About this company
         </h4>
         <p className="text-sm text-gray-700 leading-relaxed mb-4">
-          Hi [Future Customer Name], I'm youssef belasri, and I specialize in
-          painting and decorating in the London NW10 area. I'm passionate about
-          transforming spaces with quality work and bringing your vision to
-          life. I'd love to hear about your project and discuss how I can help.
+          {about}
         </p>
         <p className="text-xs text-gray-500 italic">
           *The details provided in this profile have not been verified by
-          MyBuilder. Please <span className="underline">contact us</span> if you
-          believe any of this information is incorrect.
+          Getatradelink.
         </p>
       </div>
-
-      {/* Portfolio Section */}
+      {/* Please <span className="underline">contact us</span> if you
+          believe any of this information is incorrect. */}
       <div>
-        <h4 className="text-lg font-semibold text-gray-900 mb-4">Portfolio</h4>
+        {/* <h4 className="text-lg font-semibold text-gray-900 mb-4">Portfolio</h4>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {[1, 2, 3, 4, 5, 6, 7].map((index) => (
             <div
@@ -75,7 +68,7 @@ export default function Profile({ value }: Props) {
               />
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </TabsContent>
   );

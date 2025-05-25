@@ -5,10 +5,16 @@ import { auth } from "@/app/lib/auth";
 import { db } from "@/app/lib/db";
 import { replyReviewSchema } from "@/app/lib/schemas";
 
-export const getReviews = async () => {
+export const getReviews = async (userId?: number) => {
   const session = await auth();
-  const user = await getUser(session?.user?.email as string);
+  let user;
 
+  if (userId) {
+    user = await getUser("", userId);
+  } else {
+    user = await getUser(session?.user?.email as string);
+  }
+  
   type Review = {
     username: string;
     title: string;

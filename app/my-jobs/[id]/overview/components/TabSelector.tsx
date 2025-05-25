@@ -1,10 +1,17 @@
+"use client"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import Profile from "./Profile";
 import Review from "./Reviews";
 import Messages from "./Messages";
 
-export default function TabSelector() {
+type Props = {
+  userId?: number;
+  about?: string
+};
+
+
+export default function TabSelector({ userId, about }: Props) {
   const [activeTab, setActiveTab] = useState("profile");
   return (
     <div>
@@ -29,8 +36,8 @@ export default function TabSelector() {
             Messages
           </TabsTrigger>
         </TabsList>
-        <Profile value="profile" />
-        <Review value="reviews" />
+        <Profile value="profile" about={about} />
+        <Review value="reviews" userId={userId} />
         <Messages value="messages" />
       </Tabs>
     </div>
