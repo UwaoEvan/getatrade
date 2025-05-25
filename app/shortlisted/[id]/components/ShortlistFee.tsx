@@ -20,9 +20,16 @@ export default function ShortlistFee({ jobId }: Props) {
       <Link
         href={`/checkout?jobId=${jobId}`}
         type="submit"
-        className="bg-[#2f76d9] text-white py-2 px-4 rounded w-full block text-center"
+        className="bg-[#2f76d9] text-white py-2 px-4 rounded w-full block text-center text-sm"
       >
         Pay
+      </Link>
+      <Link
+        href={`/messages?jobId=${jobId}`}
+        type="submit"
+        className="bg-[#2f76d9] text-white py-2 px-4 rounded w-full block text-center mt-2 text-sm"
+      >
+        Send Message
       </Link>
     </div>
   );

@@ -11,7 +11,26 @@ const Sidebar = async ({ id }: Props) => {
   return (
     <aside className="w-full max-w-xs space-y-6 text-sm text-gray-900 pb-6">
       <div className="border-[1px] border-gray-300 pt-2">
-        <h2 className="font-semibold text-base mb-2 px-4 py-2">
+        <h2 className="font-bold text-base mb-2 px-4 py-2">My chats</h2>
+        <hr className="text-gray-300" />
+        <p className="text-gray-700 mb-4 px-4 pt-4">
+          You didn’t start a chat with any tradespeople yet. Start a chat to get
+          your job done soon.
+        </p>
+
+        <div className="divide-y divide-gray-200 overflow-hidden">
+          {interests.map((interest) => (
+            <Tradesperson
+              key={interest.id}
+              jobId={id}
+              interest={interest}
+              chat={true}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="border-[1px] border-gray-300 pt-2">
+        <h2 className="font-bold text-base mb-2 px-4 py-2">
           Interested tradespeople
         </h2>
         <hr className="text-gray-300" />
@@ -21,17 +40,19 @@ const Sidebar = async ({ id }: Props) => {
         </p>
 
         <div className="divide-y divide-gray-200 overflow-hidden">
-          { interests.map(interest => (
-            <Tradesperson 
-              jobId={id} 
+          {interests.map((interest) => (
+            <Tradesperson
+              key={interest.id}
+              jobId={id}
               interest={interest}
+              chat={false}
             />
           ))}
         </div>
       </div>
 
       <div className="border-[1px] border-gray-300 pt-2">
-        <h2 className="font-semibold text-base mb-2 px-4 py-2">
+        <h2 className="font-bold text-base mb-2 px-4 py-2">
           Get more responses
         </h2>
         <hr className="text-gray-300" />
@@ -46,7 +67,7 @@ const Sidebar = async ({ id }: Props) => {
       </div>
 
       <div className="border-[1px] border-gray-300 ">
-        <h2 className="font-semibold text-base my-2 px-4 py-2">Job details</h2>
+        <h2 className="font-bold text-base my-2 px-4 py-2">Job details</h2>
         <hr className="text-gray-300" />
         <p className="py-4 text-md px-4">Painting</p>
         <div className="flex flex-col space-y-2">

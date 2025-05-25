@@ -39,7 +39,9 @@ const ContactDetails = async () => {
 
           <div>
             <p className="text-sm text-gray-500">Name</p>
-            <p className="text-md text-gray-700 font-medium">{user?.firstName}</p>
+            <p className="text-md text-gray-700 font-medium">
+              {user?.firstName}
+            </p>
           </div>
 
           <div>
