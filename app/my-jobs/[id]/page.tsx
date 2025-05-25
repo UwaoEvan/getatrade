@@ -27,11 +27,11 @@ export default async function LeadDetails({ params }: Params) {
     >
       <div className="px-6 space-y-8">
         <div className="flex flex-wrap items-center gap-6 bg-blue-100 text-black p-4 rounded-md">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 text-sm">
             <MessageCircle className="w-5 h-5" />
             <span>2 responses</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 text-sm">
             <Clock className="w-5 h-5" />
             <span>
               {formatDistanceToNow(new Date(job?.createdAt || ""), {
@@ -39,7 +39,7 @@ export default async function LeadDetails({ params }: Params) {
               })}
             </span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 text-sm">
             <MapPin className="w-5 h-5" />
             <span>{job?.location}</span>
           </div>

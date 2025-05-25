@@ -33,21 +33,19 @@ const ContactDetails = async () => {
           <div>
             <p className="text-sm text-gray-500">Trading name</p>
             <p className="text-md text-gray-700 font-medium">
-              McKenzie Plastering & Decorating Service
+              {user?.username}
             </p>
           </div>
 
           <div>
             <p className="text-sm text-gray-500">Name</p>
-            <p className="text-md text-gray-700 font-medium">Sharna McKenzie</p>
+            <p className="text-md text-gray-700 font-medium">{user?.firstName}</p>
           </div>
 
           <div>
             <p className="text-sm text-gray-500">Address</p>
             <p className="text-md text-gray-700 font-medium">
-              Bower Lane
-              <br />
-              ME16 8BJ Maidstone
+              {user?.location}
             </p>
           </div>
         </>
