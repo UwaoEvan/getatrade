@@ -3,10 +3,10 @@ import { getJobPosting, getUser } from "../lib/actions";
 import Chat from "./Chat";
 
 type SearchParams = {
-  searchParams: {
-    jobId?: string;
-    userId?: string;
-  };
+  searchParams: Promise<{
+    jobId?: string
+    userId?: string
+  }>
 };
 
 export default async function Messages({ searchParams }: SearchParams) {
