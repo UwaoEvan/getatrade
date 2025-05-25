@@ -1,12 +1,13 @@
-"use client";
 import Link from "next/link";
 import Tradesperson from "./Tradesperson";
+import { getInterestOnJob } from "../../actions";
 
 type Props = {
   id?: string;
 };
 
-const Sidebar = ({ id }: Props) => {
+const Sidebar = async ({ id }: Props) => {
+  const interests = await getInterestOnJob(id as string);
   return (
     <aside className="w-full max-w-xs space-y-6 text-sm text-gray-900 pb-6">
       <div className="border-[1px] border-gray-300 pt-2">
@@ -20,7 +21,12 @@ const Sidebar = ({ id }: Props) => {
         </p>
 
         <div className="divide-y divide-gray-200 overflow-hidden">
-          <Tradesperson jobId={id} />
+          { interests.map(interest => (
+            <Tradesperson 
+              jobId={id} 
+              interest={interest}
+            />
+          ))}
         </div>
       </div>
 

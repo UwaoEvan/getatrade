@@ -4,9 +4,18 @@ import Link from "next/link";
 
 type Props = {
   jobId?: string;
+  interest: {
+    id: string;
+    jobId: string;
+    userId: number;
+    user?: {
+      username: string;
+      location?: string | null;
+    };
+  };
 };
 
-export default function Tradesperson({ jobId }: Props) {
+export default function Tradesperson({ jobId, interest }: Props) {
   return (
     <Link
       href={`/my-jobs/${jobId}/overview`}
@@ -15,11 +24,16 @@ export default function Tradesperson({ jobId }: Props) {
       <div className="flex items-center space-x-3">
         <Avatar className="w-10 h-10">
           <AvatarFallback className="bg-blue-100 text-[#2f76d9]">
-            A
+            {interest.user?.username.charAt(0).toUpperCase()}
           </AvatarFallback>
         </Avatar>
         <div>
-          <div className="text-[#2f76d9] font-medium">Painter Decorator</div>
+          <div 
+            className="text-[#2f76d9] font-medium" 
+            title={interest.user?.username}
+          >
+            {interest.user?.username}
+          </div>
           <div className="text-xs text-gray-600">⭐ 5/5 (186 reviews)</div>
         </div>
       </div>
