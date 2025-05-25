@@ -1,4 +1,3 @@
-
 import { MapPin } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import TabSelector from "./components/TabSelector";
@@ -6,9 +5,9 @@ import { getUser } from "@/app/lib/actions";
 import Link from "next/link";
 
 type SearchParams = {
-  searchParams: {
+  searchParams: Promise<{
     id?: string;
-  };
+  }>;
   params: Promise<{
     id: string;
   }>;
@@ -55,9 +54,10 @@ export default async function ProfilePage({
           phone or email.
         </p>
         <div className="flex space-x-4">
-          <Link 
+          <Link
             href={`/my-jobs/${jobId}`}
-            className="block px-4 py-2 border text-sm rounded-md text-blue-600 ">
+            className="block px-4 py-2 border text-sm rounded-md text-blue-600 "
+          >
             Not interested
           </Link>
           <Link

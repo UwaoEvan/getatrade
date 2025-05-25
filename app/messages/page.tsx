@@ -4,9 +4,9 @@ import Chat from "./Chat";
 
 type SearchParams = {
   searchParams: Promise<{
-    jobId?: string
-    userId?: string
-  }>
+    jobId?: string;
+    userId?: string;
+  }>;
 };
 
 export default async function Messages({ searchParams }: SearchParams) {

@@ -1,10 +1,10 @@
-"use client"
+"use client";
 import { TabsContent } from "@/components/ui/tabs";
 import { CheckCircle, Clock, Info, Shield } from "lucide-react";
 
 type Props = {
   value: string;
-    about?: string;
+  about?: string;
 };
 
 export default function Profile({ value, about }: Props) {
@@ -43,9 +43,7 @@ export default function Profile({ value, about }: Props) {
         <h4 className="text-lg font-semibold text-gray-900 mb-3">
           About this company
         </h4>
-        <p className="text-sm text-gray-700 leading-relaxed mb-4">
-          {about}
-        </p>
+        <p className="text-sm text-gray-700 leading-relaxed mb-4">{about}</p>
         <p className="text-xs text-gray-500 italic">
           *The details provided in this profile have not been verified by
           Getatradelink.

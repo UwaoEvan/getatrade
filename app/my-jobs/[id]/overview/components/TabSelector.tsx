@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import Profile from "./Profile";
@@ -7,9 +7,8 @@ import Messages from "./Messages";
 
 type Props = {
   userId?: number;
-  about?: string
+  about?: string;
 };
-
 
 export default function TabSelector({ userId, about }: Props) {
   const [activeTab, setActiveTab] = useState("profile");

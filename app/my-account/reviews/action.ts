@@ -14,7 +14,7 @@ export const getReviews = async (userId?: number) => {
   } else {
     user = await getUser(session?.user?.email as string);
   }
-  
+
   type Review = {
     username: string;
     title: string;
