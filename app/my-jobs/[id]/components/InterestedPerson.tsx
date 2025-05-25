@@ -3,17 +3,16 @@ import ShortlistForm from "./ShortlistForm";
 type Interested = {
   interest: {
     id: string;
-  jobId: string;
-  userId: number;
-  user?: {
-    username: string;
-    location?: string | null;
-  }
-  }
-}
+    jobId: string;
+    userId: number;
+    user?: {
+      username: string;
+      location?: string | null;
+    };
+  };
+};
 
 export default function InterestedPerson({ interest }: Interested) {
-
   return (
     <div className="w-full max-w-sm p-4 bg-white rounded-xl shadow-md border border-gray-200">
       <div className="flex items-center gap-3 mb-2">
@@ -38,7 +37,9 @@ export default function InterestedPerson({ interest }: Interested) {
           <p className="text-sm text-gray-500">
             ⭐ 5/5 <span className="ml-1 text-gray-400">(2 reviews)</span>
           </p>
-          <p className="text-sm text-gray-600 mb-4">📍 {interest?.user?.location}</p>
+          <p className="text-sm text-gray-600 mb-4">
+            📍 {interest?.user?.location}
+          </p>
         </div>
       </div>
       <ShortlistForm jobId={interest.jobId} userId={interest.userId} />

@@ -17,14 +17,14 @@ type Interest = {
   user: {
     username: string;
     location?: string | null;
-  }
-}
+  };
+};
 
 export default function LeadTabs({ jobId, interests, shortlists }: Props) {
   const [activeTab, setActiveTab] = useState<"interested" | "shortlisted">(
     "interested",
   );
-  console.log(interests)
+
   return (
     <div>
       <div className="flex space-x-4 border-b mb-4">

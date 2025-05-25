@@ -22,10 +22,10 @@ export const getInterestOnJob = async (jobId: string) => {
       jobId,
     },
     include: {
-      user: true
-    }
+      user: true,
+    },
   });
-  
+
   return interest;
 };
 

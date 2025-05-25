@@ -50,21 +50,6 @@ export default function CloseJob({ jobId, active }: Props) {
           <p className="text-sm font-semibold text-red-500 bg-red-100 p-2 rounded mb-3">
             This job has been closed for applications.
           </p>
-          {/* <p className="text-sm text-gray-700 mb-4">
-        Do you wish to close this job
-      </p>
-      <form action={formAction}>
-        <input name="jobId" type="hidden" value={jobId} />
-        <button
-          type="submit"
-          className="bg-red-500 text-white py-2 px-4 rounded w-full block text-center hover:cursor-pointer"
-        >
-          Close
-        </button>
-        {state?.success && (
-          <p className="text-green-600">Closed successfully! 🎉</p>
-        )}
-      </form> */}
         </>
       )}
     </div>

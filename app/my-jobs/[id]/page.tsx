@@ -2,8 +2,8 @@ import { getJobPosting } from "@/app/lib/actions";
 import { formatDistanceToNow } from "date-fns";
 import { Suspense } from "react";
 import { getInterestOnJob, getShortlists } from "../actions";
-import CloseJob from "./components/CloseJob";
 import LeadTabs from "./components/LeadTabs";
+import { Clock, MapPin, MessageCircle } from "lucide-react";
 
 type Params = {
   params: Promise<{
@@ -25,30 +25,46 @@ export default async function LeadDetails({ params }: Params) {
         </div>
       }
     >
-      <div className="max-w-4xl mx-auto mt-10 p-6 space-y-8">
-        <div className="space-y-3">
-          <h1 className="text-3xl font-bold text-gray-800">{job?.title}</h1>
-          <p className="text-sm text-gray-500">
-            {job?.location} •{" "}
-            {formatDistanceToNow(new Date(job?.createdAt || ""), {
-              addSuffix: true,
-            })}
-          </p>
+      <div className="px-6 space-y-8">
+        <div className="flex flex-wrap items-center gap-6 bg-blue-100 text-black p-4 rounded-md">
+          <div className="flex items-center gap-2">
+            <MessageCircle className="w-5 h-5" />
+            <span>2 responses</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Clock className="w-5 h-5" />
+            <span>
+              {formatDistanceToNow(new Date(job?.createdAt || ""), {
+                addSuffix: true,
+              })}
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <MapPin className="w-5 h-5" />
+            <span>{job?.location}</span>
+          </div>
         </div>
         <div className="md:flex md:justify-between">
-          <div className="mt-4 space-y-1">
-            <p className="font-bold mb-4">Job description</p>
-            <p>
-              <span className="font-semibold">Job type:</span> {job?.project}
-            </p>
-            <p>
-              <span className="font-semibold">Category:</span> {job?.category}
-            </p>
-            <p className="font-semibold mt-2">
-              Note: <span className="font-normal">{job?.description}</span>
-            </p>
+          <div className="mt-4">
+            <p className="mb-4 font-bold text-lg">Job description</p>
+
+            <div className="space-y-2">
+              <div className="grid grid-cols-[150px_1fr] gap-2">
+                <span className="">Job type:</span>
+                <span>{job?.project}</span>
+              </div>
+
+              <div className="grid grid-cols-[150px_1fr] gap-2">
+                <span className="">Category:</span>
+                <span>{job?.category}</span>
+              </div>
+
+              <div className="grid grid-cols-[150px_1fr] gap-2">
+                <span className="">Note:</span>
+                <span>{job?.description}</span>
+              </div>
+            </div>
           </div>
-          <CloseJob active={job?.active as boolean} jobId={job?.id} />
         </div>
         <div className="w-full">
           <hr className="border-gray-300" />
@@ -73,33 +89,7 @@ export default async function LeadDetails({ params }: Params) {
             </div>
           </div>
         </div>
-        {/* <div>
-          <p className="font-bold text-xl py-4">Interested</p>
-          <div className="flex flex-wrap justify-between gap-4">
-            {interests.map((interest) => (
-              <InterestedPerson key={interest.id} interest={interest} />
-            ))}
-          </div>
-        </div>
-        <div>
-          <p className="font-bold text-xl py-4">Shortlisted</p>
-          <div className="flex flex-wrap justify-between gap-4">
-            {shortlists.map((shortlist) => (
-              <Shortlisted
-                key={shortlist.shortlistId}
-                userId={shortlist.userId}
-                location={shortlist.location}
-                name={shortlist.username}
-                jobId={jobId}
-              />
-            ))}
-          </div>
-        </div> */}
-        <LeadTabs 
-          jobId={jobId} 
-          interests={interests} 
-          shortlists={shortlists} 
-        />
+        <LeadTabs jobId={jobId} interests={interests} shortlists={shortlists} />
       </div>
     </Suspense>
   );
