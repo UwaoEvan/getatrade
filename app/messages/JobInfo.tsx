@@ -20,7 +20,7 @@ export default function JobInfo({ user }: Props) {
   const location = searchParams.get("location");
   const time = searchParams.get("time");
   return (
-    <div className="w-full md:w-[40%] px-4 mt-4 space-y-6">
+    <div className="w-full md:w-[40%] px-4 mt-4 md:mt-10 space-y-6">
       <div className="bg-white rounded-xl border border-gray-200 p-4 space-y-3">
         <h3 className="font-semibold">Contact details</h3>
         <div className="bg-green-50 text-green-800 p-2 rounded-md text-sm">
