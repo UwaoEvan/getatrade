@@ -36,7 +36,7 @@ export default function TabSelector({ userId, about, role }: Props) {
             Messages
           </TabsTrigger>
         </TabsList>
-        <Profile value="profile" about={about} role={role} />
+        <Profile value="profile" about={about} role={role} userId={userId} />
         <Review value="reviews" userId={userId} />
         <Messages value="messages" />
       </Tabs>

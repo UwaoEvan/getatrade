@@ -1,14 +1,16 @@
 "use client";
 import { TabsContent } from "@/components/ui/tabs";
 import { CheckCircle, Clock, Info, Shield } from "lucide-react";
+import Portfolio from "./Portfolio";
 
 type Props = {
   value: string;
   about?: string;
   role?: string;
+  userId?: number
 };
 
-export default function Profile({ value, about, role }: Props) {
+export default function Profile({ value, about, role, userId }: Props) {
   return (
     <TabsContent value={value} className="mt-6 space-y-6">
       <div className="flex items-center gap-2 text-sm text-gray-600">
@@ -52,23 +54,7 @@ export default function Profile({ value, about, role }: Props) {
       </div>
       {/* Please <span className="underline">contact us</span> if you
           believe any of this information is incorrect. */}
-      <div>
-        {/* <h4 className="text-lg font-semibold text-gray-900 mb-4">Portfolio</h4>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-          {[1, 2, 3, 4, 5, 6, 7].map((index) => (
-            <div
-              key={index}
-              className="aspect-square bg-gray-200 rounded-lg overflow-hidden"
-            >
-              <img
-                src={`/placeholder.svg?height=150&width=150`}
-                alt={`Portfolio image ${index}`}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-200"
-              />
-            </div>
-          ))}
-        </div> */}
-      </div>
+      <Portfolio userId={userId} />
     </TabsContent>
   );
 }

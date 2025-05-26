@@ -17,7 +17,6 @@ export default function Page() {
   const [isUploading, setIsUploading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Fetch images on component mount
   useEffect(() => {
     fetchImages();
   }, []);
@@ -40,20 +39,20 @@ export default function Page() {
 
   const removeImage = async (id: string) => {
     setImages(images.filter((img) => img.id !== id));
-    // try {
-    //   const response = await fetch(`/api/upload/${id}`, {
-    //     method: "DELETE",
-    //   })
+    try {
+      const response = await fetch(`/api/upload/${id}`, {
+        method: "DELETE",
+      })
 
-    //   if (response.ok) {
-    //     setImages(images.filter((img) => img.id !== id))
+      if (response.ok) {
+        setImages(images.filter((img) => img.id !== id))
 
-    //   } else {
+      } else {
 
-    //   }
-    // } catch (error) {
+      }
+    } catch (error) {
 
-    // }
+    }
   };
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
