@@ -60,7 +60,7 @@ export default function Notification({ shortlist }: ShortlistProps) {
             </span>
           </div>
           <p className="text-gray-700 text-sm">
-            Great news, you have been shortlisted for "{shortlist.category}".
+            Great news, you have been shortlisted for &quot;{shortlist.category}&quot;.
           </p>
 
           {/* <div className="flex items-center space-x-6">
