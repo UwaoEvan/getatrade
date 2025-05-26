@@ -32,7 +32,7 @@ export default function Notification({ shortlist }: ShortlistProps) {
       href={`/messages?jobId=${shortlist.jobId}&target=${shortlist.id}&from=${shortlist.userId}&title=${shortlist.title}&time=${time}&location=${shortlist.location}`}
       className="w-full mx-auto bg-white mb-2"
     >
-      <div className="relative bg-white border border-gray-200 rounded-lg shadow-sm">
+      <div className="relative bg-white border border-gray-200 rounded-lg shadow-sm transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-md">
         <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-400 rounded-l-lg"></div>
         <div className="p-4 pl-8">
           <div className="flex items-start justify-between mb-4">
@@ -60,7 +60,7 @@ export default function Notification({ shortlist }: ShortlistProps) {
             </span>
           </div>
           <p className="text-gray-700 text-sm">
-            Great news, you have been shortlisted for {shortlist.description}.
+            Great news, you have been shortlisted for "{shortlist.category}".
           </p>
 
           {/* <div className="flex items-center space-x-6">
