@@ -4,9 +4,10 @@ import { getInterestOnJob } from "../../actions";
 
 type Props = {
   id?: string;
+  currentUser?: number;
 };
 
-const Sidebar = async ({ id }: Props) => {
+const Sidebar = async ({ id, currentUser }: Props) => {
   const interests = await getInterestOnJob(id as string);
   return (
     <aside className="w-full max-w-xs space-y-6 text-sm text-gray-900 pb-6">
@@ -24,6 +25,7 @@ const Sidebar = async ({ id }: Props) => {
               key={interest.id}
               jobId={id}
               interest={interest}
+              currentUser={currentUser}
               chat={true}
             />
           ))}

@@ -49,7 +49,7 @@ export default async function MyJobLayout({
           </div>
         </div>
         <div className="flex flex-col md:flex-row min-h-[60vh] pb-6">
-          <Sidebar id={id} />
+          <Sidebar id={id} currentUser={job?.userId} />
           <main className="flex-1">
             <div className="px-4">{children}</div>
           </main>

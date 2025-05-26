@@ -11,7 +11,7 @@ interface PortfolioImage {
   createdAt: string;
 }
 
-export default function Portfolio({ userId }: { userId?: number}) {
+export default function Portfolio({ userId }: { userId?: number }) {
   const [images, setImages] = useState<PortfolioImage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,7 +33,6 @@ export default function Portfolio({ userId }: { userId?: number}) {
       setIsLoading(false);
     }
   };
-
 
   if (isLoading) {
     return (

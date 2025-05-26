@@ -14,14 +14,15 @@ type Props = {
       location?: string | null;
     };
   };
+  currentUser?: number;
 };
 
-export default function Tradesperson({ jobId, interest, chat }: Props) {
+export default function Tradesperson({ jobId, interest, chat, currentUser }: Props) {
   return (
     <Link
       href={
         chat
-          ? `/my-jobs/${jobId}/messaging`
+          ? `/my-jobs/${jobId}/messaging?target=${interest.userId}&from=${currentUser}`
           : `/my-jobs/${jobId}/overview?id=${interest?.userId}`
       }
       className="flex items-center justify-between px-3 py-4 border-t-1 border-t-gray-100 hover:cursor-pointer hover:bg-gray-100"

@@ -15,21 +15,23 @@ datasource db {
 }
 
 model User {
-  id             Int         @id @default(autoincrement())
-  username       String
-  email          String      @unique
-  phoneNumber    String?     
-  firstName      String?
-  lastName       String?
-  hashedPassword String
-  role           String?
-  location       String?
-  about          String?
-  averageRating  Float?      @default(0.0)
-  job            Job[]
-  interest       Interest[]
-  shortlist      Shortlist[]
-  payments       Payments[]
+  id               Int         @id @default(autoincrement())
+  username         String
+  email            String      @unique
+  phoneNumber      String?
+  firstName        String?
+  lastName         String?
+  hashedPassword   String
+  role             String?
+  location         String?
+  about            String?
+  averageRating    Float?      @default(0.0)
+  job              Job[]
+  interest         Interest[]
+  shortlist        Shortlist[]
+  payments         Payments[]
+  sentMessages     Message[]   @relation("SentMessages")
+  receivedMessages Message[]   @relation("ReceivedMessages")
 
   @@map("user")
 }
@@ -111,7 +113,7 @@ model Reviews {
   customerId     Int
   tradesPersonId Int
   reply          String?
-  replyCreatedAt DateTime? 
+  replyCreatedAt DateTime?
   jobId          String
   job            Job       @relation(fields: [jobId], references: [id])
 
@@ -124,7 +126,20 @@ model PortfolioImage {
   filename  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userId Int?
+  userId    Int?
 
   @@map("portfolio_images")
+}
+
+model Message {
+  id         String   @id @default(cuid())
+  content    String
+  createdAt  DateTime @default(now())
+  read       Boolean  @default(false)
+  senderId   Int
+  receiverId Int
+  sender     User     @relation("SentMessages", fields: [senderId], references: [id])
+  receiver   User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+
+  @@map("message")
 }

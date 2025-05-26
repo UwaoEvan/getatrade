@@ -1,65 +1,79 @@
-import { Send } from "lucide-react";
-import React from "react";
+"use client";
 
-export default function Messaging() {
+import { useState, useEffect } from "react";
+import Messaging from "./component/messaging";
+import { useSearchParams } from "next/navigation";
+
+interface User {
+  id: number;
+  username: string;
+  avatar?: string;
+}
+
+export default function Page() {
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [otherUser, setOtherUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const searchParams = useSearchParams();
+  const targetUserId = searchParams.get("target");
+  const currentUserId = searchParams.get("from");
+
+  useEffect(() => {
+    initializeUsers();
+  }, []);
+
+  const initializeUsers = async () => {
+    try {
+      // Fetch all users
+      const response = await fetch("/api/users");
+      if (response.ok) {
+        const fetchedUsers = await response.json();
+        // setUsers(fetchedUsers)
+
+        // Set default users for demo
+        const brendan = fetchedUsers.find(
+          (u: User) => u.id === parseInt(targetUserId as string),
+        );
+        const you = fetchedUsers.find((u: User) => u.id === parseInt(currentUserId as string));
+
+        if (brendan && you) {
+          setCurrentUser(you);
+          setOtherUser(brendan);
+        }
+      }
+    } catch (error) {
+      console.error("Error initializing users:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-gray-500">Setting up messaging...</div>
+      </div>
+    );
+  }
+
+  if (!currentUser || !otherUser) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-red-500">Error: Could not initialize users</div>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-col lg:flex-row px-6 font-sans text-sm">
-      <div className="flex-1 bg-white rounded-xl border border-gray-200">
-        <div className="border-b p-4 font-semibold text-base">
-          Brendan O Shea
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="max-w-4xl mx-auto">
+        <div className="mb-4 text-center text-sm text-gray-600">
+          Chatting as:{" "}
+          <span className="font-semibold">{currentUser.username}</span> with{" "}
+          <span className="font-semibold">{otherUser.username}</span>
         </div>
 
-        <div className="p-4 space-y-4">
-          <div className="flex items-start">
-            <div className="w-6 h-6 bg-purple-200 text-purple-700 rounded-full text-xs font-bold flex items-center justify-center mr-2">
-              B
-            </div>
-            <div className="bg-gray-100 p-3 rounded-md max-w-md">
-              if you need to contact me my number is 07711589839.
-              <div className="text-gray-400 text-xs text-right mt-1">14:51</div>
-            </div>
-          </div>
-
-          <div className="flex items-start justify-end">
-            <div className="bg-purple-50 p-3 rounded-md max-w-md">
-              Thank you I will be sure contact you via your mobile . Thank you
-              <div className="text-gray-400 text-xs text-right mt-1">
-                Read 14:53
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-start">
-            <div className="w-6 h-6 bg-purple-200 text-purple-700 rounded-full text-xs font-bold flex items-center justify-center mr-2">
-              B
-            </div>
-            <div className="bg-gray-100 p-3 rounded-md max-w-md">
-              No problem, will you been attending tomorrow 9:30AM to have a
-              look?
-              <div className="text-gray-400 text-xs text-right mt-1">15:00</div>
-            </div>
-          </div>
-
-          <div className="text-center text-xs text-gray-500 py-2 border-t border-gray-200">
-            Wed, 03 Apr 2024
-          </div>
-        </div>
-
-        <div className="border-t p-4">
-          <div className="flex items-center gap-2">
-            <textarea
-              placeholder="Your message"
-              className="flex-1 border border-gray-300 rounded-md px-4 py-2 text-sm"
-            />
-            <button
-              type="button"
-              className="p-2 rounded-md bg-blue-400  text-white"
-              aria-label="Send message"
-            >
-              <Send className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
+        <Messaging currentUserId={currentUser.id} otherUserId={otherUser.id} />
       </div>
     </div>
   );

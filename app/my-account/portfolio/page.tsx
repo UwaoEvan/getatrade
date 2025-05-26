@@ -42,17 +42,13 @@ export default function Page() {
     try {
       const response = await fetch(`/api/upload/${id}`, {
         method: "DELETE",
-      })
+      });
 
       if (response.ok) {
-        setImages(images.filter((img) => img.id !== id))
-
+        setImages(images.filter((img) => img.id !== id));
       } else {
-
       }
-    } catch  {
-
-    }
+    } catch {}
   };
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {

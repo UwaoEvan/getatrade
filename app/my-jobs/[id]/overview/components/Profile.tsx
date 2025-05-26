@@ -7,7 +7,7 @@ type Props = {
   value: string;
   about?: string;
   role?: string;
-  userId?: number
+  userId?: number;
 };
 
 export default function Profile({ value, about, role, userId }: Props) {

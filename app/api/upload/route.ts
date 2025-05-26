@@ -64,7 +64,7 @@ export async function GET() {
 
     const images = await db.portfolioImage.findMany({
       where: {
-        userId: user.id
+        userId: user.id,
       },
       orderBy: {
         createdAt: "desc",
