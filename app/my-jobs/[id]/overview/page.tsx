@@ -69,7 +69,11 @@ export default async function ProfilePage({
         </div>
       </div>
 
-      <TabSelector userId={user?.id} about={user?.about || ""} />
+      <TabSelector 
+        userId={user?.id} 
+        about={user?.about as string} 
+        role={user?.role as string}
+      />
     </div>
   );
 }

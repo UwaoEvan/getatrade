@@ -8,9 +8,10 @@ import Messages from "./Messages";
 type Props = {
   userId?: number;
   about?: string;
+  role?: string;
 };
 
-export default function TabSelector({ userId, about }: Props) {
+export default function TabSelector({ userId, about, role }: Props) {
   const [activeTab, setActiveTab] = useState("profile");
   return (
     <div>
@@ -35,7 +36,7 @@ export default function TabSelector({ userId, about }: Props) {
             Messages
           </TabsTrigger>
         </TabsList>
-        <Profile value="profile" about={about} />
+        <Profile value="profile" about={about} role={role} />
         <Review value="reviews" userId={userId} />
         <Messages value="messages" />
       </Tabs>

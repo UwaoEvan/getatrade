@@ -5,9 +5,10 @@ import { CheckCircle, Clock, Info, Shield } from "lucide-react";
 type Props = {
   value: string;
   about?: string;
+  role?: string;
 };
 
-export default function Profile({ value, about }: Props) {
+export default function Profile({ value, about, role }: Props) {
   return (
     <TabsContent value={value} className="mt-6 space-y-6">
       <div className="flex items-center gap-2 text-sm text-gray-600">
@@ -36,7 +37,7 @@ export default function Profile({ value, about }: Props) {
 
       <div>
         <h4 className="text-lg font-semibold text-gray-900 mb-3">Trades</h4>
-        <p className="text-sm text-gray-700">Painter & Decorator</p>
+        <p className="text-sm text-gray-700">{role}</p>
       </div>
 
       <div>
