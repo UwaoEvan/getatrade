@@ -34,6 +34,13 @@ export default async function MyJobLayout({
             </Link>
             <p className="px-4 text-gray-300 font-bold">|</p>
             <Link
+              href={`/my-jobs/${job?.id}/edit`}
+              className="text-md font-semibold text-gray-500"
+            >
+              Edit
+            </Link>
+            <p className="px-4 text-gray-300 font-bold">|</p>
+            <Link
               href={`/my-jobs/${job?.id}/close`}
               className="text-md font-semibold text-gray-500"
             >

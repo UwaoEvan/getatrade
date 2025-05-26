@@ -77,7 +77,10 @@ const Sidebar = async ({ id }: Props) => {
           >
             View details
           </Link>
-          <Link href="#" className="block text-[#2f76d9] font-medium mb-4 px-4">
+          <Link
+            href={`/my-jobs/${id}/edit`}
+            className="block text-[#2f76d9] font-medium mb-4 px-4"
+          >
             Edit
           </Link>
           <Link

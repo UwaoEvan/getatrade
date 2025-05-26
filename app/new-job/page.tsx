@@ -72,12 +72,12 @@ export default function PostJob() {
 
         <div className="mb-6">
           <label className="block font-semibold mb-1">
-            Describe what you need the plans for
+            Add a description to your job
           </label>
           <textarea
             name="description"
             required
-            placeholder="E.g. I need plans for something a little bit different..."
+            placeholder="Include any details you think the tradesperson should know(paint color, timeframe, etc)"
             className="w-full border border-[#2f76d9] rounded px-3 py-2 h-28"
           ></textarea>
         </div>

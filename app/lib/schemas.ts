@@ -21,6 +21,11 @@ export const postJobSchema = z.object({
   location: z.string({ required_error: "Location is required" }),
 });
 
+export const updateJobSchema = z.object({
+  jobId: z.string(),
+  description: z.string(),
+});
+
 export const showInterestSchema = z.object({
   jobId: z.string(),
   email: z.string(),

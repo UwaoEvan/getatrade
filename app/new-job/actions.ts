@@ -1,9 +1,10 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { getUser, State } from "../lib/actions";
 import { auth } from "../lib/auth";
 import { db } from "../lib/db";
-import { postJobSchema } from "../lib/schemas";
+import { postJobSchema, updateJobSchema } from "../lib/schemas";
 
 export const postNewJob = async (prevState: State, formData: FormData) => {
   const session = await auth();
@@ -42,4 +43,28 @@ export const postNewJob = async (prevState: State, formData: FormData) => {
   });
 
   return { success: true };
+};
+
+export const updateJob = async (formData: FormData) => {
+  const parsed = updateJobSchema.safeParse({
+    jobId: formData.get("jobId"),
+    description: formData.get("description"),
+  });
+
+  if (!parsed.success) {
+    return;
+  }
+
+  const { jobId, description } = parsed.data;
+
+  await db.job.update({
+    where: {
+      id: jobId,
+    },
+    data: {
+      description,
+    },
+  });
+
+  revalidatePath(`/my-jobs/${jobId}`);
 };
