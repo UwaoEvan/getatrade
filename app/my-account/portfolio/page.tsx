@@ -50,7 +50,7 @@ export default function Page() {
       } else {
 
       }
-    } catch (error) {
+    } catch  {
 
     }
   };
