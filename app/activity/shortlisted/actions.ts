@@ -20,11 +20,14 @@ export const getShortlistedLeads = async (email: string) => {
     active: boolean;
     jobId: string;
     paid: boolean;
+    username: string;
+    jobPosterId: number;
   };
   const shortlist = await db.$queryRaw<Lead[]>`
-    SELECT * 
+    SELECT *, "job"."userId" as "jobPosterId"
     FROM "job"
     INNER JOIN "shortlist" ON "shortlist"."jobId" = "job"."id"
+    INNER JOIN "user" ON "user"."id" = "job"."userId"
     WHERE "shortlist"."userId" = ${user?.id} AND "job"."active" = true
   `;
   return shortlist;

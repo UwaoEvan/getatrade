@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { getJobPosting, getUser, State } from "../lib/actions";
 import { auth } from "../lib/auth";
 import { db } from "../lib/db";
@@ -96,6 +97,8 @@ export const shortlistTradesperson = async (
       "customer",
     );
 
+    revalidatePath(`/my-jobs/${jobId}`);
+
     return { success: true };
   } catch (error) {
     return { error: JSON.stringify(error) };
@@ -157,6 +160,7 @@ export const closeJob = async (prevState: State, formData: FormData) => {
     },
   });
 
+  revalidatePath(`/my-jobs/${jobId}`);
   return { success: true };
 };
 

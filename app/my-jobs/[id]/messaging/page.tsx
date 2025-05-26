@@ -28,17 +28,17 @@ export default function Page() {
       const response = await fetch("/api/users");
       if (response.ok) {
         const fetchedUsers = await response.json();
-        // setUsers(fetchedUsers)
 
-        // Set default users for demo
-        const brendan = fetchedUsers.find(
+        const targetUser = fetchedUsers.find(
           (u: User) => u.id === parseInt(targetUserId as string),
         );
-        const you = fetchedUsers.find((u: User) => u.id === parseInt(currentUserId as string));
+        const you = fetchedUsers.find(
+          (u: User) => u.id === parseInt(currentUserId as string),
+        );
 
-        if (brendan && you) {
+        if (targetUser && you) {
           setCurrentUser(you);
-          setOtherUser(brendan);
+          setOtherUser(targetUser);
         }
       }
     } catch (error) {

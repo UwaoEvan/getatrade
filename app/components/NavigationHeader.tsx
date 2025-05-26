@@ -25,6 +25,7 @@ const navLinks = {
   tradesperson: [
     { href: "/new-leads", label: "New leads" },
     { href: "/activity", label: "Activity" },
+    { href: "/contacts", label: "Contacts" },
     { href: "/my-account", label: "My account" },
   ],
 };

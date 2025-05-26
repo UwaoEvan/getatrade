@@ -1,8 +1,7 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useActionState } from "react";
 import { closeJob } from "../../actions";
-import { useRouter } from "next/navigation";
 
 type Props = {
   jobId?: string;
@@ -13,13 +12,6 @@ type Props = {
 const initState = { error: undefined, success: false };
 export default function CloseJob({ jobId, active }: Props) {
   const [state, formAction] = useActionState(closeJob, initState);
-  const router = useRouter();
-
-  useEffect(() => {
-    if (state.success) {
-      router.push(`/my-jobs/${jobId}`);
-    }
-  }, [state]);
 
   return (
     <div className="w-full md:w-[300px] border-1 border-gray-200 p-4 rounded-lg">

@@ -1,7 +1,6 @@
 "use client";
-import { useActionState, useEffect } from "react";
+import { useActionState } from "react";
 import { shortlistTradesperson } from "../../actions";
-import { useRouter } from "next/navigation";
 
 type Shortlist = {
   jobId: string;
@@ -14,13 +13,6 @@ export default function ShortlistForm({ userId, jobId }: Shortlist) {
     shortlistTradesperson,
     initialState,
   );
-  const router = useRouter();
-
-  useEffect(() => {
-    if (state.success) {
-      router.push(`/myjobs/${jobId}`);
-    }
-  }, [state]);
 
   return (
     <form action={formAction}>

@@ -1,69 +1,90 @@
-import { formatDistanceToNow } from "date-fns";
-import { getJobPosting, getUser } from "../lib/actions";
-import Chat from "./Chat";
+"use client";
 
-type SearchParams = {
-  searchParams: Promise<{
-    jobId?: string;
-    userId?: string;
-  }>;
-};
+import { useState, useEffect } from "react";
+import Messaging from "../my-jobs/[id]/messaging/component/messaging";
+import { useSearchParams } from "next/navigation";
+import JobInfo from "./JobInfo";
 
-export default async function Messages({ searchParams }: SearchParams) {
-  const { jobId, userId } = await searchParams;
-  const job = await getJobPosting(jobId as string);
-  const user = await getUser("", parseInt(userId as string));
+interface User {
+  id: number;
+  username: string;
+  phoneNumber: string;
+  email: string;
+  avatar?: string;
+}
+
+export default function Page() {
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [otherUser, setOtherUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const searchParams = useSearchParams();
+  const targetUserId = searchParams.get("target");
+  const currentUserId = searchParams.get("from");
+
+  useEffect(() => {
+    initializeUsers();
+  }, []);
+
+  const initializeUsers = async () => {
+    try {
+      // Fetch all users
+      const response = await fetch("/api/users");
+      if (response.ok) {
+        const fetchedUsers = await response.json();
+
+        const targetUser = fetchedUsers.find(
+          (u: User) => u.id === parseInt(targetUserId as string),
+        );
+        const you = fetchedUsers.find(
+          (u: User) => u.id === parseInt(currentUserId as string),
+        );
+
+        if (targetUser && you) {
+          setCurrentUser(you);
+          setOtherUser(targetUser);
+        }
+      }
+    } catch (error) {
+      console.error("Error initializing users:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-gray-500">Setting up messaging...</div>
+      </div>
+    );
+  }
+
+  if (!currentUser || !otherUser) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-red-500">Error: Could not initialize users</div>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-col lg:flex-row min-h-[60vh] mx-auto bg-gray-100 p-6 font-sans text-sm">
-      <div className="md:w-[880px] mx-auto flex">
-        <div className=" bg-white rounded-xl border border-gray-200">
-          <div className="border-b p-4 font-semibold text-base">
-            {user?.username}
-          </div>
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="max-w-4xl mx-auto md:flex">
+        <div className="w-full md:w-[60%]">
+          <div>
+            <div className="mb-4 text-center text-sm text-gray-600">
+              Chatting as:{" "}
+              <span className="font-semibold">{currentUser.username}</span> with{" "}
+              <span className="font-semibold">{otherUser.username}</span>
+            </div>
 
-          <Chat user={user || undefined} />
-        </div>
-
-        <div className="w-full lg:w-80 mt-6 lg:mt-0 lg:ml-6 space-y-6">
-          <div className="bg-white rounded-xl border border-gray-200 p-4 space-y-3">
-            <h3 className="font-semibold">Contact details</h3>
-            <div className="bg-green-50 text-green-800 p-2 rounded-md text-sm">
-              ✅ You&apos;ve been hired for this job
-            </div>
-            <div className="text-sm">
-              📞{" "}
-              <a href={user?.phoneNumber || ""} className="underline">
-                {user?.phoneNumber}
-              </a>
-            </div>
-            <div className="text-sm">
-              📧{" "}
-              <a href={user?.email} className="underline">
-                {user?.email}
-              </a>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl border border-gray-200 p-4 space-y-3">
-            <h3 className="font-semibold">{job?.title}</h3>
-            <span className="bg-purple-100 text-purple-800 text-xs font-semibold px-2 py-1 rounded-full">
-              Customer
-            </span>
-            <div className="text-sm space-y-1 mt-2">
-              {/* <p>💬 2 responses</p> */}
-              <p>
-                ⏱{" "}
-                {formatDistanceToNow(new Date(job?.createdAt || ""), {
-                  addSuffix: true,
-                })}
-              </p>
-              <p>
-                💷 You&apos;ve been charged <strong>£32</strong> + VAT
-              </p>
-              <p>📍 {job?.location}</p>
-            </div>
+            <Messaging
+              currentUserId={currentUser.id}
+              otherUserId={otherUser.id}
+            />
           </div>
         </div>
+        <JobInfo user={otherUser} />
       </div>
     </div>
   );

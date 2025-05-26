@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Tradesperson from "./Tradesperson";
-import { getInterestOnJob } from "../../actions";
+import Tradesperson, { Shortlisted } from "./Tradesperson";
+import { getInterestOnJob, getShortlists } from "../../actions";
 
 type Props = {
   id?: string;
@@ -9,6 +9,7 @@ type Props = {
 
 const Sidebar = async ({ id, currentUser }: Props) => {
   const interests = await getInterestOnJob(id as string);
+  const shortlisted = await getShortlists(id as string);
   return (
     <aside className="w-full max-w-xs space-y-6 text-sm text-gray-900 pb-6">
       <div className="border-[1px] border-gray-300 pt-2">
@@ -20,13 +21,13 @@ const Sidebar = async ({ id, currentUser }: Props) => {
         </p>
 
         <div className="divide-y divide-gray-200 overflow-hidden">
-          {interests.map((interest) => (
-            <Tradesperson
-              key={interest.id}
+          {shortlisted.map((shortlist) => (
+            <Shortlisted
+              key={shortlist.shortlistId}
               jobId={id}
-              interest={interest}
+              name={shortlist.username}
+              userId={shortlist.userId}
               currentUser={currentUser}
-              chat={true}
             />
           ))}
         </div>
