@@ -5,9 +5,10 @@ import { getInterestOnJob, getShortlists } from "../../actions";
 type Props = {
   id?: string;
   currentUser?: number;
+  jobTitle?: string;
 };
 
-const Sidebar = async ({ id, currentUser }: Props) => {
+const Sidebar = async ({ id, currentUser, jobTitle }: Props) => {
   const interests = await getInterestOnJob(id as string);
   const shortlisted = await getShortlists(id as string);
   return (
@@ -72,7 +73,7 @@ const Sidebar = async ({ id, currentUser }: Props) => {
       <div className="border-[1px] border-gray-300 ">
         <h2 className="font-bold text-base my-2 px-4 py-2">Job details</h2>
         <hr className="text-gray-300" />
-        <p className="py-4 text-md px-4">Painting</p>
+        <p className="py-4 text-md px-4 break-words">{jobTitle}</p>
         <div className="flex flex-col space-y-2">
           <Link
             href={`/my-jobs/${id}`}
