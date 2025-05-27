@@ -78,10 +78,10 @@ export const getAverageRating = async () => {
         rating: true,
       },
       where: {
-        customerId: user.id,
+        tradesPersonId: user.id,
       },
     });
-    console.log("av", avgRating);
+
     return avgRating;
   }
 };
