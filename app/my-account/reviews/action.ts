@@ -32,6 +32,7 @@ export const getReviews = async (userId?: number) => {
       ON "job"."id" = "reviews"."jobId"
       INNER JOIN "user" 
       ON "user"."id" = "job"."userId"
+      WHERE "reviews"."tradesPersonId" = ${user.id}
     `;
     return reviews;
   }
