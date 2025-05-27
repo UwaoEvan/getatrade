@@ -11,7 +11,7 @@ export const registerSchema = z.object({
   phoneNumber: z.string(),
   role: z.string(),
   password: z.string().min(6),
-  location: z.optional(z.string()),
+  // location: z.optional(z.string()),
 });
 
 export const postJobSchema = z.object({
