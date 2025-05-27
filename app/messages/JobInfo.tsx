@@ -19,6 +19,7 @@ export default function JobInfo({ user }: Props) {
   const title = searchParams.get("title");
   const location = searchParams.get("location");
   const time = searchParams.get("time");
+  const amount = searchParams.get("amount");
   return (
     <div className="w-full md:w-[40%] px-4 mt-4 md:mt-10 space-y-6">
       <div className="bg-white rounded-xl border border-gray-200 p-4 space-y-3">
@@ -49,7 +50,7 @@ export default function JobInfo({ user }: Props) {
           <p>💬 responses</p>
           <p>⏱ {time}</p>
           <p>
-            💷 You&apos;ve been charged <strong>£32</strong> + VAT
+            💷 You&apos;ve been charged <strong>£{amount || 10}</strong> + VAT
           </p>
           <p>📍 {location}</p>
         </div>

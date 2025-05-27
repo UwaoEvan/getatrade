@@ -12,10 +12,12 @@ export default function CheckoutPage({
   amount = 10,
   description,
   jobId,
+  shortlistId,
 }: {
   amount: number;
   description: string;
   jobId: string;
+  shortlistId?: string;
 }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -47,7 +49,7 @@ export default function CheckoutPage({
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `${window.location.origin}/payment-success?id=${pay?.id}`,
+        return_url: `${window.location.origin}/payment-success?id=${pay?.id}&shortlistId=${shortlistId}`,
       },
     });
 
@@ -101,7 +103,7 @@ export default function CheckoutPage({
             Processing...
           </span>
         ) : (
-          `Pay ${amount}`
+          `Pay ${amount / 100}`
         )}
       </button>
     </form>

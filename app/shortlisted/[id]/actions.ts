@@ -7,6 +7,10 @@ export const getShortListedInfo = async (jobId: string) => {
     where: {
       jobId,
     },
+    include: {
+      job: true,
+      user: true,
+    },
   });
   return interest;
 };

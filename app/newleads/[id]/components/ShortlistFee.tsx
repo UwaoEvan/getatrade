@@ -7,10 +7,11 @@ import { showInterest } from "../../actions";
 type Props = {
   jobId?: string;
   email?: string;
+  price?: number;
 };
 
 const initialState = { error: undefined, success: false };
-export default function ShortlistFee({ email, jobId }: Props) {
+export default function ShortlistFee({ email, jobId, price }: Props) {
   const [state, formAction, isPending] = useActionState(
     showInterest,
     initialState,
@@ -26,7 +27,7 @@ export default function ShortlistFee({ email, jobId }: Props) {
   return (
     <div className="w-full border-1 border-gray-200 p-4 rounded-lg">
       <p className="font-bold">Shortlist fee</p>
-      <p className="text-[#2f76d9] font-bold">￡32.00 + VAT</p>
+      <p className="text-[#2f76d9] font-bold">￡{price} + VAT</p>
       <div className="p-2 bg-gray-200 my-4">
         <p className="font-bold">￡ Expressing interest is free</p>
         <p className="text-sm font-medium">

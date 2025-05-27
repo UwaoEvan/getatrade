@@ -1,8 +1,7 @@
-import { getJobPosting } from "@/app/lib/actions";
 import { formatDistanceToNow } from "date-fns";
 import { Suspense } from "react";
 import HiredInfo from "./Hired";
-// import { getShortListedInfo } from "@/app/shortlisted/[id]/actions";
+import { getShortListedInfo } from "@/app/shortlisted/[id]/actions";
 
 type Params = {
   params: Promise<{
@@ -12,8 +11,7 @@ type Params = {
 
 export default async function HiredDetails({ params }: Params) {
   const { id: jobId } = await params;
-  const job = await getJobPosting(jobId as string);
-  // const shortlisted = await getShortListedInfo(jobId);
+  const job = await getShortListedInfo(jobId);
 
   return (
     <Suspense
@@ -24,7 +22,7 @@ export default async function HiredDetails({ params }: Params) {
       }
     >
       <div className="max-w-4xl mx-auto p-6">
-        <h1 className="text-3xl font-bold mb-4">{job?.title}</h1>
+        <h1 className="text-3xl font-bold mb-4">{job?.job.title}</h1>
 
         <div className="flex items-center text-gray-500 space-x-4 mb-6">
           <span>
@@ -33,7 +31,7 @@ export default async function HiredDetails({ params }: Params) {
               addSuffix: true,
             })}
           </span>
-          <span>📍 {job?.location}</span>
+          <span>📍 {job?.job.location}</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
@@ -45,7 +43,8 @@ export default async function HiredDetails({ params }: Params) {
               <div className="flex justify-between text-center border-1 border-gray-200 px-4 py-6">
                 <div>
                   <div className="text-2xl font-bold text-[#2f76d9]">
-                    9 <span className="text-sm text-gray-600">Interested</span>
+                    {job?.job.interested}{" "}
+                    <span className="text-sm text-gray-600">Interested</span>
                   </div>
                   <div className="text-xs text-gray-400">
                     Tradespeople who expressed interest
@@ -53,7 +52,8 @@ export default async function HiredDetails({ params }: Params) {
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-[#2f76d9]">
-                    1 <span className="text-sm text-gray-600">Shortlisted</span>
+                    {job?.job.shortlisted}{" "}
+                    <span className="text-sm text-gray-600">Shortlisted</span>
                   </div>
                   <div className="text-xs text-gray-400">
                     Tradespeople who received contact details
@@ -62,32 +62,38 @@ export default async function HiredDetails({ params }: Params) {
               </div>
             </div>
           </div>
-          <HiredInfo />
+          <HiredInfo
+            name={job?.user.username}
+            email={job?.user.email}
+            phoneNumber={job?.user?.phoneNumber || undefined}
+            jobId={job?.job.id}
+            targetUserId={job?.job.userId}
+            currentUserId={job?.userId}
+            title={job?.job.title}
+            createdAt={job?.job.createdAt}
+            location={job?.job.location}
+          />
         </div>
 
         <div className="p-4 rounded-lg mb-6">
           <h2 className="font-semibold mb-2">Job description</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
             <div>
-              <strong>Job type:</strong> Painting & Decorating
+              <strong>Job type:</strong> {job?.job.title}
             </div>
             <div>
-              <strong>Location:</strong> Interior
+              <strong>Location:</strong> {job?.job.location}
             </div>
             <div>
-              <strong>Service:</strong> Paint / decorate 3 rooms
+              <strong>Service:</strong> {job?.job.category}
             </div>
-            <div>
-              <strong>Note:</strong> Includes hallway, stairs and landing
-            </div>
+            <div>{/* <strong>Note:</strong> {job?.job.description} */}</div>
           </div>
         </div>
 
         <div className="p-4 rounded-lg">
           <h2 className="font-semibold mb-2">Customer description:</h2>
-          <p className="text-sm text-gray-800">
-            paint all 3 rooms and hallway and stairs
-          </p>
+          <p className="text-sm text-gray-800">{job?.job.description}</p>
         </div>
       </div>
     </Suspense>

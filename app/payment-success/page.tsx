@@ -4,14 +4,15 @@ import { updatePayments } from "../checkout/action";
 type Params = {
   searchParams: Promise<{
     id: string;
+    shortlistId: string;
   }>;
 };
 
 export default async function PaymentSuccessPage({ searchParams }: Params) {
-  const { id } = await searchParams;
+  const { id, shortlistId } = await searchParams;
 
   if (id) {
-    await updatePayments(id, "PAID");
+    await updatePayments(id, "PAID", shortlistId);
   }
 
   return (

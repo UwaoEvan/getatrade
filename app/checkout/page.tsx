@@ -10,8 +10,14 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_KEY as string);
 export default function Checkout() {
   const searchParams = useSearchParams();
   const jobId = searchParams.get("jobId");
-  const cost = searchParams.get("const");
-  const amount = parseFloat(cost as string);
+  const cost = searchParams.get("cost");
+  const shortlistId = searchParams.get("shortlistId");
+  const amount = parseInt(cost as string);
+  console.log(shortlistId);
+
+  function toPence(pounds: number) {
+    return Math.round(pounds * 100);
+  }
 
   return (
     <div className="min-h-[60vh] mx-auto bg-gray-100 py-6">
@@ -24,14 +30,15 @@ export default function Checkout() {
           stripe={stripePromise}
           options={{
             mode: "payment",
-            amount: amount,
+            amount: toPence(amount),
             currency: "gbp",
           }}
         >
           <CheckoutPage
-            amount={amount}
+            amount={toPence(amount)}
             description={`Payment for job: ${jobId || "Unknown"}`}
-            jobId={jobId || ""}
+            jobId={jobId as string}
+            shortlistId={shortlistId as string}
           />
         </Elements>
       </div>

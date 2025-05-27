@@ -63,7 +63,11 @@ export default async function LeadDetails({ params }: Params) {
               </div>
             </div>
           </div>
-          <ShortlistFee jobId={job?.id} email={session?.user?.email || ""} />
+          <ShortlistFee
+            jobId={job?.id}
+            email={session?.user?.email || ""}
+            price={job?.price || 10}
+          />
         </div>
 
         <div className="p-4 rounded-lg mb-6">

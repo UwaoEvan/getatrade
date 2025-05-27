@@ -28,7 +28,11 @@ export const savePayments = async (
   }
 };
 
-export const updatePayments = async (paymentId: string, status: string) => {
+export const updatePayments = async (
+  paymentId: string,
+  status: string,
+  jobId?: string,
+) => {
   const payment = await db.payments.update({
     where: {
       id: paymentId,
@@ -40,5 +44,16 @@ export const updatePayments = async (paymentId: string, status: string) => {
 
   if (!payment) {
     return { error: "Payment not found." };
+  }
+
+  if (jobId) {
+    await db.shortlist.update({
+      where: {
+        id: jobId,
+      },
+      data: {
+        paid: true,
+      },
+    });
   }
 };
