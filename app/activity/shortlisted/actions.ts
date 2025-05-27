@@ -28,7 +28,7 @@ export const getShortlistedLeads = async (email: string) => {
     FROM "job"
     INNER JOIN "shortlist" ON "shortlist"."jobId" = "job"."id"
     INNER JOIN "user" ON "user"."id" = "job"."userId"
-    WHERE "shortlist"."userId" = ${user?.id} AND "job"."active" = true
+    WHERE "shortlist"."userId" = ${user?.id} AND "job"."active" = true AND "shortlist"."paid" = true
   `;
   return shortlist;
 };
