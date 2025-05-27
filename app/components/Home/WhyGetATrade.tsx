@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Banner from "@/public/banner.png";
+import Banner from "@/public/banner.jpg";
 import Link from "next/link";
 
 export default function WhyGetATrade() {
