@@ -61,7 +61,7 @@ export default function CustomerSignup() {
         <label className="text-sm">
           I agree to the{" "}
           <Link
-            href="/terms"
+            href="/terms-conditions"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 underline"
