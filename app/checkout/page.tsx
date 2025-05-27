@@ -10,7 +10,8 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_KEY as string);
 export default function Checkout() {
   const searchParams = useSearchParams();
   const jobId = searchParams.get("jobId");
-  const amount = 32;
+  const cost = searchParams.get("const");
+  const amount = parseFloat(cost as string);
 
   return (
     <div className="min-h-[60vh] mx-auto bg-gray-100 py-6">

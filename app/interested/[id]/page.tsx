@@ -71,7 +71,7 @@ export default async function InterestedDetails({ params }: Params) {
               </div>
             </div>
           </div>
-          <Shortlist />
+          <Shortlist amount={job?.price || 10.0} />
         </div>
 
         <div className="p-4 rounded-lg mb-6">

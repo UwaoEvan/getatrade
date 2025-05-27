@@ -1,6 +1,10 @@
+"use client";
+import Location from "@/app/components/Location";
 import { SERVICES } from "@/app/lib/services";
+import { useState } from "react";
 
 export default function PostJob() {
+  const [location, setLocation] = useState("");
   return (
     <div>
       <div className="mb-6">
@@ -61,13 +65,14 @@ export default function PostJob() {
         <label className="block font-semibold mb-1">
           What is your location?
         </label>
-        <input
-          type="text"
-          required
-          name="location"
-          placeholder="e.g., Maidstone"
-          className="w-full border border-gray-300 rounded px-3 py-2"
+        <Location
+          value={location}
+          onChange={setLocation}
+          placeholder="Start typing your location..."
+          className="mt-1 block w-full rounded-sm border-gray-300 shadow-sm focus:ring-[#2f76d9] focus:border-[#2f76d9] sm:text-sm p-3"
         />
+
+        <input type="hidden" name="location" value={location} />
       </div>
     </div>
   );

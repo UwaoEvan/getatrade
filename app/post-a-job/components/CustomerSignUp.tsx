@@ -30,8 +30,10 @@ export default function CustomerSignup() {
         <input
           type="tel"
           name="phonenumber"
-          className="w-full border border-gray-300 rounded px-3 py-2"
-          placeholder="(123) 456-7890"
+          placeholder="UK phone number"
+          className={`w-full bg-white border p-2 text-sm rounded "border-gray-300"`}
+          pattern="^(\+44|0044|44|0)[1-9]\d{8,9}$"
+          title="Please enter a valid UK phone number"
         />
         <p className="text-sm text-gray-500 mt-1">
           Your phone number will be shared with the tradesperson you choose to
@@ -46,8 +48,11 @@ export default function CustomerSignup() {
         <input
           type="password"
           name="password"
-          className="w-full border border-gray-300 rounded px-3 py-2"
-          placeholder="••••••••"
+          placeholder="Your password"
+          minLength={6}
+          pattern=".{6,}"
+          title="Password must be at least 6 characters long"
+          className="w-full bg-white border border-gray-300 p-2 rounded"
         />
       </div>
 

@@ -4,9 +4,10 @@ import Link from "next/link";
 type Props = {
   jobId?: string;
   shortlisted?: string;
+  amount?: number;
 };
 
-export default function ShortlistFee({ jobId }: Props) {
+export default function ShortlistFee({ jobId, amount }: Props) {
   return (
     <div className="w-full border-1 border-gray-200 p-4 rounded-lg">
       <h2 className="font-semibold mb-2">Message sent</h2>
@@ -14,11 +15,11 @@ export default function ShortlistFee({ jobId }: Props) {
         Congratulations 🎉! You have been shortlisted..
       </p>
       <p className="text-sm text-gray-700 mb-4">
-        You&apos;ll be charged <strong>£32.00 + VAT</strong> if the customer
+        You&apos;ll be charged <strong>£{amount} + VAT</strong> if the customer
         shortlists you.
       </p>
       <Link
-        href={`/checkout?jobId=${jobId}`}
+        href={`/checkout?jobId=${jobId}&amount=${amount}`}
         type="submit"
         className="bg-[#2f76d9] text-white py-2 px-4 rounded w-full block text-center text-sm"
       >

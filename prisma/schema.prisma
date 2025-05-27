@@ -47,6 +47,7 @@ model Job {
   active      Boolean?    @default(true)
   location    String
   userId      Int
+  price       Float?      @default(10.00)
   interested  Int?        @default(0)
   shortlisted Int?        @default(0)
   user        User        @relation(fields: [userId], references: [id])

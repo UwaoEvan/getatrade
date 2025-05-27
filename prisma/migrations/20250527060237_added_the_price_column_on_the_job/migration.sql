@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "job" ADD COLUMN     "price" DOUBLE PRECISION DEFAULT 10.0;

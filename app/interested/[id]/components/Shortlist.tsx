@@ -1,4 +1,4 @@
-export default function Shortlist() {
+export default function Shortlist({ amount }: { amount: number }) {
   return (
     <div className="w-full border-1 border-gray-200 p-4 rounded-lg">
       <h2 className="font-semibold mb-2">Message sent</h2>
@@ -6,7 +6,7 @@ export default function Shortlist() {
         We&apos;ll let you know when the customer responds.
       </p>
       <p className="text-sm text-gray-700 mb-4">
-        You&apos;ll be charged <strong>£32.00 + VAT</strong> if the customer
+        You&apos;ll be charged <strong>£{amount} + VAT</strong> if the customer
         shortlists you.
       </p>
     </div>

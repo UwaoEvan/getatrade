@@ -1,10 +1,12 @@
 "use client";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { updateProfile } from "./action";
 import { useRouter } from "next/navigation";
+import Location from "../components/Location";
 
 const initState = { success: false, error: undefined };
 export default function UpdateProfile() {
+  const [location, setLocation] = useState("");
   const [state, formAction, isPending] = useActionState(
     updateProfile,
     initState,
@@ -82,20 +84,20 @@ export default function UpdateProfile() {
         >
           Location
         </label>
-        <input
-          type="text"
-          id="location"
-          name="location"
-          required
+        <Location
+          value={location}
+          onChange={setLocation}
+          placeholder="Start typing your location..."
           className="mt-1 block w-full rounded-sm border-gray-300 shadow-sm focus:ring-[#2f76d9] focus:border-[#2f76d9] sm:text-sm p-3"
-          placeholder="Enter your location"
         />
+
+        <input type="hidden" name="location" value={location} />
       </div>
 
       <div className="mb-4 flex items-start">
         <input type="checkbox" name="terms" className="mr-2 mt-1" />
         <label className="text-sm">
-          would you like to receive marketing emails?
+          Would you like to receive marketing emails?
         </label>
       </div>
 

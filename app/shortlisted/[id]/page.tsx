@@ -70,7 +70,11 @@ export default async function ShortlistedDetails({ params }: Params) {
           {payment?.status === "PAID" ? (
             <HiredInfo email={user?.email} name={user?.username} />
           ) : (
-            <ShortlistFee jobId={jobId} shortlisted={shortlisted?.id} />
+            <ShortlistFee
+              jobId={jobId}
+              shortlisted={shortlisted?.id}
+              amount={job?.price || 10}
+            />
           )}
         </div>
 

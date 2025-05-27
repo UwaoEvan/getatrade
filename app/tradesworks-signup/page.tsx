@@ -33,7 +33,7 @@ function SignupForm() {
       >
         <select
           name="role"
-          className="w-full bg-white border border-gray-300 rounded px-3 py-2 outline-0"
+          className="w-full bg-white text-sm border border-gray-300 rounded px-3 py-2 outline-0"
         >
           <option value="">Your main trade</option>
           {SERVICES.map((service) => (
@@ -46,26 +46,41 @@ function SignupForm() {
           type="text"
           name="username"
           placeholder="Your company name"
-          className="w-full border bg-white border-gray-300 p-2 rounded"
+          className="w-full border text-sm bg-white border-gray-300 p-2 rounded"
         />
         <input
           type="email"
           name="email"
           placeholder="Your email to receive leads"
-          className="w-full bg-white border border-gray-300 p-2 rounded"
+          className="w-full bg-white border text-sm border-gray-300 p-2 rounded"
         />
-        <input
-          type="tel"
-          name="phonenumber"
-          placeholder="Your phonenumber"
-          className="w-full bg-white border border-gray-300 p-2 rounded"
-        />
+        <div className="space-y-1">
+          <input
+            type="tel"
+            name="phonenumber"
+            placeholder="UK phone number"
+            className={`w-full bg-white border p-2 text-sm rounded "border-gray-300"`}
+            pattern="^(\+44|0044|44|0)[1-9]\d{8,9}$"
+            title="Please enter a valid UK phone number"
+          />
+        </div>
         <input
           type="password"
           name="password"
           placeholder="Your password"
+          minLength={6}
+          pattern=".{6,}"
+          title="Password must be at least 6 characters long"
           className="w-full bg-white border border-gray-300 p-2 rounded"
         />
+        <div className="mb-4 flex items-start">
+          <input type="checkbox" name="terms" className="mr-2 mt-1" />
+          <label className="text-sm text-gray-500">
+            Would you like to receive marketing communications about
+            Getatradelink services by email, SMS and that you can unsubscribe at
+            any time?
+          </label>
+        </div>
         <p className="text-xs text-gray-500">
           By clicking Sign up for free, you agree to Getatradelinkltd Terms and
           Conditions. For information on how we process your data, see our
