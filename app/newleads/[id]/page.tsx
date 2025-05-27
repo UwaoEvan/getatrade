@@ -74,16 +74,16 @@ export default async function LeadDetails({ params }: Params) {
           <h2 className="font-semibold mb-2">Job description</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
             <div>
-              <strong>Job type:</strong> Painting & Decorating
+              <strong>Job type:</strong> {job?.title}
             </div>
             <div>
-              <strong>Location:</strong> Interior
+              <strong>Location:</strong> {job?.location}
             </div>
             <div>
-              <strong>Service:</strong> Paint / decorate 3 rooms
+              <strong>Service:</strong> {job?.category}
             </div>
             <div>
-              <strong>Note:</strong> Includes hallway, stairs and landing
+              {/* <strong>Note:</strong> Includes hallway, stairs and landing */}
             </div>
           </div>
         </div>
@@ -91,7 +91,7 @@ export default async function LeadDetails({ params }: Params) {
         <div className="p-4 rounded-lg">
           <h2 className="font-semibold mb-2">Customer description:</h2>
           <p className="text-sm text-gray-800">
-            paint all 3 rooms and hallway and stairs
+            {job?.description}
           </p>
         </div>
       </div>
