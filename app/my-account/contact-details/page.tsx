@@ -6,8 +6,10 @@ const ContactDetails = async () => {
   const session = await auth();
   const user = await getUser(session?.user?.email as string);
   return (
-    <div className="max-w-md mx-auto p-6 space-y-4">
-      <h2 className="text-2xl font-bold text-gray-800">Contact Details</h2>
+    <div className="max-w-md mx-auto md:p-6 space-y-4">
+      <h2 className="text-xl md:text-2xl font-bold text-gray-800">
+        Contact Details
+      </h2>
 
       {user?.role === "customer" ? (
         <>

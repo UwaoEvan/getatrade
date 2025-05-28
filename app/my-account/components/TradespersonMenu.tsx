@@ -95,7 +95,7 @@ export default function TradespersonMenu({ name, location }: Props) {
   }
 
   return (
-    <aside className="w-full max-w-[240px] p-4 text-sm text-gray-800">
+    <aside className="w-full md:max-w-[240px] p-4 text-sm text-gray-800">
       <div className="mb-6 text-center">
         <div className="flex justify-center mb-2">
           <Image

@@ -5,7 +5,7 @@ export default async function Reviews() {
   const reviews = await getReviews();
   const avg = await getAverageRating();
   return (
-    <section className="max-w-2xl mx-auto p-4">
+    <section className="max-w-2xl mx-auto md:p-4">
       <div className="bg-white rounded-lg shadow p-6 mb-6">
         <div className="flex items-center justify-between mb-4">
           <div>
