@@ -90,9 +90,7 @@ export default async function LeadDetails({ params }: Params) {
 
         <div className="p-4 rounded-lg">
           <h2 className="font-semibold mb-2">Customer description:</h2>
-          <p className="text-sm text-gray-800">
-            {job?.description}
-          </p>
+          <p className="text-sm text-gray-800">{job?.description}</p>
         </div>
       </div>
     </Suspense>

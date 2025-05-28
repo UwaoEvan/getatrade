@@ -23,14 +23,14 @@ export default async function Page({ params }: Params) {
         </div>
       }
     >
-      <div className="px-6 space-y-8">
+      <div className="md:px-6 space-y-8">
         <div className="flex flex-wrap items-center gap-6 bg-blue-100 text-black p-4 rounded-md">
           <div className="flex items-center gap-2 text-sm">
-            <MessageCircle className="w-5 h-5" />
+            <MessageCircle className="w-4 h-4" />
             <span>Responses</span>
           </div>
           <div className="flex items-center gap-2 text-sm">
-            <Clock className="w-5 h-5" />
+            <Clock className="w-4 h-4" />
             <span>
               {formatDistanceToNow(new Date(job?.createdAt || ""), {
                 addSuffix: true,
@@ -38,11 +38,11 @@ export default async function Page({ params }: Params) {
             </span>
           </div>
           <div className="flex items-center gap-2 text-sm">
-            <MapPin className="w-5 h-5" />
+            <MapPin className="w-4 h-4" />
             <span>{job?.location}</span>
           </div>
         </div>
-        <div className="md:flex md:justify-between">
+        <div className="md:flex md:justify-between text-sm">
           <div className="mt-4">
             <p className="mb-4 font-bold text-lg">Job description</p>
 

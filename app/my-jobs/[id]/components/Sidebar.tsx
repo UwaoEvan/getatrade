@@ -12,7 +12,7 @@ const Sidebar = async ({ id, currentUser, jobTitle }: Props) => {
   const interests = await getInterestOnJob(id as string);
   const shortlisted = await getShortlists(id as string);
   return (
-    <aside className="w-full max-w-xs space-y-6 text-sm text-gray-900 pb-6">
+    <aside className="w-full md:max-w-xs space-y-6 text-sm text-gray-900 pb-6">
       <div className="border-[1px] border-gray-300 pt-2">
         <h2 className="font-bold text-base mb-2 px-4 py-2">My chats</h2>
         <hr className="text-gray-300" />

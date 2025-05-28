@@ -92,8 +92,8 @@ export function EmptyState() {
             No notifications yet
           </h3>
           <p className="text-gray-500 mb-6 max-w-sm mx-auto">
-            When you pay for the shortlisted leads, you will then receive updates from clients,
-            they&apos;ll appear here.
+            When you pay for the shortlisted leads, you will then receive
+            updates from clients, they&apos;ll appear here.
           </p>
         </div>
       </div>

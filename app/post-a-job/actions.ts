@@ -34,6 +34,15 @@ export const postJob = async (prevState: State, formData: FormData) => {
       },
     });
 
+    await db.user.update({
+      where: {
+        id: user.userId,
+      },
+      data: {
+        location,
+      },
+    });
+
     return { success: true };
   }
   return { error: "Something went wrong" };
