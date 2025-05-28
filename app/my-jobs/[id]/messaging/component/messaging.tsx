@@ -141,7 +141,7 @@ export default function Messaging({
   }
 
   return (
-    <div className="flex flex-col lg:flex-row px-4 font-sans text-sm">
+    <div className="flex flex-col lg:flex-row md:px-4 font-sans text-sm">
       <div className="flex-1 bg-white rounded-xl border border-gray-200">
         <div className="border-b p-4 font-semibold text-base">
           {otherUser?.username || "Unknown User"}
