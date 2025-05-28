@@ -11,6 +11,7 @@ export default function MyAccountLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [user, setUser] = useState<any>(null);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
