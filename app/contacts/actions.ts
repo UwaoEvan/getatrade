@@ -1,9 +1,9 @@
-"use server";
+"use server"
 
 import { getUser } from "@/app/lib/actions";
 import { db } from "@/app/lib/db";
 
-export const getShortlistedLeads = async (email: string) => {
+export const getPaidLeads = async (email: string) => {
   const user = await getUser(email);
   type Lead = {
     id: string;
@@ -28,7 +28,7 @@ export const getShortlistedLeads = async (email: string) => {
     FROM "job"
     INNER JOIN "shortlist" ON "shortlist"."jobId" = "job"."id"
     INNER JOIN "user" ON "user"."id" = "job"."userId"
-    WHERE "shortlist"."userId" = ${user?.id} AND "job"."active" = true AND "shortlist"."paid" = false
+    WHERE "shortlist"."userId" = ${user?.id} AND "job"."active" = true AND "shortlist"."paid" = true
   `;
   return shortlist;
 };

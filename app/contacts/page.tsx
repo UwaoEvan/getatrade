@@ -1,10 +1,10 @@
-import { getShortlistedLeads } from "../activity/shortlisted/actions";
 import { auth } from "../lib/auth";
+import { getPaidLeads } from "./actions";
 import Notification, { EmptyState } from "./components/Notification";
 
 export default async function Page() {
   const session = await auth();
-  const shortlisted = await getShortlistedLeads(session?.user?.email || "");
+  const shortlisted = await getPaidLeads(session?.user?.email || "");
 
   return (
     <div className="min-h-[60vh] mx-auto bg-gray-100 py-6">
