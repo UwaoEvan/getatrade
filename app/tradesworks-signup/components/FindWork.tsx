@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Step1 from "@/public/job-finding-step-1.svg";
-import Step2 from "@/public/job-finding-step-2.svg";
-import Step3 from "@/public/job-finding-step-3.svg";
+import Step1 from "@/public/job-finding-2.png";
+import Step2 from "@/public/job-finding-3.png";
+import Step3 from "@/public/job-finding-1.png";
 import Link from "next/link";
 
 export default function FindWork() {

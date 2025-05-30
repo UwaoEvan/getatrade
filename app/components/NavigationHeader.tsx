@@ -48,7 +48,7 @@ export default function NavigationHeader({
     <header className="bg-[#2f76d9] text-white">
       <div className="w-full px-4 lg:w-[880px] lg:mx-auto flex items-center justify-between py-4">
         <Link href="/" className="flex items-center">
-          <Image src={logo} alt="logo" className="h-16 w-auto max-w-[200px]" />
+          <Image src={logo} alt="logo" className="h-16 w-auto object-contain" />
         </Link>
 
         <nav className="hidden md:flex items-center space-x-6 text-sm">
