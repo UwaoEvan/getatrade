@@ -6,6 +6,7 @@ import { registerSchema } from "./schemas";
 import bcrypt from "bcrypt";
 import { db } from "./db";
 import { redirect } from "next/navigation";
+import { sendSignupEmail } from "./emailTemplate";
 
 export type State = {
   error?: string;
@@ -65,6 +66,13 @@ export const register = async (prevState: State, formData: FormData) => {
       // location,
     },
   });
+
+  await sendSignupEmail(
+    "info@getatradelinkltd.com",
+    "New user signup",
+    user.email,
+    user?.role as string,
+  );
 
   await signIn("credentials", {
     email: formData.get("email"),

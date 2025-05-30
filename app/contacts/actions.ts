@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { getUser } from "@/app/lib/actions";
 import { db } from "@/app/lib/db";
