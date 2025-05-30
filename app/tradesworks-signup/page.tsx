@@ -119,12 +119,12 @@ export default function TradeWorkSignup() {
           <SignupForm />
         </Suspense>
 
-        <div className="hidden md:block relative h-[500px]">
+        <div className="hidden md:block relative h-[500px] mt-[20%]">
           <Image
             src={Person}
             alt="Worker"
             fill
-            className="object-cover"
+            className="object-cover h-[200px]"
             priority
           />
         </div>
