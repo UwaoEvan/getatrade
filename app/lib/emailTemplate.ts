@@ -136,7 +136,7 @@ export const sendSignupEmail = async (
   to: string,
   subject: string,
   userName: string,
-  role: String,
+  role: string,
 ) => {
   const apiInstance = new Brevo.TransactionalEmailsApi();
   apiInstance.setApiKey(
