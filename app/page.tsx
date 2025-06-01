@@ -2,7 +2,7 @@ import HomeBanner from "./components/Home/HomeBanner";
 import HomeCounter from "./components/Home/HomeCounter";
 import HowToHire from "./components/Home/HowToHire";
 import LookingForLeads from "./components/Home/LookingForLeads";
-import PopularTrades from "./components/Home/PopularTrades";
+import Partners from "./components/Home/Partners";
 import WhyGetATrade from "./components/Home/WhyGetATrade";
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
       <HomeCounter />
       <HowToHire />
       <WhyGetATrade />
-      <PopularTrades />
+      <Partners />
       <LookingForLeads />
     </div>
   );
