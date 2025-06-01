@@ -6,19 +6,20 @@ import Partner2 from "@/public/partner2.jpg";
 export default function Partners() {
   const partners = [
     {
-      name: "Partner A",
+      name: "Proud Flagship Partner of GetTrade Link",
       description:
-        "Leading provider of quality construction services across the UK.",
-      link: "#",
-      image: Partner1,
-    },
-    {
-      name: "Partner B",
-      description:
-        "Innovative bathroom and plumbing solutions with nationwide coverage.",
-      link: "#",
+        "Setting the standard in quality and reliability on the UK's trusted trades plaform.",
+      link: "https://www.mckenzieplasteringanddecoratingservice.com/",
       image: Partner2,
     },
+    {
+      name: "B&S Building Supplies",
+      // description:
+      //   "Leading provider of quality construction services across the UK.",
+      link: "https://www.bsbuildingsupplies.co.uk/",
+      image: Partner1,
+    },
+    
   ];
 
   return (
@@ -37,9 +38,21 @@ export default function Partners() {
                 <Image
                   src={partner.image}
                   alt={partner.name}
-                  className="w-full h-48 object-contain p-4 bg-white"
+                  className="w-full h-48 object-cover p-4 bg-white"
                 />
+                <div className="p-4 flex-grow">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    {partner.name}
+                  </h3>
+                  <p className="text-gray-700 text-sm">
+                    {partner.description}{" "}
+                    {/* <a href={partner.link} className="text-black underline">
+                      Learn more
+                    </a> */}
+                  </p>
+                </div>
               </div>
+              
             ))}
           </div>
         </div>
