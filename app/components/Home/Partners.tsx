@@ -19,7 +19,6 @@ export default function Partners() {
       link: "https://www.bsbuildingsupplies.co.uk/",
       image: Partner1,
     },
-    
   ];
 
   return (
@@ -52,7 +51,6 @@ export default function Partners() {
                   </p>
                 </div>
               </div>
-              
             ))}
           </div>
         </div>
