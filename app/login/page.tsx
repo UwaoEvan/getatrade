@@ -4,6 +4,8 @@ import { useActionState } from "react";
 import { authenticate } from "../lib/actions";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import Image from "next/image";
+import logo from "@/public/logo.png";
 
 function LoginForm() {
   const searchParams = useSearchParams();
@@ -15,12 +17,9 @@ function LoginForm() {
 
   return (
     <div className="flex items-center justify-center py-10 px-4">
-      <div className="bg-white shadow border border-gray-200 rounded-lg p-8 max-w-md w-full space-y-6">
+      <div className="bg-white shadow border border-gray-200 rounded-lg p-4 max-w-md w-full space-y-6">
         <div>
-          <h1 className="sm:text-xl md:text-2xl font-semibold text-gray-900">
-            Login to GetATradeLinkLtd
-          </h1>
-          <p className="text-gray-600 mt-1">Enter your email to continue</p>
+          <Image src={logo} alt="logo" className="w-40 mx-auto py-4 md:py-6" />
         </div>
 
         <form className="space-y-5" action={formAction}>
@@ -85,7 +84,10 @@ function LoginForm() {
         <div className="text-sm text-gray-800">
           <p className="font-semibold">New to Getatradelinkltd?</p>
           <p className="mt-1">
-            <Link href="/post-a-job" className="text-[#2f76d9] underline">
+            <Link
+              href="/post-a-job"
+              className="text-[#2f76d9] font-bold hover:underline"
+            >
               Post your job
             </Link>{" "}
             to find a tradesperson
@@ -93,7 +95,7 @@ function LoginForm() {
           <p>
             <Link
               href="/tradesworks-signup"
-              className="text-[#2f76d9] underline"
+              className="text-[#2f76d9] font-bold hover:underline"
             >
               Sign up
             </Link>{" "}
