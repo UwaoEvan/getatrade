@@ -2,6 +2,7 @@
 
 import { register, State } from "../lib/actions";
 import { db } from "../lib/db";
+import { sendJobPostEmail } from "../lib/emailTemplate";
 import { postJobSchema } from "../lib/schemas";
 
 export const postJob = async (prevState: State, formData: FormData) => {
@@ -22,7 +23,7 @@ export const postJob = async (prevState: State, formData: FormData) => {
 
     const { category, title, description, location, project } = parsed.data;
 
-    await db.job.create({
+    const job = await db.job.create({
       data: {
         title,
         description,
@@ -34,7 +35,7 @@ export const postJob = async (prevState: State, formData: FormData) => {
       },
     });
 
-    await db.user.update({
+    const updatedUser = await db.user.update({
       where: {
         id: user.userId,
       },
@@ -42,6 +43,13 @@ export const postJob = async (prevState: State, formData: FormData) => {
         location,
       },
     });
+
+    await sendJobPostEmail(
+      updatedUser.email,
+      "Thank you for posting your job",
+      updatedUser.username,
+      job.title,
+    );
 
     return { success: true };
   }

@@ -5,6 +5,7 @@ import { getUser, State } from "../lib/actions";
 import { auth } from "../lib/auth";
 import { db } from "../lib/db";
 import { postJobSchema, updateJobSchema } from "../lib/schemas";
+import { sendJobPostEmail } from "../lib/emailTemplate";
 
 export const postNewJob = async (prevState: State, formData: FormData) => {
   const session = await auth();
@@ -46,6 +47,8 @@ export const postNewJob = async (prevState: State, formData: FormData) => {
 };
 
 export const updateJob = async (formData: FormData) => {
+  const session = await auth();
+  const user = await getUser(session?.user?.email as string);
   const parsed = updateJobSchema.safeParse({
     jobId: formData.get("jobId"),
     description: formData.get("description"),
@@ -55,9 +58,13 @@ export const updateJob = async (formData: FormData) => {
     return;
   }
 
+  if (!user) {
+    return;
+  }
+
   const { jobId, description } = parsed.data;
 
-  await db.job.update({
+  const job = await db.job.update({
     where: {
       id: jobId,
     },
@@ -65,6 +72,13 @@ export const updateJob = async (formData: FormData) => {
       description,
     },
   });
+
+  await sendJobPostEmail(
+    user.email,
+    "Thank you for posting your job",
+    user.username,
+    job.title,
+  );
 
   revalidatePath(`/my-jobs/${jobId}`);
 };
