@@ -34,22 +34,25 @@ export default function Partners() {
                 key={index}
                 className="bg-white shadow rounded-lg overflow-hidden flex flex-col justify-between"
               >
-                <Image
-                  src={partner.image}
-                  alt={partner.name}
-                  className="w-full h-48 object-cover p-4 bg-white"
-                />
-                <div className="p-4 flex-grow">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                    {partner.name}
-                  </h3>
-                  <p className="text-gray-700 text-sm">
-                    {partner.description}{" "}
-                    {/* <a href={partner.link} className="text-black underline">
-                      Learn more
-                    </a> */}
-                  </p>
-                </div>
+                <a
+                  href={partner.link}
+                  target="_"
+                  className="text-black underline"
+                >
+                  <Image
+                    src={partner.image}
+                    alt={partner.name}
+                    className="w-full h-48 object-cover p-4 bg-white"
+                  />
+                  <div className="p-4 flex-grow">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                      {partner.name}
+                    </h3>
+                    <p className="text-gray-700 text-sm">
+                      {partner.description}{" "}
+                    </p>
+                  </div>
+                </a>
               </div>
             ))}
           </div>
