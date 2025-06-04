@@ -8,10 +8,12 @@ export default async function Dashboard() {
   const session = await auth();
   const user = await getUser(session?.user?.email as string);
 
-  if (user?.role !== "customer" && !user?.about) {
-    redirect("/update-profile");
-  } else if (user?.role === "customer") {
+  if (user?.role === "customer") {
     redirect("/my-jobs");
+  } else if (user?.role === "Admin") {
+    redirect("/dashboard");
+  } else if (user?.role !== "customer" && !user?.about) {
+    redirect("/update-profile");
   }
 
   const jobs = await getJobPostings();

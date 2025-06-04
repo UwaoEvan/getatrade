@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/public/logo.png";
 import NavItem from "./NavItem";
+import { useRouter } from "next/navigation";
 
 interface NavigationHeaderProps {
   isLoggedIn: boolean;
@@ -28,6 +29,7 @@ const navLinks = {
     { href: "/contacts", label: "Contacts" },
     { href: "/my-account", label: "My account" },
   ],
+  admin: [{ href: "/dashboard", label: "Admin Console" }],
 };
 
 export default function NavigationHeader({
@@ -35,10 +37,20 @@ export default function NavigationHeader({
   role,
 }: NavigationHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [prevRole, setPrevRole] = useState(role);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLoggedIn && role && role !== prevRole) {
+      setPrevRole(role);
+      router.refresh();
+    }
+  }, [role]);
 
   const getNavItems = () => {
     if (!isLoggedIn) return navLinks.guest;
     if (role === "customer") return navLinks.customer;
+    if (role === "Admin") return navLinks.admin;
     return navLinks.tradesperson;
   };
 

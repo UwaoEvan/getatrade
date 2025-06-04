@@ -23,6 +23,7 @@ export const authConfig = {
         "/contact-details",
         "/messages",
         "/contacts",
+        "/dashboard",
       ];
       const isOnProtectedPath = protectedPaths.some((path) =>
         nextUrl.pathname.startsWith(path),
