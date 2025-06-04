@@ -3,21 +3,12 @@
 import { useState, useEffect } from "react";
 import {
   Search,
-  Plus,
-  Edit,
-  Trash2,
   Eye,
   MoreHorizontal,
   Users,
-  Briefcase,
-  TrendingUp,
-  Calendar,
   MapPin,
   Building2,
   DollarSign,
-  Pause,
-  Play,
-  Copy,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -34,7 +25,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {

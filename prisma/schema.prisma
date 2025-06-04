@@ -118,6 +118,8 @@ model Reviews {
   reply          String?
   replyCreatedAt DateTime?
   jobId          String
+  jobTitle       String?
+  creator        String?
   job            Job       @relation(fields: [jobId], references: [id])
 
   @@map("reviews")

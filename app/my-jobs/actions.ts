@@ -184,6 +184,10 @@ export const submitReview = async (prevState: State, formData: FormData) => {
   }
 
   const { tradespersonId, rating, review, jobId } = parsed.data;
+  const job = await db.job.findFirst({
+    where: { id: jobId },
+  });
+
   await db.reviews.create({
     data: {
       customerId: user.id,
@@ -191,6 +195,8 @@ export const submitReview = async (prevState: State, formData: FormData) => {
       rating: parseFloat(rating),
       review,
       jobId,
+      jobTitle: job?.title,
+      creator: user.username,
     },
   });
   return { success: true };

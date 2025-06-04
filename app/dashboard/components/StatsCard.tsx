@@ -6,6 +6,7 @@ type Stat = {
     value?: number;
     change: string;
     color: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     icon: any;
   };
 };

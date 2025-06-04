@@ -2,21 +2,15 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import User from "@/public/userGroup.svg";
-import userIcon from "@/public/menuicons/user.png";
-import file from "@/public/menuicons/document.png";
-import {
-  Briefcase,
-  ChartPieIcon,
-  Currency,
-  LayoutDashboard,
-  Star,
-} from "lucide-react";
+import { Briefcase, ChartPieIcon, LayoutDashboard, Star } from "lucide-react";
+import { signOut } from "@/app/lib/auth";
 
 type MenuItem = {
   label: string;
   route: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon: any;
 };
 
@@ -58,12 +52,12 @@ const sections: Section[] = [
   },
 ];
 
-export default function Sidebar({ name, location, onClose }: Props) {
+export default function Sidebar({ onClose }: Props) {
   const pathname = usePathname();
   const router = useRouter();
 
   async function handleSignOut() {
-    // await signOut();
+    await signOut();
     router.push("/");
   }
 

@@ -18,7 +18,7 @@ export default function Close() {
   }, [state]);
 
   return (
-    <div>
+    <div className="px-4">
       <p className="text-sm text-green-500 bg-green-100 p-2 rounded mb-3">
         This job is still active.
       </p>
