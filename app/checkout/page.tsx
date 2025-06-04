@@ -12,8 +12,8 @@ export default function Checkout() {
   const jobId = searchParams.get("jobId");
   const cost = searchParams.get("cost");
   const shortlistId = searchParams.get("shortlistId");
+  const description = searchParams.get("description");
   const amount = parseInt(cost as string);
-  console.log(shortlistId);
 
   function toPence(pounds: number) {
     return Math.round(pounds * 100);
@@ -36,7 +36,7 @@ export default function Checkout() {
         >
           <CheckoutPage
             amount={toPence(amount)}
-            description={`Payment for job: ${jobId || "Unknown"}`}
+            description={description || ""}
             jobId={jobId as string}
             shortlistId={shortlistId as string}
           />

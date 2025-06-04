@@ -5,9 +5,15 @@ type Props = {
   jobId?: string;
   shortlisted?: string;
   amount?: number;
+  description?: string;
 };
 
-export default function ShortlistFee({ jobId, amount, shortlisted }: Props) {
+export default function ShortlistFee({
+  jobId,
+  amount,
+  shortlisted,
+  description,
+}: Props) {
   return (
     <div className="w-full border-1 border-gray-200 p-4 rounded-lg">
       <h2 className="font-semibold mb-2">Message sent</h2>
@@ -19,7 +25,7 @@ export default function ShortlistFee({ jobId, amount, shortlisted }: Props) {
         shortlists you.
       </p>
       <Link
-        href={`/checkout?jobId=${jobId}&cost=${amount}&shortlistId=${shortlisted}`}
+        href={`/checkout?jobId=${jobId}&cost=${amount}&shortlistId=${shortlisted}&description=${description}`}
         type="submit"
         className="bg-[#2f76d9] text-white py-2 px-4 rounded w-full block text-center text-sm"
       >

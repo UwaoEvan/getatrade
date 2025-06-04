@@ -81,6 +81,7 @@ export default async function ShortlistedDetails({ params }: Params) {
               jobId={jobId}
               shortlisted={shortlisted?.id}
               amount={shortlisted?.job?.price || 10}
+              description={shortlisted?.job.title}
             />
           )}
         </div>

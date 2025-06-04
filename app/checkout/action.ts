@@ -17,7 +17,7 @@ export const savePayments = async (
   if (user) {
     const payment = await db.payments.create({
       data: {
-        amount,
+        amount: amount / 100,
         description,
         userId: user?.id,
         jobId,
