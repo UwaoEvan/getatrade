@@ -35,7 +35,7 @@ const sections: Section[] = [
   {
     items: [
       {
-        label: "Dashboard",
+        label: "Users",
         route: "/dashboard",
         icon: <LayoutDashboard />,
       },
@@ -68,7 +68,7 @@ export default function Sidebar({ name, location, onClose }: Props) {
   }
 
   return (
-    <aside className="w-full md:w-[240px] h-full p-4 text-sm text-gray-800  relative z-50">
+    <aside className="w-full md:w-[100px] lg:w-[240px] h-full p-4 text-sm text-gray-800  relative z-50">
       {onClose && (
         <button
           onClick={onClose}
@@ -96,7 +96,7 @@ export default function Sidebar({ name, location, onClose }: Props) {
         {sections.map((section, idx) => (
           <div key={idx}>
             {section.title && (
-              <p className="text-xs uppercase font-medium text-gray-400 mb-1 px-2">
+              <p className="md:hidden text-xs uppercase font-medium text-gray-400 mb-1 px-2">
                 {section.title}
               </p>
             )}
@@ -114,7 +114,7 @@ export default function Sidebar({ name, location, onClose }: Props) {
                 const content = (
                   <>
                     {icon}
-                    <span>{label}</span>
+                    <span className="md:hidden lg:inline">{label}</span>
                   </>
                 );
 
@@ -137,10 +137,10 @@ export default function Sidebar({ name, location, onClose }: Props) {
         ))}
       </nav>
 
-      <form action={handleSignOut} className="mt-6 px-2">
+      <form action={handleSignOut} className="mt-6">
         <button className="flex items-center gap-2 w-full px-3 py-2 rounded-md text-red-600 hover:bg-red-50">
           <svg
-            className="w-5 h-5"
+            className="w-8 h-8"
             fill="none"
             stroke="currentColor"
             strokeWidth="1.5"
@@ -152,7 +152,7 @@ export default function Sidebar({ name, location, onClose }: Props) {
               d="M17 16l4-4m0 0l-4-4m4 4H9m4 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1"
             />
           </svg>
-          Sign Out
+          <span className="md:hidden lg:inline">Sign Out</span>
         </button>
       </form>
     </aside>

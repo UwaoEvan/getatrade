@@ -2,18 +2,8 @@
 
 import type React from "react";
 
-import { useState } from "react";
-import {
-  Plus,
-  Users,
-  UserCheck,
-  UserX,
-  Download,
-  Printer,
-  Eye,
-  Edit,
-  Trash2,
-} from "lucide-react";
+import { useState, useEffect } from "react";
+import { Plus, Users, Eye, Edit, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -34,123 +24,48 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import StatsCard from "./components/StatsCard";
+import { addUser, deactivateUser, getAllUsers, updateUser } from "./actions";
+import { format } from "date-fns";
 
 interface Member {
-  id: string;
-  name: string;
-  memberId: string;
+  id: number;
+  role: string | null;
+  username: string;
   email: string;
-  phone: string;
-  status: "Active" | "New" | "Inactive";
-  ministry: string;
-  joinDate: string;
-  initials: string;
+  phoneNumber: string | null;
+  firstName: string | null;
+  lastName: string | null;
+  hashedPassword: string;
+  location: string | null;
+  about: string | null;
+  averageRating: number | null;
+  joinDate: Date | null;
+  status: string | null;
 }
 
-const members: Member[] = [
-  {
-    id: "1",
-    name: "John Doe",
-    memberId: "GC-1001",
-    email: "john.doe@example.com",
-    phone: "(555) 123-4567",
-    status: "Active",
-    ministry: "Worship Team, Men's Ministry",
-    joinDate: "Jan 15, 2020",
-    initials: "JD",
-  },
-  {
-    id: "2",
-    name: "Sarah Johnson",
-    memberId: "GC-1002",
-    email: "sarah.j@example.com",
-    phone: "(555) 987-6543",
-    status: "Active",
-    ministry: "Children's Ministry",
-    joinDate: "Mar 22, 2019",
-    initials: "SJ",
-  },
-  {
-    id: "3",
-    name: "Michael Brown",
-    memberId: "GC-1003",
-    email: "michael.b@example.com",
-    phone: "(555) 456-7890",
-    status: "New",
-    ministry: "Not Assigned",
-    joinDate: "Jun 5, 2023",
-    initials: "MB",
-  },
-  {
-    id: "4",
-    name: "Emily Wilson",
-    memberId: "GC-1004",
-    email: "emily.w@example.com",
-    phone: "(555) 789-0123",
-    status: "Inactive",
-    ministry: "Women's Ministry",
-    joinDate: "Aug 12, 2021",
-    initials: "EW",
-  },
-  {
-    id: "5",
-    name: "Robert Miller",
-    memberId: "GC-1005",
-    email: "robert.m@example.com",
-    phone: "(555) 234-5678",
-    status: "Active",
-    ministry: "Outreach, Men's Ministry",
-    joinDate: "Nov 30, 2018",
-    initials: "RM",
-  },
-];
-
-const stats = [
-  {
-    title: "Total Members",
-    value: "1,248",
-    change: "+12% from last month",
-    trend: "up",
-    icon: Users,
-    color: "bg-blue-100 text-blue-600",
-  },
-  {
-    title: "Active Members",
-    value: "892",
-    change: "+8% from last month",
-    trend: "up",
-    icon: UserCheck,
-    color: "bg-green-100 text-green-600",
-  },
-  // {
-  //   title: "New This Month",
-  //   value: "42",
-  //   change: "-3% from last month",
-  //   trend: "down",
-  //   icon: UserPlus,
-  //   color: "bg-purple-100 text-purple-600",
-  // },
-  {
-    title: "Inactive Members",
-    value: "156",
-    change: "+5% from last month",
-    trend: "up",
-    icon: UserX,
-    color: "bg-yellow-100 text-yellow-600",
-  },
-];
-
 export default function Page() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [statusFilter, setStatusFilter] = useState("all");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"add" | "edit" | "delete">("add");
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
+  const [users, setUsers] = useState<Member[]>();
+  const inactiveUsers = users?.filter((user) => user.status === "Inactive");
   const [formData, setFormData] = useState({
     username: "",
     role: "",
     password: "",
+    email: "",
+    phoneNumber: "",
+    userId: "",
   });
+
+  useEffect(() => {
+    fetchUsers();
+  }, [isModalOpen]);
+
+  const fetchUsers = async () => {
+    const users = await getAllUsers();
+    setUsers(users);
+  };
 
   const getStatusBadgeColor = (status: string) => {
     switch (status) {
@@ -173,15 +88,21 @@ export default function Page() {
     setSelectedMember(member || null);
     if (mode === "edit" && member) {
       setFormData({
-        username: member.name,
-        role: member.ministry.split(",")[0].trim(),
+        username: member.username,
+        role: "",
         password: "",
+        email: member.email,
+        phoneNumber: member?.phoneNumber as string,
+        userId: member.id.toString(),
       });
     } else {
       setFormData({
         username: "",
         role: "",
         password: "",
+        email: "",
+        phoneNumber: "",
+        userId: "",
       });
     }
     setIsModalOpen(true);
@@ -194,10 +115,13 @@ export default function Page() {
       username: "",
       role: "",
       password: "",
+      email: "",
+      phoneNumber: "",
+      userId: "",
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission based on modalMode
     console.log("Form submitted:", {
@@ -205,6 +129,15 @@ export default function Page() {
       data: formData,
       member: selectedMember,
     });
+
+    if (modalMode === "add") {
+      await addUser(formData);
+    } else if (modalMode === "edit") {
+      await updateUser(formData);
+    } else {
+      await deactivateUser(selectedMember?.id || 0);
+    }
+
     handleCloseModal();
   };
 
@@ -216,9 +149,9 @@ export default function Page() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto  space-y-6 bg-gray-50 min-h-screen">
+    <div className="space-y-6 bg-gray-50 min-h-screen">
       <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
-        <div className="relative flex-1 max-w-md"></div>
+        <div className="relative flex-1"></div>
         <div className="flex gap-2">
           <Button
             className="bg-green-600 hover:bg-green-700"
@@ -229,41 +162,32 @@ export default function Page() {
           </Button>
         </div>
       </div>
-
-      {/* Stats Cards */}
-      <div className="flex gap-4">
-        {stats.map((stat, index) => (
-          <StatsCard key={index} stat={stat} />
-        ))}
+      <div className="flex gap-2">
+        <StatsCard
+          stat={{
+            title: "Total Users",
+            value: users?.length,
+            change: "+12% from last month",
+            icon: Users,
+            color: "bg-blue-100 text-blue-600",
+          }}
+        />
+        <StatsCard
+          stat={{
+            title: "Inactive Users",
+            value: inactiveUsers?.length,
+            change: "+12% from last month",
+            icon: Users,
+            color: "bg-blue-100 text-blue-600",
+          }}
+        />
       </div>
 
-      {/* Members Table */}
       <Card className="bg-white">
         <CardContent className="p-0">
           <div className="p-6 border-b">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <h2 className="text-xl font-semibold text-gray-900">
-                All Members
-              </h2>
-              <div className="flex items-center gap-2">
-                <Select value={statusFilter} onValueChange={setStatusFilter}>
-                  <SelectTrigger className="w-32">
-                    <SelectValue placeholder="All Status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Status</SelectItem>
-                    <SelectItem value="active">Active</SelectItem>
-                    <SelectItem value="new">New</SelectItem>
-                    <SelectItem value="inactive">Inactive</SelectItem>
-                  </SelectContent>
-                </Select>
-                <Button variant="outline" size="sm">
-                  <Download className="h-4 w-4" />
-                </Button>
-                <Button variant="outline" size="sm">
-                  <Printer className="h-4 w-4" />
-                </Button>
-              </div>
+              <h2 className="text-xl font-semibold text-gray-900">All Users</h2>
             </div>
           </div>
 
@@ -272,7 +196,7 @@ export default function Page() {
               <thead className="bg-gray-50">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Member
+                    User
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Contact
@@ -281,7 +205,7 @@ export default function Page() {
                     Status
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Ministry
+                    Role
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Join Date
@@ -292,21 +216,21 @@ export default function Page() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {members.map((member) => (
+                {users?.map((member) => (
                   <tr key={member.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <Avatar className="h-10 w-10 bg-blue-100">
                           <AvatarFallback className="text-blue-600 font-medium">
-                            {member.initials}
+                            {member?.username.charAt(0)}
                           </AvatarFallback>
                         </Avatar>
                         <div className="ml-4">
                           <div className="text-sm font-medium text-gray-900">
-                            {member.name}
+                            {member.username}
                           </div>
                           <div className="text-sm text-gray-500">
-                            Member ID: {member.memberId}
+                            ID: {member.id}
                           </div>
                         </div>
                       </div>
@@ -316,19 +240,21 @@ export default function Page() {
                         {member.email}
                       </div>
                       <div className="text-sm text-gray-500">
-                        {member.phone}
+                        {member.phoneNumber}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <Badge className={getStatusBadgeColor(member.status)}>
+                      <Badge
+                        className={getStatusBadgeColor(member?.status || "")}
+                      >
                         {member.status}
                       </Badge>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {member.ministry}
+                      {member.role}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {member.joinDate}
+                      {format(new Date(member.joinDate || ""), "dd-MM-yyyy")}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex items-center gap-2">
@@ -365,34 +291,34 @@ export default function Page() {
         </CardContent>
       </Card>
 
-      {/* Modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle>
               {modalMode === "add" && "Add New Member"}
               {modalMode === "edit" && "Edit Member"}
-              {modalMode === "delete" && "Delete Member"}
+              {modalMode === "delete" && "Deactivate Member"}
             </DialogTitle>
           </DialogHeader>
 
-          {modalMode === "delete" ? (
+          {modalMode === "delete" && (
             <div className="space-y-4">
               <p className="text-sm text-gray-600">
-                Are you sure you want to delete{" "}
-                <strong>{selectedMember?.name}</strong>? This action cannot be
-                undone.
+                Are you sure you want to deactivate{" "}
+                <strong>{selectedMember?.username}</strong>? This action cannot
+                be undone.
               </p>
               <div className="flex justify-end gap-2">
                 <Button variant="outline" onClick={handleCloseModal}>
                   Cancel
                 </Button>
                 <Button variant="destructive" onClick={handleSubmit}>
-                  Delete Member
+                  Deactivate Member
                 </Button>
               </div>
             </div>
-          ) : (
+          )}
+          {modalMode === "edit" && (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="username">Username</Label>
@@ -409,43 +335,27 @@ export default function Page() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="role">Role</Label>
-                <Select
-                  value={formData.role}
-                  onValueChange={(value) => handleInputChange("role", value)}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a role" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Worship Team">Worship Team</SelectItem>
-                    <SelectItem value="Children's Ministry">
-                      Children's Ministry
-                    </SelectItem>
-                    <SelectItem value="Men's Ministry">
-                      Men's Ministry
-                    </SelectItem>
-                    <SelectItem value="Women's Ministry">
-                      Women's Ministry
-                    </SelectItem>
-                    <SelectItem value="Outreach">Outreach</SelectItem>
-                    <SelectItem value="Youth Ministry">
-                      Youth Ministry
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
+                <Label htmlFor="username">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  placeholder="example@domain.com"
+                  required
+                />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="username">Phone number</Label>
                 <Input
-                  id="password"
-                  type="password"
-                  value={formData.password}
+                  id="phoneNumber"
+                  type="tel"
+                  value={formData.phoneNumber}
                   onChange={(e) =>
-                    handleInputChange("password", e.target.value)
+                    handleInputChange("username", e.target.value)
                   }
-                  placeholder="Enter password"
+                  placeholder="Enter username"
                   required
                 />
               </div>
@@ -462,7 +372,97 @@ export default function Page() {
                   type="submit"
                   className="bg-green-600 hover:bg-green-700"
                 >
-                  {modalMode === "add" ? "Add Member" : "Update Member"}
+                  Update User
+                </Button>
+              </div>
+            </form>
+          )}
+          {modalMode === "add" && (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="username">Username</Label>
+                <Input
+                  id="username"
+                  type="text"
+                  value={formData.username}
+                  onChange={(e) =>
+                    handleInputChange("username", e.target.value)
+                  }
+                  placeholder="Enter username"
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="username">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  placeholder="example@domain.com"
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="username">Phone number</Label>
+                <Input
+                  id="phoneNumber"
+                  type="tel"
+                  value={formData.phoneNumber}
+                  onChange={(e) =>
+                    handleInputChange("phoneNumber", e.target.value)
+                  }
+                  placeholder="UK phone number"
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="role">Role</Label>
+                <Select
+                  value={formData.role}
+                  onValueChange={(value) => handleInputChange("role", value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a role" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Admin">Admin</SelectItem>
+                    <SelectItem value="Customer">Customer</SelectItem>
+                    <SelectItem value="Tradesperson">Tradesperson</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="username">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  value={formData.password}
+                  onChange={(e) =>
+                    handleInputChange("password", e.target.value)
+                  }
+                  placeholder="password"
+                  required
+                />
+              </div>
+
+              <div className="flex justify-end gap-2 pt-4">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleCloseModal}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  className="bg-green-600 hover:bg-green-700"
+                >
+                  Add User
                 </Button>
               </div>
             </form>

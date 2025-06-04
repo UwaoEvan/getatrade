@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Search,
   Plus,
@@ -47,145 +47,23 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import StatsCard from "../components/StatsCard";
+import { fetchAllJobs } from "./actions";
 
 interface Job {
   id: string;
   title: string;
-  company: string;
-  location: string;
-  type: "Full-time" | "Part-time" | "Contract" | "Remote";
-  salary: string;
   description: string;
-  requirements: string[];
-  status: "Active" | "Paused" | "Closed" | "Draft";
-  applications: number;
-  views: number;
-  postedDate: string;
-  expiryDate: string;
-  urgent: boolean;
+  category: string;
+  project: string;
+  createdAt: Date;
+  closedAt: Date | null;
+  active: boolean | null;
+  location: string;
+  userId: number;
+  price: number | null;
+  interested: number | null;
+  shortlisted: number | null;
 }
-
-const jobs: Job[] = [
-  {
-    id: "1",
-    title: "Senior Frontend Developer",
-    company: "TechCorp Inc.",
-    location: "San Francisco, CA",
-    type: "Full-time",
-    salary: "$120,000 - $150,000",
-    description:
-      "We're looking for an experienced Frontend Developer to join our dynamic team.",
-    requirements: [
-      "5+ years React experience",
-      "TypeScript proficiency",
-      "UI/UX design skills",
-    ],
-    status: "Active",
-    applications: 24,
-    views: 156,
-    postedDate: "2024-01-15",
-    expiryDate: "2024-02-15",
-    urgent: true,
-  },
-  {
-    id: "2",
-    title: "Product Manager",
-    company: "StartupXYZ",
-    location: "New York, NY",
-    type: "Full-time",
-    salary: "$90,000 - $120,000",
-    description: "Join our fast-growing startup as a Product Manager.",
-    requirements: [
-      "3+ years PM experience",
-      "Agile methodology",
-      "Data analysis skills",
-    ],
-    status: "Active",
-    applications: 18,
-    views: 89,
-    postedDate: "2024-01-10",
-    expiryDate: "2024-02-10",
-    urgent: false,
-  },
-  {
-    id: "3",
-    title: "UX/UI Designer",
-    company: "Design Studio Pro",
-    location: "Remote",
-    type: "Remote",
-    salary: "$70,000 - $95,000",
-    description:
-      "We're seeking a creative UX/UI Designer to create intuitive user experiences.",
-    requirements: [
-      "Figma expertise",
-      "User research experience",
-      "Portfolio required",
-    ],
-    status: "Paused",
-    applications: 31,
-    views: 203,
-    postedDate: "2024-01-08",
-    expiryDate: "2024-02-08",
-    urgent: false,
-  },
-  {
-    id: "4",
-    title: "Backend Engineer",
-    company: "CloudTech Solutions",
-    location: "Austin, TX",
-    type: "Full-time",
-    salary: "$100,000 - $130,000",
-    description:
-      "Looking for a skilled Backend Engineer to build scalable APIs.",
-    requirements: ["Node.js/Python", "AWS/Azure experience", "Database design"],
-    status: "Draft",
-    applications: 0,
-    views: 12,
-    postedDate: "2024-01-12",
-    expiryDate: "2024-02-12",
-    urgent: false,
-  },
-  {
-    id: "5",
-    title: "Marketing Specialist",
-    company: "Growth Marketing Co.",
-    location: "Chicago, IL",
-    type: "Part-time",
-    salary: "$25 - $35/hour",
-    description:
-      "Join our marketing team to drive growth through digital campaigns.",
-    requirements: [
-      "Digital marketing experience",
-      "Content creation",
-      "Analytics tools",
-    ],
-    status: "Closed",
-    applications: 45,
-    views: 234,
-    postedDate: "2023-12-20",
-    expiryDate: "2024-01-20",
-    urgent: false,
-  },
-];
-
-const stats = [
-  {
-    title: "Total Jobs",
-    value: "127",
-    change: "+12% from last month",
-    trend: "up",
-    icon: Briefcase,
-    color: "bg-blue-100 text-blue-600",
-  },
-  {
-    title: "Active Jobs",
-    value: "89",
-    change: "+8% from last month",
-    trend: "up",
-    icon: TrendingUp,
-    color: "bg-green-100 text-green-600",
-  },
-];
 
 export default function AdminJobsPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -194,32 +72,23 @@ export default function AdminJobsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"add" | "edit" | "view">("add");
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+  const [jobs, setJobs] = useState<Job[]>();
+
+  useEffect(() => {
+    fetchJobs();
+  }, []);
+
+  const fetchJobs = async () => {
+    const jobs = await fetchAllJobs();
+    setJobs(jobs);
+  };
 
   const getStatusBadgeColor = (status: string) => {
     switch (status) {
       case "Active":
         return "bg-green-100 text-green-800 hover:bg-green-100";
-      case "Paused":
-        return "bg-yellow-100 text-yellow-800 hover:bg-yellow-100";
       case "Closed":
         return "bg-red-100 text-red-800 hover:bg-red-100";
-      case "Draft":
-        return "bg-gray-100 text-gray-800 hover:bg-gray-100";
-      default:
-        return "bg-gray-100 text-gray-800 hover:bg-gray-100";
-    }
-  };
-
-  const getJobTypeBadgeColor = (type: string) => {
-    switch (type) {
-      case "Full-time":
-        return "bg-blue-100 text-blue-800 hover:bg-blue-100";
-      case "Part-time":
-        return "bg-purple-100 text-purple-800 hover:bg-purple-100";
-      case "Contract":
-        return "bg-orange-100 text-orange-800 hover:bg-orange-100";
-      case "Remote":
-        return "bg-teal-100 text-teal-800 hover:bg-teal-100";
       default:
         return "bg-gray-100 text-gray-800 hover:bg-gray-100";
     }
@@ -246,52 +115,96 @@ export default function AdminJobsPage() {
 
   const handleSelectAll = () => {
     setSelectedJobs(
-      selectedJobs.length === jobs.length ? [] : jobs.map((job) => job.id),
+      selectedJobs.length === jobs?.length
+        ? []
+        : jobs?.map((job) => job.id) || [],
     );
   };
 
-  const filteredJobs = jobs.filter((job) => {
+  const filteredJobs = jobs?.filter((job) => {
     const matchesSearch =
       job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      job.company.toLowerCase().includes(searchTerm.toLowerCase());
+      job.project.toLowerCase().includes(searchTerm.toLowerCase());
+    const status = job.active ? "Active" : "Closed";
     const matchesStatus =
       statusFilter === "all" ||
-      job.status.toLowerCase() === statusFilter.toLowerCase();
+      status.toLowerCase() === statusFilter.toLowerCase();
     return matchesSearch && matchesStatus;
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 max-w-2xl">
-      <div className="border-b">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">
-                Job Management
-              </h1>
-              <p className="text-gray-600 mt-1">
-                Manage and monitor all job postings
-              </p>
+    <div className="min-h-screen bg-gray-50">
+      <div className="py-6 space-y-6">
+        <div className="flex gap-4">
+          <StatsCard
+            stat={{
+              title: "Total Jobs",
+              value: jobs?.length,
+              change: "+12% from last month",
+              icon: Users,
+              color: "bg-blue-100 text-blue-600",
+            }}
+          />
+          <StatsCard
+            stat={{
+              title: "Inactive Jobs",
+              value: 0,
+              change: "+12% from last month",
+              icon: Users,
+              color: "bg-blue-100 text-blue-600",
+            }}
+          />
+        </div>
+
+        <Card className="bg-white">
+          <CardContent className="p-6">
+            <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+              <div className="flex flex-col sm:flex-row gap-4 flex-1">
+                <div className="relative flex-1 max-w-md">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                  <Input
+                    placeholder="Search jobs..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-10"
+                  />
+                </div>
+                <Select value={statusFilter} onValueChange={setStatusFilter}>
+                  <SelectTrigger className="w-48">
+                    <SelectValue placeholder="Filter by status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Status</SelectItem>
+                    <SelectItem value="active">Active</SelectItem>
+                    <SelectItem value="closed">Closed</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              {selectedJobs.length > 0 && (
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm">
+                    Bulk Edit ({selectedJobs.length})
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="text-red-600 hover:text-red-700"
+                  >
+                    Delete Selected
+                  </Button>
+                </div>
+              )}
             </div>
-          </div>
-        </div>
-      </div>
+          </CardContent>
+        </Card>
 
-      <div className="max-w-7xl mx-auto px-4 py-6 space-y-6">
-        <div className="md:flex gap-4">
-          {stats.map((stat, index) => (
-            <StatsCard key={index} stat={stat} />
-          ))}
-        </div>
-
-        {/* Jobs Table */}
         <Card className="bg-white">
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
-              <span>All Jobs ({filteredJobs.length})</span>
+              <span>All Jobs ({filteredJobs?.length})</span>
               <div className="flex items-center gap-2">
                 <Checkbox
-                  checked={selectedJobs.length === jobs.length}
+                  checked={selectedJobs.length === jobs?.length}
                   onCheckedChange={handleSelectAll}
                 />
                 <span className="text-sm text-gray-500">Select All</span>
@@ -306,7 +219,7 @@ export default function AdminJobsPage() {
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       <Checkbox
                         checked={
-                          selectedJobs.length === filteredJobs.length &&
+                          selectedJobs.length === filteredJobs?.length &&
                           filteredJobs.length > 0
                         }
                         onCheckedChange={handleSelectAll}
@@ -333,7 +246,7 @@ export default function AdminJobsPage() {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {filteredJobs.map((job) => (
+                  {filteredJobs?.map((job) => (
                     <tr key={job.id} className="hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <Checkbox
@@ -351,17 +264,8 @@ export default function AdminJobsPage() {
                               <h3 className="text-sm font-medium text-gray-900 truncate">
                                 {job.title}
                               </h3>
-                              {job.urgent && (
-                                <Badge className="bg-red-100 text-red-800 hover:bg-red-100 text-xs">
-                                  Urgent
-                                </Badge>
-                              )}
                             </div>
                             <div className="flex items-center gap-4 text-xs text-gray-500">
-                              <span className="flex items-center gap-1">
-                                <Building2 className="h-3 w-3" />
-                                {job.company}
-                              </span>
                               <span className="flex items-center gap-1">
                                 <MapPin className="h-3 w-3" />
                                 {job.location}
@@ -369,38 +273,42 @@ export default function AdminJobsPage() {
                             </div>
                             <div className="flex items-center gap-2 mt-2">
                               <Badge
-                                className={getJobTypeBadgeColor(job.type)}
+                                className="bg-blue-100 text-blue-800 hover:bg-blue-100"
                                 variant="secondary"
                               >
-                                {job.type}
+                                Contract
                               </Badge>
                               <span className="text-xs text-green-600 flex items-center gap-1">
                                 <DollarSign className="h-3 w-3" />
-                                {job.salary}
+                                {job.price}
                               </span>
                             </div>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <Badge className={getStatusBadgeColor(job.status)}>
-                          {job.status}
+                        <Badge
+                          className={getStatusBadgeColor(
+                            job.active ? "Active" : "Closed",
+                          )}
+                        >
+                          {job.active ? "Active" : "Closed"}
                         </Badge>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-medium text-gray-900">
-                          {job.applications}
+                          {job.interested}
                         </div>
                         <div className="text-xs text-gray-500">interested</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-medium text-gray-900">
-                          {job.views}
+                          {job.shortlisted}
                         </div>
                         <div className="text-xs text-gray-500">shortlisted</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {new Date(job.postedDate).toLocaleDateString()}
+                        {new Date(job.createdAt).toLocaleDateString()}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <DropdownMenu>
@@ -428,7 +336,6 @@ export default function AdminJobsPage() {
         </Card>
       </div>
 
-      {/* Modal for Add/Edit/View Job */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
@@ -451,11 +358,11 @@ export default function AdminJobsPage() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="company">Company</Label>
+                <Label htmlFor="project">Project</Label>
                 <Input
-                  id="company"
-                  defaultValue={selectedJob?.company || ""}
-                  placeholder="Company name"
+                  id="project"
+                  defaultValue={selectedJob?.project || ""}
+                  placeholder="Project"
                   disabled={modalMode === "view"}
                 />
               </div>
@@ -471,30 +378,13 @@ export default function AdminJobsPage() {
                   disabled={modalMode === "view"}
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="type">Job Type</Label>
-                <Select
-                  defaultValue={selectedJob?.type || ""}
-                  disabled={modalMode === "view"}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select job type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Full-time">Full-time</SelectItem>
-                    <SelectItem value="Part-time">Part-time</SelectItem>
-                    <SelectItem value="Contract">Contract</SelectItem>
-                    <SelectItem value="Remote">Remote</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="salary">Salary Range</Label>
+              <Label htmlFor="salary">Charges</Label>
               <Input
                 id="salary"
-                defaultValue={selectedJob?.salary || ""}
+                defaultValue={selectedJob?.price || ""}
                 placeholder="e.g. $80,000 - $120,000"
                 disabled={modalMode === "view"}
               />
@@ -511,23 +401,9 @@ export default function AdminJobsPage() {
               />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="requirements">Requirements (one per line)</Label>
-              <Textarea
-                id="requirements"
-                defaultValue={selectedJob?.requirements.join("\n") || ""}
-                placeholder="List the key requirements and qualifications..."
-                rows={3}
-                disabled={modalMode === "view"}
-              />
-            </div>
-
             {modalMode !== "view" && (
               <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="urgent"
-                  defaultChecked={selectedJob?.urgent || false}
-                />
+                <Checkbox id="urgent" defaultChecked={false} />
                 <Label htmlFor="urgent">Mark as urgent</Label>
               </div>
             )}

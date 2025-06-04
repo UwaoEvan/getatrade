@@ -26,6 +26,8 @@ model User {
   location         String?
   about            String?
   averageRating    Float?      @default(0.0)
+  status           String?     @default("Active")
+  joinDate         DateTime?   @default(now())
   job              Job[]
   interest         Interest[]
   shortlist        Shortlist[]

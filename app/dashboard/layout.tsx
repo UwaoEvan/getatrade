@@ -4,7 +4,7 @@ import { useState } from "react";
 import Sidebar from "./components/Sidebar";
 import { Menu } from "lucide-react";
 
-export default function MyAccountLayout({
+export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -13,9 +13,8 @@ export default function MyAccountLayout({
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      <div className="max-w-4xl mx-auto">
+      <div className="lg:w-[880px] lg:mx-auto">
         <div className="p-4 flex justify-between items-center py-6">
-          {/* <h1 className="text-2xl font-bold">My Account</h1> */}
           <button
             className="md:hidden p-2 rounded hover:bg-gray-200"
             onClick={() => setIsSidebarOpen(true)}
@@ -35,7 +34,9 @@ export default function MyAccountLayout({
             <Sidebar />
           </div>
 
-          <main className="px-4">{children}</main>
+          <main className="px-4 lg:w-[74%] md:w-[88%] md:mx-auto">
+            {children}
+          </main>
         </div>
       </div>
     </div>

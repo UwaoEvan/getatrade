@@ -322,23 +322,7 @@ export default function AdminReviewsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="border-b">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">
-                Review Management
-              </h1>
-              <p className="text-gray-600 mt-1">
-                Monitor and moderate company reviews
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 py-6 space-y-6">
+      <div className="py-6 space-y-6">
         <div className="flex">
           {stats.map((stat, index) => (
             <StatsCard key={index} stat={stat} />
@@ -363,9 +347,9 @@ export default function AdminReviewsPage() {
               {filteredReviews.map((review) => (
                 <div
                   key={review.id}
-                  className="border rounded-lg p-6 hover:shadow-md transition-shadow duration-200 bg-gray-50"
+                  className="overflow-x-auto border rounded-lg p-6 hover:shadow-md transition-shadow duration-200 bg-gray-50"
                 >
-                  <div className="flex items-start gap-4">
+                  <div className="flex w-fit items-start gap-4">
                     <Checkbox
                       checked={selectedReviews.includes(review.id)}
                       onCheckedChange={() => handleSelectReview(review.id)}

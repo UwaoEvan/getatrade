@@ -389,21 +389,7 @@ export default function PaymentsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="border-b">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">Transactions</h1>
-              <p className="text-gray-600 mt-1">
-                Track and manage all your financial transactions
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 py-6 space-y-6">
+      <div className="py-6 space-y-6">
         <div className="flex">
           {stats.map((stat, index) => (
             <StatsCard key={index} stat={stat} />
