@@ -8,7 +8,7 @@ import {
   Banknote,
   Smartphone,
   Calendar,
-  DollarSign,
+  PoundSterling,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -67,7 +67,7 @@ export default function PaymentsPage() {
       case "Mobile Payment":
         return <Smartphone className="h-4 w-4" />;
       default:
-        return <DollarSign className="h-4 w-4" />;
+        return <PoundSterling className="h-4 w-4" />;
     }
   };
 
@@ -80,7 +80,7 @@ export default function PaymentsPage() {
               title: "Total Transactions",
               value: transactions?.length,
               change: "+12% from last month",
-              icon: DollarSign,
+              icon: PoundSterling,
               color: "bg-blue-100 text-blue-600",
             }}
           />
