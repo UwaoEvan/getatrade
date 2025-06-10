@@ -21,7 +21,7 @@ export const { auth, signIn, signOut } = NextAuth({
         }
 
         const { email, password } = parsedCredentials.data;
-        const user = await db.user.findFirst({ where: { email } });
+        const user = await db.user.findFirst({ where: { email, status: "Active" } });
 
         if (!user) {
           throw new AuthError("User not found");
