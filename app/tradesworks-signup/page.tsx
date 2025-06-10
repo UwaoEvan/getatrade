@@ -92,7 +92,7 @@ function SignupForm() {
         >
           Sign up for free
         </button>
-        {state?.error && <p className="text-red-500">{state.error}</p>}
+        {state?.error && <p className="text-red-500 text-sm">{state.error}</p>}
       </form>
     </div>
   );

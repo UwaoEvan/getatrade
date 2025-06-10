@@ -5,7 +5,7 @@ import { getUser, State } from "../lib/actions";
 import { auth } from "../lib/auth";
 import { db } from "../lib/db";
 import { postJobSchema, updateJobSchema } from "../lib/schemas";
-import { sendJobPostEmail } from "../lib/emailTemplate";
+import { notifyTradepeople, sendJobPostEmail } from "../lib/emailTemplate";
 
 export const postNewJob = async (prevState: State, formData: FormData) => {
   const session = await auth();
@@ -31,7 +31,7 @@ export const postNewJob = async (prevState: State, formData: FormData) => {
 
   const { category, title, description, location, project } = parsed.data;
 
-  await db.job.create({
+  const job = await db.job.create({
     data: {
       title,
       description,
@@ -42,6 +42,20 @@ export const postNewJob = async (prevState: State, formData: FormData) => {
       userId: user.id,
     },
   });
+
+  const tradesPeople = await db.user.findMany({
+    where: { role: title },
+    select: { email: true },
+  });
+
+  await sendJobPostEmail(
+    user.email,
+    "Thank you for posting your job",
+    user.username,
+    job.title,
+  );
+  // send notifications to people
+  await notifyTradepeople(tradesPeople, job.title);
 
   return { success: true };
 };
@@ -64,7 +78,7 @@ export const updateJob = async (formData: FormData) => {
 
   const { jobId, description } = parsed.data;
 
-  const job = await db.job.update({
+  await db.job.update({
     where: {
       id: jobId,
     },
@@ -72,13 +86,6 @@ export const updateJob = async (formData: FormData) => {
       description,
     },
   });
-
-  await sendJobPostEmail(
-    user.email,
-    "Thank you for posting your job",
-    user.username,
-    job.title,
-  );
 
   revalidatePath(`/my-jobs/${jobId}`);
 };
