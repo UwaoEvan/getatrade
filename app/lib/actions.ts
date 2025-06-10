@@ -48,10 +48,14 @@ export const register = async (prevState: State, formData: FormData) => {
 
   const { phoneNumber, email, username, password, role } = parsed.data;
 
-  const existingUser = await db.user.findUnique({ where: { email } });
+  const existingUser = await db.user.findFirst({
+    where: {
+      OR: [{ email }, { phoneNumber }],
+    },
+  });
 
   if (existingUser) {
-    return { error: "Email already in use" };
+    return { error: "Email or phone number already in use" };
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
