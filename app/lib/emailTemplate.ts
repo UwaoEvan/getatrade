@@ -329,7 +329,7 @@ export const notifyTradepeople = async (emails: emails[], jobTitle: string) => {
   <html>
     <body style="font-family: Arial, sans-serif; background-color: #f9f9f9; margin: 0; padding: 0;">
       <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f9f9f9; padding: 20px 0;">
-        <tr>
+        <tr> ${emails}
           <td align="center">
             <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
               <tr>
@@ -361,7 +361,7 @@ export const notifyTradepeople = async (emails: emails[], jobTitle: string) => {
     </body>
   </html>
 `;
-
+  console.log(htmlContent);
   // const sendSmtpEmail = {
   //   to: emails,
   //   subject: "subject",

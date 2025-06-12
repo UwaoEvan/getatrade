@@ -1,8 +1,9 @@
-import { getJobPosting } from "@/app/lib/actions";
+import { getJobPosting, getUser } from "@/app/lib/actions";
 import { formatDistanceToNow } from "date-fns";
 import { Suspense } from "react";
 import ShortlistFee from "./components/ShortlistFee";
 import { auth } from "@/app/lib/auth";
+import UnverifiedInfo from "./components/UnverifiedInfo";
 
 type Params = {
   params: Promise<{
@@ -14,6 +15,7 @@ export default async function LeadDetails({ params }: Params) {
   const { id: jobId } = await params;
   const job = await getJobPosting(jobId);
   const session = await auth();
+  const user = await getUser(session?.user?.email as string);
   return (
     <Suspense
       fallback={
@@ -63,11 +65,17 @@ export default async function LeadDetails({ params }: Params) {
               </div>
             </div>
           </div>
-          <ShortlistFee
-            jobId={job?.id}
-            email={session?.user?.email || ""}
-            price={job?.price || 10}
-          />
+          {user?.verificationStatus !== "Verified" ? (
+            <UnverifiedInfo
+              status={user?.verificationStatus || "Not verified"}
+            />
+          ) : (
+            <ShortlistFee
+              jobId={job?.id}
+              email={session?.user?.email || ""}
+              price={job?.price || 10}
+            />
+          )}
         </div>
 
         <div className="p-4 rounded-lg mb-6">

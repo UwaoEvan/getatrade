@@ -3,6 +3,7 @@ import { getJobPostings, getUser } from "../lib/actions";
 import { Suspense } from "react";
 import Lead from "./components/Lead";
 import { redirect } from "next/navigation";
+import Unverified from "@/components/ui/Unverified";
 
 export default async function Dashboard() {
   const session = await auth();
@@ -28,6 +29,9 @@ export default async function Dashboard() {
     >
       <div className="min-h-[60vh] mx-auto bg-gray-100 py-6">
         <div className="w-full px-4 md:w-[880px] mx-auto">
+          {user.verificationStatus !== "Verified" && (
+            <Unverified status={user.verificationStatus || "Not verified"} />
+          )}
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold">New Leads</h1>
           </div>

@@ -28,8 +28,8 @@ export default function ShortlistFee({ email, jobId, price }: Props) {
     <div className="w-full border-1 border-gray-200 p-4 rounded-lg">
       <p className="font-bold">Shortlist fee</p>
       <p className="text-[#2f76d9] font-bold">￡{price} + VAT</p>
-      <div className="p-2 bg-gray-200 my-4">
-        <p className="font-bold">￡ Expressing interest is free</p>
+      <div className="p-2 bg-gray-200 my-4 rounded-sm">
+        <p className="font-bold text-sm pb-2">￡ Expressing interest is free</p>
         <p className="text-sm font-medium">
           You only pay a fee if the customer shortlists you.
         </p>
