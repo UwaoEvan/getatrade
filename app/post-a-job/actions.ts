@@ -2,7 +2,7 @@
 
 import { register, State } from "../lib/actions";
 import { db } from "../lib/db";
-import { sendJobPostEmail } from "../lib/emailTemplate";
+import { notifyTradepeople, sendJobPostEmail } from "../lib/emailTemplate";
 import { postJobSchema } from "../lib/schemas";
 
 export const postJob = async (prevState: State, formData: FormData) => {
@@ -50,6 +50,13 @@ export const postJob = async (prevState: State, formData: FormData) => {
       updatedUser.username,
       job.title,
     );
+
+    const tradesPeople = await db.user.findMany({
+      where: { role: title },
+      select: { email: true },
+    });
+
+    await notifyTradepeople(tradesPeople, job.title);
 
     return { success: true };
   }

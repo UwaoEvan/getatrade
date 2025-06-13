@@ -329,27 +329,22 @@ export const notifyTradepeople = async (emails: emails[], jobTitle: string) => {
   <html>
     <body style="font-family: Arial, sans-serif; background-color: #f9f9f9; margin: 0; padding: 0;">
       <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f9f9f9; padding: 20px 0;">
-        <tr> ${emails}
+        <tr>
           <td align="center">
             <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
               <tr>
-                <td style="padding: 30px; text-align: center; border-bottom: 1px solid #eeeeee;">
-                  <h1 style="color: #333333; margin: 0;">Thank you for the job post!</h1>
-                </td>
-              </tr>
-              <tr>
                 <td style="padding: 30px; color: #555555; font-size: 16px; line-height: 1.5;">
                   <p>Hello,</p>
-                  <p>Thank you for posting your <strong>${jobTitle} job</strong>. We'll now help you find available tradespeople near you.</p>
+                  <p>There's a new lead in your area of specialization!</p>
+                  <p>Job title: <strong>${jobTitle} job</strong>.</p>
                   <p><strong>Next Steps:</strong></p>
                   <ul>
-                    <li>We sent your job to relevant tradespeople near you.</li>
-                    <li>Getatrade link sends you an email and text message when a tradesperson expresses interest.</li>
-                    <li>Start chats with tradespeople to share contact details. Then you can discuss the job on our platform or using their phone or email.</li>
-                    <li>Hire the right tradesperson and leave a review when the job is done.</li>
+                    <li>Send a message for free to the customer to express interest in this lead.</li>
+                    <li>You'll only pay if a customer shortlists you</li>
+                    <li>Contact the customer as soon as you get the contact details for the best chance of getting hired.</li>
                   </ul>
-                  <p><strong>Get more responses</strong></p>
-                  <p>You can invite up to 10 more recommended tradespeople to quote on your job.</p>
+                  <p>Do not share this email with others to prevent unauthorised access to your account.</p>
+                  <p>To protect yourself from fraud and identity theft, please be cautious when sharing personal documents with other users. Contact us if you have any concerns or encounter suspicious requests.</p>
                   <p>Best,<br>Getatrade link Team</p>
                   <p style="font-size: 12px; color: #999999;">Do not share this email with others to prevent unauthorised access to your account.</p>
                 </td>
@@ -361,19 +356,19 @@ export const notifyTradepeople = async (emails: emails[], jobTitle: string) => {
     </body>
   </html>
 `;
-  console.log(htmlContent);
-  // const sendSmtpEmail = {
-  //   to: emails,
-  //   subject: "subject",
-  //   htmlContent: htmlContent,
-  //   sender: { email: "info@getatradelinkltd.com", name: "Getatrade" },
-  // };
 
-  // try {
-  //   await apiInstance.sendTransacEmail(sendSmtpEmail);
-  //   return true;
-  // } catch (error) {
-  //   console.error("Error sending email:", error);
-  //   return false;
-  // }
+  const sendSmtpEmail = {
+    to: emails,
+    subject: "NEW LEADS",
+    htmlContent: htmlContent,
+    sender: { email: "info@getatradelinkltd.com", name: "Getatrade" },
+  };
+
+  try {
+    await apiInstance.sendTransacEmail(sendSmtpEmail);
+    return true;
+  } catch (error) {
+    console.error("Error sending email:", error);
+    return false;
+  }
 };
