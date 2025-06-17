@@ -5,7 +5,7 @@ export const sendEmail = async (
   subject: string,
   userName: string,
   status: string,
-  reason?: string
+  reason?: string,
 ) => {
   const apiInstance = new Brevo.TransactionalEmailsApi();
   apiInstance.setApiKey(
@@ -31,7 +31,11 @@ export const sendEmail = async (
   }
 };
 
-const generateHtmlContent = (userName: string, status: string, reason?: string) => {
+const generateHtmlContent = (
+  userName: string,
+  status: string,
+  reason?: string,
+) => {
   let htmlContent;
   if (status === "Approved") {
     htmlContent = `

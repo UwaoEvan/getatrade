@@ -112,16 +112,13 @@ export default function Page() {
 
     setProcessing(true);
     try {
-      const response = await fetch(
-        `/api/admin/verifications/${params.id}/reject`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ reason: rejectionReason }),
+      const response = await fetch(`/api/verifications/${params.id}/reject`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({ reason: rejectionReason }),
+      });
 
       if (response.ok) {
         fetchVerificationDetail();
@@ -300,7 +297,7 @@ export default function Page() {
                       className="flex-1"
                     >
                       <CheckCircle className="h-4 w-4 mr-2" />
-                      {processing ? "Processing..." : "Approve"}
+                      {processing ? "Loading..." : "Approve"}
                     </Button>
                     <Button
                       onClick={handleReject}
@@ -309,7 +306,7 @@ export default function Page() {
                       className="flex-1"
                     >
                       <XCircle className="h-4 w-4 mr-2" />
-                      {processing ? "Processing..." : "Reject"}
+                      {processing ? "Loading..." : "Reject"}
                     </Button>
                   </div>
                 </CardContent>

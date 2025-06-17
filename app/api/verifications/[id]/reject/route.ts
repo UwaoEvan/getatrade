@@ -37,7 +37,13 @@ export async function POST(
 
     const subject = "Your document verification has been rejected!";
 
-    await sendEmail(user.email, subject, user.username, "Rejected", updated?.rejectionReason || "");
+    await sendEmail(
+      user.email,
+      subject,
+      user.username,
+      "Rejected",
+      updated?.rejectionReason || "",
+    );
 
     return NextResponse.json(updated);
   } catch (error) {
