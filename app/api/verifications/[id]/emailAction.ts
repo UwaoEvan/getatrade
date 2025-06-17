@@ -79,8 +79,7 @@ const generateHtmlContent = (
                   <td style="padding: 30px; color: #555555; font-size: 16px; line-height: 1.5;">
                     <p>Dear <strong>${userName}</strong>,</p>
                     <p>We regret to inform you that your document submission has been <strong>rejected</strong> on Getatrade Link Ltd.</p>
-                    <p><strong>Reason:</strong></p>
-                    <p>${reason}<p>
+                    <p><strong>Reason:</strong>${reason}</p>
                     <p>Unfortunately, this means you are not currently eligible to access client leads or connect with customers through our platform.</p>
                     <p>If you believe this decision was made in error or you'd like to reapply, you're welcome to submit your documents again for review.</p>
                     <p>Thank you for your interest in Getatrade Link Ltd. If you have any questions or need support, please don't hesitate to contact us.</p>
