@@ -82,6 +82,7 @@ export const register = async (prevState: State, formData: FormData) => {
     user.email,
     "Welcome to GetATradeLinkLtd",
     user.username,
+    user?.role as string,
   );
 
   await signIn("credentials", {

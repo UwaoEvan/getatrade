@@ -254,15 +254,53 @@ export const sendWelcomeEmail = async (
   to: string,
   subject: string,
   userName: string,
+  role: string,
 ) => {
   const apiInstance = new Brevo.TransactionalEmailsApi();
   apiInstance.setApiKey(
     Brevo.TransactionalEmailsApiApiKeys.apiKey,
     process.env.BREVO_API_KEY || "",
   );
-
-  const htmlContent = `
-  <html>
+  const customer = role === "customer";
+  const htmlContent = customer
+    ? `<html>
+    <body style="font-family: Arial, sans-serif; background-color: #f9f9f9; margin: 0; padding: 0;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f9f9f9; padding: 20px 0;">
+        <tr>
+          <td align="center">
+            <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+              <tr>
+                <td style="padding: 30px; text-align: center; border-bottom: 1px solid #eeeeee;">
+                  <h1 style="color: #333333; margin: 0;">Welcome to Getatrade Link Ltd – Let's Get You Started!</h1>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 30px; color: #555555; font-size: 16px; line-height: 1.6;">
+                  <p>Hello <strong>${userName}</strong>,</p>
+                  <p>Welcome to <strong>Getatrade Link Ltd</strong>! We’re so glad to have you here!</p>
+                  <p>You have just taken a big step toward getting your job sorted with a trusted local tradesperson.</p>
+                  <p>Your job is now live on our platform, and tradesperson are being matched as we speak. Once someone’s available and interested, they’ll get in touch with you directly.</p>
+                  <p>We Keep things simple-no bidding wars, no overwhelming choices. Just Skilled people ready to get the job done.</p>
+                  <p><strong>Next Steps::</strong></p>
+                  <ul>
+                    <li><strong>You’ll be contacted soon by a local tradesperson.</li>
+                    <li><strong>Discuss the details together and agree on the work.</li>
+                    <li><strong>Leave a review after the job- your feedback helps others just like you!</li>
+                    <li><strong>Verify Your Identity:</strong> Completing our verification process increases your credibility and trustworthiness.</li>
+                  </ul>
+                  <p>If you have any questions or need help along the way, we’re only message away.</p>
+                  <p>Thanks again for choosing GetaTrade Link- your job just got easier.</p>
+                  <p style="margin-top: 30px;">Best regards,<br><strong>Getatrade Link Ltd Team</strong></p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+  </html>
+`
+    : `<html>
     <body style="font-family: Arial, sans-serif; background-color: #f9f9f9; margin: 0; padding: 0;">
       <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f9f9f9; padding: 20px 0;">
         <tr>
