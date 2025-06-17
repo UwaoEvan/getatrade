@@ -8,7 +8,6 @@ import {
   Users,
   MapPin,
   Building2,
-  DollarSign,
   PoundSterling,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -57,7 +56,6 @@ interface Job {
   shortlisted: number | null;
 }
 
-// Loading skeleton component for the jobs table
 const JobsTableSkeleton = () => {
   return (
     <div className="overflow-x-auto">
