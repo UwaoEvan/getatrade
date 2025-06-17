@@ -2,10 +2,10 @@ import { db } from "@/app/lib/db";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function POST(
-  _: NextRequest,
-  { params }: { params: { id: string } },
+  request: NextRequest,
+  context: { params: Promise<{ id: string }> },
 ) {
-  const { id } = params;
+  const { id } = await context.params;
 
   try {
     const updated = await db.verification.update({
