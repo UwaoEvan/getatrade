@@ -110,7 +110,7 @@ export default function PortfolioPage() {
       <div className="max-w-6xl mx-auto space-y-6">
         <div className="flex items-center gap-4">
           <h1 className="text-lg md:text-3xl font-bold text-gray-900">
-            {user.username}'s Portfolio
+            {user.username}&apos;s Portfolio
           </h1>
         </div>
 
@@ -142,7 +142,7 @@ export default function PortfolioPage() {
                       No Portfolio Images
                     </h3>
                     <p className="text-gray-500">
-                      This user hasn't uploaded any portfolio images yet.
+                      This user hasn&apos;t uploaded any portfolio images yet.
                     </p>
                   </div>
                 ) : (

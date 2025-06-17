@@ -79,7 +79,7 @@ export default function Page() {
 
   useEffect(() => {
     fetchUsers();
-  }, [isModalOpen]);
+  }, []);
 
   const fetchUsers = async () => {
     try {
@@ -187,7 +187,7 @@ export default function Page() {
     } else {
       await deactivateUser(selectedMember?.id || 0);
     }
-
+    fetchUsers();
     handleCloseModal();
   };
 
