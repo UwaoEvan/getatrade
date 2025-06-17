@@ -4,7 +4,11 @@ import { db } from "../lib/db";
 import bcrypt from "bcrypt";
 
 export const getAllUsers = async () => {
-  const users = await db.user.findMany();
+  const users = await db.user.findMany({
+    orderBy: {
+      joinDate: "desc",
+    },
+  });
   return users;
 };
 

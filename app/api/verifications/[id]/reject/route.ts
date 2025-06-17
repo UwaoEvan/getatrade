@@ -35,7 +35,8 @@ export async function POST(
       },
     });
 
-    const subject = "Your document submission was unsuccessful - please resubmit";
+    const subject =
+      "Your document submission was unsuccessful - please resubmit";
 
     await sendEmail(
       user.email,

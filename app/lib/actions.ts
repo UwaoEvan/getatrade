@@ -99,6 +99,9 @@ export const getJobPostings = async () => {
     where: {
       closedAt: null,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
   return jobs;
 };

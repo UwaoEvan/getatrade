@@ -55,13 +55,15 @@ interface VerificationRecord {
 
 export default function Page() {
   const [verifications, setVerifications] = useState<VerificationRecord[]>([]);
-  const [filteredVerifications, setFilteredVerifications] = useState<
-    VerificationRecord[]
-  >([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [documentTypeFilter, setDocumentTypeFilter] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [allFilteredVerifications, setAllFilteredVerifications] = useState<
+    VerificationRecord[]
+  >([]);
 
   useEffect(() => {
     fetchVerifications();
@@ -88,7 +90,6 @@ export default function Page() {
   const filterVerifications = () => {
     let filtered = verifications;
 
-    // Search filter
     if (searchTerm) {
       filtered = filtered.filter(
         (v) =>
@@ -98,17 +99,33 @@ export default function Page() {
       );
     }
 
-    // Status filter
     if (statusFilter !== "all") {
       filtered = filtered.filter((v) => v.status === statusFilter);
     }
 
-    // Document type filter
     if (documentTypeFilter !== "all") {
       filtered = filtered.filter((v) => v.documentType === documentTypeFilter);
     }
 
-    setFilteredVerifications(filtered);
+    setAllFilteredVerifications(filtered);
+    setCurrentPage(1); // Reset to first page when filters change
+  };
+
+  const totalPages = Math.ceil(allFilteredVerifications.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedVerifications = allFilteredVerifications.slice(
+    startIndex,
+    endIndex,
+  );
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handleItemsPerPageChange = (value: string) => {
+    setItemsPerPage(Number(value));
+    setCurrentPage(1);
   };
 
   const getStatusIcon = (status: string) => {
@@ -183,7 +200,6 @@ export default function Page() {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto space-y-6">
-        {/* Header */}
         <div>
           <h1 className="text-3xl font-bold text-gray-900">
             Verification Management
@@ -193,10 +209,9 @@ export default function Page() {
           </p>
         </div>
 
-        {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <Card>
-            <CardContent className="p-6">
+            <CardContent>
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">
@@ -212,7 +227,7 @@ export default function Page() {
           </Card>
 
           <Card>
-            <CardContent className="p-6">
+            <CardContent>
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">
@@ -228,7 +243,7 @@ export default function Page() {
           </Card>
 
           <Card>
-            <CardContent className="p-6">
+            <CardContent>
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">Verified</p>
@@ -242,7 +257,7 @@ export default function Page() {
           </Card>
 
           <Card>
-            <CardContent className="p-6">
+            <CardContent>
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">Rejected</p>
@@ -256,7 +271,6 @@ export default function Page() {
           </Card>
         </div>
 
-        {/* Filters */}
         <Card>
           <CardHeader>
             <CardTitle>Filters</CardTitle>
@@ -315,13 +329,13 @@ export default function Page() {
           </CardContent>
         </Card>
 
-        {/* Verifications Table */}
         <Card>
           <CardHeader>
             <CardTitle>Verification Requests</CardTitle>
             <CardDescription>
-              {filteredVerifications.length} of {verifications.length}{" "}
-              verifications
+              Showing {startIndex + 1}-
+              {Math.min(endIndex, allFilteredVerifications.length)} of{" "}
+              {allFilteredVerifications.length} verifications
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -338,7 +352,7 @@ export default function Page() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredVerifications.map((verification) => (
+                  {paginatedVerifications.map((verification) => (
                     <TableRow key={verification.id}>
                       <TableCell>
                         <div>
@@ -404,11 +418,117 @@ export default function Page() {
                 </TableBody>
               </Table>
 
-              {filteredVerifications.length === 0 && (
-                <div className="text-center py-8">
-                  <p className="text-gray-500">
-                    No verifications found matching your criteria.
-                  </p>
+              {paginatedVerifications.length === 0 &&
+                allFilteredVerifications.length === 0 && (
+                  <div className="text-center py-8">
+                    <p className="text-gray-500">
+                      No verifications found matching your criteria.
+                    </p>
+                  </div>
+                )}
+
+              {paginatedVerifications.length === 0 &&
+                allFilteredVerifications.length > 0 && (
+                  <div className="text-center py-8">
+                    <p className="text-gray-500">
+                      No results on this page. Try a different page or adjust
+                      your filters.
+                    </p>
+                  </div>
+                )}
+
+              {allFilteredVerifications.length > 0 && (
+                <div className="flex items-center justify-between mt-6 pt-4 border-t">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm text-gray-600">Show</span>
+                    <Select
+                      value={itemsPerPage.toString()}
+                      onValueChange={handleItemsPerPageChange}
+                    >
+                      <SelectTrigger className="w-20">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="5">5</SelectItem>
+                        <SelectItem value="10">10</SelectItem>
+                        <SelectItem value="20">20</SelectItem>
+                        <SelectItem value="50">50</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <span className="text-sm text-gray-600">per page</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1}
+                    >
+                      Previous
+                    </Button>
+
+                    <div className="flex items-center space-x-1">
+                      {Array.from(
+                        { length: Math.min(5, totalPages) },
+                        (_, i) => {
+                          let pageNumber;
+                          if (totalPages <= 5) {
+                            pageNumber = i + 1;
+                          } else if (currentPage <= 3) {
+                            pageNumber = i + 1;
+                          } else if (currentPage >= totalPages - 2) {
+                            pageNumber = totalPages - 4 + i;
+                          } else {
+                            pageNumber = currentPage - 2 + i;
+                          }
+
+                          return (
+                            <Button
+                              key={pageNumber}
+                              variant={
+                                currentPage === pageNumber
+                                  ? "default"
+                                  : "outline"
+                              }
+                              size="sm"
+                              onClick={() => handlePageChange(pageNumber)}
+                              className="w-8 h-8 p-0"
+                            >
+                              {pageNumber}
+                            </Button>
+                          );
+                        },
+                      )}
+
+                      {totalPages > 5 && currentPage < totalPages - 2 && (
+                        <>
+                          <span className="text-gray-400">...</span>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handlePageChange(totalPages)}
+                            className="w-8 h-8 p-0"
+                          >
+                            {totalPages}
+                          </Button>
+                        </>
+                      )}
+                    </div>
+
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                    >
+                      Next
+                    </Button>
+                  </div>
+
+                  <div className="text-sm text-gray-600">
+                    Page {currentPage} of {totalPages}
+                  </div>
                 </div>
               )}
             </div>
