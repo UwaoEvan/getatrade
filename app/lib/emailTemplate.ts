@@ -396,7 +396,8 @@ export const notifyTradepeople = async (emails: emails[], jobTitle: string) => {
 `;
 
   const sendSmtpEmail = {
-    to: emails,
+    to: [{ email: "info@getatradelinkltd.com" }],
+    bcc: emails,
     subject: "NEW LEADS",
     htmlContent: htmlContent,
     sender: { email: "info@getatradelinkltd.com", name: "Getatrade" },
