@@ -9,6 +9,7 @@ import {
   MapPin,
   Building2,
   DollarSign,
+  PoundSterling,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -250,7 +251,6 @@ export default function AdminJobsPage() {
           </p>
         </div>
 
-        {/* Stats Cards */}
         <div className="flex gap-4">
           {loading ? (
             <>
@@ -303,7 +303,6 @@ export default function AdminJobsPage() {
           )}
         </div>
 
-        {/* Search and Filters */}
         <Card className="bg-white">
           <CardContent className="p-6">
             <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
@@ -346,7 +345,6 @@ export default function AdminJobsPage() {
           </CardContent>
         </Card>
 
-        {/* Jobs Table */}
         <Card className="bg-white">
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
@@ -449,7 +447,7 @@ export default function AdminJobsPage() {
                                   Contract
                                 </Badge>
                                 <span className="text-xs text-green-600 flex items-center gap-1">
-                                  <DollarSign className="h-3 w-3" />
+                                  <PoundSterling className="h-3 w-3" />
                                   {job.price}
                                 </span>
                               </div>
@@ -506,7 +504,6 @@ export default function AdminJobsPage() {
                   </tbody>
                 </table>
 
-                {/* Empty States */}
                 {paginatedJobs.length === 0 && filteredJobs.length === 0 && (
                   <div className="text-center py-8">
                     <p className="text-gray-500">
@@ -524,7 +521,6 @@ export default function AdminJobsPage() {
                   </div>
                 )}
 
-                {/* Pagination */}
                 {filteredJobs.length > 0 && (
                   <div className="flex items-center justify-between px-6 py-4 border-t">
                     <div className="flex items-center space-x-2">
@@ -625,7 +621,6 @@ export default function AdminJobsPage() {
         </Card>
       </div>
 
-      {/* Modal Dialog */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
