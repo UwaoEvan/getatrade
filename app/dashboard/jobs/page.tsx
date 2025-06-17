@@ -8,7 +8,7 @@ import {
   Users,
   MapPin,
   Building2,
-  PoundSterling,
+  DollarSign,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -217,7 +217,6 @@ export default function AdminJobsPage() {
     return matchesSearch && matchesStatus;
   });
 
-  // Pagination logic
   const totalPages = Math.ceil(filteredJobs.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -445,7 +444,7 @@ export default function AdminJobsPage() {
                                   Contract
                                 </Badge>
                                 <span className="text-xs text-green-600 flex items-center gap-1">
-                                  <PoundSterling className="h-3 w-3" />
+                                  <DollarSign className="h-3 w-3" />
                                   {job.price}
                                 </span>
                               </div>
