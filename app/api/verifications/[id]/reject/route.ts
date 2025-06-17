@@ -35,7 +35,7 @@ export async function POST(
       },
     });
 
-    const subject = "Your document verification has been rejected!";
+    const subject = "Your document submission was unsuccessful - please resubmit";
 
     await sendEmail(
       user.email,
