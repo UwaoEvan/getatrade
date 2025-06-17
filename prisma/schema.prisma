@@ -15,9 +15,9 @@ datasource db {
 }
 
 model User {
-  id                 Int            @id @default(autoincrement())
+  id                 Int              @id @default(autoincrement())
   username           String
-  email              String         @unique
+  email              String           @unique
   phoneNumber        String?
   firstName          String?
   lastName           String?
@@ -25,18 +25,19 @@ model User {
   role               String?
   location           String?
   about              String?
-  verified           Boolean?       @default(false)
-  verificationStatus String?        @default("Not verified")
-  averageRating      Float?         @default(0.0)
-  status             String?        @default("Active")
-  joinDate           DateTime?      @default(now())
+  verified           Boolean?         @default(false)
+  verificationStatus String?          @default("Not verified")
+  averageRating      Float?           @default(0.0)
+  status             String?          @default("Active")
+  joinDate           DateTime?        @default(now())
   job                Job[]
   interest           Interest[]
   shortlist          Shortlist[]
   payments           Payments[]
-  sentMessages       Message[]      @relation("SentMessages")
-  receivedMessages   Message[]      @relation("ReceivedMessages")
+  sentMessages       Message[]        @relation("SentMessages")
+  receivedMessages   Message[]        @relation("ReceivedMessages")
   verification       Verification[]
+  portfolioImages    PortfolioImage[]
 
   @@map("user")
 }
@@ -151,6 +152,7 @@ model PortfolioImage {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId    Int?
+  user      User?    @relation(fields: [userId], references: [id])
 
   @@map("portfolio_images")
 }

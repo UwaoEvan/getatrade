@@ -8,6 +8,9 @@ export const getAllUsers = async () => {
     orderBy: {
       joinDate: "desc",
     },
+    include: {
+      portfolioImages: true,
+    },
   });
   return users;
 };
@@ -60,4 +63,11 @@ export const deactivateUser = async (id: number) => {
     },
   });
   return true;
+};
+
+export const deletePortfolioImage = async (id: string) => {
+  await db.portfolioImage.delete({
+    where: { id },
+  });
+  return {};
 };

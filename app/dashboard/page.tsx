@@ -3,7 +3,7 @@
 import type React from "react";
 
 import { useState, useEffect } from "react";
-import { Plus, Users, Eye, Edit, Trash2 } from "lucide-react";
+import { Plus, Users, Eye, Edit, Trash2, Images } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -27,6 +27,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import StatsCard from "./components/StatsCard";
 import { addUser, deactivateUser, getAllUsers, updateUser } from "./actions";
 import { format } from "date-fns";
+import TableSkeleton from "./Skeleton";
+import { useRouter } from "next/navigation";
 
 interface Member {
   id: number;
@@ -42,79 +44,19 @@ interface Member {
   averageRating: number | null;
   joinDate: Date | null;
   status: string | null;
+  portfolioImages?: PortfolioImage[];
 }
 
-const TableSkeleton = () => {
-  return (
-    <div className="overflow-x-auto">
-      <table className="w-full">
-        <thead className="bg-gray-50">
-          <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              User
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Contact
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Status
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Role
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Join Date
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Actions
-            </th>
-          </tr>
-        </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
-          {Array.from({ length: 10 }).map((_, index) => (
-            <tr key={index} className="hover:bg-gray-50">
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="flex items-center">
-                  <Skeleton className="h-10 w-10 rounded-full" />
-                  <div className="ml-4 space-y-2">
-                    <Skeleton className="h-4 w-24" />
-                    <Skeleton className="h-3 w-16" />
-                  </div>
-                </div>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="space-y-2">
-                  <Skeleton className="h-4 w-32" />
-                  <Skeleton className="h-3 w-24" />
-                </div>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <Skeleton className="h-6 w-16 rounded-full" />
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <Skeleton className="h-4 w-20" />
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <Skeleton className="h-4 w-20" />
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="flex items-center gap-2">
-                  <Skeleton className="h-8 w-8 rounded" />
-                  <Skeleton className="h-8 w-8 rounded" />
-                  <Skeleton className="h-8 w-8 rounded" />
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
+type PortfolioImage = {
+  id: string;
+  url: string;
 };
 
 export default function Page() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalMode, setModalMode] = useState<"add" | "edit" | "delete">("add");
+  const [modalMode, setModalMode] = useState<
+    "add" | "edit" | "delete" | "view"
+  >("add");
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   const [users, setUsers] = useState<Member[]>([]);
   const [loading, setLoading] = useState(true);
@@ -122,6 +64,7 @@ export default function Page() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
+  const router = useRouter();
 
   const inactiveUsers = users?.filter((user) => user.status === "Inactive");
 
@@ -194,7 +137,7 @@ export default function Page() {
   };
 
   const handleOpenModal = (
-    mode: "add" | "edit" | "delete",
+    mode: "add" | "edit" | "delete" | "view",
     member?: Member,
   ) => {
     setModalMode(mode);
@@ -253,6 +196,10 @@ export default function Page() {
       ...prev,
       [field]: value,
     }));
+  };
+
+  const handleViewPortfolio = (userId: number) => {
+    router.push(`/dashboard/portfolio/${userId}`);
   };
 
   return (
@@ -444,8 +391,21 @@ export default function Page() {
                             variant="ghost"
                             size="sm"
                             className="text-blue-600 hover:text-blue-800"
+                            onClick={() => handleOpenModal("view", member)}
                           >
                             <Eye className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="text-purple-600 hover:text-purple-800"
+                            onClick={() => handleViewPortfolio(member.id)}
+                            disabled={
+                              !member.portfolioImages ||
+                              member.portfolioImages.length === 0
+                            }
+                          >
+                            <Images className="h-4 w-4" />
                           </Button>
                           <Button
                             variant="ghost"
@@ -587,12 +547,15 @@ export default function Page() {
       </Card>
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent
+          className={modalMode === "view" ? "sm:max-w-2xl" : "sm:max-w-md"}
+        >
           <DialogHeader>
             <DialogTitle>
               {modalMode === "add" && "Add New Member"}
               {modalMode === "edit" && "Edit Member"}
               {modalMode === "delete" && "Deactivate Member"}
+              {modalMode === "view" && "User Details"}
             </DialogTitle>
           </DialogHeader>
 
@@ -761,6 +724,98 @@ export default function Page() {
                 </Button>
               </div>
             </form>
+          )}
+          {modalMode === "view" && selectedMember && (
+            <div className="space-y-6">
+              <div className="flex items-center space-x-4">
+                <Avatar className="h-16 w-16 bg-blue-100">
+                  <AvatarFallback className="text-blue-600 font-medium text-xl">
+                    {selectedMember.username.charAt(0)}
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <h3 className="text-lg font-semibold">
+                    {selectedMember.username}
+                  </h3>
+                  <p className="text-sm text-gray-500">
+                    ID: {selectedMember.id}
+                  </p>
+                  <Badge
+                    className={getStatusBadgeColor(selectedMember.status || "")}
+                  >
+                    {selectedMember.status}
+                  </Badge>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label className="text-sm font-medium text-gray-500">
+                    Email
+                  </Label>
+                  <p className="text-sm">{selectedMember.email}</p>
+                </div>
+                <div>
+                  <Label className="text-sm font-medium text-gray-500">
+                    Phone
+                  </Label>
+                  <p className="text-sm">
+                    {selectedMember.phoneNumber || "Not provided"}
+                  </p>
+                </div>
+                <div>
+                  <Label className="text-sm font-medium text-gray-500">
+                    Role
+                  </Label>
+                  <p className="text-sm">
+                    {selectedMember.role || "Not assigned"}
+                  </p>
+                </div>
+                <div>
+                  <Label className="text-sm font-medium text-gray-500">
+                    Join Date
+                  </Label>
+                  <p className="text-sm">
+                    {selectedMember.joinDate
+                      ? format(new Date(selectedMember.joinDate), "dd MMM yyyy")
+                      : "Unknown"}
+                  </p>
+                </div>
+                <div>
+                  <Label className="text-sm font-medium text-gray-500">
+                    Location
+                  </Label>
+                  <p className="text-sm">
+                    {selectedMember.location || "Not provided"}
+                  </p>
+                </div>
+                <div>
+                  <Label className="text-sm font-medium text-gray-500">
+                    Average Rating
+                  </Label>
+                  <p className="text-sm">
+                    {selectedMember.averageRating
+                      ? `${selectedMember.averageRating}/5`
+                      : "No ratings yet"}
+                  </p>
+                </div>
+              </div>
+
+              {selectedMember.about && (
+                <div>
+                  <Label className="text-sm font-medium text-gray-500">
+                    About
+                  </Label>
+                  <p className="text-sm mt-1">{selectedMember.about}</p>
+                </div>
+              )}
+
+              <div className="flex justify-end pt-4">
+                <Button variant="outline" onClick={handleCloseModal}>
+                  Close
+                </Button>
+              </div>
+            </div>
           )}
         </DialogContent>
       </Dialog>

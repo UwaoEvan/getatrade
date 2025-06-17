@@ -34,7 +34,7 @@ export default function DashboardLayout({
             <Sidebar />
           </div>
 
-          <main className="px-4 lg:w-[74%] md:w-[88%] md:mx-auto">
+          <main className="md:px-4 lg:w-[74%] md:w-[88%] md:mx-auto">
             {children}
           </main>
         </div>
