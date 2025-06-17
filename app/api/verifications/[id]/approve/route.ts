@@ -1,9 +1,10 @@
 import { db } from "@/app/lib/db";
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
-type Params = { params: { id: string } };
-
-export async function POST(_: NextRequest, { params }: Params) {
+export async function POST(
+  _: NextRequest,
+  { params }: { params: { id: string } },
+) {
   const { id } = params;
 
   try {
