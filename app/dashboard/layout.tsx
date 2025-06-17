@@ -13,7 +13,7 @@ export default function DashboardLayout({
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      <div className="lg:w-[880px] lg:mx-auto">
+      <div className="w-full">
         <div className="p-4 flex justify-between items-center py-6">
           <button
             className="md:hidden p-2 rounded hover:bg-gray-200"

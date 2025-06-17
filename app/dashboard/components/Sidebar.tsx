@@ -4,7 +4,13 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import User from "@/public/userGroup.svg";
-import { Briefcase, ChartPieIcon, LayoutDashboard, Star } from "lucide-react";
+import {
+  Briefcase,
+  ChartPieIcon,
+  LayoutDashboard,
+  Star,
+  Verified,
+} from "lucide-react";
 import { signOut } from "@/app/lib/auth";
 
 type MenuItem = {
@@ -32,6 +38,11 @@ const sections: Section[] = [
         label: "Users",
         route: "/dashboard",
         icon: <LayoutDashboard />,
+      },
+      {
+        label: "Verifications",
+        route: "/dashboard/verifications",
+        icon: <Verified />,
       },
       {
         label: "Jobs Management",

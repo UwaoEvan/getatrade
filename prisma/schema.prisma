@@ -42,14 +42,17 @@ model User {
 }
 
 model Verification {
-  id           String   @id @default(uuid())
-  userId       Int
-  user         User     @relation(fields: [userId], references: [id])
-  status       String   @default("Pending")
-  createdAt    DateTime @default(now())
-  url          String
-  filename     String
-  documentType String?
+  id              String    @id @default(uuid())
+  userId          Int
+  user            User      @relation(fields: [userId], references: [id])
+  status          String    @default("Pending")
+  createdAt       DateTime  @default(now())
+  url             String
+  filename        String
+  documentType    String?
+  reviewedAt      DateTime?
+  reviewedBy      String?
+  rejectionReason String?
 
   @@map("verification")
 }
