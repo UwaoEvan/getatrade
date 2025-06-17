@@ -19,7 +19,12 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
@@ -224,13 +229,15 @@ export default function Page() {
                   <Label className="text-sm font-medium text-gray-600">
                     Name
                   </Label>
-                  <p className="text-sm">{verification.userName}</p>
+                  <p className="text-sm break-words">{verification.userName}</p>
                 </div>
                 <div>
                   <Label className="text-sm font-medium text-gray-600">
                     Email
                   </Label>
-                  <p className="text-sm">{verification.userEmail}</p>
+                  <p className="text-sm break-words">
+                    {verification.userEmail}
+                  </p>
                 </div>
                 <div>
                   <Label className="text-sm font-medium text-gray-600">
@@ -325,7 +332,6 @@ export default function Page() {
             )}
           </div>
 
-          {/* Document Images */}
           <div className="lg:col-span-2">
             <Card>
               <CardHeader>
@@ -336,18 +342,17 @@ export default function Page() {
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Front Image */}
-                  <div>
+                  <div className="col-span-2">
                     <Label className="text-sm font-medium text-gray-600 mb-2 block">
-                      Front Side
+                      Document
                     </Label>
                     <Dialog>
+                      <DialogTitle></DialogTitle>
                       <DialogTrigger asChild>
                         <div className="relative group cursor-pointer">
                           <img
                             src={
-                              verification.files.front ||
-                              "/placeholder.svg?height=300&width=400"
+                              verification.files.front || "/placeholder.svg?"
                             }
                             alt="Document Front"
                             className="w-full h-64 object-cover rounded-lg border border-gray-200"
@@ -361,7 +366,7 @@ export default function Page() {
                         <img
                           src={
                             verification.files.front ||
-                            "/placeholder.svg?height=600&width=800"
+                            "/placeholder.svg?height=100%&width=800"
                           }
                           alt="Document Front - Full Size"
                           className="w-full h-auto"
@@ -383,8 +388,7 @@ export default function Page() {
                     </div>
                   </div>
 
-                  {/* Back Image */}
-                  {verification.files.back && (
+                  {/* {verification.files.back && (
                     <div>
                       <Label className="text-sm font-medium text-gray-600 mb-2 block">
                         Back Side
@@ -430,7 +434,7 @@ export default function Page() {
                         </Button>
                       </div>
                     </div>
-                  )}
+                  )} */}
                 </div>
               </CardContent>
             </Card>

@@ -1,5 +1,6 @@
 import { db } from "@/app/lib/db";
 import { type NextRequest, NextResponse } from "next/server";
+import { sendEmail } from "../emailAction";
 
 export async function POST(
   request: NextRequest,
@@ -18,13 +19,17 @@ export async function POST(
       },
     });
 
-    await db.user.update({
+    const user = await db.user.update({
       where: { id: updated.userId },
       data: {
         verified: true,
         verificationStatus: "Verified",
       },
     });
+
+    const subject = "Your documents have been successfully verified!";
+
+    await sendEmail(user.email, subject, user.username, "Approved");
 
     return NextResponse.json(updated);
   } catch (error) {

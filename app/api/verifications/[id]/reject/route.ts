@@ -1,5 +1,6 @@
 import { db } from "@/app/lib/db";
 import { type NextRequest, NextResponse } from "next/server";
+import { sendEmail } from "../emailAction";
 
 export async function POST(
   request: NextRequest,
@@ -27,12 +28,16 @@ export async function POST(
       },
     });
 
-    await db.user.update({
+    const user = await db.user.update({
       where: { id: updated.userId },
       data: {
         verificationStatus: "Not verified",
       },
     });
+
+    const subject = "Your document verification has been rejected!";
+
+    await sendEmail(user.email, subject, user.username, "Rejected");
 
     return NextResponse.json(updated);
   } catch (error) {
