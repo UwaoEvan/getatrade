@@ -38,7 +38,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Skeleton } from "@/components/ui/skeleton";
 import StatsCard from "../components/StatsCard";
-import { fetchAllJobs } from "./actions";
+import { closeJob, fetchAllJobs } from "./actions";
 
 interface Job {
   id: string;
@@ -55,83 +55,6 @@ interface Job {
   interested: number | null;
   shortlisted: number | null;
 }
-
-const JobsTableSkeleton = () => {
-  return (
-    <div className="overflow-x-auto">
-      <table className="w-full">
-        <thead className="bg-gray-50">
-          <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              <Skeleton className="h-4 w-4" />
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Job Details
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Status
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Interested
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Shortlisted
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Posted Date
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Actions
-            </th>
-          </tr>
-        </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
-          {Array.from({ length: 10 }).map((_, index) => (
-            <tr key={index} className="hover:bg-gray-50">
-              <td className="px-6 py-4 whitespace-nowrap">
-                <Skeleton className="h-4 w-4" />
-              </td>
-              <td className="px-6 py-4">
-                <div className="flex items-start gap-3">
-                  <Skeleton className="w-10 h-10 rounded-lg" />
-                  <div className="min-w-0 flex-1 space-y-2">
-                    <Skeleton className="h-4 w-48" />
-                    <Skeleton className="h-3 w-32" />
-                    <div className="flex items-center gap-2">
-                      <Skeleton className="h-5 w-16 rounded-full" />
-                      <Skeleton className="h-3 w-12" />
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <Skeleton className="h-6 w-16 rounded-full" />
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="space-y-1">
-                  <Skeleton className="h-4 w-8" />
-                  <Skeleton className="h-3 w-16" />
-                </div>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="space-y-1">
-                  <Skeleton className="h-4 w-8" />
-                  <Skeleton className="h-3 w-20" />
-                </div>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <Skeleton className="h-4 w-20" />
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <Skeleton className="h-8 w-8 rounded" />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-};
 
 export default function AdminJobsPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -238,6 +161,14 @@ export default function AdminJobsPage() {
 
   const inactiveJobs = jobs.filter((job) => !job.active);
 
+  const handleClose = async (selected: string[]) => {
+    for (let i = 0; i <= selected.length; i++) {
+      await closeJob(selected[i]);
+    }
+    fetchJobs();
+    return;
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="space-y-6">
@@ -326,15 +257,13 @@ export default function AdminJobsPage() {
               </div>
               {selectedJobs.length > 0 && (
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm">
-                    Bulk Edit ({selectedJobs.length})
-                  </Button>
                   <Button
                     variant="outline"
                     size="sm"
                     className="text-red-600 hover:text-red-700"
+                    onClick={() => handleClose(selectedJobs)}
                   >
-                    Delete Selected
+                    Close Selected
                   </Button>
                 </div>
               )}
@@ -622,7 +551,6 @@ export default function AdminJobsPage() {
         <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>
-              {modalMode === "add" && "Post New Job"}
               {modalMode === "edit" && "Edit Job"}
               {modalMode === "view" && "Job Details"}
             </DialogTitle>
@@ -706,3 +634,80 @@ export default function AdminJobsPage() {
     </div>
   );
 }
+
+const JobsTableSkeleton = () => {
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full">
+        <thead className="bg-gray-50">
+          <tr>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <Skeleton className="h-4 w-4" />
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Job Details
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Status
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Interested
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Shortlisted
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Posted Date
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody className="bg-white divide-y divide-gray-200">
+          {Array.from({ length: 10 }).map((_, index) => (
+            <tr key={index} className="hover:bg-gray-50">
+              <td className="px-6 py-4 whitespace-nowrap">
+                <Skeleton className="h-4 w-4" />
+              </td>
+              <td className="px-6 py-4">
+                <div className="flex items-start gap-3">
+                  <Skeleton className="w-10 h-10 rounded-lg" />
+                  <div className="min-w-0 flex-1 space-y-2">
+                    <Skeleton className="h-4 w-48" />
+                    <Skeleton className="h-3 w-32" />
+                    <div className="flex items-center gap-2">
+                      <Skeleton className="h-5 w-16 rounded-full" />
+                      <Skeleton className="h-3 w-12" />
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <Skeleton className="h-6 w-16 rounded-full" />
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="space-y-1">
+                  <Skeleton className="h-4 w-8" />
+                  <Skeleton className="h-3 w-16" />
+                </div>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="space-y-1">
+                  <Skeleton className="h-4 w-8" />
+                  <Skeleton className="h-3 w-20" />
+                </div>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <Skeleton className="h-4 w-20" />
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <Skeleton className="h-8 w-8 rounded" />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};

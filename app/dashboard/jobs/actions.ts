@@ -10,3 +10,16 @@ export const fetchAllJobs = async () => {
   });
   return jobs;
 };
+
+export const closeJob = async (jobId: string) => {
+  if (jobId) {
+    await db.job.update({
+      where: { id: jobId },
+      data: {
+        closedAt: new Date(),
+        active: false,
+      },
+    });
+    return true;
+  }
+};
