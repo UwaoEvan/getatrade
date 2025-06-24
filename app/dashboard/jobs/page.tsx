@@ -8,7 +8,7 @@ import {
   Users,
   MapPin,
   Building2,
-  DollarSign,
+  PoundSterling,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -373,7 +373,7 @@ export default function AdminJobsPage() {
                                   Contract
                                 </Badge>
                                 <span className="text-xs text-green-600 flex items-center gap-1">
-                                  <DollarSign className="h-3 w-3" />
+                                  <PoundSterling className="h-3 w-3" />
                                   {job.price}
                                 </span>
                               </div>
