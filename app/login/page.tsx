@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useActionState } from "react";
 import { authenticate } from "../lib/actions";
 import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
 import Image from "next/image";
 import logo from "@/public/logo.png";
 
