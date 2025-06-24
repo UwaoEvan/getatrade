@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "@/app/lib/auth";
-import Image, { StaticImageData } from "next/image";
-import User from "@/public/userGroup.svg";
 import userIcon from "@/public/menuicons/user.png";
 import info from "@/public/menuicons/info.png";
 import file from "@/public/menuicons/document.png";
+import ProfileImage from "./ProfileImage";
+import { StaticImageData } from "next/image";
 
 type MenuItem = {
   label: string;
@@ -23,6 +23,8 @@ type Section = {
 type Props = {
   name?: string;
   location?: string;
+  userId?: number;
+  imageUri?: string;
 };
 
 const sections: Section[] = [
@@ -46,7 +48,12 @@ const sections: Section[] = [
   },
 ];
 
-export default function CustomerMenu({ name, location }: Props) {
+export default function CustomerMenu({
+  name,
+  location,
+  userId,
+  imageUri,
+}: Props) {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -58,15 +65,7 @@ export default function CustomerMenu({ name, location }: Props) {
   return (
     <aside className="w-full md:max-w-[240px] p-4 text-sm text-gray-800">
       <div className="mb-6 text-center max-w-xs mx-auto">
-        <div className="flex justify-center mb-2">
-          <Image
-            src={User}
-            alt="Profile"
-            width={60}
-            height={60}
-            className="rounded-full"
-          />
-        </div>
+        <ProfileImage userId={userId} imageUri={imageUri} />
         <p className="font-bold break-words">{name}</p>
         <p className="text-xs text-gray-500">{location}</p>
       </div>
@@ -94,8 +93,8 @@ export default function CustomerMenu({ name, location }: Props) {
                     }`}
                   >
                     <span className="text-lg">
-                      <Image
-                        src={icon}
+                      <img
+                        src={icon.src}
                         alt="icon"
                         className="w-4 h-4 object-contain"
                       />
@@ -113,8 +112,8 @@ export default function CustomerMenu({ name, location }: Props) {
                     }`}
                   >
                     <span className="text-lg">
-                      <Image
-                        src={icon}
+                      <img
+                        src={icon.src}
                         alt="icon"
                         className="w-4 h-4 object-contain"
                       />

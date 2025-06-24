@@ -22,11 +22,15 @@ export default async function MyAccountLayout({
             <CustomerMenu
               name={user.username}
               location={user?.location as string}
+              userId={user.id}
+              imageUri={user?.profileUrl as string}
             />
           ) : (
             <TradespersonMenu
               name={user?.username}
               location={user?.location as string}
+              userId={user?.id}
+              imageUri={user?.profileUrl as string}
             />
           )}
           <main className="flex-1">

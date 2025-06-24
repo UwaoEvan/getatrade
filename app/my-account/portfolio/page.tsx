@@ -105,7 +105,7 @@ export default function Page() {
             <img
               src={img.url || "/placeholder.svg"}
               alt={img.filename}
-              className="w-full h-32 object-cover rounded shadow"
+              className="w-full h-32 object-contain rounded shadow"
             />
             <Button
               onClick={() => removeImage(img.id)}

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "@/app/lib/auth";
 import Image, { StaticImageData } from "next/image";
-import User from "@/public/userGroup.svg";
 import userIcon from "@/public/menuicons/user.png";
 import reviews from "@/public/menuicons/star.png";
 import camera from "@/public/menuicons/camera.png";
@@ -12,6 +11,7 @@ import file from "@/public/menuicons/document.png";
 import invoice from "@/public/menuicons/invoice.png";
 import info from "@/public/menuicons/info.png";
 import discover from "@/public/menuicons/discover.png";
+import ProfileImage from "./ProfileImage";
 
 type MenuItem = {
   label: string;
@@ -27,6 +27,8 @@ type Section = {
 type Props = {
   name?: string;
   location?: string;
+  userId?: number;
+  imageUri?: string;
 };
 
 const sections: Section[] = [
@@ -85,7 +87,12 @@ const sections: Section[] = [
   },
 ];
 
-export default function TradespersonMenu({ name, location }: Props) {
+export default function TradespersonMenu({
+  name,
+  location,
+  userId,
+  imageUri,
+}: Props) {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -96,20 +103,11 @@ export default function TradespersonMenu({ name, location }: Props) {
 
   return (
     <aside className="w-full md:max-w-[240px] p-4 text-sm text-gray-800">
-      <div className="mb-6 text-center">
-        <div className="flex justify-center mb-2">
-          <Image
-            src={User}
-            alt="Profile"
-            width={60}
-            height={60}
-            className="rounded-full"
-          />
-        </div>
+      <div className="mb-6 text-center max-w-xs mx-auto">
+        <ProfileImage userId={userId} imageUri={imageUri} />
         <p className="font-bold break-words">{name}</p>
         <p className="text-xs text-gray-500">{location}</p>
       </div>
-
       <nav className="space-y-6">
         {sections.map((section, idx) => (
           <div key={idx}>
