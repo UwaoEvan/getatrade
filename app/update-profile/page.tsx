@@ -1,12 +1,15 @@
 "use client";
 import { useActionState, useEffect, useState } from "react";
 import { updateProfile } from "./action";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Location from "../components/Location";
 
 const initState = { success: false, error: undefined };
 export default function UpdateProfile() {
   const [location, setLocation] = useState("");
+  const searchParams = useSearchParams();
+  const role = searchParams.get("role");
+
   const [state, formAction, isPending] = useActionState(
     updateProfile,
     initState,
@@ -60,22 +63,24 @@ export default function UpdateProfile() {
         />
       </div>
 
-      <div>
-        <label
-          htmlFor="about"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Company description
-        </label>
-        <textarea
-          id="about"
-          name="about"
-          required
-          rows={4}
-          className="mt-1 block w-full rounded-sm border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-3"
-          placeholder="Tell us a bit about your company..."
-        />
-      </div>
+      {role !== "customer" && (
+        <div>
+          <label
+            htmlFor="about"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Company description
+          </label>
+          <textarea
+            id="about"
+            name="about"
+            required
+            rows={4}
+            className="mt-1 block w-full rounded-sm border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-3"
+            placeholder="Tell us a bit about your company..."
+          />
+        </div>
+      )}
 
       <div>
         <label
@@ -94,12 +99,14 @@ export default function UpdateProfile() {
         <input type="hidden" name="location" value={location} />
       </div>
 
-      <div className="mb-4 flex items-start">
-        <input type="checkbox" name="terms" className="mr-2 mt-1" />
-        <label className="text-sm">
-          Would you like to receive marketing emails?
-        </label>
-      </div>
+      {role !== "customer" && (
+        <div className="mb-4 flex items-start">
+          <input type="checkbox" name="terms" className="mr-2 mt-1" />
+          <label className="text-sm">
+            Would you like to receive marketing emails?
+          </label>
+        </div>
+      )}
 
       <button
         type="submit"

@@ -14,6 +14,8 @@ export default async function Dashboard() {
 
   if (user?.role !== "customer") {
     redirect("/new-leads");
+  } else if (!user.firstName) {
+    redirect("/update-profile?role=customer");
   }
   return (
     <Suspense
