@@ -13,7 +13,7 @@ export default async function Dashboard() {
     redirect("/my-jobs");
   } else if (user?.role === "Admin") {
     redirect("/dashboard");
-  } else if (user?.role !== "customer" && !user?.about) {
+  } else if (user?.role !== "customer" && !user?.about || !user?.location) {
     redirect("/update-profile");
   }
 
