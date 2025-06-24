@@ -65,3 +65,9 @@ export const replyReviewSchema = z.object({
   reply: z.string(),
   reviewId: z.string(),
 });
+
+export const newPasswordSchema = z.object({
+  newPassword: z.string({ required_error: "New Password is required" }),
+  password: z.string({ required_error: "Confirm new password is required" }),
+  userId: z.string({ required_error: "User is not found" }),
+});

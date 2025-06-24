@@ -10,7 +10,6 @@ export default async function MyAccountLayout({
 }) {
   const session = await auth();
   const user = await getUser(session?.user?.email as string);
-
   return (
     <div className="bg-gray-50">
       <div className="max-w-4xl mx-auto">
