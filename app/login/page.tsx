@@ -7,7 +7,7 @@ import { Suspense } from "react";
 import Image from "next/image";
 import logo from "@/public/logo.png";
 
-function LoginForm() {
+export default function LoginForm() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/new-leads";
   const [errorMessage, formAction, isPending] = useActionState(
@@ -101,22 +101,17 @@ function LoginForm() {
             </Link>{" "}
             to join as a tradesperson
           </p>
+          <p>
+            <Link
+              href="/forgot-password"
+              className="text-[#2f76d9] font-bold hover:underline"
+            >
+              Forgot password
+            </Link>{" "}
+            to reset password
+          </p>
         </div>
       </div>
     </div>
-  );
-}
-
-export default function LoginPage() {
-  return (
-    <Suspense
-      fallback={
-        <div className="flex items-center justify-center min-h-[80vh]">
-          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-purple-600"></div>
-        </div>
-      }
-    >
-      <LoginForm />
-    </Suspense>
   );
 }

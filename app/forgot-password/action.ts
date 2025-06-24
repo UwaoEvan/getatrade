@@ -79,7 +79,7 @@ export const sendEmail = async (
                     <table cellpadding="0" cellspacing="0" style="margin: 20px 0;">
                       <tr>
                         <td align="center">
-                          <a href="http://getatradelinkltd.vercel.app/forgot-password/${userId} style="background-color: #007BFF; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
+                          <a href="https://getatradelinkltd.com/forgot-password/${userId} style="background-color: #007BFF; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
                             Reset password
                           </a>
                         </td>
