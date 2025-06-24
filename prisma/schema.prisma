@@ -31,6 +31,7 @@ model User {
   averageRating      Float?           @default(0.0)
   status             String?          @default("Active")
   joinDate           DateTime?        @default(now())
+  deactivatedOn      DateTime?
   job                Job[]
   interest           Interest[]
   shortlist          Shortlist[]

@@ -60,6 +60,7 @@ export const deactivateUser = async (id: number) => {
     where: { id },
     data: {
       status: "Inactive",
+      deactivatedOn: new Date(),
     },
   });
   return true;
