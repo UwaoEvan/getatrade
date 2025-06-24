@@ -23,7 +23,7 @@ export default function Marketing() {
               fees, no tricks, no nonsense.
             </p>
 
-            <ul className="mt-8 space-y-3 text-left text-lg md:text-xl max-w-md mx-auto">
+            <ul className="mt-8 space-y-3 text-left text-lg md:text-xl mx-auto">
               <li className="flex items-start">
                 <span className="text-green-600 font-bold mr-2">✓</span> Real
                 customers.
@@ -33,14 +33,14 @@ export default function Marketing() {
                 trades.
               </li>
               <li className="flex items-start">
-                <span className="text-green-600 font-bold mr-2">•</span> A real
+                <span className="text-green-600 font-bold mr-2">✓</span> A real
                 chance to win work without wasting your time or money.
               </li>
             </ul>
 
             <blockquote className="mt-12 text-xl md:text-2xl font-medium text-gray-800 italic">
-              Built by tradespeople, for tradespeople. <br />
-              We&apos;re not just different – we&apos;re fair.
+              &quot;Built by tradespeople, for tradespeople. <br />
+              We&apos;re not just different – we&apos;re fair.&quot;
             </blockquote>
           </div>
         </section>
