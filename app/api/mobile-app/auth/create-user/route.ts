@@ -11,20 +11,29 @@ const registerSchema = z.object({
   location: z.string({ required_error: "Location is missing" }),
   firstName: z.string({ required_error: "First name is missing" }),
   lastName: z.string({ required_error: "Last name is missing" }),
-  password: z.string({ required_error: "Password is missing" })
-})
+  password: z.string({ required_error: "Password is missing" }),
+});
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const parsed = registerSchema.parse(body);
-    const { username, email, phoneNumber, role, location, firstName, lastName, password } = parsed;
+    const {
+      username,
+      email,
+      phoneNumber,
+      role,
+      location,
+      firstName,
+      lastName,
+      password,
+    } = parsed;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await db.user.create({
       data: {
-        username, 
+        username,
         firstName,
         lastName,
         location,
@@ -32,23 +41,22 @@ export async function POST(request: NextRequest) {
         email,
         phoneNumber,
         hashedPassword,
-        joinDate: new Date()
-      }
-    })
+        joinDate: new Date(),
+      },
+    });
 
     return NextResponse.json(user);
-
   } catch (error) {
     if (error instanceof ZodError) {
       const message = error.errors.map((err) => err.message);
-        return NextResponse.json({
+      return NextResponse.json({
         error: message,
-        status: 500
-      })
-    } 
+        status: 500,
+      });
+    }
     return NextResponse.json({
       error: error,
-      status: 500
-    })
+      status: 500,
+    });
   }
 }
