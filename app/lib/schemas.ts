@@ -71,3 +71,5 @@ export const newPasswordSchema = z.object({
   password: z.string({ required_error: "Confirm new password is required" }),
   userId: z.string({ required_error: "User is not found" }),
 });
+
+
