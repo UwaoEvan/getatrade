@@ -27,6 +27,7 @@ model User {
   about              String?
   profileUrl         String?
   address            String?
+  distanceArea       Int?
   verified           Boolean?         @default(false)
   verificationStatus String?          @default("Not verified")
   averageRating      Float?           @default(0.0)

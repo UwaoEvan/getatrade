@@ -10,6 +10,7 @@ import camera from "@/public/menuicons/camera.png";
 import file from "@/public/menuicons/document.png";
 import invoice from "@/public/menuicons/invoice.png";
 import notifications from "@/public/menuicons/notification.png";
+import location from "@/public/menuicons/location.png";
 import info from "@/public/menuicons/info.png";
 import discover from "@/public/menuicons/discover.png";
 import ProfileImage from "./ProfileImage";
@@ -85,6 +86,11 @@ const sections: Section[] = [
         label: "Notifications",
         route: "/my-account/notifications",
         icon: notifications,
+      },
+      {
+        label: "Work area",
+        route: "/my-account/work-area",
+        icon: location,
       },
     ],
   },

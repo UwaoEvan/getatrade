@@ -6,6 +6,7 @@ import { signOut } from "@/app/lib/auth";
 import userIcon from "@/public/menuicons/user.png";
 import info from "@/public/menuicons/info.png";
 import file from "@/public/menuicons/document.png";
+import notifications from "@/public/menuicons/notification.png";
 import ProfileImage from "./ProfileImage";
 import { StaticImageData } from "next/image";
 
@@ -39,6 +40,16 @@ const sections: Section[] = [
         label: "Manage account",
         route: "/my-account/manage",
         icon: userIcon,
+      },
+    ],
+  },
+  {
+    title: "Settings",
+    items: [
+      {
+        label: "Notifications",
+        route: "/my-account/notifications-customer",
+        icon: notifications,
       },
     ],
   },

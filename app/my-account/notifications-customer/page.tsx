@@ -1,5 +1,4 @@
 import { Switch } from "@/components/ui/switch";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 
 export default function Page() {
@@ -19,9 +18,11 @@ export default function Page() {
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <h3 className="font-medium text-gray-900">New leads</h3>
+            <h3 className="font-medium text-gray-900">
+              Responses from tradespeople
+            </h3>
             <p className="text-sm text-gray-600">
-              Relevant leads as soon as they are posted.
+              When a tradesperson sends you a message.
             </p>
             <div className="flex items-center justify-between">
               <span className="text-sm text-gray-700">Email</span>
@@ -30,9 +31,11 @@ export default function Page() {
           </div>
 
           <div className="space-y-2">
-            <h3 className="font-medium text-gray-900">Daily lead summary</h3>
+            <h3 className="font-medium text-gray-900">
+              Marketing communications
+            </h3>
             <p className="text-sm text-gray-600">
-              Summary of relevant leads in the last 24 hours.
+              Receive marketing communications.
             </p>
             <div className="flex items-center justify-between">
               <span className="text-sm text-gray-700">Email</span>
@@ -45,11 +48,10 @@ export default function Page() {
       <Separator />
 
       <div className="space-y-4">
-        <h2 className="text-lg font-medium text-gray-900">
-          Invites from customers
-        </h2>
+        <h2 className="text-lg font-medium text-gray-900">Newsletter</h2>
         <p className="text-sm text-gray-600">
-          A customer invites you to talk about a lead.
+          Our fortnightly newsletter with advice, related services and pricing
+          guides.
         </p>
 
         <div className="space-y-3">
@@ -67,11 +69,9 @@ export default function Page() {
       <Separator />
 
       <div className="space-y-4">
-        <h2 className="text-lg font-medium text-gray-900">
-          Messages and job status
-        </h2>
+        <h2 className="text-lg font-medium text-gray-900">Job Reviews</h2>
         <p className="text-sm text-gray-600">
-          New messages, new contacts, being hired, job completion and reviews.
+          Reminders to review the tradesperson on our platform.
         </p>
 
         <div className="flex items-center justify-between">
@@ -83,61 +83,14 @@ export default function Page() {
       <Separator />
 
       <div className="space-y-4">
-        <h2 className="text-lg font-medium text-gray-900">Closed Jobs</h2>
-        <p className="text-sm text-gray-600">
-          Closed jobs and unsuccessful hires.
-        </p>
-
-        <div className="flex items-center justify-between">
-          <span className="text-sm text-gray-700">Email</span>
-          <Switch defaultChecked />
-        </div>
-      </div>
-
-      <Separator />
-
-      <div className="space-y-4">
-        <h2 className="text-lg font-medium text-gray-900">Hired status</h2>
-        <p className="text-sm text-gray-600">Let us know if you were hired.</p>
-
-        <div className="flex items-center justify-between">
-          <span className="text-sm text-gray-700">Email</span>
-          <Switch defaultChecked />
-        </div>
-      </div>
-
-      <Separator />
-
-      <div className="space-y-4">
-        <h2 className="text-lg font-medium text-gray-900">
-          Marketing communications
-        </h2>
-
-        <div className="flex items-center space-x-2">
-          <Checkbox id="marketing" defaultChecked />
-          <label htmlFor="marketing" className="text-sm text-gray-700">
-            Receive marketing communications.
-          </label>
-        </div>
-      </div>
-
-      <Separator />
-
-      <div className="space-y-4">
         <h2 className="text-lg font-medium text-gray-900">Promotions</h2>
         <p className="text-sm text-gray-600">
           Receive our feedback requests, product news, sweepstakes and surveys.
         </p>
 
-        <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-700">Email</span>
-            <Switch defaultChecked />
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-700">Call</span>
-            <Switch defaultChecked />
-          </div>
+        <div className="flex items-center justify-between">
+          <span className="text-sm text-gray-700">Email</span>
+          <Switch defaultChecked />
         </div>
       </div>
 
@@ -145,16 +98,13 @@ export default function Page() {
 
       <div className="space-y-4">
         <h2 className="text-lg font-medium text-gray-900">Help us improve</h2>
+        <p className="text-sm text-gray-600">
+          Participate in paid and unpaid research.
+        </p>
 
-        <div className="space-y-2">
-          <h3 className="font-medium text-gray-900">Research</h3>
-          <p className="text-sm text-gray-600">
-            Participate in paid and unpaid research.
-          </p>
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-700">Email</span>
-            <Switch defaultChecked />
-          </div>
+        <div className="flex items-center justify-between">
+          <span className="text-sm text-gray-700">Email</span>
+          <Switch defaultChecked />
         </div>
       </div>
     </div>
