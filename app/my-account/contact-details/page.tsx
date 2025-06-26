@@ -137,7 +137,7 @@ const ContactDetails = () => {
                 Phone number *
               </label>
               <div className="space-y-1">
-                <div className="flex rounded-sm border border-gray-300 shadow-sm focus-within:ring-1 focus-within:ring-[#2f76d9] focus-within:border-[#2f76d9]">
+                <div className="flex rounded-sm border border-gray-300 shadow-sm focus-within:ring-1 focus-within:ring-gray-300 focus-within:border-gray-300">
                   <span className="flex items-center px-3 bg-gray-100 text-gray-700 border-r border-gray-300 text-sm">
                     +44
                   </span>
