@@ -11,6 +11,7 @@ import file from "@/public/menuicons/document.png";
 import invoice from "@/public/menuicons/invoice.png";
 import notifications from "@/public/menuicons/notification.png";
 import location from "@/public/menuicons/location.png";
+import save from "@/public/menuicons/save.png";
 import info from "@/public/menuicons/info.png";
 import discover from "@/public/menuicons/discover.png";
 import ProfileImage from "./ProfileImage";
@@ -66,11 +67,11 @@ const sections: Section[] = [
         route: "/my-account/manage",
         icon: userIcon,
       },
-      // {
-      //   label: "Saved leads",
-      //   route: "/my-account/saved",
-      //   icon: save,
-      // },
+      {
+        label: "Saved leads",
+        route: "/my-account/saved-leads",
+        icon: save,
+      },
     ],
   },
   {
@@ -90,6 +91,11 @@ const sections: Section[] = [
       {
         label: "Work area",
         route: "/my-account/work-area",
+        icon: location,
+      },
+      {
+        label: "Services",
+        route: "/my-account/services",
         icon: location,
       },
     ],
