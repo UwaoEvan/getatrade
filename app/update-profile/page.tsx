@@ -63,7 +63,7 @@ export default function UpdateProfile() {
         />
       </div>
 
-      {role !== "customer" && (
+      {role !== "customer" ? (
         <div>
           <label
             htmlFor="about"
@@ -80,6 +80,8 @@ export default function UpdateProfile() {
             placeholder="Tell us a bit about your company..."
           />
         </div>
+      ) : (
+        <input type="hidden" name="about" value="Customer" />
       )}
 
       <div>

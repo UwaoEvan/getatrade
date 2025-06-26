@@ -11,6 +11,10 @@ export default async function MyAccount() {
     redirect("/update-profile");
   }
 
+  if (user.role === "customer") {
+    redirect("/my-account/contact-details");
+  }
+
   return (
     <div className="max-w-3xl mx-auto">
       <CompanyProfile
@@ -18,6 +22,7 @@ export default async function MyAccount() {
         phoneNumber={user?.phoneNumber as string}
         role={user?.role as string}
         about={user?.about as string}
+        userId={user?.id}
       />
     </div>
   );
