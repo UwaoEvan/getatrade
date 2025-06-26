@@ -78,6 +78,16 @@ const sections: Section[] = [
     ],
   },
   {
+    title: "Lead settings",
+    items: [
+      {
+        label: "Notifications",
+        route: "/my-account/notifications",
+        icon: invoice,
+      },
+    ],
+  },
+  {
     title: "Support",
     items: [{ label: "Support centre", route: "/my-account/", icon: info }],
   },
