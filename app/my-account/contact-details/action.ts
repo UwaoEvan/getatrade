@@ -18,6 +18,7 @@ export const updateContactDetails = async (
       lastName: formData.get("lastName") as string,
       address: formData.get("address") as string,
       location: formData.get("location") as string,
+      phoneNumber: `+44${formData.get("phonenumber") as string}`,
     },
   });
 

@@ -134,6 +134,27 @@ const ContactDetails = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700">
+                Phone number *
+              </label>
+              <div className="space-y-1">
+                <div className="flex rounded-sm border border-gray-300 shadow-sm focus-within:ring-1 focus-within:ring-[#2f76d9] focus-within:border-[#2f76d9]">
+                  <span className="flex items-center px-3 bg-gray-100 text-gray-700 border-r border-gray-300 text-sm">
+                    +44
+                  </span>
+                  <input
+                    type="tel"
+                    defaultValue={user?.phoneNumber}
+                    name="phonenumber"
+                    placeholder="UK phone number"
+                    className="flex-1 p-3 rounded-sm focus:outline-none sm:text-sm"
+                    title="Please enter a valid UK phone number"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
                 Address *
               </label>
               <input
