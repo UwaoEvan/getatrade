@@ -75,6 +75,7 @@ export default function Page() {
     email: "",
     phoneNumber: "",
     userId: "",
+    about: "",
   });
 
   useEffect(() => {
@@ -150,6 +151,7 @@ export default function Page() {
         email: member.email,
         phoneNumber: member?.phoneNumber as string,
         userId: member.id.toString(),
+        about: member.about as string,
       });
     } else {
       setFormData({
@@ -159,6 +161,7 @@ export default function Page() {
         email: "",
         phoneNumber: "",
         userId: "",
+        about: "",
       });
     }
     setIsModalOpen(true);
@@ -174,6 +177,7 @@ export default function Page() {
       email: "",
       phoneNumber: "",
       userId: "",
+      about: "",
     });
   };
 
@@ -615,6 +619,18 @@ export default function Page() {
                   }
                   placeholder="Enter phone number"
                   required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="username">About</Label>
+                <textarea
+                  id="about"
+                  rows={4}
+                  value={formData.about}
+                  onChange={(e) => handleInputChange("about", e.target.value)}
+                  placeholder="About"
+                  className="border-2 w-full rounded-sm text-sm p-2 focus-visible:border-ring focus-visible:ring-ring/50 "
                 />
               </div>
 

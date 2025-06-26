@@ -22,6 +22,7 @@ interface Body {
   password: string;
   userId: string;
   role: string;
+  about?: string;
 }
 
 export const addUser = async (body: Body) => {
@@ -49,6 +50,7 @@ export const updateUser = async (formData: Body) => {
       username: formData.username,
       email: formData.email,
       phoneNumber: formData.phoneNumber,
+      about: formData?.about,
     },
   });
 
