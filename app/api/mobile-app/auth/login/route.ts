@@ -5,7 +5,7 @@ import { encodeToken } from "@/lib/utils";
 import { z, ZodError } from "zod";
 
 const loginSchema = z.object({
-  username: z.string({ required_error: "Username is required" }),
+  email: z.string({ required_error: "Username is required" }),
   password: z.string({ required_error: "Password is required." }),
 });
 
@@ -13,26 +13,20 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const parsed = loginSchema.parse(body);
-    const { username, password } = parsed;
+    const { email, password } = parsed;
 
     const user = await db.user.findFirst({
-      where: { email: username },
+      where: { email },
     });
 
     if (!user) {
-      return NextResponse.json({
-        error: "User not found.",
-        status: 404,
-      });
+      return NextResponse.json({ error: "User not found." }, { status: 404 });
     }
 
     const isMatch = await bcrypt.compare(password, user.hashedPassword);
 
     if (!isMatch) {
-      return NextResponse.json({
-        error: "Wrong password.",
-        status: 401,
-      });
+      return NextResponse.json({ error: "Wrong password." }, { status: 401 });
     }
 
     const token = await encodeToken({
@@ -44,7 +38,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     if (error instanceof ZodError) {
       const messages = error.errors.map((err) => err.message);
-      return NextResponse.json({ error: messages }, { status: 400 });
+      return NextResponse.json({ error: messages[0] }, { status: 400 });
     }
   }
 }

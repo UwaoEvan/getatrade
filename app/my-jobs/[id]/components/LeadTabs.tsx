@@ -8,6 +8,7 @@ type Props = {
   jobId: string;
   interests: Interest[];
   shortlists: any[];
+  jobPoster?: number;
 };
 
 type Interest = {
@@ -20,7 +21,12 @@ type Interest = {
   };
 };
 
-export default function LeadTabs({ jobId, interests, shortlists }: Props) {
+export default function LeadTabs({
+  jobId,
+  interests,
+  shortlists,
+  jobPoster,
+}: Props) {
   const [activeTab, setActiveTab] = useState<"interested" | "shortlisted">(
     "interested",
   );
@@ -83,6 +89,7 @@ export default function LeadTabs({ jobId, interests, shortlists }: Props) {
                 location={shortlist.location}
                 name={shortlist.username}
                 jobId={jobId}
+                jobPoster={jobPoster}
               />
             ))}
           </div>

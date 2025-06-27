@@ -89,7 +89,13 @@ export default async function LeadDetails({ params }: Params) {
             </div>
           </div>
         </div>
-        <LeadTabs jobId={jobId} interests={interests} shortlists={shortlists} />
+
+        <LeadTabs
+          jobPoster={job?.userId}
+          jobId={jobId}
+          interests={interests}
+          shortlists={shortlists}
+        />
       </div>
     </Suspense>
   );

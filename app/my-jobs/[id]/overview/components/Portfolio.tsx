@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-
 import { useState, useEffect } from "react";
 
 interface PortfolioImage {
@@ -14,6 +13,9 @@ interface PortfolioImage {
 export default function Portfolio({ userId }: { userId?: number }) {
   const [images, setImages] = useState<PortfolioImage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<PortfolioImage | null>(
+    null,
+  );
 
   useEffect(() => {
     fetchImages();
@@ -25,7 +27,6 @@ export default function Portfolio({ userId }: { userId?: number }) {
       const data = await response.json();
       if (response.ok) {
         setImages(data.images);
-      } else {
       }
     } catch {
       setIsLoading(false);
@@ -51,7 +52,11 @@ export default function Portfolio({ userId }: { userId?: number }) {
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-6">
         {images.map((img) => (
-          <div key={img.id} className="relative group">
+          <div
+            key={img.id}
+            className="relative group cursor-pointer"
+            onClick={() => setSelectedImage(img)}
+          >
             <img
               src={img.url || "/placeholder.svg"}
               alt={img.filename}
@@ -60,6 +65,33 @@ export default function Portfolio({ userId }: { userId?: number }) {
           </div>
         ))}
       </div>
+
+      {selectedImage && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div
+            className="bg-white p-4 rounded-lg max-w-lg w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="text-black text-sm float-right"
+              onClick={() => setSelectedImage(null)}
+            >
+              ✕
+            </button>
+            <img
+              src={selectedImage.url}
+              alt={selectedImage.filename}
+              className="w-full h-auto mt-4 rounded"
+            />
+            <p className="text-sm text-gray-500 mt-2">
+              {selectedImage.filename}
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
