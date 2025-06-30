@@ -40,20 +40,6 @@ export async function POST(request: NextRequest) {
       const messages = error.errors.map((err) => err.message);
       return NextResponse.json({ error: messages[0] }, { status: 400 });
     }
+    return NextResponse.json({ error: error }, { status: 500 });
   }
 }
-
-// export async function GET(request: NextRequest) {
-//   try {
-//     const authHeader = request.headers.get("authorization");
-//     const token = authHeader?.split(' ')[1];
-//     const decode = await decodeToken(token as string);
-//     console.log(decode?.userId)
-//     return NextResponse.json(token);
-//   } catch (error) {
-//     return NextResponse.json({
-//       error: "Something went wrong.",
-//       status: 500
-//     })
-//   }
-// }

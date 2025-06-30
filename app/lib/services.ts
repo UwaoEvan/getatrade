@@ -46,4 +46,5 @@ export const SERVICES = [
   { id: 45, label: "Windows & Doors (uPVC & Metal)" },
   { id: 46, label: "Windows & Doors (Wooden)" },
   { id: 47, label: "Windows & Door Repair" },
+  { id: 47, label: "Windows, curtains and blinders" },
 ];

@@ -29,6 +29,19 @@ export async function POST(request: NextRequest) {
       password,
     } = parsed;
 
+    const existingUser = await db.user.findFirst({
+      where: {
+        OR: [{ email }, { phoneNumber }],
+      },
+    });
+
+    if (existingUser) {
+      return NextResponse.json(
+        { error: "The user already exists. Login instead" },
+        { status: 400 },
+      );
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await db.user.create({
@@ -49,14 +62,8 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     if (error instanceof ZodError) {
       const message = error.errors.map((err) => err.message);
-      return NextResponse.json({
-        error: message,
-        status: 500,
-      });
+      return NextResponse.json({ error: message[0] }, { status: 400 });
     }
-    return NextResponse.json({
-      error: error,
-      status: 500,
-    });
+    return NextResponse.json({ error: error }, { status: 500 });
   }
 }
