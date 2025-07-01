@@ -18,6 +18,20 @@ export async function POST(
       where: { id },
     });
 
+    const interested = await db.interest.findFirst({
+      where: {
+        jobId: id,
+        userId: user.userId
+      }
+    })
+
+    if (interested) {
+      return NextResponse.json(
+        { error: "Already applied for this job."},
+        { status: 403 }
+      )
+    }
+
     if (!job) {
       return NextResponse.json({ error: "Job not found." }, { status: 404 });
     }
