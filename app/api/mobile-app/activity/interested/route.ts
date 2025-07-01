@@ -15,6 +15,7 @@ export async function GET(request: NextRequest) {
       include: {
         job: true,
       },
+      orderBy: { createdAt: "desc" },
     });
 
     return NextResponse.json(interested);
