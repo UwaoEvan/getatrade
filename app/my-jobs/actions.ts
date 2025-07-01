@@ -13,6 +13,9 @@ export const getCustomerJobs = async (email: string) => {
     where: {
       userId: user?.id,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
   return jobs;
 };

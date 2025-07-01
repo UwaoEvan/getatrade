@@ -12,13 +12,14 @@ type Interested = {
       location?: string | null;
     };
   };
+  jobPoster?: number;
 };
 
-export default function InterestedPerson({ interest }: Interested) {
+export default function InterestedPerson({ interest, jobPoster }: Interested) {
   return (
     <div className="w-full max-w-sm p-4 bg-white rounded-xl shadow-md border border-gray-200">
       <Link
-        href={`/my-job/${interest.jobId}/overview`}
+        href={`/my-jobs/${interest.jobId}/overview?tradesperson=${interest.userId}&jobPoster=${jobPoster}`}
         className="flex items-center gap-3 mb-2"
       >
         <Avatar className="w-10 h-10">

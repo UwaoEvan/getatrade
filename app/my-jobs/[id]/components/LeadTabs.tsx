@@ -53,7 +53,11 @@ export default function LeadTabs({
         <div>
           <div className="flex flex-wrap gap-4">
             {interests.map((interest) => (
-              <InterestedPerson key={interest.id} interest={interest} />
+              <InterestedPerson
+                key={interest.id}
+                interest={interest}
+                jobPoster={jobPoster}
+              />
             ))}
           </div>
           {interests.length === 0 && (
