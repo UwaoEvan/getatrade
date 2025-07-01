@@ -21,15 +21,15 @@ export async function POST(
     const interested = await db.interest.findFirst({
       where: {
         jobId: id,
-        userId: user.userId
-      }
-    })
+        userId: user.userId,
+      },
+    });
 
     if (interested) {
       return NextResponse.json(
-        { error: "Already applied for this job."},
-        { status: 403 }
-      )
+        { error: "Already applied for this job." },
+        { status: 403 },
+      );
     }
 
     if (!job) {
