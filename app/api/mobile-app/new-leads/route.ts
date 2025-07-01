@@ -4,7 +4,11 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
-    await authenticateUser(request);
+    const user = await authenticateUser(request);
+
+    if (user instanceof NextResponse) {
+      return user;
+    }
 
     const newLeads = await db.job.findMany({
       where: {

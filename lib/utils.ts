@@ -1,7 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import jwt from "jsonwebtoken";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -27,6 +27,10 @@ export const authenticateUser = async (request: NextRequest) => {
     const token = authHeader?.split(" ")[1];
 
     const user = await decodeToken(token as string);
+
+    if (!user) {
+      return NextResponse.json({ error: "Token expired!" }, { status: 401 });
+    }
     return user;
   } catch (error) {
     throw error;
@@ -35,7 +39,7 @@ export const authenticateUser = async (request: NextRequest) => {
 
 export const encodeToken = (payload: Payload) => {
   const token = jwt.sign(payload, SECRET_KEY, {
-    expiresIn: 60 * 60,
+    expiresIn: "30d",
   });
 
   return token;
@@ -46,6 +50,6 @@ export const decodeToken = async (token: string) => {
     const decoded = (await jwt.verify(token, SECRET_KEY)) as Decode;
     return decoded;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };

@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-const notifyAdmin = async (
+export const notifyAdmin = async (
   userName: string,
   userEmail: string,
   documentType: string,
