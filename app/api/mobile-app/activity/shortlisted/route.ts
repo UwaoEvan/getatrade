@@ -20,7 +20,9 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    return NextResponse.json(shortlisted);
+    const activeJobs = shortlisted.filter(job => job?.job?.active);
+
+    return NextResponse.json(activeJobs);
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 500 });
   }
