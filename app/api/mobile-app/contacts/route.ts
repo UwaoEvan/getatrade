@@ -11,18 +11,18 @@ export async function GET(request: NextRequest) {
     }
 
     const shortlisted = await db.shortlist.findMany({
-      where: { userId: user.userId },
-      include: {
-        job: true,
+      where: {
+        AND: [{ userId: user.userId }, { paid: true }],
       },
-      orderBy: {
-        createdAt: "desc",
+      include: {
+        user: true,
+        job: true,
       },
     });
 
-    const activeJobs = shortlisted.filter((job) => job?.job?.active);
+    const activeContacts = shortlisted.filter((contact) => contact.job.active);
 
-    return NextResponse.json(activeJobs);
+    return NextResponse.json(activeContacts);
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 500 });
   }
