@@ -56,3 +56,25 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ error: error }, { status: 500 });
   }
 }
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const user = await authenticateUser(request);
+
+    if (user instanceof NextResponse) {
+      return user;
+    }
+
+    await db.user.update({
+      where: { id: user.userId },
+      data: {
+        status: "Inactive",
+        deactivatedOn: new Date(),
+      },
+    });
+
+    return NextResponse.json({ sucess: true });
+  } catch (error) {
+    return NextResponse.json({ error: error }, { status: 500 });
+  }
+}
