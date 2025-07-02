@@ -62,9 +62,6 @@ export async function POST(request: NextRequest) {
       images: uploadedImages,
     });
   } catch (error) {
-    return NextResponse.json(
-      { error: error },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: error }, { status: 500 });
   }
 }
