@@ -12,7 +12,6 @@ export async function GET(request: NextRequest) {
 
     const jobs = await db.job.findMany({
       where: {
-        closedAt: null,
         userId: user.userId,
       },
       orderBy: {

@@ -19,6 +19,7 @@ export async function PUT(
         where: { id },
         data: {
           closedAt: new Date(),
+          active: false,
         },
       });
       await trx.closed.create({
