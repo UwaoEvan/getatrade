@@ -63,6 +63,7 @@ export async function POST(request: NextRequest) {
           hashedPassword,
           email,
           phoneNumber,
+          role: "customer",
         },
       });
 
