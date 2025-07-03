@@ -1,4 +1,5 @@
 import { db } from "@/app/lib/db";
+import { sendEmail } from "@/app/lib/emailTemplate";
 import { authenticateUser } from "@/lib/utils";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
@@ -56,6 +57,14 @@ export async function POST(
       return NextResponse.json({ error: "Job not found." }, { status: 404 });
     }
 
+    const sUser = await db.user.findFirst({
+      where: { id: user.userId },
+    });
+
+    if (!sUser) {
+      return NextResponse.json({ error: "User not found." }, { status: 404 });
+    }
+
     const { userId } = parsed;
 
     const sExists = await db.shortlist.findFirst({
@@ -63,7 +72,7 @@ export async function POST(
         AND: [{ jobId: id }, { userId: parseInt(userId) }],
       },
     });
-    console.log(`UserId: ${user.userId}, jobId: ${id}`);
+
     if (sExists) {
       return NextResponse.json(
         { error: "User already shortlisted." },
@@ -98,6 +107,14 @@ export async function POST(
       });
       return short;
     });
+
+    await sendEmail(
+      sUser.email,
+      "You have been shortlisted.",
+      exists.title,
+      sUser.username,
+      "customer",
+    );
 
     return NextResponse.json(shortlisted);
   } catch (error) {
