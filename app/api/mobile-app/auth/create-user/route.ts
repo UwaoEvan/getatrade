@@ -2,6 +2,7 @@ import { db } from "@/app/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import { z, ZodError } from "zod";
 import bcrypt from "bcrypt";
+import { sendWelcomeEmail } from "@/app/lib/emailTemplate";
 
 const registerSchema = z.object({
   username: z.string({ required_error: "Username is missing." }),
@@ -57,6 +58,13 @@ export async function POST(request: NextRequest) {
         joinDate: new Date(),
       },
     });
+
+    await sendWelcomeEmail(
+      user.email,
+      "Welcome to GetATradeLinkLtd",
+      user.username,
+      user?.role as string,
+    );
 
     return NextResponse.json(user);
   } catch (error) {
