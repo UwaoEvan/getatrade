@@ -10,19 +10,26 @@ export async function GET(request: NextRequest) {
       return user;
     }
 
-    const shortlisted = await db.shortlist.findMany({
-      where: {
-        AND: [{ userId: user.userId }, { paid: true }],
-      },
-      include: {
-        user: true,
-        job: true,
-      },
-    });
+    // const shortlisted = await db.shortlist.findMany({
+    //   where: {
+    //     AND: [{ userId: user.userId }, { paid: true }],
+    //   },
+    //   include: {
+    //     user: true,
+    //     job: true,
+    //   },
+    // });
 
-    const activeContacts = shortlisted.filter((contact) => contact.job.active);
+    // const activeContacts = shortlisted.filter((contact) => contact.job.active);
+    const shortlisted = await db.$queryRaw`
+    SELECT *, "job"."userId" as "jobPosterId"
+    FROM "job"
+    INNER JOIN "shortlist" ON "shortlist"."jobId" = "job"."id"
+    INNER JOIN "user" ON "user"."id" = "job"."userId"
+    WHERE "shortlist"."userId" = ${user.userId} AND "job"."active" = true AND "shortlist"."paid" = true
+  `;
 
-    return NextResponse.json(activeContacts);
+    return NextResponse.json(shortlisted);
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 500 });
   }
