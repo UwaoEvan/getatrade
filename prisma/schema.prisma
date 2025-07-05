@@ -87,12 +87,13 @@ model Job {
 }
 
 model Interest {
-  id        String   @id @default(uuid())
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id])
-  createdAt DateTime @default(now())
-  jobId     String
-  job       Job      @relation(fields: [jobId], references: [id])
+  id          String   @id @default(uuid())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  jobId       String
+  job         Job      @relation(fields: [jobId], references: [id])
+  shortlisted Boolean? @default(false)
 
   @@map("interest")
 }

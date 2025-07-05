@@ -17,9 +17,9 @@ export async function GET(
     const shortlisted = await db.shortlist.findMany({
       where: {
         jobId: id,
+        paid: true,
       },
       include: {
-        // job: true,
         user: true,
       },
     });

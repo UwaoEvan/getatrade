@@ -16,28 +16,30 @@ export async function PUT(
 
     const { id } = await params;
 
-    const job = await db.shortlist.update({
-      where: { id },
-      data: {
-        paid: true,
-      },
+    await db.$transaction(async (trx) => {
+      const existingJob = await trx.shortlist.update({
+        where: { id },
+        data: {
+          paid: true,
+        },
+      });
+
+      await trx.interest.deleteMany({
+        where: {
+          userId: user.userId,
+          jobId: existingJob.jobId,
+        },
+      });
+
+      await trx.payments.update({
+        where: { id: paymentId },
+        data: {
+          status: "PAID",
+        },
+      });
     });
 
-    if (!job) {
-      return NextResponse.json(
-        { error: `Job with the id of ${id} not found.` },
-        { status: 404 },
-      );
-    }
-
-    await db.payments.update({
-      where: { id: paymentId },
-      data: {
-        status: "PAID",
-      },
-    });
-
-    return NextResponse.json(job);
+    return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json(
       { error: `Something went wrong: ${error} ` },

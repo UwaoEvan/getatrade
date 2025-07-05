@@ -40,17 +40,31 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    // we get this from the interest table.id and use it to find the jobs and interests
     const { id } = await params;
     const body = await request.json();
     const parsed = shortlistSchema.parse(body);
     const user = await authenticateUser(request);
 
+    if (!id) return;
+
     if (user instanceof NextResponse) {
       return user;
     }
 
-    const exists = await db.job.findFirst({
+    const eInterest = await db.interest.findFirst({
       where: { id },
+    });
+
+    if (!eInterest) {
+      return NextResponse.json(
+        { error: "Interest not found." },
+        { status: 404 },
+      );
+    }
+
+    const exists = await db.job.findFirst({
+      where: { id: eInterest.jobId },
     });
 
     if (!exists) {
@@ -83,7 +97,7 @@ export async function POST(
     const shortlisted = await db.$transaction(async (trx) => {
       const short = await trx.shortlist.create({
         data: {
-          jobId: id,
+          jobId: eInterest.jobId,
           userId: parseInt(userId),
         },
         include: {
@@ -91,15 +105,15 @@ export async function POST(
         },
       });
 
-      await trx.interest.deleteMany({
-        where: {
-          userId: parseInt(userId),
-          jobId: id,
+      await trx.interest.update({
+        where: { id },
+        data: {
+          shortlisted: true,
         },
       });
 
       await trx.job.update({
-        where: { id },
+        where: { id: eInterest.jobId },
         data: {
           interested: (exists.interested ?? 0) - 1,
           shortlisted: (exists.shortlisted ?? 0) + 1,
