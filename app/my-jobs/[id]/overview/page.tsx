@@ -20,10 +20,7 @@ export default async function ProfilePage({
 }: SearchParams) {
   const { tradesperson, jobPoster } = await searchParams;
   const { id: jobId } = await params;
-  const shortlisted = await getShortlistedOnJob(
-    jobId as string,
-    parseInt(tradesperson as string),
-  );
+  const shortlisted = await getShortlistedOnJob(jobId as string);
   const user = await getUser("", shortlisted?.userId);
 
   return (
