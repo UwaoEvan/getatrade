@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     }
 
     const interested = await db.interest.findMany({
-      where: { userId: user.userId },
+      where: { userId: user.userId, shortlisted: false },
       include: {
         job: true,
       },
