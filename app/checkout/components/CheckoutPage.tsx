@@ -49,12 +49,12 @@ export default function CheckoutPage({
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `${window.location.origin}/payment-success?id=${pay?.id}&shortlistId=${shortlistId}`,
+        return_url: `${window.location.origin}/payment-success?id=${pay?.id}&jobId=${jobId}&shortlistId=${shortlistId}`,
       },
     });
 
     if (error) {
-      await updatePayments(pay?.id as string, "FAILED");
+      await updatePayments(pay?.id as string, "FAILED", jobId, shortlistId);
       setErrorMessage(error.message as string);
     }
 

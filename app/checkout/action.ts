@@ -32,7 +32,10 @@ export const updatePayments = async (
   paymentId: string,
   status: string,
   jobId?: string,
+  shortlistId?: string,
 ) => {
+  if (!jobId) return { error: "Job not found." };
+
   const payment = await db.payments.update({
     where: {
       id: paymentId,
@@ -46,14 +49,22 @@ export const updatePayments = async (
     return { error: "Payment not found." };
   }
 
-  if (jobId) {
-    await db.shortlist.update({
+  if (status === "PAID") {
+    await db.interest.deleteMany({
       where: {
-        id: jobId,
-      },
-      data: {
-        paid: true,
+        userId: payment.userId,
+        jobId: payment.jobId,
       },
     });
   }
+
+  const result = status === "PAID" ? true : false;
+  await db.shortlist.update({
+    where: {
+      id: shortlistId,
+    },
+    data: {
+      paid: result,
+    },
+  });
 };

@@ -39,7 +39,7 @@ export const shortlistTradesperson = async (
 ) => {
   try {
     const parsed = shortlist.safeParse({
-      jobId: formData.get("jobId"),
+      shortlistId: formData.get("shortlistId"),
       userId: formData.get("userId"),
     });
 
@@ -47,9 +47,17 @@ export const shortlistTradesperson = async (
       return { error: "Invalid formdata" };
     }
 
-    const { jobId, userId } = parsed.data;
+    const { shortlistId, userId } = parsed.data;
 
-    const job = await getJobPosting(jobId);
+    const interest = await db.interest.findFirst({
+      where: { id: shortlistId },
+    });
+
+    if (!interest) {
+      return { error: "You have no interest for this person." };
+    }
+
+    const job = await getJobPosting(interest.jobId);
 
     const tradesPerson = await db.user.findFirst({
       where: { id: parseInt(userId) },
@@ -63,32 +71,26 @@ export const shortlistTradesperson = async (
       return { error: "Job not found." };
     }
 
-    const interest = await getShortlistedOnJob(jobId, parseInt(userId));
-
-    if (interest) {
-      return { error: "You have already shortlisted for this person." };
-    }
-
     await db.shortlist.create({
       data: {
         userId: parseInt(userId),
-        jobId: jobId as string,
+        jobId: job.id,
         createdAt: new Date(),
       },
     });
 
     await db.job.update({
-      where: { id: jobId },
+      where: { id: job.id },
       data: {
         interested: (job.interested ?? 0) - 1,
         shortlisted: (job.shortlisted ?? 0) + 1,
       },
     });
 
-    await db.interest.deleteMany({
-      where: {
-        jobId,
-        userId: parseInt(userId),
+    await db.interest.update({
+      where: { id: interest.id },
+      data: {
+        shortlisted: true,
       },
     });
 
@@ -100,7 +102,7 @@ export const shortlistTradesperson = async (
       "customer",
     );
 
-    revalidatePath(`/my-jobs/${jobId}`);
+    revalidatePath(`/my-jobs/${job.id}`);
 
     return { success: true };
   } catch (error) {
@@ -121,17 +123,14 @@ export const getShortlists = async (jobId: string) => {
     FROM "shortlist"
     INNER JOIN "user"
     ON "user"."id" = "shortlist"."userId"
-    WHERE "shortlist"."jobId" = ${jobId}
+    WHERE "shortlist"."jobId" = ${jobId} AND "shortlist"."paid" = true
   `;
   return shortlists;
 };
 
-export const getShortlistedOnJob = async (jobId: string, userId: number) => {
+export const getShortlistedOnJob = async (id: string) => {
   const interest = await db.shortlist.findFirst({
-    where: {
-      jobId,
-      userId,
-    },
+    where: { id },
   });
   return interest;
 };

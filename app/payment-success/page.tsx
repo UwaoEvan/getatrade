@@ -5,14 +5,16 @@ type Params = {
   searchParams: Promise<{
     id: string;
     shortlistId: string;
+    jobId: string;
   }>;
 };
 
 export default async function PaymentSuccessPage({ searchParams }: Params) {
-  const { id, shortlistId } = await searchParams;
+  const { id, shortlistId, jobId } = await searchParams;
+  console.log({ id, shortlistId, jobId });
 
   if (id) {
-    await updatePayments(id, "PAID", shortlistId);
+    await updatePayments(id, "PAID", jobId, shortlistId);
   }
 
   return (

@@ -7,6 +7,7 @@ type Interested = {
     id: string;
     jobId: string;
     userId: number;
+    shortlisted?: boolean;
     user?: {
       username: string;
       location?: string | null;
@@ -40,7 +41,11 @@ export default function InterestedPerson({ interest, jobPoster }: Interested) {
           </p>
         </div>
       </Link>
-      <ShortlistForm jobId={interest.jobId} userId={interest.userId} />
+      <ShortlistForm
+        shortlistId={interest.id}
+        userId={interest.userId}
+        disabled={interest.shortlisted}
+      />
     </div>
   );
 }

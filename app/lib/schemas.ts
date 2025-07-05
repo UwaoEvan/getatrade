@@ -33,7 +33,7 @@ export const showInterestSchema = z.object({
 });
 
 export const shortlist = z.object({
-  jobId: z.string(),
+  shortlistId: z.string(),
   userId: z.string(),
 });
 
