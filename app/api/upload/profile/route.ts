@@ -12,13 +12,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
     }
 
-    if (!file.type.startsWith("image/")) {
-      return NextResponse.json(
-        { error: "File must be an image" },
-        { status: 400 },
-      );
-    }
-
     if (file.size > 5 * 1024 * 1024) {
       return NextResponse.json(
         { error: "File size must be less than 5MB" },
